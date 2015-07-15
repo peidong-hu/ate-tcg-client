@@ -1,0 +1,101 @@
+This document is built for developers to setup your code style and JAutoDoc tool.
+
+1) Code Style setup
+	a) Click on menus Window->Preferences->Java->Code Style->Code Templates
+	b) Click 'Import' button and select bigtester_codetemplates.xml to import the code style. the template file could be found at the root of the project folder.
+	b') Check the option 'Automatically add comments for new methods and types' at the bottom of the dialog.
+	c) Click on Comments item in the right panel
+	d) Click on 'Types' in the expanded Comments treeview
+	e) Click on 'Edit' button to change the 'Types' comment's author name to your own name
+	f) click on 'Overriding methods' item under 'Comments' treeview, click on edit button
+	g) change the pattern of 'Overriding methods' to 
+	/**
+	 * {@inheritDoc}
+	 */
+	
+	h) To test if your setting is working, exit the dialog of Windows-Preferences
+	i) New a Class in your project and see if the newly created class has correct header and your full name in the comments.
+	
+2) Install plugin JAutoDoc from Eclipse marketplace
+	a) Click on menus Window->Preferences->Java->JAutoDoc, 
+	b) Check the option 'Add file header',
+	c) click button 'Edit' beside above option and replace the content with the following header at the bottom of this file, including the stared lines. 
+	(don't forget to copy the first stared line and last started line) 
+	d) Click on menus Window->Preferences->Java->JAutoDoc, click the expanding icon beside 'JAutoDoc' menu,
+	e) Click Templates, click 'Properties' button on the right of the dialog
+	f) Add variable 'author', value is your own full name
+	g) Click 'Types' item in the right panel
+	h) Click 'Default' item, and click edit,
+	i) Add the line '@author ${author}'
+	
+	j) To test if the JAutodoc works correctly, exit the dialog of Windows-Preferences
+	k) Create a new Class
+	l) Delete all the comments
+	m) move the cursor to the first line of the file,
+	n) press 'Ctrl-Alt-j', All comments should be added automatically including the header and class comments. 
+	
+ 3) Install PMD through Eclipse marketplace
+    If you have previously installed a version of the PMD Eclipse plugin prior to November 2012, then you should remove/uninstall it first.
+    To install the PMD for Eclipse plugin:
+    In Eclipse, click on Help -> Install New Software...
+    Click on Add..
+    Enter the following:
+       Name: PMD for Eclipse Update Site
+       URL: https://sourceforge.net/projects/pmd/files/pmd-eclipse/update-site/
+    and click OK.
+    You should see PMD for Eclipse 4. Select the checkbox next to it and click Next >.
+    You'll need to accept the license and confirm you want to install a plugin that is not digitally signed. Go ahead and install it anyway.
+    Restart eclipse.
+ 
+    a) click on menus window->preferences->PMD->rule configuration
+    b) click 'Use global rule management' 
+ 	c) find rule 'CommentSize' and click on it
+ 	d) click on properties tab of this rule
+ 	e) change the maximum line length to 200
+ 	f) change the maximum lines to 50
+ 	f')click Rule Configuration,
+ 	f'') uncheck rules 'AvoidInstantiatingObjectsInLoops', all JUnit related rules, 'LawofDemeter', 'LocalVariableCouldBeFinal',
+ 	f''') LongVariable->Properties tab->The variable length reporting threshold -> 30 
+ 	g) exit window->preferences dialog
+ 	h) enable PMD on your project by right click on 'org.bigtester.ate.core' project->properties->PMD 
+ 	i) click 'enable PMD'
+	i') click Use the ruleset configured in a project file
+ 	j) project will be scanned and suggestion of code style will be displayed as a triangle icon on file.
+ /*******************************************************************************
+ * ATE, Automation Test Engine
+ *
+ * Copyright ${year}, Montreal PROT, or individual contributors as
+ * indicated by the @author tags or express copyright attribution
+ * statements applied by the authors.  All third-party contributions are
+ * distributed under license by Montreal PROT.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *******************************************************************************/
+4) Setting Null Analysis to improve code quality of handling potential null pointer exceptions.
+	a) right click on project->properties->java compiler->Errors/Warnings
+	b) check on 'Enable project specific settings'
+	c) scroll down to find 'Null Analysis'
+	d) set the following options,
+		Null pointer access: Error
+		Potential null pointer access: Error
+		Redundant null check: Warning
+		Check on 'Enable annotation-based null analysis'
+		Violation of null specification: Error
+		Conflict between null annotations and null inference: Error
+		Unchecked conversion from non-annotated type to @NonNull type: Error
+		Redundant null annotation: Warning
+		@NonNull parameter not annotated in overriding method: warning
+		Missing '@NonNullByDefault' annotation on package: Error
+		Check on 'Use default annotations for null specifications'
+		Enable syntactic null analysis for fields
+	e) click on Apply button and Close 

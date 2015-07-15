@@ -1,0 +1,43 @@
+NOTE1) Please work on your own branch when you exploring a new technology. To create a new branch, follow these steps,
+		a) right click on project in 'Package explorer', click Team->Switch to...->New Branch
+		b) Give a name for the new branch, for example, ExplorNewTech
+		c) Click OK (a new branch is created in local machine)
+		d) right click on project in 'Package explorer', click Team->Push Branch...
+		e) click next->Finish (this new branch is pushed to the remote server.).
+		f) open your browser, goto https://github.com/bigtester/automation-test-engine
+		g) click dropdown button 'branch: master' to see if your new branch's name appears in the dropdown menu.
+		h) if g) is 'yes', you can start to safely work on your own branch without break the master branch code.
+
+		
+NOTE3) Update the project
+    a) right click on project org.bigtester.ate.core,
+    b) click 'Maven',
+    c) click update project
+    
+NOTE4) Display all the files
+    a) in the project window, click the View Menu(in the upper right corner of the window)
+    b) click Filters
+    c) deselect 'Inner class files' and '.*resources'
+    
+NOTE5) How to improve code quality of handling Null Pointer Exception
+	a) go through step 4) in README.codestyle
+	b) create package-info.java in newly created package
+	c) use @NonNullByDefault annotation in package-info.java
+	d) use @Nullable annotation on any argument, return value or field which could be Nullable during runtime.
+	e) Eclipse will automatically find possible NPE in IDE compiler. 
+	
+NOTE6) Install STS(Spring Tool Suite for Eclipse Luna) through Eclipse marketplace	
+
+NOTE7) Run Firefox, create a profile file
+       1) run Firefox in command line: firefox -p
+       2) create a profile file with the name: dentisteasy
+       3) save the profile, quit Firefox
+
+Note8) Remove the warning 'Plugin execNo grammar constraints (DTD or XML Schema) referenced in the document' in XML file .
+    a) Go to the Preferences window, then XML -> XML Files -> Validation. 
+    b) In the Validating files section of the preferences panel on the right, choose Ignore in the drop down box for the "No grammar specified" preference. 
+    c) You may need to close the file and then reopen it to make the warning go away.
+
+Note9) Remove the warning 'Plugin execution not covered by lifecycle configuration' in XML file.
+ 	   https://www.eclipse.org/m2e/documentation/m2e-execution-not-covered.html 
+
