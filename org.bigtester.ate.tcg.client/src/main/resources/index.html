@@ -7,6 +7,8 @@
         	<!-- before any uses of the backend objects -->
         	<script src="js/fruits-service.js" type="text/javascript"></script>
         	<script src="js/calculator-service.js" type="text/javascript"></script>
+        	<script src="js/browser-service.js" type="text/javascript"></script>
+        	<script src="js/userinput-service.js" type="text/javascript"></script>
         	
  			<script src="jslib/angular.min.js" type="text/javascript"></script>
 			
@@ -19,6 +21,9 @@
 			
 			<!-- Latest compiled and minified JavaScript -->
 			<script src="jslib/bootstrap.min.js"></script>   
+			<script type='text/javascript' src='https://github.com/firebug/firebug-lite/blob/0fd318131ecb33679183811f1573f6d3bbf3dbfa/content/lite/pluginSample.js'></script>
+			
+			<script type='text/javascript' src='http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js'></script>
 			
 			<link rel="stylesheet" href="style.css">
       </head>
@@ -31,23 +36,7 @@
       </p>  
       <div class="container-fluid">
       <div class="row">
-       <div class="col-sm-6">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Calculator (synchronous example)</h3>
-            </div>
-            <div class="panel-body">
-            
-	          Number1: <input ng-model="number1" class="form-control"><br>
-	          Number2: <input ng-model="number2" class="form-control"><br>
-	          
-	          <p>
-	          	Result of Number1 + Number2 is: {{ sum() }}<br>
-	          	<small>(the result is computed in pure Java via a synchronous call)</small>
-	          </p>
-            </div>
-          </div>
-         </div>
+       
       	<div class="col-sm-6">
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -65,7 +54,23 @@
 	          		</tr>
 	          	</tbody>
 	          </table>
-	          <button class="btn btn-lg btn-success" ng-click="update()">Update data</button>
+            </div>
+          </div>
+         </div>
+         <div class="col-sm-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Calculator (synchronous example)</h3>
+            </div>
+            <div class="panel-body">
+            
+	          Number1: <input ng-model="number1" class="form-control"><br>
+	          Number2: <input ng-model="number2" class="form-control"><br>
+	          
+	          <p>
+	          	Result of Number1 + Number2 is: {{ sum() }}<br>
+	          	<small>(the result is computed in pure Java via a synchronous call)</small>
+	          </p>
             </div>
           </div>
          </div>
@@ -73,6 +78,8 @@
         </div>
 </div>
 <a href="index.html">Reload page</a>
+	          <button class="btn btn-lg btn-success" ng-click="launchFireBug()">Update data</button>
+	          <button class="btn btn-lg btn-success" ng-click="launchBrowser()">homePage</button>
 
       </body>
 </html>

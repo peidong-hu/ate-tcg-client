@@ -25,5 +25,12 @@ app.controller('JavaFXWebDemoController', function ($scope) {
   $scope.sum=function() {    
     return calculatorService.sum($scope.number1, $scope.number2);
   }
+  $scope.launchBrowser=function() {    
+	    browserService.launchUserHomepage();
+	  }
+  $scope.launchFireBug=function() {
+	  browserService.launchFireBug();
+  }
+  
 });
 
