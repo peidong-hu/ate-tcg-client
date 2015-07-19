@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/DTD/strict.dtd">
+<html ng-app="javafxwebdemo">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>Firebug Lite</title>
+<!-- An empty script to avoid FOUC when loading the stylesheet -->
+<script type="text/javascript"></script>
+ 			<script src="jslib/angular.min.js" type="text/javascript"></script>
+			
+			<!-- Latest compiled and minified CSS -->
+			<link rel="stylesheet" href="css/bootstrap.min.css">
+			
+			<!-- Optional theme -->
+			<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+			
+			<!-- Latest compiled and minified JavaScript -->
+			<script src="jslib/bootstrap.min.js"></script>
+			<script src="jslib/controller-angular.js"></script>   
+			
+<style type="text/css" media="screen">@import "firebug.css";</style>
+<style>html,body{margin:0;padding:0;overflow:hidden;}</style>
+</head>
+<body class="fbBody">
+<div id="abctest" style="display:none" ng-controller="JavaFXWebDemoController">
+      <h1>Java 8 desktop app with Web-based UI</h1>
+      <p>A JavaFX desktop application using WebView. The main logic is programmed
+      in pure Java, but the user interface is based on state of the art web
+      technologies: AngularJS (user controller) and Bootstrap (style and layout).
+      </p>  
+      <div class="container-fluid">
+      <div class="row">
+       
+      	<div class="col-sm-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Fruits (asynchronous example)</h3>
+            </div>
+            <div class="panel-body">
+	          Fruits: <small>(data is generated in pure Java via an asynchronous call)</small>
+	          <table class="table table-striped">
+	          	<thead>
+	          		<tr><th>Name</th></tr>
+	          	</thead>
+	          	<tbody>
+	          		<tr ng-repeat="fruit in fruits">
+	          			<td>{{fruit}}</td>
+	          		</tr>
+	          	</tbody>
+	          </table>
+            </div>
+          </div>
+         </div>
+         <div class="col-sm-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Calculator (synchronous example)</h3>
+            </div>
+            <div class="panel-body">
+            
+	          Number1: <input ng-model="number1" class="form-control"><br>
+	          Number2: <input ng-model="number2" class="form-control"><br>
+	          
+	          <p>
+	          	Result of Number1 + Number2 is: {{ sum() }}<br>
+	          	<small>(the result is computed in pure Java via a synchronous call)</small>
+	          </p>
+            </div>
+          </div>
+         </div>
+        
+        </div>
+</div>
+<a href="index.html">Reload page</a>
+	          <button class="btn btn-lg btn-success" ng-click="launchFireBug()">Update data</button>
+	          <button class="btn btn-lg btn-success" ng-click="launchBrowser()">homePage</button>
+
+      </div>
+<table id="fbChrome" cellpadding="0" cellspacing="0" border="0">
+  <tbody>
+    <tr>
+      <!-- Interface - Top Area -->
+      <td id="fbTop" colspan="2">
+      
+        <!-- 
+        <div>
+          --><!-- <span id="fbToolbarErrors" class="fbErrors">2 errors</span> --><!-- 
+          <input type="text" id="fbToolbarSearch" />
+        </div>
+        -->
+              
+        <!-- Window Buttons -->
+        <div id="fbWindowButtons">
+          <a id="fbWindow_btDeactivate" class="fbSmallButton fbHover" title="Deactivate Firebug for this web page">&nbsp;</a>
+          <a id="fbWindow_btDetach" class="fbSmallButton fbHover" title="Open Firebug in popup window">&nbsp;</a>
+          <a id="fbWindow_btClose" class="fbSmallButton fbHover" title="Minimize Firebug">&nbsp;</a>
+        </div>
+        
+        <!-- Toolbar buttons and Status Bar -->
+        <div id="fbToolbar">
+          <div id="fbToolbarContent">
+        
+          <!-- Firebug Button -->
+          <span id="fbToolbarIcon">
+            <a id="fbFirebugButton" class="fbIconButton" class="fbHover" target="_blank">&nbsp;</a>
+          </span>
+          
+          <!-- 
+          <span id="fbLeftToolbarErrors" class="fbErrors">2 errors</span>
+           -->
+           
+          <!-- Toolbar Buttons -->
+          <span id="fbToolbarButtons">
+            <!-- Fixed Toolbar Buttons -->
+            <span id="fbFixedButtons">
+                <a id="fbChrome_btInspect" class="fbButton fbHover" title="Click an element in the page to inspect">Inspect</a>
+            </span>
+            
+            <!-- Console Panel Toolbar Buttons -->
+            <span id="fbConsoleButtons" class="fbToolbarButtons">
+              <a id="fbConsole_btClear" class="fbButton fbHover" title="Clear the console">Clear</a>
+            </span>
+            
+            <!-- HTML Panel Toolbar Buttons -->
+            <!-- 
+            <span id="fbHTMLButtons" class="fbToolbarButtons">
+              <a id="fbHTML_btEdit" class="fbHover" title="Edit this HTML">Edit</a>
+            </span>
+             -->
+          </span>
+          
+          <!-- Status Bar -->
+          <span id="fbStatusBarBox">
+            <span class="fbToolbarSeparator"></span>
+            <!-- HTML Panel Status Bar -->
+            <!-- 
+            <span id="fbHTMLStatusBar" class="fbStatusBar fbToolbarButtons">
+            </span>
+             -->
+          </span>
+          
+          </div>
+          
+        </div>
+        
+        <!-- PanelBars -->
+        <div id="fbPanelBarBox">
+        
+          <!-- Main PanelBar -->
+          <div id="fbPanelBar1" class="fbPanelBar">
+            <a id="fbConsoleTab" class="fbTab fbHover">
+                <span class="fbTabL"></span>
+                <span class="fbTabText">Console</span>
+                <span class="fbTabMenuTarget"></span>
+                <span class="fbTabR"></span>
+            </a>
+            <a id="fbHTMLTab" class="fbTab fbHover">
+                <span class="fbTabL"></span>
+                <span class="fbTabText">HTML</span>
+                <span class="fbTabR"></span>
+            </a>
+            <a class="fbTab fbHover">
+                <span class="fbTabL"></span>
+                <span class="fbTabText">CSS</span>
+                <span class="fbTabR"></span>
+            </a>
+            <a class="fbTab fbHover">
+                <span class="fbTabL"></span>
+                <span class="fbTabText">Script</span>
+                <span class="fbTabR"></span>
+            </a>
+            <a class="fbTab fbHover">
+                <span class="fbTabL"></span>
+                <span class="fbTabText">DOM</span>
+                <span class="fbTabR"></span>
+            </a>
+          </div>
+
+          <!-- Side PanelBars -->
+          <div id="fbPanelBar2Box" class="hide">
+            <div id="fbPanelBar2" class="fbPanelBar">
+            <!-- 
+              <a class="fbTab fbHover">
+                <span class="fbTabL"></span>
+                <span class="fbTabText">Style</span>
+                <span class="fbTabR"></span>
+              </a>
+              <a class="fbTab fbHover">
+                <span class="fbTabL"></span>
+                <span class="fbTabText">Layout</span>
+                <span class="fbTabR"></span>
+              </a>
+              <a class="fbTab fbHover">
+                <span class="fbTabL"></span>
+                <span class="fbTabText">DOM</span>
+                <span class="fbTabR"></span>
+              </a>
+           -->
+            </div>
+          </div>
+          
+        </div>
+        
+        <!-- Horizontal Splitter -->
+        <div id="fbHSplitter">&nbsp;</div>
+        
+      </td>
+    </tr>
+    
+    <!-- Interface - Main Area -->
+    <tr id="fbContent">
+    
+      <!-- Panels  -->
+      <td id="fbPanelBox1">
+        <div id="fbPanel1" class="fbFitHeight">
+          <div id="fbConsole" class="fbPanel"></div>
+          <div id="fbHTML" class="fbPanel"></div>
+        </div>
+      </td>
+      
+      <!-- Side Panel Box -->
+      <td id="fbPanelBox2" class="hide">
+      
+        <!-- VerticalSplitter -->
+        <div id="fbVSplitter" class="fbVSplitter">&nbsp;</div>
+        
+        <!-- Side Panels -->
+        <div id="fbPanel2" class="fbFitHeight">
+        
+          <!-- HTML Side Panels -->
+          <div id="fbHTML_Style" class="fbPanel"></div>
+          <div id="fbHTML_Layout" class="fbPanel"></div>
+          <div id="fbHTML_DOM" class="fbPanel"></div>
+          
+        </div>
+        
+        <!-- Large Command Line -->
+        <textarea id="fbLargeCommandLine" class="fbFitHeight"></textarea>
+        
+        <!-- Large Command Line Buttons -->
+        <div id="fbLargeCommandButtons">
+            <a id="fbCommand_btRun" class="fbButton fbHover">Run</a>
+            <a id="fbCommand_btClear" class="fbButton fbHover">Clear</a>
+            
+            <a id="fbSmallCommandLineIcon" class="fbSmallButton fbHover"></a>
+        </div>
+        
+      </td>
+      
+    </tr>
+    
+    <!-- Interface - Bottom Area -->
+    <tr id="fbBottom" class="hide">
+    
+      <!-- Command Line -->
+      <td id="fbCommand" colspan="2">
+        <div id="fbCommandBox">
+          <div id="fbCommandIcon">&gt;&gt;&gt;</div>
+          <input id="fbCommandLine" name="fbCommandLine" type="text" />
+          <a id="fbLargeCommandLineIcon" class="fbSmallButton fbHover"></a>
+        </div>
+      </td>
+      
+    </tr>
+    
+  </tbody>
+</table> 
+<span id="fbMiniChrome">
+  <span id="fbMiniContent">
+    <span id="fbMiniIcon" title="Open Firebug Lite"></span>
+    <span id="fbMiniErrors" class="fbErrors">2 errors</span>
+  </span>
+</span>
+<!-- 
+<div id="fbErrorPopup">
+  <div id="fbErrorPopupContent">
+    <div id="fbErrorIndicator" class="fbErrors">2 errors</div>
+  </div>
+</div>
+ -->
+</body>
+</html>

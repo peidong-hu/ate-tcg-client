@@ -23,7 +23,7 @@ public class BrowserService {
 	
 	public void launchUserHomepage() {
 		if (webDriver == null) initWebDriverInstance();
-		webDriver.get("http://bigtester.com");
+		webDriver.get("https://github.com");
 	}
 	public void launchUserHomepage(String url) {
 		if (webDriver == null) initWebDriverInstance();
