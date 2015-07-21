@@ -520,7 +520,7 @@ function loadModules() {
 
     var sufix = isApplicationContext ? "#app" : "";
 
-    var useDocWrite = true;
+    var useDocWrite = true; //test for web driver js executor
     //var useDocWrite = isIE || isSafari;
 
     var moduleURL, script;
