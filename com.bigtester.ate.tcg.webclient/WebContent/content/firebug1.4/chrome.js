@@ -340,7 +340,6 @@ var createChromeWindow = function(options)
         
         //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
         // Inject the interface HTML if it is not using the local skin
-        
         if (!useLocalSkin)
         {
             var tpl = getChromeTemplate(!isChromeFrame),
@@ -473,7 +472,7 @@ var getChromeTemplate = function(isPopup)
     var r = [], i = -1;
     
     r[++i] = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/DTD/strict.dtd">';
-    r[++i] = '<html><head><title>';
+    r[++i] = '<html ng-app="javafxwebdemo"><head><title>';
     r[++i] = Firebug.version;
     
     /*
@@ -486,7 +485,17 @@ var getChromeTemplate = function(isPopup)
     r[++i] = tpl.CSS;
     r[++i] = '</style>';
     /**/
-    
+    r[++i] = '<script src="http://172.16.173.132:9080/firebuglite/content/jslib/angular.min.js" type="text/javascript"></script> \
+    	 \
+	<!-- Latest compiled and minified CSS -->  \
+	<link rel="stylesheet" href="http://172.16.173.132:9080/firebuglite/content/css/bootstrap.min.css">  \
+    	 \
+	<!-- Optional theme -->  \
+	<link rel="stylesheet" href="http://172.16.173.132:9080/firebuglite/content/css/bootstrap-theme.min.css">  \
+    	 \
+	<!-- Latest compiled and minified JavaScript -->  \
+	<script src="http://172.16.173.132:9080/firebuglite/content/jslib/bootstrap.min.js"></script>  \
+	<script src="http://172.16.173.132:9080/firebuglite/content/jslib/controller-angular.js"></script>';
     r[++i] = '</head><body class="fbBody' + (isPopup ? ' FirebugPopup' : '') + '">';
     r[++i] = tpl.HTML;
     r[++i] = '</body></html>';
