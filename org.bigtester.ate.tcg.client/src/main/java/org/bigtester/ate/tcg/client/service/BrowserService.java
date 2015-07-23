@@ -29,7 +29,7 @@ public class BrowserService {
 	
 	public void launchUserHomepage() {
 		if (webDriver == null) initWebDriverInstance();
-		//webDriver.get("http://localhost:8080/com.bigtester.ate.tcg/mvc/chat");
+		//webDriver.get("http://172.16.173.132:8080/com.bigtester.ate.tcg/mvc/chat");
 		webDriver.get("http://bigtester.com");
 	}
 	public void launchUserHomepage(String url) {

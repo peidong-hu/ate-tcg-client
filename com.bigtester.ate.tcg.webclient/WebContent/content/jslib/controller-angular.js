@@ -1,6 +1,17 @@
 var app1 = angular.module('javafxwebdemo', []);
 
-app1.controller('JavaFXWebDemoController', function($scope) {
+app1.directive('ngReplace', function() {
+	  return {
+	    restrict: 'A',
+	    link: function (scope, iElement, iAttrs) {
+
+	    	var svg = angular.element(scope.message);
+	    	 iElement.append(svg);
+	        },
+	    template: '<div ><h4>Weather for {{message}}</h4></div>'
+	  }
+	});
+app1.controller('JavaFXWebDemoController', function($scope, $http) {
 
 	// fruits
 	$scope.fruits = [ "loading..." ];
@@ -28,9 +39,36 @@ app1.controller('JavaFXWebDemoController', function($scope) {
 		browserService.launchUserHomepage();
 	}
 	$scope.launchFireBug = function() {
-		alert("aghello");
+		$scope.addDomAsyncAsJSON();
 	}
-	// angular.element(document).ready(function() {
-	// angular.bootstrap(document, ['myApp']);});
-	//      
+	$scope.addDomAsyncAsJSON = function(){		
+		// Writing it to the server
+		//
+		var dom = {
+				content: window.parent.document.documentElement.outerHTML
+		}
+		var dataObj = document;	
+		var req = {
+				 method: 'POST',
+				 url: 'http://172.16.173.132:8080/com.bigtester.ate.tcg/greeting3',
+//				 data: {content: document.documentElement.innerHTML}
+				 headers: {'Content-Type': 'application/json'},
+				 data: JSON.stringify(dom)
+		
+				}
+		var req2 = {
+				 method: 'GET',
+				 url: 'http://172.16.173.132:8080/com.bigtester.ate.tcg/greeting4',
+//				 data: {content: document.documentElement.innerHTML}
+//				 data: {content: 'eidkdidkdkdkddkkdkdkdkdkdkdk'},
+//		headers: {'Content-Type': 'application/json'}
+				}
+
+		$http.post('http://172.16.173.132:8080/com.bigtester.ate.tcg/greeting3',dom).success(function(data, status, headers, config) {
+			$scope.message = data.content;
+		}).error(function(data, status, headers, config) {
+			alert( "failure message: " + JSON.stringify({data: data}));
+		});		
+		
+	};      
 });
