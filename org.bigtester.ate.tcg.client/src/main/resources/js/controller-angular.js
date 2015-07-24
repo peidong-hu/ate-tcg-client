@@ -1,36 +1,42 @@
-
 var app = angular.module('javafxwebdemo', []);
 
-app.controller('JavaFXWebDemoController', function ($scope) {
+app.controller('JavaFXWebDemoController', function($scope) {
 
-  // fruits
-  $scope.fruits = ["loading..."];
-  angular.element(document).ready(function () {
-	$scope.update();
-  });
-    
-  $scope.update=function(){ 
-    $scope.fruits = ["loading..."];
-    
-    fruitsService.loadFruits(function(data){
-      $scope.fruits = data;
-      $scope.$apply();      
-    });
-  }
-  
-  // calculator
-  $scope.number1 = 0;
-  $scope.number2 = 2;
+//	angular.element(document).ready(function() {
+//		angular.element("launchButton").enable();
+//		angular.element("stopButton").disable();
+//		angular.element("injectButton").disable();
+//	});
+//	angular.element("launchButton").afterClick(function() {
+//		angular.element("stopButton").enable();
+//		angular.element("injectButton").enable();
+//	});
+//
+//	angular.element("stopButton").afterClick(function() {
+//		angular.element("launchButton").enable();
+//		angular.element("injectButton").disable();
+//	});
+//	angular.element("injectButton").afterClick(function() {
+//		angular.element("launchButton").disable();
+//		angular.element("stopButton").enable();
+//	});
 
-  $scope.sum=function() {    
-    return calculatorService.sum($scope.number1, $scope.number2);
-  }
-  $scope.launchBrowser=function() {    
-	    browserService.launchUserHomepage();
-	  }
-  $scope.launchFireBug=function() {
-	  browserService.launchFireBug();
-  }
-  
+	// calculator
+	$scope.number1 = "Firefox";
+	$scope.number2 = "www.bigtester.com";
+
+	// $scope.sum=function() {
+	// return calculatorService.sum($scope.number1, $scope.number2);
+	// }
+	$scope.launchBrowser = function() {
+		$scope.number1 = browserService.launchUserHomepage2($scope.number2);
+//		alert(retVal);
+	}
+	$scope.launchFireBug = function() {
+		browserService.launchFireBug();
+	}
+	$scope.stopBrowser = function() {
+		browserService.stopBrowser();
+	}
+
 });
-

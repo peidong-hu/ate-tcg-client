@@ -70,7 +70,11 @@ public class AppLauncher extends Application {
 
 		
 		primaryStage.setScene(new Scene(webView));
-		primaryStage.setTitle("ATE test case modeling tool.");		
+		primaryStage.setTitle("ATE test case modeling tool.");
+		primaryStage.setMinHeight(530);
+		primaryStage.setMaxHeight(530);
+		primaryStage.setMinWidth(400);
+		primaryStage.setMaxWidth(400);
 		primaryStage.show();
 //		webView.getEngine().documentProperty().addListener(new ChangeListener<Document>() {
 //		      @Override public void changed(ObservableValue<? extends Document> prop, Document oldDoc, Document newDoc) {

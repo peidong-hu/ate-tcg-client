@@ -32,16 +32,17 @@ public class BrowserService {
 		//webDriver.get("http://172.16.173.132:8080/com.bigtester.ate.tcg/mvc/chat");
 		webDriver.get("http://bigtester.com");
 	}
-	public void launchUserHomepage(String url) {
+	public boolean launchUserHomepage2(String url) {
 		if (webDriver == null) initWebDriverInstance();
 		webDriver.get(url);
+		return true;
 	}
 	public static WebDriver getWebDriver() {
 		if (webDriver == null) initWebDriverInstance();
 		return webDriver;
 	}
 	
-	public static void stopBrowser() {
+	public void stopBrowser() {
 		webDriver.quit();
 	}
 }
