@@ -31,7 +31,6 @@ public class AppLauncher extends Application {
 
 	private void createWebView(Stage primaryStage, String page) {
 		
-	
 		// connect the FruitsService instance as "fruitsService" 
 		// javascript variable
 		connectBackendObject(
