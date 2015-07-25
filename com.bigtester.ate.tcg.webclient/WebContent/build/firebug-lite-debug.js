@@ -1,28 +1,30 @@
 (function(){
 
-/*!*************************************************************
- *
- *    Firebug Lite 1.4.0a1
- *
- *      Copyright (c) 2007, Parakey Inc.
- *      Released under BSD license.
- *      More information: http://getfirebug.com/firebuglite
- *
- **************************************************************/
+/*******************************************************************************
+ * !
+ * 
+ * Firebug Lite 1.4.0a1
+ * 
+ * Copyright (c) 2007, Parakey Inc. Released under BSD license. More
+ * information: http://getfirebug.com/firebuglite
+ * 
+ ******************************************************************************/
 
-/*!
- * CSS selectors powered by:
- *
- * Sizzle CSS Selector Engine - v1.0
- *  Copyright 2009, The Dojo Foundation
- *  Released under the MIT, BSD, and GPL Licenses.
- *  More information: http://sizzlejs.com/
+/*
+ * ! CSS selectors powered by:
+ * 
+ * Sizzle CSS Selector Engine - v1.0 Copyright 2009, The Dojo Foundation
+ * Released under the MIT, BSD, and GPL Licenses. More information:
+ * http://sizzlejs.com/
  */
 
 /** @namespace describe lib */
 var FBL = {};
 
-( /** @scope s_lib @this FBL */ function() {
+( /**
+	 * @scope s_lib
+	 * @this FBL
+	 */ function() {
 // ************************************************************************************************
 
 // ************************************************************************************************
@@ -54,7 +56,8 @@ this.isIE6     = /msie 6/i.test(navigator.appVersion);
 this.browserVersion = (userAgent.match( /.+(?:rv|it|ra|ie)[\/: ]([\d.]+)/ ) || [0,'0'])[1];
 this.isIElt8   = this.isIE && (this.browserVersion-0 < 8);
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 this.NS = null;
 this.pixelsPerInch = null;
@@ -65,7 +68,8 @@ this.pixelsPerInch = null;
 
 var namespaces = [];
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 this.ns = function(fn)
 {
@@ -82,7 +86,8 @@ this.initialize = function()
     if (window.firebug && firebug.firebuglite || window.console && console.firebuglite)
         return;
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// *
     // initialize environment
 
     // point the FBTrace object to the local variable
@@ -150,12 +155,14 @@ this.initialize = function()
 
     this.noFixedPosition = this.isIE6 || this.isIEQuiksMode;
 
-    // after creating/synchronizing the environment, initialize the FBTrace module
+    // after creating/synchronizing the environment, initialize the FBTrace
+	// module
     if (FBL.Env.Options.enableTrace) FBTrace.initialize();
 
     if (FBTrace.DBG_INITIALIZE && isChromeContext) FBTrace.sysout("FBL.initialize - persistent application", "initialize chrome context");
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// *
     // initialize namespaces
 
     if (FBTrace.DBG_INITIALIZE) FBTrace.sysout("FBL.initialize", namespaces.length/2+" namespaces BEGIN");
@@ -172,7 +179,8 @@ this.initialize = function()
         FBTrace.sysout("FBL waitForDocument", "waiting document load");
     }
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// *
     // finish environment initialization
 
     FBL.Firebug.loadPrefs(prefs);
@@ -191,7 +199,8 @@ this.initialize = function()
         }
     }
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// *
     // wait document load
 
     waitForDocument();
@@ -216,7 +225,8 @@ var onDocumentLoad = function onDocumentLoad()
 {
     if (FBTrace.DBG_INITIALIZE) FBTrace.sysout("FBL onDocumentLoad", "document loaded");
 
-    // fix IE6 problem with cache of background images, causing a lot of flickering
+    // fix IE6 problem with cache of background images, causing a lot of
+	// flickering
     if (FBL.isIE6)
         fixIE6BackgroundImageCache();
 
@@ -226,7 +236,8 @@ var onDocumentLoad = function onDocumentLoad()
         // finally, start the application in the chrome context
         FBL.Firebug.initialize();
 
-        // if is not development mode, remove the shared environment cache object
+        // if is not development mode, remove the shared environment cache
+		// object
         // used to synchronize the both persistent contexts
         if (!FBL.Env.isDevelopmentMode)
         {
@@ -248,7 +259,8 @@ var sharedEnv;
 
 this.Env =
 {
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// *
     // Env Options (will be transported to Firebug options)
     Options:
     {
@@ -272,7 +284,8 @@ this.Env =
 
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// *
     // Library location
     Location:
     {
@@ -286,19 +299,22 @@ this.Env =
     skin: "xp",
     useLocalSkin: false,
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// *
     // Env states
     isDevelopmentMode: false,
     isDebugMode: false,
     isChromeContext: false,
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// *
     // Env references
     browser: null,
     chrome: null
 };
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var destroyEnvironment = function destroyEnvironment()
 {
@@ -418,7 +434,8 @@ var findLocation =  function findLocation()
         var Env = FBL.Env;
 
         // Always use the local skin when running in the same domain
-        // See Issue 3554: Firebug Lite should use local images when loaded locally
+        // See Issue 3554: Firebug Lite should use local images when loaded
+		// locally
         Env.useLocalSkin = path.indexOf(location.protocol + "//" + location.host + "/") == 0;
 
         // detecting development and debug modes via file name
@@ -526,7 +543,8 @@ var findLocation =  function findLocation()
 // ************************************************************************************************
 // Basics
 
-this.bind = function()  // fn, thisObject, args => thisObject.fn(args, arguments);
+this.bind = function()  // fn, thisObject, args => thisObject.fn(args,
+						// arguments);
 {
    var args = cloneArray(arguments), fn = args.shift(), object = args.shift();
    return function() { return fn.apply(object, arrayInsert(cloneArray(args), 0, arguments)); };
@@ -566,7 +584,8 @@ this.append = function(l, r)
     return l;
 };
 
-this.keys = function(map)  // At least sometimes the keys will be on user-level window objects
+this.keys = function(map)  // At least sometimes the keys will be on user-level
+							// window objects
 {
     var keys = [];
     try
@@ -670,8 +689,8 @@ function arrayInsert(array, index, other)
 
 this.createStyleSheet = function(doc, url)
 {
-    //TODO: xxxpedro
-    //var style = doc.createElementNS("http://www.w3.org/1999/xhtml", "style");
+    // TODO: xxxpedro
+    // var style = doc.createElementNS("http://www.w3.org/1999/xhtml", "style");
     var style = this.createElement("link");
     style.setAttribute("charset","utf-8");
     style.firebugIgnore = true;
@@ -679,8 +698,8 @@ this.createStyleSheet = function(doc, url)
     style.setAttribute("type", "text/css");
     style.setAttribute("href", url);
 
-    //TODO: xxxpedro
-    //style.innerHTML = this.getResource(url);
+    // TODO: xxxpedro
+    // style.innerHTML = this.getResource(url);
     return style;
 };
 
@@ -814,7 +833,7 @@ e(0x200e, 'lrm', attr, text, white, editor);
 e(0x200f, 'rlm', attr, text, white, editor);
 e(0x200b, '#8203', attr, text, white, editor); // zero-width space (ZWSP)
 
-//************************************************************************************************
+// ************************************************************************************************
 // Entity escaping
 
 var entityConversionRegexes = {
@@ -865,7 +884,10 @@ function getEscapeRegexp(direction, lists)
             }
         } else if (groups.length==1)
         {
-            list = entityConversionLists[direction][groups[0].group]; // faster for special case
+            list = entityConversionLists[direction][groups[0].group]; // faster
+																		// for
+																		// special
+																		// case
         } else {
             list = {}; // perhaps should print out an error here?
         }
@@ -915,8 +937,9 @@ function escapeGroupsForEntities(str, lists)
         {
             list = lists[l];
             r = entityConversionLists.normal[list.group][cur];
-            // if (cur == ' ' && list.group == 'whitespace' && last == ' ') // only show for runs of more than one space
-            //     r = ' ';
+            // if (cur == ' ' && list.group == 'whitespace' && last == ' ') //
+			// only show for runs of more than one space
+            // r = ' ';
             if (r)
             {
                 results[ri] = {
@@ -985,10 +1008,12 @@ var escapeForElementAttribute = this.escapeForElementAttribute = createSimpleEsc
 var escapeForCss = this.escapeForCss = createSimpleEscape('css', 'normal');
 
 // deprecated compatibility functions
-//this.deprecateEscapeHTML = createSimpleEscape('text', 'normal');
-//this.deprecatedUnescapeHTML = createSimpleEscape('text', 'reverse');
-//this.escapeHTML = deprecated("use appropriate escapeFor... function", this.deprecateEscapeHTML);
-//this.unescapeHTML = deprecated("use appropriate unescapeFor... function", this.deprecatedUnescapeHTML);
+// this.deprecateEscapeHTML = createSimpleEscape('text', 'normal');
+// this.deprecatedUnescapeHTML = createSimpleEscape('text', 'reverse');
+// this.escapeHTML = deprecated("use appropriate escapeFor... function",
+// this.deprecateEscapeHTML);
+// this.unescapeHTML = deprecated("use appropriate unescapeFor... function",
+// this.deprecatedUnescapeHTML);
 
 var escapeForSourceLine = this.escapeForSourceLine = createSimpleEscape('text', 'normal');
 
@@ -1123,7 +1148,7 @@ this.safeToString = function(ob)
     {
         // xxxpedro it is not safe to use ob+""?
         return ob + "";
-        ///return "[an object with no toString() function]";
+        // /return "[an object with no toString() function]";
     }
 };
 
@@ -1161,13 +1186,12 @@ this.emptyFn = function(){};
 
 this.isVisible = function(elt)
 {
-    /*
-    if (elt instanceof XULElement)
-    {
-        //FBTrace.sysout("isVisible elt.offsetWidth: "+elt.offsetWidth+" offsetHeight:"+ elt.offsetHeight+" localName:"+ elt.localName+" nameSpace:"+elt.nameSpaceURI+"\n");
-        return (!elt.hidden && !elt.collapsed);
-    }
-    /**/
+    /***************************************************************************
+	 * if (elt instanceof XULElement) { //FBTrace.sysout("isVisible
+	 * elt.offsetWidth: "+elt.offsetWidth+" offsetHeight:"+ elt.offsetHeight+"
+	 * localName:"+ elt.localName+" nameSpace:"+elt.nameSpaceURI+"\n"); return
+	 * (!elt.hidden && !elt.collapsed); } /
+	 **************************************************************************/
 
     return this.getStyle(elt, "visibility") != "hidden" &&
         ( elt.offsetWidth > 0 || elt.offsetHeight > 0
@@ -1178,9 +1202,12 @@ this.isVisible = function(elt)
 
 this.collapse = function(elt, collapsed)
 {
-    // IE6 doesn't support the [collapsed] CSS selector. IE7 does support the selector,
-    // but it is causing a bug (the element disappears when you set the "collapsed"
-    // attribute, but it doesn't appear when you remove the attribute. So, for those
+    // IE6 doesn't support the [collapsed] CSS selector. IE7 does support the
+	// selector,
+    // but it is causing a bug (the element disappears when you set the
+	// "collapsed"
+    // attribute, but it doesn't appear when you remove the attribute. So, for
+	// those
     // cases, we need to use the class attribute.
     if (this.isIElt8)
     {
@@ -1263,14 +1290,15 @@ this.getClientOffset = function(elt)
     {
         var p = elt.offsetParent;
 
-        ///var style = isIE ? elt.currentStyle : view.getComputedStyle(elt, "");
+        // /var style = isIE ? elt.currentStyle : view.getComputedStyle(elt,
+		// "");
         var chrome = Firebug.chrome;
 
         if (elt.offsetLeft)
-            ///coords.x += elt.offsetLeft + parseInt(style.borderLeftWidth);
+            // /coords.x += elt.offsetLeft + parseInt(style.borderLeftWidth);
             coords.x += elt.offsetLeft + chrome.getMeasurementInPixels(elt, "borderLeft");
         if (elt.offsetTop)
-            ///coords.y += elt.offsetTop + parseInt(style.borderTopWidth);
+            // /coords.y += elt.offsetTop + parseInt(style.borderTopWidth);
             coords.y += elt.offsetTop + chrome.getMeasurementInPixels(elt, "borderTop");
 
         if (p)
@@ -1281,8 +1309,10 @@ this.getClientOffset = function(elt)
         else
         {
             var otherView = isIE ? elt.ownerDocument.parentWindow : elt.ownerDocument.defaultView;
-            // IE will fail when reading the frameElement property of a popup window.
-            // We don't need it anyway once it is outside the (popup) viewport, so we're
+            // IE will fail when reading the frameElement property of a popup
+			// window.
+            // We don't need it anyway once it is outside the (popup) viewport,
+			// so we're
             // ignoring the frameElement check when the window is a popup
             if (!otherView.opener && otherView.frameElement)
                 addOffset(otherView.frameElement, coords, otherView);
@@ -1483,7 +1513,8 @@ this.resize = function(element, w, h)
     element.style.height = h + "px";
 };
 
-this.linesIntoCenterView = function(element, scrollBox)  // {before: int, after: int}
+this.linesIntoCenterView = function(element, scrollBox)  // {before: int,
+															// after: int}
 {
     if (!scrollBox)
         scrollBox = this.getOverflowParent(element);
@@ -1734,7 +1765,8 @@ this.getElementCSSSelector = function(element)
 
 this.getURLForStyleSheet= function(styleSheet)
 {
-    //http://www.w3.org/TR/DOM-Level-2-Style/stylesheets.html#StyleSheets-StyleSheet. For inline style sheets, the value of this attribute is null.
+    // http://www.w3.org/TR/DOM-Level-2-Style/stylesheets.html#StyleSheets-StyleSheet.
+	// For inline style sheets, the value of this attribute is null.
     return (styleSheet.href ? styleSheet.href : styleSheet.ownerNode.ownerDocument.URL);
 };
 
@@ -1749,8 +1781,8 @@ this.getDocumentForStyleSheet = function(styleSheet)
 };
 
 /**
- * Retrieves the instance number for a given style sheet. The instance number
- * is sheet's index within the set of all other sheets whose URL is the same.
+ * Retrieves the instance number for a given style sheet. The instance number is
+ * sheet's index within the set of all other sheets whose URL is the same.
  */
 this.getInstanceForStyleSheet = function(styleSheet, ownerDocument)
 {
@@ -2014,7 +2046,7 @@ this.old_hasClass = function(node, name) // className, className, ...
 this.setClass = function(node, name)
 {
     if (node && (' '+node.className+' ').indexOf(' '+name+' ') == -1)
-    ///if (node && !this.hasClass(node, name))
+    // /if (node && !this.hasClass(node, name))
         node.className += " " + name;
 };
 
@@ -2041,7 +2073,7 @@ this.removeClass = function(node, name)
 this.toggleClass = function(elt, name)
 {
     if ((' '+elt.className+' ').indexOf(' '+name+' ') != -1)
-    ///if (this.hasClass(elt, name))
+    // /if (this.hasClass(elt, name))
         this.removeClass(elt, name);
     else
         this.setClass(elt, name);
@@ -2322,7 +2354,8 @@ var appendFragment = null;
 
 this.appendInnerHTML = function(element, html, referenceElement)
 {
-    // if undefined, we must convert it to null otherwise it will throw an error in IE
+    // if undefined, we must convert it to null otherwise it will throw an error
+	// in IE
     // when executing element.insertBefore(firstChild, referenceElement)
     referenceElement = referenceElement || null;
 
@@ -2332,7 +2365,8 @@ this.appendInnerHTML = function(element, html, referenceElement)
     if (doc.createRange)
     {
         var range = doc.createRange();  // a helper object
-        range.selectNodeContents(element); // the environment to interpret the html
+        range.selectNodeContents(element); // the environment to interpret the
+											// html
 
         var fragment = range.createContextualFragment(html);  // parse
         var firstChild = fragment.firstChild;
@@ -2403,7 +2437,7 @@ this.createGlobalElement = function(tagName, properties)
     return element;
 };
 
-//************************************************************************************************
+// ************************************************************************************************
 
 this.safeGetWindowLocation = function(window)
 {
@@ -2548,7 +2582,8 @@ this.cancelEvent = function(e, preventDefault)
         e.cancelBubble = true;
 };
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 this.addGlobalEvent = function(name, handler)
 {
@@ -2596,7 +2631,8 @@ this.removeGlobalEvent = function(name, handler)
     }
 };
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 this.dispatch = function(listeners, name, args)
 {
@@ -2632,13 +2668,15 @@ this.dispatch = function(listeners, name, args)
         if (FBTrace.DBG_ERRORS)
         {
             FBTrace.sysout(" Exception in lib.dispatch "+ name, exc);
-            //FBTrace.dumpProperties(" Exception in lib.dispatch listener", listener);
+            // FBTrace.dumpProperties(" Exception in lib.dispatch listener",
+			// listener);
         }
     }
     /**/
 };
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var disableTextSelectionHandler = function(event)
 {
@@ -2656,7 +2694,8 @@ this.disableTextSelection = function(e)
     {
         e.style.cssText = "user-select: none; -khtml-user-select: none; -moz-user-select: none;";
 
-        // canceling the event in FF will prevent the menu popups to close when clicking over
+        // canceling the event in FF will prevent the menu popups to close when
+		// clicking over
         // text-disabled elements
         if (!this.isFirefox)
             this.addEvent(e, "mousedown", disableTextSelectionHandler);
@@ -2674,7 +2713,8 @@ this.restoreTextSelection = function(e)
     {
         e.style.cssText = "cursor: default;";
 
-        // canceling the event in FF will prevent the menu popups to close when clicking over
+        // canceling the event in FF will prevent the menu popups to close when
+		// clicking over
         // text-disabled elements
         if (!this.isFirefox)
             this.removeEvent(e, "mousedown", disableTextSelectionHandler);
@@ -2796,7 +2836,7 @@ this.splitDataURL = function(url)
 {
     var mark = url.indexOf(':', 3);
     if (mark != 4)
-        return false;   //  the first 5 chars must be 'data:'
+        return false;   // the first 5 chars must be 'data:'
 
     var point = url.indexOf(',', mark+1);
     if (point < mark)
@@ -2819,7 +2859,8 @@ this.splitDataURL = function(url)
          var caller_URL = decodeURIComponent(props['fileName']);
          var caller_split = this.splitURLTrue(caller_URL);
 
-        if (props.hasOwnProperty('baseLineNumber'))  // this means it's probably an eval()
+        if (props.hasOwnProperty('baseLineNumber'))  // this means it's
+														// probably an eval()
         {
             props['path'] = caller_split.path;
             props['line'] = props['baseLineNumber'];
@@ -2907,7 +2948,8 @@ this.isSystemPage = function(win)
     }
     catch (exc)
     {
-        // Sometimes documents just aren't ready to be manipulated here, but don't let that
+        // Sometimes documents just aren't ready to be manipulated here, but
+		// don't let that
         // gum up the works
         ERROR("tabWatcher.isSystemPage document not ready:"+ exc);
         return false;
@@ -3030,18 +3072,22 @@ this.absoluteURLWithDots = function(url, baseURL)
     }
 };
 
-this.normalizeURL = function(url)  // this gets called a lot, any performance improvement welcome
+this.normalizeURL = function(url)  // this gets called a lot, any performance
+									// improvement welcome
 {
     if (!url)
         return "";
-    // Replace one or more characters that are not forward-slash followed by /.., by space.
+    // Replace one or more characters that are not forward-slash followed by
+	// /.., by space.
     if (url.length < 255) // guard against monsters.
     {
-        // Replace one or more characters that are not forward-slash followed by /.., by space.
+        // Replace one or more characters that are not forward-slash followed by
+		// /.., by space.
         url = url.replace(/[^\/]+\/\.\.\//, "", "g");
         // Issue 1496, avoid #
         url = url.replace(/#.*/,"");
-        // For some reason, JSDS reports file URLs like "file:/" instead of "file:///", so they
+        // For some reason, JSDS reports file URLs like "file:/" instead of
+		// "file:///", so they
         // don't match up with the URLs we get back from the DOM
         url = url.replace(/file:\/([^\/])/g, "file:///$1");
         if (url.indexOf('chrome:')==0)
@@ -3235,37 +3281,30 @@ this.parseJSONString = function(jsonString, originURL)
     // throw on the extra parentheses
     jsonString = "(" + jsonString + ")";
 
-    ///var s = Components.utils.Sandbox(originURL);
+    // /var s = Components.utils.Sandbox(originURL);
     var jsonObject = null;
 
     try
     {
-        ///jsonObject = Components.utils.evalInSandbox(jsonString, s);
+        // /jsonObject = Components.utils.evalInSandbox(jsonString, s);
 
-        //jsonObject = Firebug.context.eval(jsonString);
+        // jsonObject = Firebug.context.eval(jsonString);
         jsonObject = Firebug.context.evaluate(jsonString, null, null, function(){return null;});
     }
     catch(e)
     {
-        /***
-        if (e.message.indexOf("is not defined"))
-        {
-            var parts = e.message.split(" ");
-            s[parts[0]] = function(str){ return str; };
-            try {
-                jsonObject = Components.utils.evalInSandbox(jsonString, s);
-            } catch(ex) {
-                if (FBTrace.DBG_ERRORS || FBTrace.DBG_JSONVIEWER)
-                    FBTrace.sysout("jsonviewer.parseJSON EXCEPTION", e);
-                return null;
-            }
-        }
-        else
-        {/**/
+        /***********************************************************************
+		 * if (e.message.indexOf("is not defined")) { var parts =
+		 * e.message.split(" "); s[parts[0]] = function(str){ return str; }; try {
+		 * jsonObject = Components.utils.evalInSandbox(jsonString, s); }
+		 * catch(ex) { if (FBTrace.DBG_ERRORS || FBTrace.DBG_JSONVIEWER)
+		 * FBTrace.sysout("jsonviewer.parseJSON EXCEPTION", e); return null; } }
+		 * else {/
+		 **********************************************************************/
             if (FBTrace.DBG_ERRORS || FBTrace.DBG_JSONVIEWER)
                 FBTrace.sysout("jsonviewer.parseJSON EXCEPTION", e);
             return null;
-        ///}
+        // /}
     }
 
     return jsonObject;
@@ -3314,7 +3353,7 @@ this.getInputSelectionStart = function(input)
         var range = input.ownerDocument.selection.createRange();
         var text = range.text;
 
-        //console.log("range", range.text);
+        // console.log("range", range.text);
 
         // if there is a selection, find the start position
         if (text)
@@ -3361,7 +3400,8 @@ this.fixOperaTabKey = function(el)
     el.onkeydown = onOperaTabKeyDown;
 };
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 this.Property = function(object, name)
 {
@@ -3381,7 +3421,8 @@ this.ErrorCopy = function(message)
 
 function EventCopy(event)
 {
-    // Because event objects are destroyed arbitrarily by Gecko, we must make a copy of them to
+    // Because event objects are destroyed arbitrarily by Gecko, we must make a
+	// copy of them to
     // represent them long term in the inspector.
     for (var name in event)
     {
@@ -3420,27 +3461,35 @@ this.instanceOf = function(object, className)
     if (!object || typeof object != "object")
         return false;
 
-    // Try to use the native instanceof operator. We can only use it when we know
+    // Try to use the native instanceof operator. We can only use it when we
+	// know
     // exactly the window where the object is located at
     if (object.ownerDocument)
     {
         // find the correct window of the object
         var win = object.ownerDocument.defaultView || object.ownerDocument.parentWindow;
 
-        // if the class is accessible in the window, uses the native instanceof operator
-        // if the instanceof evaluates to "true" we can assume it is a instance, but if it
-        // evaluates to "false" we must continue with the duck type detection below because
-        // the native object may be extended, thus breaking the instanceof result
-        // See Issue 3524: Firebug Lite Style Panel doesn't work if the native Element is extended
+        // if the class is accessible in the window, uses the native instanceof
+		// operator
+        // if the instanceof evaluates to "true" we can assume it is a instance,
+		// but if it
+        // evaluates to "false" we must continue with the duck type detection
+		// below because
+        // the native object may be extended, thus breaking the instanceof
+		// result
+        // See Issue 3524: Firebug Lite Style Panel doesn't work if the native
+		// Element is extended
         if (className in win && object instanceof win[className])
             return true;
     }
-    // If the object doesn't have the ownerDocument property, we'll try to look at
+    // If the object doesn't have the ownerDocument property, we'll try to look
+	// at
     // the current context's window
     else
     {
         // TODO: xxxpedro context
-        // Since we're not using yet a Firebug.context, we'll just use the top window
+        // Since we're not using yet a Firebug.context, we'll just use the top
+		// window
         // (browser) as a reference
         var win = Firebug.browser.window;
         if (className in win)
@@ -3462,7 +3511,8 @@ this.instanceOf = function(object, className)
         for(var name in obj)
         {
             // avoid problems with extended native objects
-            // See Issue 3524: Firebug Lite Style Panel doesn't work if the native Element is extended
+            // See Issue 3524: Firebug Lite Style Panel doesn't work if the
+			// native Element is extended
             if (!obj.hasOwnProperty(name))
                 continue;
 
@@ -3482,9 +3532,9 @@ var instanceCheckMap =
 {
     // DuckTypeCheck:
     // {
-    //     property: ["window", "document"],
-    //     method: "setTimeout",
-    //     value: {nodeType: 1}
+    // property: ["window", "document"],
+    // method: "setTimeout",
+    // value: {nodeType: 1}
     // },
 
     Window:
@@ -3584,13 +3634,12 @@ var instanceCheckMap =
 // DOM Constants
 
 /*
-
-Problems:
-
-  - IE does not have window.Node, window.Element, etc
-  - for (var name in Node.prototype) return nothing on FF
-
-*/
+ * 
+ * Problems:
+ *  - IE does not have window.Node, window.Element, etc - for (var name in
+ * Node.prototype) return nothing on FF
+ * 
+ */
 
 
 var domMemberMap2 = {};
@@ -3615,8 +3664,8 @@ var getDomMemberMap2 = function(name)
 
     var props = [];
 
-    //var object = domMemberMap2Sandbox[name];
-    //object = object.prototype || object;
+    // var object = domMemberMap2Sandbox[name];
+    // object = object.prototype || object;
 
     var object = null;
 
@@ -3639,9 +3688,10 @@ var getDomMemberMap2 = function(name)
 
     if (object)
     {
-        //object = object.prototype || object;
+        // object = object.prototype || object;
 
-        //props  = 'addEventListener,document,location,navigator,window'.split(',');
+        // props =
+		// 'addEventListener,document,location,navigator,window'.split(',');
 
         for (var n in object)
           props.push(n);
@@ -3664,13 +3714,11 @@ this.getDOMMembers = function(object)
             var builtins = getDomMemberMap2(name);
             var cache = domMemberCache[name] = {};
 
-            /*
-            if (name.indexOf("Element") != -1)
-            {
-                this.append(cache, this.getDOMMembers("Node"));
-                this.append(cache, this.getDOMMembers("Element"));
-            }
-            /**/
+            /*******************************************************************
+			 * if (name.indexOf("Element") != -1) { this.append(cache,
+			 * this.getDOMMembers("Node")); this.append(cache,
+			 * this.getDOMMembers("Element")); } /
+			 ******************************************************************/
 
             for (var i = 0; i < builtins.length; ++i)
                 cache[builtins[i]] = i;
@@ -3736,78 +3784,45 @@ this.getDOMMembers = function(object)
 };
 
 
-/*
-this.getDOMMembers = function(object)
-{
-    if (!domMemberCache)
-    {
-        domMemberCache = {};
-
-        for (var name in domMemberMap)
-        {
-            var builtins = domMemberMap[name];
-            var cache = domMemberCache[name] = {};
-
-            for (var i = 0; i < builtins.length; ++i)
-                cache[builtins[i]] = i;
-        }
-    }
-
-    try
-    {
-        if (this.instanceOf(object, "Window"))
-            { return domMemberCache.Window; }
-        else if (object instanceof Document || object instanceof XMLDocument)
-            { return domMemberCache.Document; }
-        else if (object instanceof Location)
-            { return domMemberCache.Location; }
-        else if (object instanceof HTMLImageElement)
-            { return domMemberCache.HTMLImageElement; }
-        else if (object instanceof HTMLAnchorElement)
-            { return domMemberCache.HTMLAnchorElement; }
-        else if (object instanceof HTMLInputElement)
-            { return domMemberCache.HTMLInputElement; }
-        else if (object instanceof HTMLButtonElement)
-            { return domMemberCache.HTMLButtonElement; }
-        else if (object instanceof HTMLFormElement)
-            { return domMemberCache.HTMLFormElement; }
-        else if (object instanceof HTMLBodyElement)
-            { return domMemberCache.HTMLBodyElement; }
-        else if (object instanceof HTMLHtmlElement)
-            { return domMemberCache.HTMLHtmlElement; }
-        else if (object instanceof HTMLScriptElement)
-            { return domMemberCache.HTMLScriptElement; }
-        else if (object instanceof HTMLTableElement)
-            { return domMemberCache.HTMLTableElement; }
-        else if (object instanceof HTMLTableRowElement)
-            { return domMemberCache.HTMLTableRowElement; }
-        else if (object instanceof HTMLTableCellElement)
-            { return domMemberCache.HTMLTableCellElement; }
-        else if (object instanceof HTMLIFrameElement)
-            { return domMemberCache.HTMLIFrameElement; }
-        else if (object instanceof SVGSVGElement)
-            { return domMemberCache.SVGSVGElement; }
-        else if (object instanceof SVGElement)
-            { return domMemberCache.SVGElement; }
-        else if (object instanceof Element)
-            { return domMemberCache.Element; }
-        else if (object instanceof Text || object instanceof CDATASection)
-            { return domMemberCache.Text; }
-        else if (object instanceof Attr)
-            { return domMemberCache.Attr; }
-        else if (object instanceof Node)
-            { return domMemberCache.Node; }
-        else if (object instanceof Event || object instanceof EventCopy)
-            { return domMemberCache.Event; }
-        else
-            return {};
-    }
-    catch(E)
-    {
-        return {};
-    }
-};
-/**/
+/*******************************************************************************
+ * this.getDOMMembers = function(object) { if (!domMemberCache) { domMemberCache =
+ * {};
+ * 
+ * for (var name in domMemberMap) { var builtins = domMemberMap[name]; var cache =
+ * domMemberCache[name] = {};
+ * 
+ * for (var i = 0; i < builtins.length; ++i) cache[builtins[i]] = i; } }
+ * 
+ * try { if (this.instanceOf(object, "Window")) { return domMemberCache.Window; }
+ * else if (object instanceof Document || object instanceof XMLDocument) {
+ * return domMemberCache.Document; } else if (object instanceof Location) {
+ * return domMemberCache.Location; } else if (object instanceof
+ * HTMLImageElement) { return domMemberCache.HTMLImageElement; } else if (object
+ * instanceof HTMLAnchorElement) { return domMemberCache.HTMLAnchorElement; }
+ * else if (object instanceof HTMLInputElement) { return
+ * domMemberCache.HTMLInputElement; } else if (object instanceof
+ * HTMLButtonElement) { return domMemberCache.HTMLButtonElement; } else if
+ * (object instanceof HTMLFormElement) { return domMemberCache.HTMLFormElement; }
+ * else if (object instanceof HTMLBodyElement) { return
+ * domMemberCache.HTMLBodyElement; } else if (object instanceof HTMLHtmlElement) {
+ * return domMemberCache.HTMLHtmlElement; } else if (object instanceof
+ * HTMLScriptElement) { return domMemberCache.HTMLScriptElement; } else if
+ * (object instanceof HTMLTableElement) { return
+ * domMemberCache.HTMLTableElement; } else if (object instanceof
+ * HTMLTableRowElement) { return domMemberCache.HTMLTableRowElement; } else if
+ * (object instanceof HTMLTableCellElement) { return
+ * domMemberCache.HTMLTableCellElement; } else if (object instanceof
+ * HTMLIFrameElement) { return domMemberCache.HTMLIFrameElement; } else if
+ * (object instanceof SVGSVGElement) { return domMemberCache.SVGSVGElement; }
+ * else if (object instanceof SVGElement) { return domMemberCache.SVGElement; }
+ * else if (object instanceof Element) { return domMemberCache.Element; } else
+ * if (object instanceof Text || object instanceof CDATASection) { return
+ * domMemberCache.Text; } else if (object instanceof Attr) { return
+ * domMemberCache.Attr; } else if (object instanceof Node) { return
+ * domMemberCache.Node; } else if (object instanceof Event || object instanceof
+ * EventCopy) { return domMemberCache.Event; } else return {}; } catch(E) {
+ * return {}; } }; /
+ ******************************************************************************/
 
 this.isDOMMember = function(object, propName)
 {
@@ -4530,7 +4545,8 @@ domMemberMap.Event =
     "stopPropagation"
 ];
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 this.domConstantMap =
 {
@@ -5550,7 +5566,8 @@ this.innerEditableTags =
 };
 
 this.selfClosingTags =
-{ // End tags for void elements are forbidden http://wiki.whatwg.org/wiki/HTML_vs._XHTML
+{ // End tags for void elements are forbidden
+	// http://wiki.whatwg.org/wiki/HTML_vs._XHTML
     "meta": 1,
     "link": 1,
     "area": 1,
@@ -5590,15 +5607,9 @@ var invisibleTags = this.invisibleTags =
     "param": 1,
     "col": 1
     /*
-    "window": 1,
-    "browser": 1,
-    "frame": 1,
-    "tabbrowser": 1,
-    "WINDOW": 1,
-    "BROWSER": 1,
-    "FRAME": 1,
-    "TABBROWSER": 1,
-    */
+	 * "window": 1, "browser": 1, "frame": 1, "tabbrowser": 1, "WINDOW": 1,
+	 * "BROWSER": 1, "FRAME": 1, "TABBROWSER": 1,
+	 */
 };
 
 
@@ -5775,23 +5786,38 @@ this.Ajax =
 
 
     /**
-     * Create a AJAX request.
-     *
-     * @name request
-     * @param {Object}   options               request options
-     * @param {String}   options.url           URL to be requested
-     * @param {String}   options.type          Request type ("get" ou "post"). Default is "get".
-     * @param {Boolean}  options.async         Asynchronous flag. Default is "true".
-     * @param {String}   options.dataType      Data type ("text", "html", "xml" or "json"). Default is "text".
-     * @param {String}   options.contentType   Content-type of the data being sent. Default is "application/x-www-form-urlencoded".
-     * @param {Function} options.onLoading     onLoading callback
-     * @param {Function} options.onLoaded      onLoaded callback
-     * @param {Function} options.onInteractive onInteractive callback
-     * @param {Function} options.onComplete    onComplete callback
-     * @param {Function} options.onUpdate      onUpdate callback
-     * @param {Function} options.onSuccess     onSuccess callback
-     * @param {Function} options.onFailure     onFailure callback
-     */
+	 * Create a AJAX request.
+	 * 
+	 * @name request
+	 * @param {Object}
+	 *            options request options
+	 * @param {String}
+	 *            options.url URL to be requested
+	 * @param {String}
+	 *            options.type Request type ("get" ou "post"). Default is "get".
+	 * @param {Boolean}
+	 *            options.async Asynchronous flag. Default is "true".
+	 * @param {String}
+	 *            options.dataType Data type ("text", "html", "xml" or "json").
+	 *            Default is "text".
+	 * @param {String}
+	 *            options.contentType Content-type of the data being sent.
+	 *            Default is "application/x-www-form-urlencoded".
+	 * @param {Function}
+	 *            options.onLoading onLoading callback
+	 * @param {Function}
+	 *            options.onLoaded onLoaded callback
+	 * @param {Function}
+	 *            options.onInteractive onInteractive callback
+	 * @param {Function}
+	 *            options.onComplete onComplete callback
+	 * @param {Function}
+	 *            options.onUpdate onUpdate callback
+	 * @param {Function}
+	 *            options.onSuccess onSuccess callback
+	 * @param {Function}
+	 *            options.onFailure onFailure callback
+	 */
     request: function(options)
     {
         // process options
@@ -5846,7 +5872,7 @@ this.Ajax =
         // open XHR object
         t.open(r.type, r.url, r.async);
 
-        //setRequestHeaders();
+        // setRequestHeaders();
 
         // indicates that it is a XHR request to the server
         t.setRequestHeader("X-Requested-With", "XMLHttpRequest");
@@ -5867,8 +5893,8 @@ this.Ajax =
     },
 
     /**
-     * Handles the state change
-     */
+	 * Handles the state change
+	 */
     onStateChange: function(options)
     {
         var fn, o = options, t = this.transport;
@@ -5894,8 +5920,8 @@ this.Ajax =
     },
 
     /**
-     * gets the appropriate response value according the type
-     */
+	 * gets the appropriate response value according the type
+	 */
     getResponse: function(options)
     {
         var t = this.transport, type = options.dataType;
@@ -5908,8 +5934,8 @@ this.Ajax =
     },
 
     /**
-     * returns the current state of the XHR object
-     */
+	 * returns the current state of the XHR object
+	 */
     getState: function()
     {
         return this.states[this.transport.readyState];
@@ -5997,7 +6023,8 @@ var calculatePixelsPerInch = function calculatePixelsPerInch(doc, body)
 };
 
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 this.SourceLink = function(url, line, type, object, instance)
 {
@@ -6024,7 +6051,8 @@ this.SourceLink.prototype =
 
 };
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 this.SourceText = function(lines, owner)
 {
@@ -6091,7 +6119,8 @@ FBL.$STRF = function(name, args)
         var part = parts[i];
         if (part && typeof(part) == "object")
         {
-            if (++trialIndex > objects.length)  // then too few parameters for format, assume unformatted.
+            if (++trialIndex > objects.length)  // then too few parameters for
+												// format, assume unformatted.
             {
                 format = "";
                 objIndex = -1;
@@ -6176,7 +6205,8 @@ FBL.ns( /** @scope s_firebug */ function() { with (FBL) {
 // ************************************************************************************************
 // Globals
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 // Internals
 
 var modules = [];
@@ -6196,17 +6226,20 @@ var parentPanelMap = {};
  */
 FBL.Firebug =
 {
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     version:  "Firebug Lite 1.4.0a1",
     revision: "$Revision$",
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     modules: modules,
     panelTypes: panelTypes,
     panelTypeMap: panelTypeMap,
     reps: reps,
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Initialization
 
     initialize: function()
@@ -6269,7 +6302,8 @@ FBL.Firebug =
         Firebug.context = null;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Registration
 
     registerModule: function()
@@ -6313,7 +6347,8 @@ FBL.Firebug =
         FBL.defaultFuncRep = funcRep;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Reps
 
     getRep: function(object)
@@ -6341,7 +6376,7 @@ FBL.Firebug =
                     FBTrace.sysout("firebug.getRep FAILS: ", exc.message || exc);
                     FBTrace.sysout("firebug.getRep reps["+i+"/"+reps.length+"]: Rep="+reps[i].className);
                     // TODO: xxxpedro add trace to FBTrace logs like in Firebug
-                    //firebug.trace();
+                    // firebug.trace();
                 }
             }
         }
@@ -6385,7 +6420,8 @@ FBL.Firebug =
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Preferences
 
     getPref: function(name)
@@ -6487,7 +6523,8 @@ if (!Env.Options.enablePersistent ||
         Env.browser.window.Firebug = FBL.Firebug;
 
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * *
 // Other methods
 
 FBL.cacheDocument = function cacheDocument()
@@ -6505,12 +6542,12 @@ FBL.cacheDocument = function cacheDocument()
 
 /**
  * @class
- *
- * Support for listeners registration. This object also extended by Firebug.Module so,
- * all modules supports listening automatically. Notice that array of listeners
- * is created for each intance of a module within initialize method. Thus all derived
- * module classes must ensure that Firebug.Module.initialize method is called for the
- * super class.
+ * 
+ * Support for listeners registration. This object also extended by
+ * Firebug.Module so, all modules supports listening automatically. Notice that
+ * array of listeners is created for each intance of a module within initialize
+ * method. Thus all derived module classes must ensure that
+ * Firebug.Module.initialize method is called for the super class.
  */
 Firebug.Listener = function()
 {
@@ -6525,14 +6562,18 @@ Firebug.Listener.prototype =
     addListener: function(listener)
     {
         if (!this.fbListeners)
-            this.fbListeners = []; // delay the creation until the objects are created so 'this' causes new array for each module
+            this.fbListeners = []; // delay the creation until the objects are
+									// created so 'this' causes new array for
+									// each module
 
         this.fbListeners.push(listener);
     },
 
     removeListener: function(listener)
     {
-        remove(this.fbListeners, listener);  // if this.fbListeners is null, remove is being called with no add
+        remove(this.fbListeners, listener);  // if this.fbListeners is null,
+												// remove is being called with
+												// no add
     }
 };
 
@@ -6543,47 +6584,49 @@ Firebug.Listener.prototype =
 // Module
 
 /**
- * @module Base class for all modules. Every derived module object must be registered using
- * <code>Firebug.registerModule</code> method. There is always one instance of a module object
- * per browser window.
+ * @module Base class for all modules. Every derived module object must be
+ *         registered using <code>Firebug.registerModule</code> method. There
+ *         is always one instance of a module object per browser window.
  * @extends Firebug.Listener
  */
 Firebug.Module = extend(new Firebug.Listener(),
 /** @extend Firebug.Module */
 {
     /**
-     * Called when the window is opened.
-     */
+	 * Called when the window is opened.
+	 */
     initialize: function()
     {
     },
 
     /**
-     * Called when the window is closed.
-     */
+	 * Called when the window is closed.
+	 */
     shutdown: function()
     {
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     /**
-     * Called when a new context is created but before the page is loaded.
-     */
+	 * Called when a new context is created but before the page is loaded.
+	 */
     initContext: function(context)
     {
     },
 
     /**
-     * Called after a context is detached to a separate window;
-     */
+	 * Called after a context is detached to a separate window;
+	 */
     reattachContext: function(browser, context)
     {
     },
 
     /**
-     * Called when a context is destroyed. Module may store info on persistedState for reloaded pages.
-     */
+	 * Called when a context is destroyed. Module may store info on
+	 * persistedState for reloaded pages.
+	 */
     destroyContext: function(context, persistedState)
     {
     },
@@ -6595,13 +6638,14 @@ Firebug.Module = extend(new Firebug.Listener(),
     },
 
     /**
-     * Called after a context's page gets DOMContentLoaded
-     */
+	 * Called after a context's page gets DOMContentLoaded
+	 */
     loadedContext: function(context)
     {
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     showPanel: function(browser, panel)
     {
@@ -6611,7 +6655,8 @@ Firebug.Module = extend(new Firebug.Listener(),
     {
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     updateOption: function(name, value)
     {
@@ -6626,9 +6671,10 @@ Firebug.Module = extend(new Firebug.Listener(),
 // Panel
 
 /**
- * @panel Base class for all panels. Every derived panel must define a constructor and
- * register with "Firebug.registerPanel" method. An instance of the panel
- * object is created by the framework for each browser tab where Firebug is activated.
+ * @panel Base class for all panels. Every derived panel must define a
+ *        constructor and register with "Firebug.registerPanel" method. An
+ *        instance of the panel object is created by the framework for each
+ *        browser tab where Firebug is activated.
  */
 Firebug.Panel =
 {
@@ -6644,18 +6690,17 @@ Firebug.Panel =
         hasStatusBar: false,
         hasToolButtons: false,
 
-        // Pre-rendered panels are those included in the skin file (firebug.html)
+        // Pre-rendered panels are those included in the skin file
+		// (firebug.html)
         isPreRendered: false,
         innerHTMLSync: false
 
-        /*
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-        // To be used by external extensions
-        panelHTML: "",
-        panelCSS: "",
-
-        toolButtonsHTML: ""
-        /**/
+        /***********************************************************************
+		 * // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+		 * To be used by external extensions panelHTML: "", panelCSS: "",
+		 * 
+		 * toolButtonsHTML: "" /
+		 **********************************************************************/
     },
 
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -6720,7 +6765,8 @@ Firebug.Panel =
         {
             var containerSufix = this.parentPanel ? "2" : "1";
 
-            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+			// * * * * * * * * *
             // Create Panel
             var panelNode = this.panelNode = createElement("div", {
                 id: panelId,
@@ -6729,7 +6775,8 @@ Firebug.Panel =
 
             $("fbPanel" + containerSufix).appendChild(panelNode);
 
-            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+			// * * * * * * * * *
             // Create Panel Tab
             var tabHTML = '<span class="fbTabL"></span><span class="fbTabText">' +
                     this.title + '</span><span class="fbTabR"></span>';
@@ -6752,7 +6799,8 @@ Firebug.Panel =
             panelBarNode.appendChild(tabNode);
             tabNode.style.display = "block";
 
-            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+			// * * * * * * * * *
             // create ToolButtons
             if (options.hasToolButtons)
             {
@@ -6764,7 +6812,8 @@ Firebug.Panel =
                 $("fbToolbarButtons").appendChild(this.toolButtonsNode);
             }
 
-            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+			// * * * * * * * * *
             // create StatusBar
             if (options.hasStatusBar)
             {
@@ -6778,7 +6827,8 @@ Firebug.Panel =
                 this.statusBarBox.appendChild(this.statusBarNode);
             }
 
-            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+			// * * * * * * * * *
             // create SidePanel
         }
 
@@ -6789,21 +6839,20 @@ Firebug.Panel =
         // xxxpedro contextMenu
         this.onContextMenu = bind(this.onContextMenu, this);
 
-        /*
-        this.context = context;
-        this.document = doc;
-
-        this.panelNode = doc.createElement("div");
-        this.panelNode.ownerPanel = this;
-
-        setClass(this.panelNode, "panelNode panelNode-"+this.name+" contextUID="+context.uid);
-        doc.body.appendChild(this.panelNode);
-
-        if (FBTrace.DBG_INITIALIZE)
-            FBTrace.sysout("firebug.initialize panelNode for "+this.name+"\n");
-
-        this.initializeNode(this.panelNode);
-        /**/
+        /***********************************************************************
+		 * this.context = context; this.document = doc;
+		 * 
+		 * this.panelNode = doc.createElement("div"); this.panelNode.ownerPanel =
+		 * this;
+		 * 
+		 * setClass(this.panelNode, "panelNode panelNode-"+this.name+"
+		 * contextUID="+context.uid); doc.body.appendChild(this.panelNode);
+		 * 
+		 * if (FBTrace.DBG_INITIALIZE) FBTrace.sysout("firebug.initialize
+		 * panelNode for "+this.name+"\n");
+		 * 
+		 * this.initializeNode(this.panelNode); /
+		 **********************************************************************/
     },
 
     destroy: function(state) // Panel may store info on state
@@ -6828,17 +6877,18 @@ Firebug.Panel =
         this.statusBarBox = null;
         this.statusBarNode = null;
 
-        //if (this.panelNode)
-        //    delete this.panelNode.ownerPanel;
+        // if (this.panelNode)
+        // delete this.panelNode.ownerPanel;
 
-        //this.destroyNode();
+        // this.destroyNode();
     },
 
     initialize: function()
     {
         if (FBTrace.DBG_INITIALIZE) FBTrace.sysout("Firebug.Panel.initialize", this.name);
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// * * * * * * * * *
         if (this.hasSidePanel)
         {
             this.sidePanelBar.initialize();
@@ -6865,7 +6915,8 @@ Firebug.Panel =
 
         this.containerNode = this.panelNode.parentNode;
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// * * * * * * * * *
         // restore persistent state
         this.containerNode.scrollTop = this.lastScrollTop;
 
@@ -6873,7 +6924,7 @@ Firebug.Panel =
         addEvent(this.containerNode, "contextmenu", this.onContextMenu);
 
 
-        /// TODO: xxxpedro infoTip Hack
+        // / TODO: xxxpedro infoTip Hack
         Firebug.chrome.currentPanel =
                 Firebug.chrome.selectedPanel && Firebug.chrome.selectedPanel.sidePanelBar ?
                 Firebug.chrome.selectedPanel.sidePanelBar.selectedPanel :
@@ -6887,20 +6938,23 @@ Firebug.Panel =
     {
         if (FBTrace.DBG_INITIALIZE) FBTrace.sysout("Firebug.Panel.shutdown", this.name);
 
-        /// TODO: xxxpedro infoTip Hack
+        // / TODO: xxxpedro infoTip Hack
         Firebug.InfoTip.uninitializeBrowser(Firebug.chrome);
 
         if (Firebug.chrome.largeCommandLineVisible)
             Firebug.chrome.hideLargeCommandLine();
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// * * * * * * * * *
         if (this.hasSidePanel)
         {
             // TODO: xxxpedro firebug1.3a6
-            // new PanelBar mechanism will need to call shutdown to hide the panels (so it
-            // doesn't appears in other panel's sidePanelBar. Therefore, we need to implement
+            // new PanelBar mechanism will need to call shutdown to hide the
+			// panels (so it
+            // doesn't appears in other panel's sidePanelBar. Therefore, we need
+			// to implement
             // a "remember selected panel" feature in the sidePanelBar
-            //this.sidePanelBar.shutdown();
+            // this.sidePanelBar.shutdown();
         }
 
         // store persistent state
@@ -6982,16 +7036,18 @@ Firebug.Panel =
     {
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     /**
-     * Toolbar helpers
-     */
+	 * Toolbar helpers
+	 */
     showToolbarButtons: function(buttonsId, show)
     {
         try
         {
-            if (!this.context.browser) // XXXjjb this is bug. Somehow the panel context is not FirebugContext.
+            if (!this.context.browser) // XXXjjb this is bug. Somehow the panel
+										// context is not FirebugContext.
             {
                 if (FBTrace.DBG_ERRORS)
                     FBTrace.sysout("firebug.Panel showToolbarButtons this.context has no browser, this:", this);
@@ -7012,19 +7068,21 @@ Firebug.Panel =
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     /**
-     * Returns a number indicating the view's ability to inspect the object.
-     *
-     * Zero means not supported, and higher numbers indicate specificity.
-     */
+	 * Returns a number indicating the view's ability to inspect the object.
+	 * 
+	 * Zero means not supported, and higher numbers indicate specificity.
+	 */
     supportsObject: function(object)
     {
         return 0;
     },
 
-    hasObject: function(object)  // beyond type testing, is this object selectable?
+    hasObject: function(object)  // beyond type testing, is this object
+									// selectable?
     {
         return false;
     },
@@ -7044,9 +7102,10 @@ Firebug.Panel =
 
             // TODO: xxxpedro
             // XXXjoe This is kind of cheating, but, feh.
-            //Firebug.chrome.onPanelSelect(object, this);
-            //if (uiListeners.length > 0)
-            //    dispatch(uiListeners, "onPanelSelect", [object, this]);  // TODO: make Firebug.chrome a uiListener
+            // Firebug.chrome.onPanelSelect(object, this);
+            // if (uiListeners.length > 0)
+            // dispatch(uiListeners, "onPanelSelect", [object, this]); // TODO:
+			// make Firebug.chrome a uiListener
         }
     },
 
@@ -7072,7 +7131,8 @@ Firebug.Panel =
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     startInspecting: function()
     {
@@ -7082,16 +7142,17 @@ Firebug.Panel =
     {
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     search: function(text, reverse)
     {
     },
 
     /**
-     * Retrieves the search options that this modules supports.
-     * This is used by the search UI to present the proper options.
-     */
+	 * Retrieves the search options that this modules supports. This is used by
+	 * the search UI to present the proper options.
+	 */
     getSearchOptionsMenuItems: function()
     {
         return [
@@ -7100,8 +7161,8 @@ Firebug.Panel =
     },
 
     /**
-     * Navigates to the next document whose match parameter returns true.
-     */
+	 * Navigates to the next document whose match parameter returns true.
+	 */
     navigateToNextDocument: function(match, reverse)
     {
         // This is an approximation of the UI that is displayed by the location
@@ -7147,23 +7208,24 @@ Firebug.Panel =
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     // Called when "Options" clicked. Return array of
-    // {label: 'name', nol10n: true,  type: "checkbox", checked: <value>, command:function to set <value>}
+    // {label: 'name', nol10n: true, type: "checkbox", checked: <value>,
+	// command:function to set <value>}
     getOptionsMenuItems: function()
     {
         return null;
     },
 
     /*
-     * Called by chrome.onContextMenu to build the context menu when this panel has focus.
-     * See also FirebugRep for a similar function also called by onContextMenu
-     * Extensions may monkey patch and chain off this call
-     * @param object: the 'realObject', a model value, eg a DOM property
-     * @param target: the HTML element clicked on.
-     * @return an array of menu items.
-     */
+	 * Called by chrome.onContextMenu to build the context menu when this panel
+	 * has focus. See also FirebugRep for a similar function also called by
+	 * onContextMenu Extensions may monkey patch and chain off this call @param
+	 * object: the 'realObject', a model value, eg a DOM property @param target:
+	 * the HTML element clicked on. @return an array of menu items.
+	 */
     getContextMenuItems: function(object, target)
     {
         return [];
@@ -7178,7 +7240,8 @@ Firebug.Panel =
     {
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     getDefaultSelection: function()
     {
@@ -7236,9 +7299,9 @@ Firebug.Panel =
     },
 
     /*
-     *  UI signal that a tab needs attention, eg Script panel is currently stopped on a breakpoint
-     *  @param: show boolean, true turns on.
-     */
+	 * UI signal that a tab needs attention, eg Script panel is currently
+	 * stopped on a breakpoint @param: show boolean, true turns on.
+	 */
     highlight: function(show)
     {
         var tab = this.getTab();
@@ -7261,39 +7324,47 @@ Firebug.Panel =
         return tab;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Support for Break On Next
 
     /**
-     * Called by the framework when the user clicks on the Break On Next button.
-     * @param {Boolean} armed Set to true if the Break On Next feature is
-     * to be armed for action and set to false if the Break On Next should be disarmed.
-     * If 'armed' is true, then the next call to shouldBreakOnNext should be |true|.
-     */
+	 * Called by the framework when the user clicks on the Break On Next button.
+	 * 
+	 * @param {Boolean}
+	 *            armed Set to true if the Break On Next feature is to be armed
+	 *            for action and set to false if the Break On Next should be
+	 *            disarmed. If 'armed' is true, then the next call to
+	 *            shouldBreakOnNext should be |true|.
+	 */
     breakOnNext: function(armed)
     {
     },
 
     /**
-     * Called when a panel is selected/displayed. The method should return true
-     * if the Break On Next feature is currently armed for this panel.
-     */
+	 * Called when a panel is selected/displayed. The method should return true
+	 * if the Break On Next feature is currently armed for this panel.
+	 */
     shouldBreakOnNext: function()
     {
         return false;
     },
 
     /**
-     * Returns labels for Break On Next tooltip (one for enabled and one for disabled state).
-     * @param {Boolean} enabled Set to true if the Break On Next feature is
-     * currently activated for this panel.
-     */
+	 * Returns labels for Break On Next tooltip (one for enabled and one for
+	 * disabled state).
+	 * 
+	 * @param {Boolean}
+	 *            enabled Set to true if the Break On Next feature is currently
+	 *            activated for this panel.
+	 */
     getBreakOnNextTooltip: function(enabled)
     {
         return null;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     // xxxpedro contextMenu
     onContextMenu: function(event)
@@ -7320,47 +7391,39 @@ Firebug.Panel =
 
         return true;
 
-        /*
-        // TODO: xxxpedro move code to somewhere. code to get cross-browser
-        // window to screen coordinates
-        var box = Firebug.browser.getElementPosition(Firebug.chrome.node);
-
-        var screenY = 0;
-
-        // Firefox
-        if (typeof window.mozInnerScreenY != "undefined")
-        {
-            screenY = window.mozInnerScreenY;
-        }
-        // Chrome
-        else if (typeof window.innerHeight != "undefined")
-        {
-            screenY = window.outerHeight - window.innerHeight;
-        }
-        // IE
-        else if (typeof window.screenTop != "undefined")
-        {
-            screenY = window.screenTop;
-        }
-
-        contextMenu.show(event.screenX-box.left, event.screenY-screenY-box.top);
-        /**/
+        /***********************************************************************
+		 * // TODO: xxxpedro move code to somewhere. code to get cross-browser //
+		 * window to screen coordinates var box =
+		 * Firebug.browser.getElementPosition(Firebug.chrome.node);
+		 * 
+		 * var screenY = 0;
+		 *  // Firefox if (typeof window.mozInnerScreenY != "undefined") {
+		 * screenY = window.mozInnerScreenY; } // Chrome else if (typeof
+		 * window.innerHeight != "undefined") { screenY = window.outerHeight -
+		 * window.innerHeight; } // IE else if (typeof window.screenTop !=
+		 * "undefined") { screenY = window.screenTop; }
+		 * 
+		 * contextMenu.show(event.screenX-box.left,
+		 * event.screenY-screenY-box.top); /
+		 **********************************************************************/
     }
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 };
 
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * *
 
 /**
- * MeasureBox
- * To get pixels size.width and size.height:
- * <ul><li>     this.startMeasuring(view); </li>
- *     <li>     var size = this.measureText(lineNoCharsSpacer); </li>
- *     <li>     this.stopMeasuring(); </li>
+ * MeasureBox To get pixels size.width and size.height:
+ * <ul>
+ * <li> this.startMeasuring(view); </li>
+ * <li> var size = this.measureText(lineNoCharsSpacer); </li>
+ * <li> this.stopMeasuring(); </li>
  * </ul>
- *
+ * 
  * @namespace
  */
 Firebug.MeasureBox =
@@ -7447,7 +7510,7 @@ if (FBL.domplate) Firebug.Rep = domplate(
         var re = /\[object (.*?)\]/;
         var m = re.exec(label);
 
-        ///return m ? m[1] : label;
+        // /return m ? m[1] : label;
 
         // if the label is in the "[object TYPE]" format return its type
         if (m)
@@ -7458,9 +7521,11 @@ if (FBL.domplate) Firebug.Rep = domplate(
         else if (
                 // safeToString() fails to recognize some objects in IE
                 isIE &&
-                // safeToString() returns "[object]" for some objects like window.Image
+                // safeToString() returns "[object]" for some objects like
+				// window.Image
                 (label == "[object]" ||
-                // safeToString() returns undefined for some objects like window.clientInformation
+                // safeToString() returns undefined for some objects like
+				// window.clientInformation
                 typeof object == "object" && typeof label == "undefined")
             )
         {
@@ -7482,7 +7547,8 @@ if (FBL.domplate) Firebug.Rep = domplate(
         return [];
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Convenience for domplates
 
     STR: function(name)
@@ -7525,7 +7591,7 @@ FBL.ns( /** @scope s_gui */ function() { with (FBL) {
 // ************************************************************************************************
 // Controller
 
-/**@namespace*/
+/** @namespace */
 FBL.Controller = {
 
     controllers: null,
@@ -7541,8 +7607,8 @@ FBL.Controller = {
     {
         this.removeControllers();
 
-        //this.controllers = null;
-        //this.controllerContext = null;
+        // this.controllers = null;
+        // this.controllerContext = null;
     },
 
     addController: function()
@@ -7593,19 +7659,22 @@ FBL.Controller = {
 // ************************************************************************************************
 // PanelBar
 
-/**@namespace*/
+/** @namespace */
 FBL.PanelBar =
 {
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     panelMap: null,
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     selectedPanel: null,
     parentPanelName: null,
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     create: function(ownerPanel)
     {
@@ -7622,7 +7691,7 @@ FBL.PanelBar =
         var panels = Firebug.panelTypes;
         for (var i=0, p; p=panels[i]; i++)
         {
-            if ( // normal Panel  of the Chrome's PanelBar
+            if ( // normal Panel of the Chrome's PanelBar
                 !ownerPanel && !p.prototype.parentPanel ||
                 // Child Panel of the current Panel's SidePanelBar
                 ownerPanel && p.prototype.parentPanel &&
@@ -7691,7 +7760,8 @@ FBL.PanelBar =
         this.selectedPanel = null;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     addPanel: function(panelName, parentPanel)
     {
@@ -7742,25 +7812,19 @@ FBL.PanelBar =
 
 };
 
-//************************************************************************************************
+// ************************************************************************************************
 // Button
 
 /**
- * options.element
- * options.caption
- * options.title
- *
- * options.owner
- * options.className
- * options.pressedClassName
- *
- * options.onPress
- * options.onUnpress
- * options.onClick
- *
+ * options.element options.caption options.title
+ * 
+ * options.owner options.className options.pressedClassName
+ * 
+ * options.onPress options.onUnpress options.onClick
+ * 
  * @class
  * @extends FBL.Controller
- *
+ * 
  */
 
 FBL.Button = function(options)
@@ -7794,10 +7858,11 @@ FBL.Button = function(options)
     }
 };
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 Button.prototype = extend(Controller,
-/**@extend FBL.Button.prototype*/
+/** @extend FBL.Button.prototype */
 {
     type: "normal",
     caption: "caption",
@@ -7818,7 +7883,8 @@ Button.prototype = extend(Controller,
     {
         this.shutdown();
 
-        // only remove if it is a dynamically generated button (not pre-rendered)
+        // only remove if it is a dynamically generated button (not
+		// pre-rendered)
         if (this.shouldDestroy)
             this.container.removeChild(this.element);
 
@@ -7936,7 +8002,8 @@ Button.prototype = extend(Controller,
     }
 });
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 /**
  * @class
@@ -7948,14 +8015,14 @@ FBL.IconButton = function()
 };
 
 IconButton.prototype = extend(Button.prototype,
-/**@extend FBL.IconButton.prototype*/
+/** @extend FBL.IconButton.prototype */
 {
     baseClassName: "fbIconButton",
     pressedClassName: "fbIconPressed"
 });
 
 
-//************************************************************************************************
+// ************************************************************************************************
 // Menu
 
 var menuItemProps = {"class": "$item.className", type: "$item.type", value: "$item.value",
@@ -8080,28 +8147,19 @@ var MenuPlate = domplate(Firebug.Rep,
     }
 });
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 /**
- * options
- * options.element
- * options.id
- * options.items
- *
- * item.label
- * item.className
- * item.type
- * item.value
- * item.disabled
- * item.checked
- * item.selected
- * item.command
- * item.child
- *
- *
+ * options options.element options.id options.items
+ * 
+ * item.label item.className item.type item.value item.disabled item.checked
+ * item.selected item.command item.child
+ * 
+ * 
  * @class
  * @extends FBL.Controller
- *
+ * 
  */
 FBL.Menu = function(options)
 {
@@ -8143,18 +8201,20 @@ FBL.Menu = function(options)
     this.handleWindowMouseDown = bind(this.handleWindowMouseDown, this);
 };
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var menuMap = {};
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 Menu.prototype =  extend(Controller,
-/**@extend FBL.Menu.prototype*/
+/** @extend FBL.Menu.prototype */
 {
     destroy: function()
     {
-        //if (this.element) console.log("destroy", this.element.id);
+        // if (this.element) console.log("destroy", this.element.id);
 
         this.hide();
 
@@ -8193,7 +8253,7 @@ Menu.prototype =  extend(Controller,
 
         if (this.isVisible) return;
 
-        //console.log("show", this.element.id);
+        // console.log("show", this.element.id);
 
         x = x || 0;
         y = y || 0;
@@ -8240,7 +8300,7 @@ Menu.prototype =  extend(Controller,
 
         if (!this.isVisible) return;
 
-        //console.log("hide", this.element.id);
+        // console.log("hide", this.element.id);
 
         this.elementStyle.display = "none";
 
@@ -8270,7 +8330,7 @@ Menu.prototype =  extend(Controller,
 
         this.showChildTimeout = Firebug.chrome.window.setTimeout(function(){
 
-            //if (!parent.isVisible) return;
+            // if (!parent.isVisible) return;
 
             var box = Firebug.chrome.getElementBox(target);
 
@@ -8283,7 +8343,8 @@ Menu.prototype =  extend(Controller,
                     parentTarget: target
                 }));
 
-            var offsetLeft = isIE6 ? -1 : -6; // IE6 problem with fixed position
+            var offsetLeft = isIE6 ? -1 : -6; // IE6 problem with fixed
+												// position
             childMenu.show(box.left + box.width + offsetLeft, box.top -6);
             setClass(target, "fbMenuGroupSelected");
 
@@ -8396,7 +8457,7 @@ Menu.prototype =  extend(Controller,
 
     handleWindowMouseDown: function(event)
     {
-        //console.log("handleWindowMouseDown");
+        // console.log("handleWindowMouseDown");
 
         var target = event.target || event.srcElement;
 
@@ -8411,7 +8472,7 @@ Menu.prototype =  extend(Controller,
 
     handleMouseOver: function(event)
     {
-        //console.log("handleMouseOver", this.element.id);
+        // console.log("handleMouseOver", this.element.id);
 
         this.clearHideTimeout();
         this.clearShowChildTimeout();
@@ -8444,10 +8505,11 @@ Menu.prototype =  extend(Controller,
     }
 });
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 append(Menu,
-/**@extend FBL.Menu*/
+/** @extend FBL.Menu */
 {
     register: function(object)
     {
@@ -8478,10 +8540,10 @@ append(Menu,
 });
 
 
-//************************************************************************************************
+// ************************************************************************************************
 // Status Bar
 
-/**@class*/
+/** @class */
 function StatusBar(){};
 
 StatusBar.prototype = extend(Controller, {
@@ -8496,7 +8558,7 @@ StatusBar.prototype = extend(Controller, {
 
 /* See license.txt for terms of usage */
 
-FBL.ns( /**@scope s_context*/ function() { with (FBL) {
+FBL.ns( /** @scope s_context */ function() { with (FBL) {
 // ************************************************************************************************
 
 // ************************************************************************************************
@@ -8504,9 +8566,12 @@ FBL.ns( /**@scope s_context*/ function() { with (FBL) {
 
 var refreshDelay = 300;
 
-// Opera and some versions of webkit returns the wrong value of document.elementFromPoint()
-// function, without taking into account the scroll position. Safari 4 (webkit/531.21.8)
-// still have this issue. Google Chrome 4 (webkit/532.5) does not. So, we're assuming this
+// Opera and some versions of webkit returns the wrong value of
+// document.elementFromPoint()
+// function, without taking into account the scroll position. Safari 4
+// (webkit/531.21.8)
+// still have this issue. Google Chrome 4 (webkit/532.5) does not. So, we're
+// assuming this
 // issue was fixed in the 532 version
 var shouldFixElementFromPoint = isOpera || isSafari && browserVersion < "532";
 
@@ -8548,7 +8613,8 @@ FBL.Context = function(win)
 
 FBL.Context.prototype =
 {
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // partial-port of Firebug tabContext.js
 
     browser: null,
@@ -8561,7 +8627,8 @@ FBL.Context.prototype =
         if (win.setTimeout == this.setTimeout)
             throw new Error("setTimeout recursion");
 
-        var timeout = win.setTimeout.apply ? // IE doesn't have apply method on setTimeout
+        var timeout = win.setTimeout.apply ? // IE doesn't have apply method
+												// on setTimeout
                 win.setTimeout.apply(win, arguments) :
                 win.setTimeout(fn, delay);
 
@@ -8585,7 +8652,8 @@ FBL.Context.prototype =
     {
         var win = this.window;
 
-        var timeout = win.setInterval.apply ? // IE doesn't have apply method on setTimeout
+        var timeout = win.setInterval.apply ? // IE doesn't have apply method
+												// on setTimeout
                 win.setInterval.apply(win, arguments) :
                 win.setInterval(fn, delay);
 
@@ -8614,14 +8682,18 @@ FBL.Context.prototype =
         {
             var panelName = arguments[i];
 
-            // avoid error. need to create a better getPanel() function as explained below
+            // avoid error. need to create a better getPanel() function as
+			// explained below
             if (!Firebug.chrome || !Firebug.chrome.selectedPanel)
                 return;
 
-            //var panel = this.getPanel(panelName, true);
-            //TODO: xxxpedro context how to get all panels using a single function?
-            // the current workaround to make the invalidation works is invalidating
-            // only sidePanels. There's also a problem with panel name (LowerCase in Firebug Lite)
+            // var panel = this.getPanel(panelName, true);
+            // TODO: xxxpedro context how to get all panels using a single
+			// function?
+            // the current workaround to make the invalidation works is
+			// invalidating
+            // only sidePanels. There's also a problem with panel name
+			// (LowerCase in Firebug Lite)
             var panel = Firebug.chrome.selectedPanel.sidePanelBar ?
                     Firebug.chrome.selectedPanel.sidePanelBar.getPanel(panelName, true) :
                     null;
@@ -8642,10 +8714,13 @@ FBL.Context.prototype =
 
             for (var panelName in this.invalidPanels)
             {
-                //var panel = this.getPanel(panelName, true);
-                //TODO: xxxpedro context how to get all panels using a single function?
-                // the current workaround to make the invalidation works is invalidating
-                // only sidePanels. There's also a problem with panel name (LowerCase in Firebug Lite)
+                // var panel = this.getPanel(panelName, true);
+                // TODO: xxxpedro context how to get all panels using a single
+				// function?
+                // the current workaround to make the invalidation works is
+				// invalidating
+                // only sidePanels. There's also a problem with panel name
+				// (LowerCase in Firebug Lite)
                 var panel = Firebug.chrome.selectedPanel.sidePanelBar ?
                         Firebug.chrome.selectedPanel.sidePanelBar.getPanel(panelName, true) :
                         null;
@@ -8674,34 +8749,38 @@ FBL.Context.prototype =
     },
 
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Evalutation Method
 
     /**
-     * Evaluates an expression in the current context window.
-     *
-     * @param {String}   expr           expression to be evaluated
-     *
-     * @param {String}   context        string indicating the global location
-     *                                  of the object that will be used as the
-     *                                  context. The context is referred in
-     *                                  the expression as the "this" keyword.
-     *                                  If no context is informed, the "window"
-     *                                  context is used.
-     *
-     * @param {String}   api            string indicating the global location
-     *                                  of the object that will be used as the
-     *                                  api of the evaluation.
-     *
-     * @param {Function} errorHandler(message) error handler to be called
-     *                                         if the evaluation fails.
-     */
+	 * Evaluates an expression in the current context window.
+	 * 
+	 * @param {String}
+	 *            expr expression to be evaluated
+	 * 
+	 * @param {String}
+	 *            context string indicating the global location of the object
+	 *            that will be used as the context. The context is referred in
+	 *            the expression as the "this" keyword. If no context is
+	 *            informed, the "window" context is used.
+	 * 
+	 * @param {String}
+	 *            api string indicating the global location of the object that
+	 *            will be used as the api of the evaluation.
+	 * 
+	 * @param {Function}
+	 *            errorHandler(message) error handler to be called if the
+	 *            evaluation fails.
+	 */
     evaluate: function(expr, context, api, errorHandler)
     {
-        // Need to remove line breaks otherwise only the first line will be executed
+        // Need to remove line breaks otherwise only the first line will be
+		// executed
         expr = stripNewLines(expr);
 
-        // the default context is the "window" object. It can be any string that represents
+        // the default context is the "window" object. It can be any string that
+		// represents
         // a global accessible element as: "my.namespaced.object"
         context = context || "window";
 
@@ -8711,7 +8790,8 @@ FBL.Context.prototype =
         // if the context is the "window" object, we don't need a closure
         if (context == "window")
         {
-            // try first the expression wrapped in parenthesis (so we can capture
+            // try first the expression wrapped in parenthesis (so we can
+			// capture
             // object literal expressions like "{}" and "{some:1,props:2}")
             cmd = api ?
                 "with("+api+"){ ("+expr+") }" :
@@ -8732,7 +8812,8 @@ FBL.Context.prototype =
         }
         else
         {
-            // try to execute the command using a "return" statement in the evaluation closure.
+            // try to execute the command using a "return" statement in the
+			// evaluation closure.
             cmd = api ?
                 // with API and context, trying to get the return value
                 "(function(arguments){ with(" + api + "){ return (" +
@@ -8746,7 +8827,8 @@ FBL.Context.prototype =
 
             result = this.eval(cmd);
 
-            // if it results in error, then try it without the "return" statement
+            // if it results in error, then try it without the "return"
+			// statement
             if (result && result[evalError])
             {
                 cmd = api ?
@@ -8779,7 +8861,8 @@ FBL.Context.prototype =
     },
 
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Window Methods
 
     getWindowSize: function()
@@ -8818,7 +8901,8 @@ FBL.Context.prototype =
         }
 
         // then we need to check if document.body has a bigger scroll size value
-        // because sometimes depending on the browser and the page, the document.body
+        // because sometimes depending on the browser and the page, the
+		// document.body
         // scroll size returns a smaller (and wrong) measure
         if ((el=this.document.body) && (el.scrollHeight || el.scrollWidth) &&
             (el.scrollWidth > width || el.scrollHeight > height))
@@ -8854,7 +8938,8 @@ FBL.Context.prototype =
     },
 
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Element Methods
 
     getElementFromPoint: function(x, y)
@@ -8915,7 +9000,8 @@ FBL.Context.prototype =
     },
 
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Measurement Methods
 
     getMeasurement: function(el, name)
@@ -9029,7 +9115,8 @@ FBL.Context.prototype =
         }
 
         var box = this.document.createElement("div");
-        //box.style.cssText = "margin:0; padding:1px; border: 0; position:static; overflow:hidden; visibility: hidden;";
+        // box.style.cssText = "margin:0; padding:1px; border: 0;
+		// position:static; overflow:hidden; visibility: hidden;";
         box.style.cssText = "margin:0; padding:1px; border: 0; visibility: hidden;";
 
         var clone = el.cloneNode(false);
@@ -9075,13 +9162,14 @@ FBL.Context.prototype =
             return value;
         }
 
-        /*
-        var calibrationBase = 200;
-        var calibrationValue = computeDirtyFontSize(el, calibrationBase);
-        var rate = calibrationBase / calibrationValue;
-        /**/
+        /***********************************************************************
+		 * var calibrationBase = 200; var calibrationValue =
+		 * computeDirtyFontSize(el, calibrationBase); var rate = calibrationBase /
+		 * calibrationValue; /
+		 **********************************************************************/
 
-        // the "dirty technique" fails in some environments, so we're using a static value
+        // the "dirty technique" fails in some environments, so we're using a
+		// static value
         // based in some tests.
         var rate = 200 / 225;
 
@@ -9091,7 +9179,8 @@ FBL.Context.prototype =
     },
 
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Unit Funtions
 
     pointsToPixels: function(name, value, returnFloat)
@@ -9142,7 +9231,8 @@ FBL.Context.prototype =
         return value;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     getStyle: isIE ? function(el, name)
     {
@@ -9162,13 +9252,14 @@ FBL.Context.prototype =
 
 /* See license.txt for terms of usage */
 
-FBL.ns( /**@scope ns-chrome*/ function() { with (FBL) {
+FBL.ns( /** @scope ns-chrome */ function() { with (FBL) {
 // ************************************************************************************************
 
 // ************************************************************************************************
 // Globals
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 // Window Options
 
 var WindowDefaultOptions =
@@ -9178,12 +9269,14 @@ var WindowDefaultOptions =
         height: 250
     },
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 // Instantiated objects
 
     commandLine,
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 // Interface Elements Cache
 
     fbTop,
@@ -9218,45 +9311,53 @@ var WindowDefaultOptions =
     fbLargeCommandLine,
     fbLargeCommandButtons,
 
-//* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 // Cached size values
 
     topHeight,
     topPartialHeight,
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
     chromeRedrawSkipRate = isIE ? 75 : isOpera ? 80 : 75,
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
     lastSelectedPanelName,
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
     focusCommandLineState = 0,
     lastFocusedPanelName,
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
     lastHSplitterMouseMove = 0,
     onHSplitterMouseMoveBuffer = null,
     onHSplitterMouseMoveTimer = null,
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
     lastVSplitterMouseMove = 0;
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 
 // ************************************************************************************************
 // FirebugChrome
 
-/**@namespace*/
+/** @namespace */
 FBL.FirebugChrome =
 {
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     isOpen: false,
     height: 250,
@@ -9270,7 +9371,8 @@ FBL.FirebugChrome =
     htmlSelectionStack: [],
     consoleMessageQueue: [],
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     create: function()
     {
@@ -9293,13 +9395,14 @@ FBL.FirebugChrome =
 
         if (Env.Options.enablePersistent && chrome.type == "popup")
         {
-            // TODO: xxxpedro persist - revise chrome synchronization when in persistent mode
+            // TODO: xxxpedro persist - revise chrome synchronization when in
+			// persistent mode
             var frame = FirebugChrome.chromeMap.frame;
             if (frame)
                 frame.close();
 
-            //chrome.reattach(frame, chrome);
-            //TODO: xxxpedro persist synchronize?
+            // chrome.reattach(frame, chrome);
+            // TODO: xxxpedro persist synchronize?
             chrome.initialize();
         }
     },
@@ -9326,7 +9429,8 @@ var createChromeWindow = function(options)
 {
     options = extend(WindowDefaultOptions, options || {});
 
-    //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Locals
 
     var chrome = {},
@@ -9371,29 +9475,33 @@ var createChromeWindow = function(options)
 
         createChromeDiv = function()
         {
-            //Firebug.Console.warn("Firebug Lite GUI is working in 'windowless mode'. It may behave slower and receive interferences from the page in which it is installed.");
+            // Firebug.Console.warn("Firebug Lite GUI is working in 'windowless
+			// mode'. It may behave slower and receive interferences from the
+			// page in which it is installed.");
 
             var node = chrome.node = createGlobalElement("div"),
                 style = createGlobalElement("style"),
 
                 css = FirebugChrome.Skin.CSS
                         /*
-                        .replace(/;/g, " !important;")
-                        .replace(/!important\s!important/g, "!important")
-                        .replace(/display\s*:\s*(\w+)\s*!important;/g, "display:$1;")*/,
+						 * .replace(/;/g, " !important;")
+						 * .replace(/!important\s!important/g, "!important")
+						 * .replace(/display\s*:\s*(\w+)\s*!important;/g,
+						 * "display:$1;")
+						 */,
 
-                        // reset some styles to minimize interference from the main page's style
+                        // reset some styles to minimize interference from the
+						// main page's style
                 rules = ".fbBody *{margin:0;padding:0;font-size:11px;line-height:13px;color:inherit;}" +
                         // load the chrome styles
                         css +
                         // adjust some remaining styles
                         ".fbBody #fbHSplitter{position:absolute !important;} .fbBody #fbHTML span{line-height:14px;} .fbBody .lineNo div{line-height:inherit !important;}";
-            /*
-            if (isIE)
-            {
-                // IE7 CSS bug (FbChrome table bigger than its parent div)
-                rules += ".fbBody table.fbChrome{position: static !important;}";
-            }/**/
+            /*******************************************************************
+			 * if (isIE) { // IE7 CSS bug (FbChrome table bigger than its parent
+			 * div) rules += ".fbBody table.fbChrome{position: static
+			 * !important;}"; }/
+			 ******************************************************************/
 
             style.type = "text/css";
 
@@ -9427,11 +9535,13 @@ var createChromeWindow = function(options)
             onChromeLoad(chrome);
         };
 
-    //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     try
     {
-        //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// * * * * * * * * *
         // create the Chrome as a "div" (windowless mode)
         if (type == "div")
         {
@@ -9439,10 +9549,16 @@ var createChromeWindow = function(options)
             return;
         }
 
-        //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// * * * * * * * * *
         // cretate the Chrome as an "iframe"
         else if (isChromeFrame)
         {
+        	for (i=0;i<40;i++) {
+        		var spacingNode = createGlobalElement("br");
+        		//formatNode(spacingNode);
+        		body.appendChild(spacingNode);	
+        	}
             // Create the Chrome Frame
             var node = chrome.node = createGlobalElement("iframe");
             node.setAttribute("src", url);
@@ -9452,14 +9568,18 @@ var createChromeWindow = function(options)
 
             body.appendChild(node);
 
-            // must set the id after appending to the document, otherwise will cause an
-            // strange error in IE, making the iframe load the page in which the bookmarklet
-            // was created (like getfirebug.com), before loading the injected UI HTML,
+            // must set the id after appending to the document, otherwise will
+			// cause an
+            // strange error in IE, making the iframe load the page in which the
+			// bookmarklet
+            // was created (like getfirebug.com), before loading the injected UI
+			// HTML,
             // generating an "Access Denied" error.
             node.id = options.id;
         }
 
-        //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// * * * * * * * * *
         // create the Chrome as a "popup"
         else
         {
@@ -9467,11 +9587,15 @@ var createChromeWindow = function(options)
 
                 options = [
                     "true,top=",
-                    Math.max(screen.availHeight - height - 61 /* Google Chrome bug */, 0),
+                    Math.max(screen.availHeight - height - 61 /*
+																 * Google Chrome
+																 * bug
+																 */, 0),
                     ",left=0,height=",
                     height,
                     ",width=",
-                    screen.availWidth-10, // Opera opens popup in a new tab if it's too big!
+                    screen.availWidth-10, // Opera opens popup in a new tab if
+											// it's too big!
                     ",resizable"
                 ].join(""),
 
@@ -9500,7 +9624,8 @@ var createChromeWindow = function(options)
             }
         }
 
-        //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// * * * * * * * * *
         // Inject the interface HTML if it is not using the local skin
 
         if (!useLocalSkin)
@@ -9512,7 +9637,8 @@ var createChromeWindow = function(options)
             doc.close();
         }
 
-        //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// * * * * * * * * *
         // Wait the Window to be loaded
 
         var win,
@@ -9532,7 +9658,8 @@ var createChromeWindow = function(options)
                     chrome.window = win.window;
                     chrome.document = win.document;
 
-                    // Prevent getting the wrong chrome height in FF when opening a popup
+                    // Prevent getting the wrong chrome height in FF when
+					// opening a popup
                     setTimeout(function(){
                         onChromeLoad(chrome);
                     }, useLocalSkin ? 200 : 0);
@@ -9549,9 +9676,12 @@ var createChromeWindow = function(options)
 
         if (/access/i.test(msg))
         {
-            // Firebug Lite could not create a window for its Graphical User Interface due to
-            // a access restriction. This happens in some pages, when loading via bookmarklet.
-            // In such cases, the only way is to load the GUI in a "windowless mode".
+            // Firebug Lite could not create a window for its Graphical User
+			// Interface due to
+            // a access restriction. This happens in some pages, when loading
+			// via bookmarklet.
+            // In such cases, the only way is to load the GUI in a "windowless
+			// mode".
 
             if (isChromeFrame)
                 body.removeChild(node);
@@ -9568,7 +9698,8 @@ var createChromeWindow = function(options)
     }
 };
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var onChromeLoad = function onChromeLoad(chrome)
 {
@@ -9578,7 +9709,8 @@ var onChromeLoad = function onChromeLoad(chrome)
 
     if (Env.Options.enablePersistent)
     {
-        // TODO: xxxpedro persist - make better chrome synchronization when in persistent mode
+        // TODO: xxxpedro persist - make better chrome synchronization when in
+		// persistent mode
         Env.FirebugChrome = FirebugChrome;
 
         chrome.window.Firebug = chrome.window.Firebug || {};
@@ -9622,7 +9754,8 @@ var onChromeLoad = function onChromeLoad(chrome)
     }
 };
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var getChromeDivTemplate = function()
 {
@@ -9638,11 +9771,10 @@ var getChromeTemplate = function(isPopup)
     r[++i] = '<html ng-app="javafxwebdemo"><head><title>';
     r[++i] = Firebug.version;
 
-    /*
-    r[++i] = '</title><link href="';
-    r[++i] = Env.Location.skinDir + 'firebug.css';
-    r[++i] = '" rel="stylesheet" type="text/css" />';
-    /**/
+    /***************************************************************************
+	 * r[++i] = '</title><link href="'; r[++i] = Env.Location.skinDir +
+	 * 'firebug.css'; r[++i] = '" rel="stylesheet" type="text/css" />'; /
+	 **************************************************************************/
 
     r[++i] = '</title><style>html,body{margin:0;padding:0;overflow:hidden;}';
     r[++i] = tpl.CSS;
@@ -9672,13 +9804,14 @@ var getChromeTemplate = function(isPopup)
 // ************************************************************************************************
 // Chrome Class
 
-/**@class*/
+/** @class */
 var Chrome = function Chrome(chrome)
 {
     var type = chrome.type;
     var Base = type == "frame" || type == "div" ? ChromeFrameBase : ChromePopupBase;
 
-    append(this, Base);   // inherit from base class (ChromeFrameBase or ChromePopupBase)
+    append(this, Base);   // inherit from base class (ChromeFrameBase or
+							// ChromePopupBase)
     append(this, chrome); // inherit chrome window properties
     append(this, new Context(chrome.window)); // inherit from Context class
 
@@ -9701,14 +9834,15 @@ var Chrome = function Chrome(chrome)
  * @namespace
  * @extends FBL.Controller
  * @extends FBL.PanelBar
- **/
+ */
 var ChromeBase = {};
 append(ChromeBase, Controller);
 append(ChromeBase, PanelBar);
 append(ChromeBase,
-/**@extend ns-chrome-ChromeBase*/
+/** @extend ns-chrome-ChromeBase */
 {
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // inherited properties
 
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -9723,19 +9857,22 @@ append(ChromeBase,
     document: null,
     window: null,
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // value properties
 
     sidePanelVisible: false,
     commandLineVisible: false,
     largeCommandLineVisible: false,
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // object properties
 
     inspectButton: null,
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     create: function()
     {
@@ -9863,7 +10000,7 @@ append(ChromeBase,
 
         });
 
-        /**@private*/
+        /** @private */
         var firebugOptionsMenu =
         {
             id: "fbFirebugOptionsMenu",
@@ -10026,7 +10163,7 @@ append(ChromeBase,
 
         var testMenuClick = function(event)
         {
-            //console.log("testMenuClick");
+            // console.log("testMenuClick");
             cancelEvent(event, true);
 
             var target = event.target || event.srcElement;
@@ -10035,7 +10172,8 @@ append(ChromeBase,
                 menu.hide();
             else
             {
-                var offsetLeft = isIE6 ? 1 : -4,  // IE6 problem with fixed position
+                var offsetLeft = isIE6 ? 1 : -4,  // IE6 problem with fixed
+													// position
 
                     chrome = Firebug.chrome,
 
@@ -10063,34 +10201,39 @@ append(ChromeBase,
 
         iconButton.initialize();
 
-        //addEvent($("fbToolbarIcon"), "click", testMenuClick);
+        // addEvent($("fbToolbarIcon"), "click", testMenuClick);
     },
 
     initialize: function()
     {
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
         if (Env.bookmarkletOutdated)
             Firebug.Console.logFormatted([
                   "A new bookmarklet version is available. " +
                   "Please visit http://getfirebug.com/firebuglite#Install and update it."
                 ], Firebug.context, "warn");
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
         if (Firebug.Console)
             Firebug.Console.flush();
 
         if (Firebug.Trace)
             FBTrace.flush(Firebug.Trace);
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
         if (FBTrace.DBG_INITIALIZE) FBTrace.sysout("Firebug.chrome.initialize", "initializing chrome application");
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
         // initialize inherited classes
         Controller.initialize.call(this);
         PanelBar.initialize.call(this);
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
         // create the interface elements cache
 
         fbTop = $("fbTop");
@@ -10125,20 +10268,24 @@ append(ChromeBase,
         fbLargeCommandLine = $("fbLargeCommandLine");
         fbLargeCommandButtons = $("fbLargeCommandButtons");
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
         // static values cache
         topHeight = fbTop.offsetHeight;
         topPartialHeight = fbToolbar.offsetHeight;
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
 
         disableTextSelection($("fbToolbar"));
         disableTextSelection($("fbPanelBarBox"));
         disableTextSelection($("fbPanelBar1"));
         disableTextSelection($("fbPanelBar2"));
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-        // Add the "javascript:void(0)" href attributes used to make the hover effect in IE6
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
+        // Add the "javascript:void(0)" href attributes used to make the hover
+		// effect in IE6
         if (isIE6 && Firebug.Selector)
         {
             // TODO: xxxpedro change to getElementsByClass
@@ -10149,18 +10296,13 @@ append(ChromeBase,
             }
         }
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
         // initialize all panels
-        /*
-        var panelMap = Firebug.panelTypes;
-        for (var i=0, p; p=panelMap[i]; i++)
-        {
-            if (!p.parentPanel)
-            {
-                this.addPanel(p.prototype.name);
-            }
-        }
-        /**/
+        /***********************************************************************
+		 * var panelMap = Firebug.panelTypes; for (var i=0, p; p=panelMap[i];
+		 * i++) { if (!p.parentPanel) { this.addPanel(p.prototype.name); } } /
+		 **********************************************************************/
 
         // ************************************************************************************************
         // ************************************************************************************************
@@ -10191,8 +10333,9 @@ append(ChromeBase,
                 Firebug.chrome.focusCommandLine();
         },0);
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-        //this.draw();
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
+        // this.draw();
 
 
 
@@ -10201,16 +10344,23 @@ append(ChromeBase,
 
 
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
 
         var onPanelMouseDown = function onPanelMouseDown(event)
         {
-            //console.log("onPanelMouseDown", event.target || event.srcElement, event);
+            // console.log("onPanelMouseDown", event.target || event.srcElement,
+			// event);
 
             var target = event.target || event.srcElement;
 
@@ -10256,12 +10406,15 @@ append(ChromeBase,
 
 
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
 
         // TODO: xxxpedro port to Firebug
 
-        // Improved window key code event listener. Only one "keydown" event will be attached
-        // to the window, and the onKeyCodeListen() function will delegate which listeners
+        // Improved window key code event listener. Only one "keydown" event
+		// will be attached
+        // to the window, and the onKeyCodeListen() function will delegate which
+		// listeners
         // should be called according to the event.keyCode fired.
         var onKeyCodeListenersMap = [];
         var onKeyCodeListen = function(event)
@@ -10287,9 +10440,9 @@ append(ChromeBase,
         addEvent(Firebug.chrome.document, "keydown", onKeyCodeListen);
 
         /**
-         * @name keyCodeListen
-         * @memberOf FBL.FirebugChrome
-         */
+		 * @name keyCodeListen
+		 * @memberOf FBL.FirebugChrome
+		 */
         Firebug.chrome.keyCodeListen = function(key, filter, listener, capture)
         {
             var keyCode = KeyEvent["DOM_VK_"+key];
@@ -10306,50 +10459,40 @@ append(ChromeBase,
         };
 
         /**
-         * @name keyIgnore
-         * @memberOf FBL.FirebugChrome
-         */
+		 * @name keyIgnore
+		 * @memberOf FBL.FirebugChrome
+		 */
         Firebug.chrome.keyIgnore = function(keyCode)
         {
             onKeyCodeListenersMap[keyCode] = null;
             delete onKeyCodeListenersMap[keyCode];
         };
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
 
         /**/
         // move to shutdown
-        //removeEvent(Firebug.chrome.document, "keydown", listener[0]);
+        // removeEvent(Firebug.chrome.document, "keydown", listener[0]);
 
 
-        /*
-        Firebug.chrome.keyCodeListen = function(key, filter, listener, capture)
-        {
-            if (!filter)
-                filter = FBL.noKeyModifiers;
-
-            var keyCode = KeyEvent["DOM_VK_"+key];
-
-            var fn = function fn(event)
-            {
-                if (event.keyCode == keyCode && (!filter || filter(event)))
-                {
-                    listener();
-                    FBL.cancelEvent(event, true);
-                    return false;
-                }
-            }
-
-            addEvent(Firebug.chrome.document, "keydown", fn);
-
-            return [fn, capture];
-        };
-
-        Firebug.chrome.keyIgnore = function(listener)
-        {
-            removeEvent(Firebug.chrome.document, "keydown", listener[0]);
-        };
-        /**/
+        /***********************************************************************
+		 * Firebug.chrome.keyCodeListen = function(key, filter, listener,
+		 * capture) { if (!filter) filter = FBL.noKeyModifiers;
+		 * 
+		 * var keyCode = KeyEvent["DOM_VK_"+key];
+		 * 
+		 * var fn = function fn(event) { if (event.keyCode == keyCode &&
+		 * (!filter || filter(event))) { listener(); FBL.cancelEvent(event,
+		 * true); return false; } }
+		 * 
+		 * addEvent(Firebug.chrome.document, "keydown", fn);
+		 * 
+		 * return [fn, capture]; };
+		 * 
+		 * Firebug.chrome.keyIgnore = function(listener) {
+		 * removeEvent(Firebug.chrome.document, "keydown", listener[0]); }; /
+		 **********************************************************************/
 
 
         this.addController(
@@ -10357,12 +10500,18 @@ append(ChromeBase,
                 [fbPanel2, "mousedown", onPanelMouseDown]
              );
 /**/
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
 
 
         // menus can be used without domplate
@@ -10370,15 +10519,15 @@ append(ChromeBase,
             this.testMenu();
         /**/
 
-        //test XHR
-        /*
-        setTimeout(function(){
-
-        FBL.Ajax.request({url: "../content/firebug/boot.js"});
-        FBL.Ajax.request({url: "../content/firebug/boot.js.invalid"});
-
-        },1000);
-        /**/
+        // test XHR
+        /***********************************************************************
+		 * setTimeout(function(){
+		 * 
+		 * FBL.Ajax.request({url: "../content/firebug/boot.js"});
+		 * FBL.Ajax.request({url: "../content/firebug/boot.js.invalid"});
+		 * 
+		 * },1000); /
+		 **********************************************************************/
     },
 
     shutdown: function()
@@ -10396,7 +10545,8 @@ append(ChromeBase,
         // ************************************************************************************************
         // ************************************************************************************************
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
 
         // remove disableTextSelection event handlers
         restoreTextSelection($("fbToolbar"));
@@ -10404,12 +10554,14 @@ append(ChromeBase,
         restoreTextSelection($("fbPanelBar1"));
         restoreTextSelection($("fbPanelBar2"));
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
         // shutdown inherited classes
         Controller.shutdown.call(this);
         PanelBar.shutdown.call(this);
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
         // Remove the interface elements cache (this must happen after calling
         // the shutdown method of all dependent components to avoid errors)
 
@@ -10444,14 +10596,16 @@ append(ChromeBase,
         fbLargeCommandLine = null;
         fbLargeCommandButtons = null;
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
         // static values cache
 
         topHeight = null;
         topPartialHeight = null;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     toggle: function(forceOpen, popup)
     {
@@ -10485,7 +10639,8 @@ append(ChromeBase,
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     detach: function()
     {
@@ -10515,12 +10670,12 @@ append(ChromeBase,
         Firebug.chrome = newChrome;
 
         // TODO: xxxpedro sync detach reattach attach
-        //dispatch(Firebug.chrome.panelMap, "detach", [oldChrome, newChrome]);
+        // dispatch(Firebug.chrome.panelMap, "detach", [oldChrome, newChrome]);
 
         if (newChrome.type == "popup")
         {
             newChrome.initialize();
-            //dispatch(Firebug.modules, "initialize", []);
+            // dispatch(Firebug.modules, "initialize", []);
         }
         else
         {
@@ -10533,7 +10688,8 @@ append(ChromeBase,
         dispatch(newPanelMap, "reattach", [oldChrome, newChrome]);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     draw: function()
     {
@@ -10544,7 +10700,10 @@ append(ChromeBase,
 
             y = Math.max(size.height /* chrome height */, topHeight),
 
-            heightValue = Math.max(y - topHeight - commandLineHeight /* fixed height */, 0),
+            heightValue = Math.max(y - topHeight - commandLineHeight /*
+																		 * fixed
+																		 * height
+																		 */, 0),
 
             height = heightValue + "px",
 
@@ -10553,25 +10712,27 @@ append(ChromeBase,
 
             width = Math.max(size.width /* chrome width */ - sideWidthValue, 0) + "px";
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
         // Height related rendering
         fbPanelBox1Style.height = height;
         fbPanel1Style.height = height;
 
         if (isIE || isOpera)
         {
-            // Fix IE and Opera problems with auto resizing the verticall splitter
+            // Fix IE and Opera problems with auto resizing the verticall
+			// splitter
             fbVSplitterStyle.height = Math.max(y - topPartialHeight - commandLineHeight, 0) + "px";
         }
-        //xxxpedro FF2 only?
-        /*
-        else if (isFirefox)
-        {
-            // Fix Firefox problem with table rows with 100% height (fit height)
-            fbContentStyle.maxHeight = Math.max(y - fixedHeight, 0)+ "px";
-        }/**/
+        // xxxpedro FF2 only?
+        /***********************************************************************
+		 * else if (isFirefox) { // Fix Firefox problem with table rows with
+		 * 100% height (fit height) fbContentStyle.maxHeight = Math.max(y -
+		 * fixedHeight, 0)+ "px"; }/
+		 **********************************************************************/
 
-        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+        // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// *
         // Width related rendering
         fbPanelBox1Style.width = width;
         fbPanel1Style.width = width;
@@ -10607,7 +10768,8 @@ append(ChromeBase,
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     getSize: function()
     {
@@ -10633,7 +10795,8 @@ append(ChromeBase,
         }, 0);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     layout: function(panel)
     {
@@ -10707,7 +10870,8 @@ append(ChromeBase,
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     focusCommandLine: function()
     {
@@ -10739,7 +10903,7 @@ append(ChromeBase,
         }
         catch(e)
         {
-            //TODO: xxxpedro trace error
+            // TODO: xxxpedro trace error
         }
 
         focusCommandLineState = ++focusCommandLineState % 2;
@@ -10755,7 +10919,7 @@ append(ChromeBase,
  * @extends ns-chrome-ChromeBase
  */
 var ChromeFrameBase = extend(ChromeBase,
-/**@extend ns-chrome-ChromeFrameBase*/
+/** @extend ns-chrome-ChromeFrameBase */
 {
     create: function()
     {
@@ -10797,7 +10961,7 @@ var ChromeFrameBase = extend(ChromeBase,
 
     initialize: function()
     {
-        //FBTrace.sysout("Frame", "initialize();")
+        // FBTrace.sysout("Frame", "initialize();")
         ChromeBase.initialize.call(this);
 
         this.addController(
@@ -10867,16 +11031,16 @@ var ChromeFrameBase = extend(ChromeBase,
             var main = $("fbChrome");
 
             // IE6 throws an error when setting this property! why?
-            //main.style.display = "table";
+            // main.style.display = "table";
             main.style.display = "";
 
             var self = this;
-                /// TODO: xxxpedro FOUC
+                // / TODO: xxxpedro FOUC
                 node.style.visibility = "visible";
             setTimeout(function(){
-                ///node.style.visibility = "visible";
+                // /node.style.visibility = "visible";
 
-                //dispatch(Firebug.modules, "initialize", []);
+                // dispatch(Firebug.modules, "initialize", []);
                 self.initialize();
 
                 if (noFixedPosition)
@@ -10894,7 +11058,7 @@ var ChromeFrameBase = extend(ChromeBase,
         {
             if (this.isInitialized)
             {
-                //dispatch(Firebug.modules, "shutdown", []);
+                // dispatch(Firebug.modules, "shutdown", []);
                 this.shutdown();
             }
 
@@ -10924,16 +11088,20 @@ var ChromeFrameBase = extend(ChromeBase,
 
     deactivate: function()
     {
-        // if it is running as a Chrome extension, dispatch a message to the extension signaling
+        // if it is running as a Chrome extension, dispatch a message to the
+		// extension signaling
         // that Firebug should be deactivated for the current tab
         if (Env.isChromeExtension)
         {
             localStorage.removeItem("Firebug");
             Firebug.GoogleChrome.dispatch("FB_deactivate");
 
-            // xxxpedro problem here regarding Chrome extension. We can't deactivate the whole
-            // app, otherwise it won't be able to be reactivated without reloading the page.
-            // but we need to stop listening global keys, otherwise the key activation won't work.
+            // xxxpedro problem here regarding Chrome extension. We can't
+			// deactivate the whole
+            // app, otherwise it won't be able to be reactivated without
+			// reloading the page.
+            // but we need to stop listening global keys, otherwise the key
+			// activation won't work.
             Firebug.chrome.close();
         }
         else
@@ -10980,7 +11148,7 @@ var ChromeFrameBase = extend(ChromeBase,
  * @extends FBL.Controller
  */
 var ChromeMini = extend(Controller,
-/**@extend ns-chrome-ChromeMini*/
+/** @extend ns-chrome-ChromeMini */
 {
     create: function(chrome)
     {
@@ -11083,7 +11251,7 @@ var ChromeMini = extend(Controller,
  * @extends ns-chrome-ChromeBase
  */
 var ChromePopupBase = extend(ChromeBase,
-/**@extend ns-chrome-ChromePopupBase*/
+/** @extend ns-chrome-ChromePopupBase */
 {
 
     initialize: function()
@@ -11151,13 +11319,18 @@ var ChromePopupBase = extend(ChromeBase,
 
             try
             {
-                if (window.opener && !window.opener.FirebugOldBrowser && (doc = window.opener.document)/* &&
-                    doc.documentElement && (head = doc.documentElement.firstChild)*/)
+                if (window.opener && !window.opener.FirebugOldBrowser && (doc = window.opener.document)/*
+																										 * &&
+																										 * doc.documentElement &&
+																										 * (head =
+																										 * doc.documentElement.firstChild)
+																										 */)
                 {
 
                     try
                     {
-                        // exposes the FBL to the global namespace when in debug mode
+                        // exposes the FBL to the global namespace when in debug
+						// mode
                         if (Env.isDebugMode)
                         {
                             window.FBL = FBL;
@@ -11171,8 +11344,10 @@ var ChromePopupBase = extend(ChromeBase,
 
                         registerConsole();
 
-                        // the delay time should be calculated right after registering the
-                        // console, once right after the console registration, call log messages
+                        // the delay time should be calculated right after
+						// registering the
+                        // console, once right after the console registration,
+						// call log messages
                         // will be properly handled
                         var persistDelay = new Date().getTime() - persistTimeStart;
 
@@ -11219,7 +11394,7 @@ var ChromePopupBase = extend(ChromeBase,
 });
 
 
-//************************************************************************************************
+// ************************************************************************************************
 // UI helpers
 
 var changeCommandLineVisibility = function changeCommandLineVisibility(visibility)
@@ -11346,17 +11521,15 @@ var onHSplitterMouseMove = function onHSplitterMouseMove(event)
     {
         clientY = Firebug.browser.getWindowSize().height - win.frameElement.offsetHeight + clientY;
     }
-    /*
-    console.log(
-            typeof win.FBL != "undefined" ? "no-Chrome" : "Chrome",
-            //win.frameElement.id,
-            event.target,
-            clientY
-        );/**/
+    /***************************************************************************
+	 * console.log( typeof win.FBL != "undefined" ? "no-Chrome" : "Chrome",
+	 * //win.frameElement.id, event.target, clientY );/
+	 **************************************************************************/
 
     onHSplitterMouseMoveBuffer = clientY; // buffer
 
-    if (new Date().getTime() - lastHSplitterMouseMove > chromeRedrawSkipRate) // frame skipping
+    if (new Date().getTime() - lastHSplitterMouseMove > chromeRedrawSkipRate) // frame
+																				// skipping
     {
         lastHSplitterMouseMove = new Date().getTime();
         handleHSplitterMouseMove();
@@ -11366,7 +11539,8 @@ var onHSplitterMouseMove = function onHSplitterMouseMove(event)
             onHSplitterMouseMoveTimer = setTimeout(handleHSplitterMouseMove, chromeRedrawSkipRate);
 
     // improving the resizing performance by canceling the mouse event.
-    // canceling events will prevent the page to receive such events, which would imply
+    // canceling events will prevent the page to receive such events, which
+	// would imply
     // in more processing being expended.
     cancelEvent(event, true);
     return false;
@@ -11392,7 +11566,8 @@ var handleHSplitterMouseMove = function()
 
     var scrollbarSize = !isIE && (scrollSize.width > windowSize.width) ? 17 : 0;
 
-    //var height = !isOpera ? chromeNode.offsetTop + chromeNode.clientHeight : windowSize.height;
+    // var height = !isOpera ? chromeNode.offsetTop + chromeNode.clientHeight :
+	// windowSize.height;
     var height =  windowSize.height;
 
     // compute the min and max size of the chrome
@@ -11439,10 +11614,12 @@ var onVSplitterMouseDown = function onVSplitterMouseDown(event)
 
 var onVSplitterMouseMove = function onVSplitterMouseMove(event)
 {
-    if (new Date().getTime() - lastVSplitterMouseMove > chromeRedrawSkipRate) // frame skipping
+    if (new Date().getTime() - lastVSplitterMouseMove > chromeRedrawSkipRate) // frame
+																				// skipping
     {
         var target = event.target || event.srcElement;
-        if (target && target.ownerDocument) // avoid error when cursor reaches out of the chrome
+        if (target && target.ownerDocument) // avoid error when cursor reaches
+											// out of the chrome
         {
             var clientX = event.clientX;
             var win = document.all
@@ -11533,10 +11710,10 @@ Firebug.Lite.Cache =
 // ************************************************************************************************
 
 /**
- * TODO: if a cached element is cloned, the expando property will be cloned too in IE
- * which will result in a bug. Firebug Lite will think the new cloned node is the old
- * one.
- *
+ * TODO: if a cached element is cloned, the expando property will be cloned too
+ * in IE which will result in a bug. Firebug Lite will think the new cloned node
+ * is the old one.
+ * 
  * TODO: Investigate a possibility of cache validation, to be customized by each
  * kind of cache. For ElementCache it should validate if the element still is
  * inserted at the DOM.
@@ -11663,15 +11840,21 @@ var createCache = function()
     {
         var id = element[CID];
 
-        // If a cached element is cloned in IE, the expando property CID will be also
-        // cloned (differently than other browsers) resulting in a bug: Firebug Lite
-        // will think the new cloned node is the old one. To prevent this problem we're
+        // If a cached element is cloned in IE, the expando property CID will be
+		// also
+        // cloned (differently than other browsers) resulting in a bug: Firebug
+		// Lite
+        // will think the new cloned node is the old one. To prevent this
+		// problem we're
         // checking if the cached element matches the given element.
         if (
-            !supportsDeleteExpando &&   // the problem happens when supportsDeleteExpando is false
+            !supportsDeleteExpando &&   // the problem happens when
+										// supportsDeleteExpando is false
             id &&                       // the element has the expando property
-            map.hasOwnProperty(id) &&   // there is a cached element with the same id
-            map[id] != element          // but it is a different element than the current one
+            map.hasOwnProperty(id) &&   // there is a cached element with the
+										// same id
+            map[id] != element          // but it is a different element than
+										// the current one
             )
         {
             // remove the problematic property
@@ -11714,10 +11897,11 @@ Firebug.Lite.Proxy =
     _callbacks: {},
 
     /**
-     * Load a resource, either locally (directly) or externally (via proxy) using
-     * synchronous XHR calls. Loading external resources requires the proxy plugin to
-     * be installed and configured (see /plugin/proxy/proxy.php).
-     */
+	 * Load a resource, either locally (directly) or externally (via proxy)
+	 * using synchronous XHR calls. Loading external resources requires the
+	 * proxy plugin to be installed and configured (see
+	 * /plugin/proxy/proxy.php).
+	 */
     load: function(url)
     {
         var resourceDomain = getDomain(url);
@@ -11725,14 +11909,16 @@ Firebug.Lite.Proxy =
             // empty domain means local URL
             !resourceDomain ||
             // same domain means local too
-            resourceDomain ==  Firebug.context.window.location.host; // TODO: xxxpedro context
+            resourceDomain ==  Firebug.context.window.location.host; // TODO:
+																		// xxxpedro
+																		// context
 
         return isLocalResource ? fetchResource(url) : fetchProxyResource(url);
     },
 
     /**
-     * Load a resource using JSONP technique.
-     */
+	 * Load a resource using JSONP technique.
+	 */
     loadJSONP: function(url, callback)
     {
         var script = createGlobalElement("script"),
@@ -11761,8 +11947,8 @@ Firebug.Lite.Proxy =
     },
 
     /**
-     * Load a resource using YQL (not reliable).
-     */
+	 * Load a resource using YQL (not reliable).
+	 */
     YQL: function(url, callback)
     {
         var yql = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22" +
@@ -11863,14 +12049,13 @@ Firebug.Lite.Style =
 
 /* See license.txt for terms of usage */
 
-FBL.ns( /**@scope s_selector*/ function() { with (FBL) {
+FBL.ns( /** @scope s_selector */ function() { with (FBL) {
 // ************************************************************************************************
 
 /*
- * Sizzle CSS Selector Engine - v1.0
- *  Copyright 2009, The Dojo Foundation
- *  Released under the MIT, BSD, and GPL Licenses.
- *  More information: http://sizzlejs.com/
+ * Sizzle CSS Selector Engine - v1.0 Copyright 2009, The Dojo Foundation
+ * Released under the MIT, BSD, and GPL Licenses. More information:
+ * http://sizzlejs.com/
  */
 
 var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^[\]]*\]|['"][^'"]*['"]|[^[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?((?:.|\r|\n)*)/g,
@@ -11882,7 +12067,7 @@ var chunker = /((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^[\]]*\]|['"][^'"]*['"]|[^
 // Here we check if the JavaScript engine is using some sort of
 // optimization where it does not always call our comparision
 // function. If that is the case, discard the hasDuplicate value.
-//   Thus far that includes Google Chrome.
+// Thus far that includes Google Chrome.
 [0, 0].sort(function(){
     baseHasDuplicate = false;
     return 0;
@@ -12145,7 +12330,11 @@ Sizzle.filter = function(expr, set, inplace, not){
     return curLoop;
 };
 
-/**#@+ @ignore */
+/**
+ * #@+
+ * 
+ * @ignore
+ */
 var Expr = Sizzle.selectors = {
     order: [ "ID", "NAME", "TAG" ],
     match: {
@@ -12295,12 +12484,14 @@ var Expr = Sizzle.selectors = {
         },
         CHILD: function(match){
             if ( match[1] == "nth" ) {
-                // parse equations like 'even', 'odd', '5', '2n', '3n+2', '4n-1', '-n+6'
+                // parse equations like 'even', 'odd', '5', '2n', '3n+2',
+				// '4n-1', '-n+6'
                 var test = /(-?)(\d*)n((?:\+|-)?\d*)/.exec(
                     match[2] == "even" && "2n" || match[2] == "odd" && "2n+1" ||
                     !/\D/.test( match[2] ) && "0n+" + match[2] || match[2]);
 
-                // calculate the numbers (first)n+(last) including if they are negative
+                // calculate the numbers (first)n+(last) including if they are
+				// negative
                 match[2] = (test[1] + (test[2] || 1)) - 0;
                 match[3] = test[3] - 0;
             }
@@ -12888,7 +13079,7 @@ var posProcess = function(selector, context){
 
 Firebug.Selector = Sizzle;
 
-/**#@-*/
+/** #@- */
 
 // ************************************************************************************************
 }});
@@ -12906,7 +13097,8 @@ Firebug.Selector = Sizzle;
 
 ( /** @scope s_domplate */ function() {
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 /** @class */
 FBL.DomplateTag = function DomplateTag(tagName)
@@ -12930,13 +13122,15 @@ FBL.DomplateLoop = function DomplateLoop()
 {
 };
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var DomplateTag = FBL.DomplateTag;
 var DomplateEmbed = FBL.DomplateEmbed;
 var DomplateLoop = FBL.DomplateLoop;
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var womb = null;
 
@@ -13057,9 +13251,12 @@ FBL.DomplateTag.prototype =
         this.compileMarkup();
         this.compileDOM();
 
-        //if (FBTrace.DBG_DOM) FBTrace.sysout("domplate renderMarkup: ", this.renderMarkup);
-        //if (FBTrace.DBG_DOM) FBTrace.sysout("domplate renderDOM:", this.renderDOM);
-        //if (FBTrace.DBG_DOM) FBTrace.sysout("domplate domArgs:", this.domArgs);
+        // if (FBTrace.DBG_DOM) FBTrace.sysout("domplate renderMarkup: ",
+		// this.renderMarkup);
+        // if (FBTrace.DBG_DOM) FBTrace.sysout("domplate renderDOM:",
+		// this.renderDOM);
+        // if (FBTrace.DBG_DOM) FBTrace.sysout("domplate domArgs:",
+		// this.domArgs);
     },
 
     compileMarkup: function()
@@ -13326,7 +13523,8 @@ FBL.DomplateTag.prototype =
             var domArgs = [node, tag.tag.context, 0];
             domArgs.push.apply(domArgs, tag.tag.domArgs);
             domArgs.push.apply(domArgs, args);
-            //if (FBTrace.DBG_DOM) FBTrace.dumpProperties("domplate__link__ domArgs:", domArgs);
+            // if (FBTrace.DBG_DOM) FBTrace.dumpProperties("domplate__link__
+			// domArgs:", domArgs);
             return tag.tag.renderDOM.apply(tag.tag.subject, domArgs);
         }
 
@@ -13339,14 +13537,15 @@ FBL.DomplateTag.prototype =
                 iter[i][0] = i;
                 iter[i][1] = nodeCount;
                 nodeCount += fn.apply(this, iter[i]);
-                //if (FBTrace.DBG_DOM) FBTrace.sysout("nodeCount", nodeCount);
+                // if (FBTrace.DBG_DOM) FBTrace.sysout("nodeCount", nodeCount);
             }
             return nodeCount;
         }
 
         function __path__(parent, offset)
         {
-            //if (FBTrace.DBG_DOM) FBTrace.sysout("domplate __path__ offset: "+ offset+"\n");
+            // if (FBTrace.DBG_DOM) FBTrace.sysout("domplate __path__ offset: "+
+			// offset+"\n");
             var root = parent;
 
             for (var i = 2; i < arguments.length; ++i)
@@ -13361,12 +13560,13 @@ FBL.DomplateTag.prototype =
                     parent = parent.childNodes[index];
             }
 
-            //if (FBTrace.DBG_DOM) FBTrace.sysout("domplate: "+arguments[2]+", root: "+ root+", parent: "+ parent+"\n");
+            // if (FBTrace.DBG_DOM) FBTrace.sysout("domplate: "+arguments[2]+",
+			// root: "+ root+", parent: "+ parent+"\n");
             return parent;
         }
 
         var js = fnBlock.join("");
-        //if (FBTrace.DBG_DOM) FBTrace.sysout(js.replace(/(\;|\{)/g, "$1\n"));
+        // if (FBTrace.DBG_DOM) FBTrace.sysout(js.replace(/(\;|\{)/g, "$1\n"));
         var r = null;
         eval(js);
         this.renderDOM = r;
@@ -13383,7 +13583,8 @@ FBL.DomplateTag.prototype =
             {
                 var val = this.listeners[i+1];
                 var arg = generateArg(val, path, args);
-                //blocks.push('node.addEventListener("', this.listeners[i], '", __bind__(this, ', arg, '), false);');
+                // blocks.push('node.addEventListener("', this.listeners[i], '",
+				// __bind__(this, ', arg, '), false);');
                 blocks.push('addEvent(node, "', this.listeners[i], '", __bind__(this, ', arg, '), false);');
             }
         }
@@ -13425,7 +13626,8 @@ FBL.DomplateTag.prototype =
     }
 };
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 FBL.DomplateEmbed.prototype = copyObject(FBL.DomplateTag.prototype,
 /** @lends FBL.DomplateEmbed.prototype */
@@ -13477,7 +13679,7 @@ FBL.DomplateEmbed.prototype = copyObject(FBL.DomplateTag.prototype,
         }
 
         blocks.push('});');
-        //this.generateChildMarkup(topBlock, topOuts, blocks, info);
+        // this.generateChildMarkup(topBlock, topOuts, blocks, info);
     },
 
     generateDOM: function(path, blocks, args)
@@ -13494,7 +13696,8 @@ FBL.DomplateEmbed.prototype = copyObject(FBL.DomplateTag.prototype,
     }
 });
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 FBL.DomplateLoop.prototype = copyObject(FBL.DomplateTag.prototype,
 /** @lends FBL.DomplateLoop.prototype */
@@ -13589,7 +13792,8 @@ FBL.DomplateLoop.prototype = copyObject(FBL.DomplateTag.prototype,
     }
 });
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 /** @class */
 function Variable(name, format)
@@ -13753,7 +13957,8 @@ function creator(tag, cons)
     return fn;
 }
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 function copyArray(oldArray)
 {
@@ -13786,7 +13991,8 @@ function addEvent(object, name, handler)
         object.addEventListener(name, handler, false);
 }
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 /** @class */
 function ArrayIterator(array)
@@ -13885,8 +14091,8 @@ var Renderer =
         var outputs = [];
         var html = this.renderHTML(args, outputs, self);
 
-        //if (FBTrace.DBG_DOM)
-        //    FBTrace.sysout("domplate.insertNode html: "+html+"\n");
+        // if (FBTrace.DBG_DOM)
+        // FBTrace.sysout("domplate.insertNode html: "+html+"\n");
 
         var doc = element.ownerDocument;
         if (!womb || womb.ownerDocument != doc)
@@ -13913,45 +14119,36 @@ var Renderer =
         domArgs.push.apply(domArgs, this.tag.domArgs);
         domArgs.push.apply(domArgs, outputs);
 
-        //if (FBTrace.DBG_DOM)
-        //    FBTrace.sysout("domplate.insertNode domArgs:", domArgs);
+        // if (FBTrace.DBG_DOM)
+        // FBTrace.sysout("domplate.insertNode domArgs:", domArgs);
         this.tag.renderDOM.apply(self ? self : this.tag.subject, domArgs);
 
         return root;
     },
     /**/
 
-    /*
-    insertAfter: function(args, before, self)
-    {
-        this.tag.compile();
-
-        var outputs = [];
-        var html = this.renderHTML(args, outputs, self);
-
-        var doc = before.ownerDocument;
-        if (!womb || womb.ownerDocument != doc)
-            womb = doc.createElement("div");
-
-        womb.innerHTML = html;
-
-        var root = womb.firstChild;
-        while (womb.firstChild)
-            if (before.nextSibling)
-                before.parentNode.insertBefore(womb.firstChild, before.nextSibling);
-            else
-                before.parentNode.appendChild(womb.firstChild);
-
-        var domArgs = [root, this.tag.context, 0];
-        domArgs.push.apply(domArgs, this.tag.domArgs);
-        domArgs.push.apply(domArgs, outputs);
-
-        this.tag.renderDOM.apply(self ? self : (this.tag.subject ? this.tag.subject : null),
-            domArgs);
-
-        return root;
-    },
-    /**/
+    /***************************************************************************
+	 * insertAfter: function(args, before, self) { this.tag.compile();
+	 * 
+	 * var outputs = []; var html = this.renderHTML(args, outputs, self);
+	 * 
+	 * var doc = before.ownerDocument; if (!womb || womb.ownerDocument != doc)
+	 * womb = doc.createElement("div");
+	 * 
+	 * womb.innerHTML = html;
+	 * 
+	 * var root = womb.firstChild; while (womb.firstChild) if
+	 * (before.nextSibling) before.parentNode.insertBefore(womb.firstChild,
+	 * before.nextSibling); else before.parentNode.appendChild(womb.firstChild);
+	 * 
+	 * var domArgs = [root, this.tag.context, 0]; domArgs.push.apply(domArgs,
+	 * this.tag.domArgs); domArgs.push.apply(domArgs, outputs);
+	 * 
+	 * this.tag.renderDOM.apply(self ? self : (this.tag.subject ?
+	 * this.tag.subject : null), domArgs);
+	 * 
+	 * return root; }, /
+	 **************************************************************************/
 
     replace: function(args, parent, self)
     {
@@ -13976,7 +14173,7 @@ var Renderer =
             womb.innerHTML = html;
 
             root = womb.firstChild;
-            //womb.removeChild(root);
+            // womb.removeChild(root);
         }
 
         var domArgs = [root, this.tag.context, 0];
@@ -13993,7 +14190,8 @@ var Renderer =
 
         var outputs = [];
         var html = this.renderHTML(args, outputs, self);
-        //if (FBTrace.DBG_DOM) FBTrace.sysout("domplate.append html: "+html+"\n");
+        // if (FBTrace.DBG_DOM) FBTrace.sysout("domplate.append html:
+		// "+html+"\n");
 
         if (!womb || womb.ownerDocument != parent.ownerDocument)
             womb = parent.ownerDocument.createElement("div");
@@ -14004,14 +14202,16 @@ var Renderer =
         while (womb.firstChild)
             parent.appendChild(womb.firstChild);
 
-        // clearing element reference to avoid reference error in IE8 when switching contexts
+        // clearing element reference to avoid reference error in IE8 when
+		// switching contexts
         womb = null;
 
         var domArgs = [root, this.tag.context, 0];
         domArgs.push.apply(domArgs, this.tag.domArgs);
         domArgs.push.apply(domArgs, outputs);
 
-        //if (FBTrace.DBG_DOM) FBTrace.dumpProperties("domplate append domArgs:", domArgs);
+        // if (FBTrace.DBG_DOM) FBTrace.dumpProperties("domplate append
+		// domArgs:", domArgs);
         this.tag.renderDOM.apply(self ? self : this.tag.subject, domArgs);
 
         return root;
@@ -14060,8 +14260,10 @@ var OBJECTLINK = this.OBJECTLINK = isIE6 ? // IE6 object link representation
     A({
         "class": "objectLink objectLink-$className a11yFocus",
         href: "javascript:void(0)",
-        // workaround to show XPath (a better approach would use the tooltip on mouseover,
-        // so the XPath information would be calculated dynamically, but we need to create
+        // workaround to show XPath (a better approach would use the tooltip on
+		// mouseover,
+        // so the XPath information would be calculated dynamically, but we need
+		// to create
         // a tooltip class/wrapper around Menu or InfoTip)
         title: "$object|FBL.getElementXPath",
         _repObject: "$object"
@@ -14069,8 +14271,10 @@ var OBJECTLINK = this.OBJECTLINK = isIE6 ? // IE6 object link representation
     : // Other browsers
     A({
         "class": "objectLink objectLink-$className a11yFocus",
-        // workaround to show XPath (a better approach would use the tooltip on mouseover,
-        // so the XPath information would be calculated dynamically, but we need to create
+        // workaround to show XPath (a better approach would use the tooltip on
+		// mouseover,
+        // so the XPath information would be calculated dynamically, but we need
+		// to create
         // a tooltip class/wrapper around Menu or InfoTip)
         title: "$object|FBL.getElementXPath",
         _repObject: "$object"
@@ -14083,7 +14287,8 @@ this.Undefined = domplate(Firebug.Rep,
 {
     tag: OBJECTBOX("undefined"),
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "undefined",
 
@@ -14099,7 +14304,8 @@ this.Null = domplate(Firebug.Rep,
 {
     tag: OBJECTBOX("null"),
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "null",
 
@@ -14115,7 +14321,8 @@ this.Nada = domplate(Firebug.Rep,
 {
     tag: SPAN(""),
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "nada"
 });
@@ -14126,7 +14333,8 @@ this.Number = domplate(Firebug.Rep,
 {
     tag: OBJECTBOX("$object"),
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "number",
 
@@ -14144,7 +14352,8 @@ this.String = domplate(Firebug.Rep,
 
     shortTag: OBJECTBOX("&quot;$object|cropString&quot;"),
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "string",
 
@@ -14162,7 +14371,8 @@ this.Text = domplate(Firebug.Rep,
 
     shortTag: OBJECTBOX("$object|cropString"),
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "text"
 });
@@ -14197,7 +14407,8 @@ this.Func = domplate(Firebug.Rep,
         return m ? m[1] : "function()";
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     copySource: function(fn)
     {
@@ -14212,7 +14423,8 @@ this.Func = domplate(Firebug.Rep,
             Firebug.Debugger.monitorScript(fn, script, "monitor");
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "function",
 
@@ -14268,74 +14480,47 @@ this.Func = domplate(Firebug.Rep,
 });
 
 // ************************************************************************************************
-/*
-this.jsdScript = domplate(Firebug.Rep,
-{
-    copySource: function(script)
-    {
-        var fn = script.functionObject.getWrappedValue();
-        return FirebugReps.Func.copySource(fn);
-    },
-
-    monitor: function(fn, script, monitored)
-    {
-        fn = script.functionObject.getWrappedValue();
-        return FirebugReps.Func.monitor(fn, script, monitored);
-    },
-
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-
-    className: "jsdScript",
-    inspectable: false,
-
-    supportsObject: function(object, type)
-    {
-        return object instanceof jsdIScript;
-    },
-
-    inspectObject: function(script, context)
-    {
-        var sourceLink = getSourceLinkForScript(script, context);
-        if (sourceLink)
-            Firebug.chrome.select(sourceLink);
-    },
-
-    getRealObject: function(script, context)
-    {
-        return script;
-    },
-
-    getTooltip: function(script)
-    {
-        return $STRF("jsdIScript", [script.tag]);
-    },
-
-    getTitle: function(script, context)
-    {
-        var fn = script.functionObject.getWrappedValue();
-        return FirebugReps.Func.getTitle(fn, context);
-    },
-
-    getContextMenuItems: function(script, target, context)
-    {
-        var fn = script.functionObject.getWrappedValue();
-
-        var scriptInfo = getSourceFileAndLineByScript(context, script);
-           var monitored = scriptInfo ? fbs.isMonitored(scriptInfo.sourceFile.href, scriptInfo.lineNo) : false;
-
-        var name = getFunctionName(script, context);
-
-        return [
-            {label: "CopySource", command: bindFixed(this.copySource, this, script) },
-            "-",
-            {label: $STRF("ShowCallsInConsole", [name]), nol10n: true,
-             type: "checkbox", checked: monitored,
-             command: bindFixed(this.monitor, this, fn, script, monitored) }
-        ];
-    }
-});
-/**/
-//************************************************************************************************
+/*******************************************************************************
+ * this.jsdScript = domplate(Firebug.Rep, { copySource: function(script) { var
+ * fn = script.functionObject.getWrappedValue(); return
+ * FirebugReps.Func.copySource(fn); },
+ * 
+ * monitor: function(fn, script, monitored) { fn =
+ * script.functionObject.getWrappedValue(); return FirebugReps.Func.monitor(fn,
+ * script, monitored); },
+ *  // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * 
+ * className: "jsdScript", inspectable: false,
+ * 
+ * supportsObject: function(object, type) { return object instanceof jsdIScript; },
+ * 
+ * inspectObject: function(script, context) { var sourceLink =
+ * getSourceLinkForScript(script, context); if (sourceLink)
+ * Firebug.chrome.select(sourceLink); },
+ * 
+ * getRealObject: function(script, context) { return script; },
+ * 
+ * getTooltip: function(script) { return $STRF("jsdIScript", [script.tag]); },
+ * 
+ * getTitle: function(script, context) { var fn =
+ * script.functionObject.getWrappedValue(); return FirebugReps.Func.getTitle(fn,
+ * context); },
+ * 
+ * getContextMenuItems: function(script, target, context) { var fn =
+ * script.functionObject.getWrappedValue();
+ * 
+ * var scriptInfo = getSourceFileAndLineByScript(context, script); var monitored =
+ * scriptInfo ? fbs.isMonitored(scriptInfo.sourceFile.href, scriptInfo.lineNo) :
+ * false;
+ * 
+ * var name = getFunctionName(script, context);
+ * 
+ * return [ {label: "CopySource", command: bindFixed(this.copySource, this,
+ * script) }, "-", {label: $STRF("ShowCallsInConsole", [name]), nol10n: true,
+ * type: "checkbox", checked: monitored, command: bindFixed(this.monitor, this,
+ * fn, script, monitored) } ]; } }); /
+ ******************************************************************************/
+// ************************************************************************************************
 
 this.Obj = domplate(Firebug.Rep,
 {
@@ -14366,7 +14551,7 @@ this.Obj = domplate(Firebug.Rep,
 
     propIterator: function (object)
     {
-        ///Firebug.ObjectShortIteratorMax;
+        // /Firebug.ObjectShortIteratorMax;
         var maxLength = 55; // default max length for long representation
 
         if (!object)
@@ -14446,7 +14631,7 @@ this.Obj = domplate(Firebug.Rep,
             if (numProperties > numPropertiesShown)
             {
                 props.push({
-                    object: "...", //xxxHonza localization
+                    object: "...", // xxxHonza localization
                     tag: FirebugReps.Caption.tag,
                     name: "",
                     equal:"",
@@ -14460,9 +14645,11 @@ this.Obj = domplate(Firebug.Rep,
         }
         catch (exc)
         {
-            // Sometimes we get exceptions when trying to read from certain objects, like
+            // Sometimes we get exceptions when trying to read from certain
+			// objects, like
             // StorageList, but don't let that gum up the works
-            // XXXjjb also History.previous fails because object is a web-page object which does not have
+            // XXXjjb also History.previous fails because object is a web-page
+			// object which does not have
             // permission to read the history
         }
         return props;
@@ -14512,7 +14699,7 @@ this.Obj = domplate(Firebug.Rep,
             if (count > max)
             {
                 props[Math.max(1,max-1)] = {
-                    object: "more...", //xxxHonza localization
+                    object: "more...", // xxxHonza localization
                     tag: FirebugReps.Caption.tag,
                     name: "",
                     equal:"",
@@ -14526,66 +14713,40 @@ this.Obj = domplate(Firebug.Rep,
         }
         catch (exc)
         {
-            // Sometimes we get exceptions when trying to read from certain objects, like
+            // Sometimes we get exceptions when trying to read from certain
+			// objects, like
             // StorageList, but don't let that gum up the works
-            // XXXjjb also History.previous fails because object is a web-page object which does not have
+            // XXXjjb also History.previous fails because object is a web-page
+			// object which does not have
             // permission to read the history
         }
         return props;
     },
 
-    /*
-    propIterator: function (object)
-    {
-        if (!object)
-            return [];
+    /***************************************************************************
+	 * propIterator: function (object) { if (!object) return [];
+	 * 
+	 * var props = []; var len = 0;
+	 * 
+	 * try { for (var name in object) { var val; try { val = object[name]; }
+	 * catch (exc) { continue; }
+	 * 
+	 * var t = typeof val; if (t == "boolean" || t == "number" || (t == "string" &&
+	 * val) || (t == "object" && !isFunction(val) && val && val.toString)) { var
+	 * title = (t == "object") ? Firebug.getRep(val).getTitle(val) : val+"";
+	 * 
+	 * len += name.length + title.length + 1; if (len < 50) props.push({name:
+	 * name, value: title}); else break; } } } catch (exc) { // Sometimes we get
+	 * exceptions when trying to read from certain objects, like // StorageList,
+	 * but don't let that gum up the works // XXXjjb also History.previous fails
+	 * because object is a web-page object which does not have // permission to
+	 * read the history }
+	 * 
+	 * return props; }, /
+	 **************************************************************************/
 
-        var props = [];
-        var len = 0;
-
-        try
-        {
-            for (var name in object)
-            {
-                var val;
-                try
-                {
-                    val = object[name];
-                }
-                catch (exc)
-                {
-                    continue;
-                }
-
-                var t = typeof val;
-                if (t == "boolean" || t == "number" || (t == "string" && val)
-                    || (t == "object" && !isFunction(val) && val && val.toString))
-                {
-                    var title = (t == "object")
-                        ? Firebug.getRep(val).getTitle(val)
-                        : val+"";
-
-                    len += name.length + title.length + 1;
-                    if (len < 50)
-                        props.push({name: name, value: title});
-                    else
-                        break;
-                }
-            }
-        }
-        catch (exc)
-        {
-            // Sometimes we get exceptions when trying to read from certain objects, like
-            // StorageList, but don't let that gum up the works
-            // XXXjjb also History.previous fails because object is a web-page object which does not have
-            // permission to read the history
-        }
-
-        return props;
-    },
-    /**/
-
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "object",
 
@@ -14618,10 +14779,10 @@ this.Arr = domplate(Firebug.Rep,
                 SPAN({"class": "arrayComma", role : "presentation"}, "$item.delim")
             ),
             // TODO: xxxpedro - confirm this on Firebug
-            //FOR("prop", "$object|shortPropIterator",
-            //        " $prop.name=",
-            //        SPAN({"class": "objectPropValue"}, "$prop.value|cropString")
-            //),
+            // FOR("prop", "$object|shortPropIterator",
+            // " $prop.name=",
+            // SPAN({"class": "objectPropValue"}, "$prop.value|cropString")
+            // ),
             SPAN({"class": "arrayRightBracket"}, "]")
         ),
 
@@ -14673,7 +14834,8 @@ this.Arr = domplate(Firebug.Rep,
         return arrayIndex;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "array",
 
@@ -14683,7 +14845,8 @@ this.Arr = domplate(Firebug.Rep,
     },
 
     // http://code.google.com/p/fbug/issues/detail?id=874
-    // BEGIN Yahoo BSD Source (modified here)  YAHOO.lang.isArray, YUI 2.2.2 June 2007
+    // BEGIN Yahoo BSD Source (modified here) YAHOO.lang.isArray, YUI 2.2.2 June
+	// 2007
     isArray: function(obj) {
         try {
             if (!obj)
@@ -14705,7 +14868,12 @@ this.Arr = domplate(Firebug.Rep,
         {
             if (FBTrace.DBG_ERRORS)
             {
-                FBTrace.sysout("isArray FAILS:", exc);  /* Something weird: without the try/catch, OOM, with no exception?? */
+                FBTrace.sysout("isArray FAILS:", exc);  /*
+														 * Something weird:
+														 * without the
+														 * try/catch, OOM, with
+														 * no exception??
+														 */
                 FBTrace.sysout("isArray Fails on obj", obj);
             }
         }
@@ -14768,7 +14936,8 @@ this.Except = domplate(Firebug.Rep,
     tag:
         OBJECTBOX({_repObject: "$object"}, "$object.message"),
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "exception",
 
@@ -14852,7 +15021,8 @@ this.Element = domplate(Firebug.Rep,
              {
                  var attr = elt.attributes[i];
 
-                 // we must check if the attribute is specified otherwise IE will show them
+                 // we must check if the attribute is specified otherwise IE
+					// will show them
                  if (!attr.specified || attr.nodeName && attr.nodeName.indexOf("firebug-") != -1)
                     continue;
                  else if (attr.nodeName == "id")
@@ -14863,8 +15033,10 @@ this.Element = domplate(Firebug.Rep,
                     attrs.push({
                         nodeName: attr.nodeName,
                         nodeValue: attr.nodeValue ||
-                        // IE won't recognize the attr.nodeValue of <style> nodes ...
-                        // and will return CSS property names in upper case, so we need to convert them
+                        // IE won't recognize the attr.nodeValue of <style>
+						// nodes ...
+                        // and will return CSS property names in upper case, so
+						// we need to convert them
                         elt.style.cssText.replace(/([^\s]+)\s*:/g,
                                 function(m,g){return g.toLowerCase()+":"})
                     });
@@ -14950,7 +15122,8 @@ this.Element = domplate(Firebug.Rep,
              return [{str:text,'class':'',extra:''}];
      },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     copyHTML: function(elt)
     {
@@ -14978,13 +15151,15 @@ this.Element = domplate(Firebug.Rep,
         return elts && elts.length ? elts[0] : null;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "element",
 
     supportsObject: function(object)
     {
-        //return object instanceof Element || object.nodeType == 1 && typeof object.nodeName == "string";
+        // return object instanceof Element || object.nodeType == 1 && typeof
+		// object.nodeName == "string";
         return instanceOf(object, "Element");
     },
 
@@ -15049,7 +15224,8 @@ this.TextNode = domplate(Firebug.Rep,
             "&gt;"
             ),
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "textNode",
 
@@ -15071,13 +15247,14 @@ this.Document = domplate(Firebug.Rep,
         return doc.location ? getFileName(doc.location.href) : "";
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "object",
 
     supportsObject: function(object)
     {
-        //return object instanceof Document || object instanceof XMLDocument;
+        // return object instanceof Document || object instanceof XMLDocument;
         return instanceOf(object, "Document");
     },
 
@@ -15120,7 +15297,8 @@ this.StyleSheet = domplate(Firebug.Rep,
         return getFileName(styleSheet.href);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     copyURL: function(styleSheet)
     {
@@ -15132,13 +15310,14 @@ this.StyleSheet = domplate(Firebug.Rep,
         openNewTab(styleSheet.href);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "object",
 
     supportsObject: function(object)
     {
-        //return object instanceof CSSStyleSheet;
+        // return object instanceof CSSStyleSheet;
         return instanceOf(object, "CSSStyleSheet");
     },
 
@@ -15193,7 +15372,8 @@ this.Window = domplate(Firebug.Rep,
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "object",
 
@@ -15257,13 +15437,14 @@ this.Event = domplate(Firebug.Rep,
         return new EventCopy(event);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "object",
 
     supportsObject: function(object)
     {
-        //return object instanceof Event || object instanceof EventCopy;
+        // return object instanceof Event || object instanceof EventCopy;
         return instanceOf(object, "Event") || instanceOf(object, "EventCopy");
     },
 
@@ -15307,7 +15488,7 @@ this.SourceLink = domplate(Firebug.Rep,
                 fileName;
 
         // TODO: xxxpedro
-        //return $STRF("Line", [fileName, sourceLink.line]);
+        // return $STRF("Line", [fileName, sourceLink.line]);
     },
 
     copyLink: function(sourceLink)
@@ -15320,7 +15501,8 @@ this.SourceLink = domplate(Firebug.Rep,
         openNewTab(sourceLink.href);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "sourceLink",
 
@@ -15399,7 +15581,8 @@ this.SourceFile = domplate(this.SourceLink,
         return getSourceFileByHref(href, context);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "sourceFile",
 
@@ -15425,7 +15608,9 @@ this.SourceFile = domplate(this.SourceLink,
 
 // ************************************************************************************************
 
-this.StackFrame = domplate(Firebug.Rep,  // XXXjjb Since the repObject is fn the stack does not have correct line numbers
+this.StackFrame = domplate(Firebug.Rep,  // XXXjjb Since the repObject is fn
+											// the stack does not have correct
+											// line numbers
 {
     tag:
         OBJECTBLOCK(
@@ -15441,15 +15626,15 @@ this.StackFrame = domplate(Firebug.Rep,  // XXXjjb Since the repObject is fn the
 
     getCallName: function(frame)
     {
-        //TODO: xxxpedro reps StackFrame
+        // TODO: xxxpedro reps StackFrame
         return frame.name || "anonymous";
 
-        //return getFunctionName(frame.script, frame.context);
+        // return getFunctionName(frame.script, frame.context);
     },
 
     getSourceLinkTitle: function(frame)
     {
-        //TODO: xxxpedro reps StackFrame
+        // TODO: xxxpedro reps StackFrame
         var fileName = cropString(getFileName(frame.href), 20);
         return fileName + (frame.lineNo ? " (line " + frame.lineNo + ")" : "");
 
@@ -15482,7 +15667,8 @@ this.StackFrame = domplate(Firebug.Rep,  // XXXjjb Since the repObject is fn the
         return items;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "stackFrame",
 
@@ -15513,7 +15699,8 @@ this.StackTrace = domplate(Firebug.Rep,
             TAG(this.StackFrame.tag, {object: "$frame"})
         ),
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "stackTrace",
 
@@ -15536,13 +15723,15 @@ this.jsdStackFrame = domplate(Firebug.Rep,
 
     getTitle: function(frame, context)
     {
-        if (!frame.isValid) return "(invalid frame)"; // XXXjjb avoid frame.script == null
+        if (!frame.isValid) return "(invalid frame)"; // XXXjjb avoid
+														// frame.script == null
         return getFunctionName(frame.script, context);
     },
 
     getTooltip: function(frame, context)
     {
-        if (!frame.isValid) return "(invalid frame)";  // XXXjjb avoid frame.script == null
+        if (!frame.isValid) return "(invalid frame)";  // XXXjjb avoid
+														// frame.script == null
         var sourceInfo = FBL.getSourceFileAndLineByScript(context, frame.script, frame);
         if (sourceInfo)
             return $STRF("Line", [sourceInfo.sourceFile.href, sourceInfo.lineNo]);
@@ -15629,7 +15818,8 @@ this.ErrorMessage = domplate(Firebug.Rep,
 
     getSourceType: function(error)
     {
-        // Errors occurring inside of HTML event handlers look like "foo.html (line 1)"
+        // Errors occurring inside of HTML event handlers look like "foo.html
+		// (line 1)"
         // so let's try to skip those
         if (error.source)
             return "syntax";
@@ -15675,7 +15865,8 @@ this.ErrorMessage = domplate(Firebug.Rep,
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     copyError: function(error)
     {
@@ -15695,7 +15886,8 @@ this.ErrorMessage = domplate(Firebug.Rep,
             Firebug.Debugger.setErrorBreakpoint(error.href, error.lineNo);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "errorMessage",
     inspectable: false,
@@ -15744,7 +15936,8 @@ this.Assert = domplate(Firebug.Rep,
             DIV({"class": "assertDescription"})
         ),
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "assert",
 
@@ -15790,7 +15983,8 @@ this.SourceText = domplate(Firebug.Rep,
 
         for (var i = 0; i < sourceText.lines.length; ++i)
         {
-            // Make sure all line numbers are the same width (with a fixed-width font)
+            // Make sure all line numbers are the same width (with a fixed-width
+			// font)
             var lineNo = (i+1) + "";
             while (lineNo.length < maxLineNoChars)
                 lineNo = " " + lineNo;
@@ -15807,7 +16001,7 @@ this.SourceText = domplate(Firebug.Rep,
     }
 });
 
-//************************************************************************************************
+// ************************************************************************************************
 this.nsIDOMHistory = domplate(Firebug.Rep,
 {
     tag:OBJECTBOX({onclick: "$showHistory"},
@@ -15841,7 +16035,8 @@ this.nsIDOMHistory = domplate(Firebug.Rep,
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     supportsObject: function(object, type)
     {
@@ -15873,7 +16068,8 @@ this.ApplicationCache = domplate(Firebug.Rep,
         openNewTab("https://bugzilla.mozilla.org/show_bug.cgi?id=422264");
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "applicationCache",
 
@@ -15897,7 +16093,8 @@ this.Storage = domplate(Firebug.Rep,
     {
         openNewTab("http://dev.w3.org/html5/webstorage/#storage-0");
     },
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     className: "Storage",
 
@@ -15910,26 +16107,26 @@ this.Storage = domplate(Firebug.Rep,
 
 // ************************************************************************************************
 Firebug.registerRep(
-    //this.nsIDOMHistory, // make this early to avoid exceptions
+    // this.nsIDOMHistory, // make this early to avoid exceptions
     this.Undefined,
     this.Null,
     this.Number,
     this.String,
     this.Window,
-    //this.ApplicationCache, // must come before Arr (array) else exceptions.
-    //this.ErrorMessage,
+    // this.ApplicationCache, // must come before Arr (array) else exceptions.
+    // this.ErrorMessage,
     this.Element,
-    //this.TextNode,
+    // this.TextNode,
     this.Document,
     this.StyleSheet,
     this.Event,
-    //this.SourceLink,
-    //this.SourceFile,
-    //this.StackTrace,
-    //this.StackFrame,
-    //this.jsdStackFrame,
-    //this.jsdScript,
-    //this.NetFile,
+    // this.SourceLink,
+    // this.SourceFile,
+    // this.StackTrace,
+    // this.StackFrame,
+    // this.jsdStackFrame,
+    // this.jsdScript,
+    // this.NetFile,
     this.Property,
     this.Except,
     this.Arr
@@ -15941,40 +16138,40 @@ Firebug.setDefaultReps(this.Func, this.Obj);
 
 // ************************************************************************************************
 /*
- * The following is http://developer.yahoo.com/yui/license.txt and applies to only code labeled "Yahoo BSD Source"
- * in only this file reps.js.  John J. Barton June 2007.
- *
-Software License Agreement (BSD License)
-
-Copyright (c) 2006, Yahoo! Inc.
-All rights reserved.
-
-Redistribution and use of this software in source and binary forms, with or without modification, are
-permitted provided that the following conditions are met:
-
-* Redistributions of source code must retain the above
-  copyright notice, this list of conditions and the
-  following disclaimer.
-
-* Redistributions in binary form must reproduce the above
-  copyright notice, this list of conditions and the
-  following disclaimer in the documentation and/or other
-  materials provided with the distribution.
-
-* Neither the name of Yahoo! Inc. nor the names of its
-  contributors may be used to endorse or promote products
-  derived from this software without specific prior
-  written permission of Yahoo! Inc.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED
-WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
-PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
-ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR
-TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * /
+ * The following is http://developer.yahoo.com/yui/license.txt and applies to
+ * only code labeled "Yahoo BSD Source" in only this file reps.js. John J.
+ * Barton June 2007.
+ * 
+ * Software License Agreement (BSD License)
+ * 
+ * Copyright (c) 2006, Yahoo! Inc. All rights reserved.
+ * 
+ * Redistribution and use of this software in source and binary forms, with or
+ * without modification, are permitted provided that the following conditions
+ * are met:
+ * 
+ * Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer.
+ * 
+ * Redistributions in binary form must reproduce the above copyright notice,
+ * this list of conditions and the following disclaimer in the documentation
+ * and/or other materials provided with the distribution.
+ * 
+ * Neither the name of Yahoo! Inc. nor the names of its contributors may be used
+ * to endorse or promote products derived from this software without specific
+ * prior written permission of Yahoo! Inc.
+ * 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE. /
  */
 
 
@@ -16062,7 +16259,8 @@ Firebug.Editor = extend(Firebug.Module,
             setClass(currentGroup, "editing");
 
         currentEditor.show(target, currentPanel, value, targetSize);
-        //dispatch(this.fbListeners, "onBeginEditing", [currentPanel, currentEditor, target, value]);
+        // dispatch(this.fbListeners, "onBeginEditing", [currentPanel,
+		// currentEditor, target, value]);
         currentEditor.beginEditing(target, value);
         if (FBTrace.DBG_EDITOR)
             FBTrace.sysout("Editor start panel "+currentPanel.name);
@@ -16097,7 +16295,9 @@ Firebug.Editor = extend(Firebug.Module,
         {
             if (cancel)
             {
-                //dispatch([Firebug.A11yModel], 'onInlineEditorClose', [currentPanel, currentTarget, removeGroup && !originalValue]);
+                // dispatch([Firebug.A11yModel], 'onInlineEditorClose',
+				// [currentPanel, currentTarget, removeGroup &&
+				// !originalValue]);
                 if (value != originalValue)
                     this.saveEditAndNotifyListeners(currentTarget, originalValue, previousValue);
 
@@ -16116,16 +16316,17 @@ Firebug.Editor = extend(Firebug.Module,
         }
         catch (exc)
         {
-            //throw exc.message;
-            //ERROR(exc);
+            // throw exc.message;
+            // ERROR(exc);
         }
 
         currentEditor.hide();
         currentPanel.editing = false;
 
-        //dispatch(this.fbListeners, "onStopEdit", [currentPanel, currentEditor, currentTarget]);
-        //if (FBTrace.DBG_EDITOR)
-        //    FBTrace.sysout("Editor stop panel "+currentPanel.name);
+        // dispatch(this.fbListeners, "onStopEdit", [currentPanel,
+		// currentEditor, currentTarget]);
+        // if (FBTrace.DBG_EDITOR)
+        // FBTrace.sysout("Editor stop panel "+currentPanel.name);
 
         currentTarget = null;
         currentGroup = null;
@@ -16188,7 +16389,8 @@ Firebug.Editor = extend(Firebug.Module,
     saveEditAndNotifyListeners: function(currentTarget, value, previousValue)
     {
         currentEditor.saveEdit(currentTarget, value, previousValue);
-        //dispatch(this.fbListeners, "onSaveEdit", [currentPanel, currentEditor, currentTarget, value, previousValue]);
+        // dispatch(this.fbListeners, "onSaveEdit", [currentPanel,
+		// currentEditor, currentTarget, value, previousValue]);
     },
 
     setEditTarget: function(element)
@@ -16277,7 +16479,8 @@ Firebug.Editor = extend(Firebug.Module,
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     attachListeners: function(editor, context)
     {
@@ -16368,7 +16571,8 @@ Firebug.Editor = extend(Firebug.Module,
             this.stopEditing();
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // extends Module
 
     initialize: function()
@@ -16420,7 +16624,8 @@ Firebug.BaseEditor = extend(Firebug.MeasureBox,
     {
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Support for context menus within inline editors.
 
     getContextMenuItems: function(target)
@@ -16432,7 +16637,8 @@ Firebug.BaseEditor = extend(Firebug.MeasureBox,
         return items;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Editor Module listeners will get "onBeginEditing" just before this call
 
     beginEditing: function(target, value)
@@ -16471,10 +16677,13 @@ var inlineEditorAttributes = {
     oncontextmenu: "$onContextMenu"
 };
 
-// IE does not support the oninput event, so we're using the onkeydown to signalize
+// IE does not support the oninput event, so we're using the onkeydown to
+// signalize
 // the relevant keyboard events, and the onpropertychange to actually handle the
-// input event, which should happen after the onkeydown event is fired and after the
-// value of the input is updated, but before the onkeyup and before the input (with the
+// input event, which should happen after the onkeydown event is fired and after
+// the
+// value of the input is updated, but before the onkeyup and before the input
+// (with the
 // new value) is rendered
 if (isIE)
 {
@@ -16517,7 +16726,7 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
 
     inputTag :
         INPUT({"class": "textEditorInner", type: "text",
-            /*oninput: "$onInput",*/ onkeypress: "$onKeyPress", onoverflow: "$onOverflow"}
+            /* oninput: "$onInput", */ onkeypress: "$onKeyPress", onoverflow: "$onOverflow"}
         ),
 
     expanderTag:
@@ -16545,10 +16754,11 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
         if (FBTrace.DBG_EDITOR)
             FBTrace.sysout("Firebug.InlineEditor initializeInline()");
 
-        //this.box = this.tag.replace({}, doc, this);
+        // this.box = this.tag.replace({}, doc, this);
         this.box = this.tag.append({}, doc.body, this);
 
-        //this.input = this.box.childNodes[1].firstChild.firstChild;  // XXXjjb childNode[1] required
+        // this.input = this.box.childNodes[1].firstChild.firstChild; // XXXjjb
+		// childNode[1] required
         this.input = this.box.getElementsByTagName("input")[0];
 
         if (isIElt8)
@@ -16578,19 +16788,23 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
 
     show: function(target, panel, value, targetSize)
     {
-        //dispatch([Firebug.A11yModel], "onInlineEditorShow", [panel, this]);
+        // dispatch([Firebug.A11yModel], "onInlineEditorShow", [panel, this]);
         this.target = target;
         this.panel = panel;
 
         this.targetSize = targetSize;
 
         // TODO: xxxpedro editor
-        //this.targetOffset = getClientOffset(target);
+        // this.targetOffset = getClientOffset(target);
 
-        // Some browsers (IE, Google Chrome and Safari) will have problem trying to get the
-        // offset values of invisible elements, or empty elements. So, in order to get the
-        // correct values, we temporary inject a character in the innerHTML of the empty element,
-        // then we get the offset values, and next, we restore the original innerHTML value.
+        // Some browsers (IE, Google Chrome and Safari) will have problem trying
+		// to get the
+        // offset values of invisible elements, or empty elements. So, in order
+		// to get the
+        // correct values, we temporary inject a character in the innerHTML of
+		// the empty element,
+        // then we get the offset values, and next, we restore the original
+		// innerHTML value.
         var innerHTML = target.innerHTML;
         var isEmptyElement = !innerHTML;
         if (isEmptyElement)
@@ -16625,7 +16839,8 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
             this.startMeasuring(target);
             this.textSize = this.measureInputText(value);
 
-            // Correct the height of the box to make the funky CSS drop-shadow line up
+            // Correct the height of the box to make the funky CSS drop-shadow
+			// line up
             var parent = this.input.parentNode;
             if (hasClass(parent, "textEditorInner2"))
             {
@@ -16649,8 +16864,8 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
         else
             target.offsetParent.appendChild(this.box);
 
-        //console.log(target);
-        //this.input.select(); // it's called bellow, with setTimeout
+        // console.log(target);
+        // this.input.select(); // it's called bellow, with setTimeout
 
         if (isIE)
         {
@@ -16669,10 +16884,11 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
             this.expander.parentNode.insertBefore(target, this.expander);
         }
 
-        //TODO: xxxpedro
-        //scrollIntoCenterView(this.box, null, true);
+        // TODO: xxxpedro
+        // scrollIntoCenterView(this.box, null, true);
 
-        // Display the editor after change its size and position to avoid flickering
+        // Display the editor after change its size and position to avoid
+		// flickering
         this.box.style.display = "block";
 
         // we need to call input.focus() and input.select() with a timeout,
@@ -16700,7 +16916,7 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
 
         if (this.box.parentNode)
         {
-            ///setSelectionRange(this.input, 0, 0);
+            // /setSelectionRange(this.input, 0, 0);
             this.input.blur();
 
             this.box.parentNode.removeChild(this.box);
@@ -16721,7 +16937,8 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
         this.updateLayout(false, forceAll);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * * * *
 
     beginEditing: function(target, value)
     {
@@ -16746,7 +16963,8 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
         return false;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * * * *
 
     getAutoCompleteRange: function(value, offset)
     {
@@ -16756,7 +16974,8 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
     {
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     getAutoCompleter: function()
     {
@@ -16772,7 +16991,7 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
 
     completeValue: function(amt)
     {
-        //console.log("completeValue");
+        // console.log("completeValue");
 
         var selectRangeCallback = this.getAutoCompleter().complete(currentPanel.context, this.input, true, amt < 0);
 
@@ -16780,7 +16999,8 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
         {
             Firebug.Editor.update(true);
 
-            // We need to select the editor text after calling update in Safari/Chrome,
+            // We need to select the editor text after calling update in
+			// Safari/Chrome,
             // otherwise the text won't be selected
             if (isSafari)
                 setTimeout(selectRangeCallback,0);
@@ -16801,7 +17021,7 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
         else
             var start = this.input.selectionStart, end = this.input.selectionEnd;
 
-        //debugger;
+        // debugger;
         var range = this.getAutoCompleteRange(value, start);
         if (!range || range.type != "int")
             range = {start: 0, end: value.length-1};
@@ -16830,11 +17050,12 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
             return false;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     onKeyPress: function(event)
     {
-        //console.log("onKeyPress", event);
+        // console.log("onKeyPress", event);
         if (event.keyCode == 27 && !this.completeAsYouType)
         {
             var reverted = this.getAutoCompleter().revert(this.input);
@@ -16853,7 +17074,8 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
                 FBL.cancelEvent(event);
             else
             {
-                // If the user backspaces, don't autocomplete after the upcoming input event
+                // If the user backspaces, don't autocomplete after the upcoming
+				// input event
                 this.ignoreNextInput = event.keyCode == 8;
             }
         }
@@ -16866,7 +17088,7 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
 
     onKeyDown: function(event)
     {
-        //console.log("onKeyDown", event.keyCode);
+        // console.log("onKeyDown", event.keyCode);
         if (event.keyCode > 46 || event.keyCode == 32 || event.keyCode == 8)
         {
             this.keyDownPressed = true;
@@ -16875,7 +17097,7 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
 
     onInput: function(event)
     {
-        //debugger;
+        // debugger;
 
         // skip not relevant onpropertychange calls on IE
         if (isIE)
@@ -16886,8 +17108,8 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
             this.keyDownPressed = false;
         }
 
-        //console.log("onInput", event);
-        //console.trace();
+        // console.log("onInput", event);
+        // console.trace();
 
         var selectRangeCallback;
 
@@ -16905,7 +17127,8 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
 
         if (selectRangeCallback)
         {
-            // We need to select the editor text after calling update in Safari/Chrome,
+            // We need to select the editor text after calling update in
+			// Safari/Chrome,
             // otherwise the text won't be selected
             if (isSafari)
                 setTimeout(selectRangeCallback,0);
@@ -16936,7 +17159,8 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
         return true;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     updateLayout: function(initial, forceAll, extraWidth)
     {
@@ -16974,7 +17198,8 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
 
                 targetMargin = parseInt(style.marginLeft) + parseInt(style.marginRight);
 
-                // Make the width fit the remaining x-space from the offset to the far right
+                // Make the width fit the remaining x-space from the offset to
+				// the far right
                 approxTextWidth = maxWidth - targetMargin;
 
                 this.input.style.width = "100%";
@@ -16982,12 +17207,15 @@ Firebug.InlineEditor.prototype = domplate(Firebug.BaseEditor,
             }
             else
             {
-                // Make the input one character wider than the text value so that
+                // Make the input one character wider than the text value so
+				// that
                 // typing does not ever cause the textbox to scroll
                 var charWidth = this.measureInputText('m').width;
 
-                // Sometimes we need to make the editor a little wider, specifically when
-                // an overflow happens, otherwise it will scroll off some text on the left
+                // Sometimes we need to make the editor a little wider,
+				// specifically when
+                // an overflow happens, otherwise it will scroll off some text
+				// on the left
                 if (extraWidth)
                     charWidth *= extraWidth;
 
@@ -17069,15 +17297,16 @@ Firebug.AutoCompleter = function(getExprOffset, getRange, evaluator, selectMode,
 
     this.complete = function(context, textBox, cycle, reverse)
     {
-        //console.log("complete", context, textBox, cycle, reverse);
+        // console.log("complete", context, textBox, cycle, reverse);
         // TODO: xxxpedro important port to firebug (variable leak)
-        //var value = lastValue = textBox.value;
+        // var value = lastValue = textBox.value;
         var value = textBox.value;
 
-        //var offset = textBox.selectionStart;
+        // var offset = textBox.selectionStart;
         var offset = getInputSelectionStart(textBox);
 
-        // The result of selectionStart() in Safari/Chrome is 1 unit less than the result
+        // The result of selectionStart() in Safari/Chrome is 1 unit less than
+		// the result
         // in Firefox. Therefore, we need to manually adjust the value here.
         if (isSafari && !cycle && offset >= 0) offset++;
 
@@ -17125,7 +17354,8 @@ Firebug.AutoCompleter = function(getExprOffset, getRange, evaluator, selectMode,
 
             var searchExpr;
 
-            // Check if the cursor is at the very right edge of the expression, or
+            // Check if the cursor is at the very right edge of the expression,
+			// or
             // somewhere in the middle of it
             if (expr && offset != parseStart+range.end+1)
             {
@@ -17152,7 +17382,8 @@ Firebug.AutoCompleter = function(getExprOffset, getRange, evaluator, selectMode,
             if (expr)
             {
                 // Filter the list of values to those which begin with expr. We
-                // will then go on to complete the first value in the resulting list
+                // will then go on to complete the first value in the resulting
+				// list
                 candidates = [];
 
                 if (caseSensitive)
@@ -17243,46 +17474,44 @@ Firebug.AutoCompleter = function(getExprOffset, getRange, evaluator, selectMode,
         textBox.value = preParsed + preExpr + preCompletion + postCompletion + postExpr;
         var offsetEnd = preParsed.length + preExpr.length + completion.length;
 
-        // TODO: xxxpedro remove the following commented code, if the lib.setSelectionRange()
+        // TODO: xxxpedro remove the following commented code, if the
+		// lib.setSelectionRange()
         // is working well.
-        /*
-        if (textBox.setSelectionRange)
-        {
-            // we must select the range with a timeout, otherwise the text won't
-            // be properly selected (because after this function executes, the editor's
-            // input will be resized to fit the whole text)
-            setTimeout(function(){
-                if (selectMode)
-                    textBox.setSelectionRange(offset, offsetEnd);
-                else
-                    textBox.setSelectionRange(offsetEnd, offsetEnd);
-            },0);
-        }
-        /**/
+        /***********************************************************************
+		 * if (textBox.setSelectionRange) { // we must select the range with a
+		 * timeout, otherwise the text won't // be properly selected (because
+		 * after this function executes, the editor's // input will be resized
+		 * to fit the whole text) setTimeout(function(){ if (selectMode)
+		 * textBox.setSelectionRange(offset, offsetEnd); else
+		 * textBox.setSelectionRange(offsetEnd, offsetEnd); },0); } /
+		 **********************************************************************/
 
         // we must select the range with a timeout, otherwise the text won't
-        // be properly selected (because after this function executes, the editor's
+        // be properly selected (because after this function executes, the
+		// editor's
         // input will be resized to fit the whole text)
-        /*
-        setTimeout(function(){
-            if (selectMode)
-                setSelectionRange(textBox, offset, offsetEnd);
-            else
-                setSelectionRange(textBox, offsetEnd, offsetEnd);
-        },0);
+        /***********************************************************************
+		 * setTimeout(function(){ if (selectMode) setSelectionRange(textBox,
+		 * offset, offsetEnd); else setSelectionRange(textBox, offsetEnd,
+		 * offsetEnd); },0);
+		 * 
+		 * return true; /
+		 **********************************************************************/
 
-        return true;
-        /**/
-
-        // The editor text should be selected only after calling the editor.update()
-        // in Safari/Chrome, otherwise the text won't be selected. So, we're returning
+        // The editor text should be selected only after calling the
+		// editor.update()
+        // in Safari/Chrome, otherwise the text won't be selected. So, we're
+		// returning
         // a function to be called later (in the proper time for all browsers).
         //
-        // TODO: xxxpedro see if we can move the editor.update() calls to here, and avoid
-        // returning a closure. the complete() function seems to be called only twice in
-        // editor.js. See if this function is called anywhere else (like css.js for example).
+        // TODO: xxxpedro see if we can move the editor.update() calls to here,
+		// and avoid
+        // returning a closure. the complete() function seems to be called only
+		// twice in
+        // editor.js. See if this function is called anywhere else (like css.js
+		// for example).
         return function(){
-            //console.log("autocomplete ", textBox, offset, offsetEnd);
+            // console.log("autocomplete ", textBox, offset, offsetEnd);
 
             if (selectMode)
                 setSelectionRange(textBox, offset, offsetEnd);
@@ -17308,10 +17537,10 @@ var getDefaultEditor = function getDefaultEditor(panel)
 }
 
 /**
- * An outsider is the first element matching the stepper element that
- * is not an child of group. Elements tagged with insertBefore or insertAfter
- * classes are also excluded from these results unless they are the sibling
- * of group, relative to group's parent editGroup. This allows for the proper insertion
+ * An outsider is the first element matching the stepper element that is not an
+ * child of group. Elements tagged with insertBefore or insertAfter classes are
+ * also excluded from these results unless they are the sibling of group,
+ * relative to group's parent editGroup. This allows for the proper insertion
  * rows when groups are nested.
  */
 var getOutsider = function getOutsider(element, group, stepper)
@@ -17348,7 +17577,8 @@ var getInlineParent = function getInlineParent(element)
     var lastInline = element;
     for (; element; element = element.parentNode)
     {
-        //var s = element.ownerDocument.defaultView.getComputedStyle(element, "");
+        // var s = element.ownerDocument.defaultView.getComputedStyle(element,
+		// "");
         var s = isIE ?
                 element.currentStyle :
                 element.ownerDocument.defaultView.getComputedStyle(element, "");
@@ -17405,7 +17635,8 @@ Firebug.Inspector =
         offlineFragment = null;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Inspect functions
 
     toggleInspect: function()
@@ -17434,7 +17665,8 @@ Firebug.Inspector =
         fbInspectFrame.style.width = size.width + "px";
         fbInspectFrame.style.height = size.height + "px";
 
-        //addEvent(Firebug.browser.document.documentElement, "mousemove", Firebug.Inspector.onInspectingBody);
+        // addEvent(Firebug.browser.document.documentElement, "mousemove",
+		// Firebug.Inspector.onInspectingBody);
 
         addEvent(fbInspectFrame, "mousemove", Firebug.Inspector.onInspecting);
         addEvent(fbInspectFrame, "mousedown", Firebug.Inspector.onInspectingClick);
@@ -17470,7 +17702,7 @@ Firebug.Inspector =
         // Avoid looking at text nodes in Opera
         while (targ.nodeType != 1) targ = targ.parentNode;
 
-        //Firebug.Console.log(targ);
+        // Firebug.Console.log(targ);
         Firebug.Inspector.stopInspecting();
     },
 
@@ -17492,7 +17724,7 @@ Firebug.Inspector =
 
             if (targ.nodeName.toLowerCase() == "body") return;
 
-            //Firebug.Console.log(e.clientX, e.clientY, targ);
+            // Firebug.Console.log(e.clientX, e.clientY, targ);
             Firebug.Inspector.drawOutline(targ);
 
             if (ElementCache(targ))
@@ -17538,7 +17770,7 @@ Firebug.Inspector =
 
             if (targ.nodeName.toLowerCase() == "body") return;
 
-            //Firebug.Console.log(e.clientX, e.clientY, targ);
+            // Firebug.Console.log(e.clientX, e.clientY, targ);
             Firebug.Inspector.drawOutline(targ);
 
             if (ElementCache.has(targ))
@@ -17549,14 +17781,9 @@ Firebug.Inspector =
     },
 
     /**
-     *
-     *   llttttttrr
-     *   llttttttrr
-     *   ll      rr
-     *   ll      rr
-     *   llbbbbbbrr
-     *   llbbbbbbrr
-     */
+	 * 
+	 * llttttttrr llttttttrr ll rr ll rr llbbbbbbrr llbbbbbbrr
+	 */
     drawOutline: function(el)
     {
         var border = 2;
@@ -17574,11 +17801,17 @@ Firebug.Inspector =
         var width = box.width;
 
         var freeHorizontalSpace = scrollPosition.left + windowSize.width - left - width -
-                (!isIE && scrollSize.height > windowSize.height ? // is *vertical* scrollbar visible
+                (!isIE && scrollSize.height > windowSize.height ? // is
+																	// *vertical*
+																	// scrollbar
+																	// visible
                  scrollbarSize : 0);
 
         var freeVerticalSpace = scrollPosition.top + windowSize.height - top - height -
-                (!isIE && scrollSize.width > windowSize.width ? // is *horizontal* scrollbar visible
+                (!isIE && scrollSize.width > windowSize.width ? // is
+																// *horizontal*
+																// scrollbar
+																// visible
                 scrollbarSize : 0);
 
         var numVerticalBorders = freeVerticalSpace > 0 ? 2 : 1;
@@ -17604,14 +17837,15 @@ Firebug.Inspector =
             style.top = top+height + "px";
             style.left = left + "px";
             style.width = width + "px";
-            //style.height = border + "px"; // TODO: on initialize() or worst case?
+            // style.height = border + "px"; // TODO: on initialize() or worst
+			// case?
         }
         else
         {
             style.top = -2*border + "px";
             style.left = -2*border + "px";
             style.width = border + "px";
-            //style.height = border + "px";
+            // style.height = border + "px";
         }
 
         style = o.fbOutlineR.style;
@@ -17655,7 +17889,8 @@ Firebug.Inspector =
         outlineVisible = true;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Box Model
 
     drawBoxModel: function(el)
@@ -17735,12 +17970,14 @@ Firebug.Inspector =
 // Inspector Internals
 
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 // Shared variables
 
 
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 // Internal variables
 
 var offlineFragment = null;
@@ -17753,7 +17990,8 @@ var boxModel, boxModelStyle,
     boxPadding, boxPaddingStyle,
     boxContent, boxContentStyle;
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var resetStyle = "margin:0; padding:0; border:0; position:absolute; overflow:hidden; display:block;";
 var offscreenStyle = resetStyle + "top:-1234px; left:-1234px;";
@@ -17762,7 +18000,9 @@ var inspectStyle = resetStyle + "z-index: 2147483500;";
 var inspectFrameStyle = resetStyle + "z-index: 2147483550; top:0; left:0; background:url(" +
                         Env.Location.skinDir + "pixel_transparent.gif);";
 
-//if (Env.Options.enableTrace) inspectFrameStyle = resetStyle + "z-index: 2147483550; top: 0; left: 0; background: #ff0; opacity: 0.05; _filter: alpha(opacity=5);";
+// if (Env.Options.enableTrace) inspectFrameStyle = resetStyle + "z-index:
+// 2147483550; top: 0; left: 0; background: #ff0; opacity: 0.05; _filter:
+// alpha(opacity=5);";
 
 var inspectModelOpacity = isIE ? "filter:alpha(opacity=80);" : "opacity:0.8;";
 var inspectModelStyle = inspectStyle + inspectModelOpacity;
@@ -17777,13 +18017,15 @@ var outlineStyle = {
     fbVerticalLine: "background: #3875D7;width: 2px;"
 }
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var lastInspecting = 0;
 var fbInspectFrame = null;
 
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var outlineVisible = false;
 var outlineElements = {};
@@ -17900,37 +18142,29 @@ FBL.ns(function() { with (FBL) {
 // ************************************************************************************************
 // Constants
 
+/*******************************************************************************
+ * const Cc = Components.classes; const Ci = Components.interfaces; const
+ * nsIPrefBranch2 = Ci.nsIPrefBranch2; const PrefService =
+ * Cc["@mozilla.org/preferences-service;1"]; const prefs =
+ * PrefService.getService(nsIPrefBranch2); /
+ ******************************************************************************/
 /*
-const Cc = Components.classes;
-const Ci = Components.interfaces;
-const nsIPrefBranch2 = Ci.nsIPrefBranch2;
-const PrefService = Cc["@mozilla.org/preferences-service;1"];
-const prefs = PrefService.getService(nsIPrefBranch2);
-/**/
-/*
-
-// new offline message handler
-o = {x:1,y:2};
-
-r = Firebug.getRep(o);
-
-r.tag.tag.compile();
-
-outputs = [];
-html = r.tag.renderHTML({object:o}, outputs);
-
-
-// finish rendering the template (the DOM part)
-target = $("build");
-target.innerHTML = html;
-root = target.firstChild;
-
-domArgs = [root, r.tag.context, 0];
-domArgs.push.apply(domArgs, r.tag.domArgs);
-domArgs.push.apply(domArgs, outputs);
-r.tag.tag.renderDOM.apply(self ? self : r.tag.subject, domArgs);
-
-
+ *  // new offline message handler o = {x:1,y:2};
+ * 
+ * r = Firebug.getRep(o);
+ * 
+ * r.tag.tag.compile();
+ * 
+ * outputs = []; html = r.tag.renderHTML({object:o}, outputs);
+ * 
+ *  // finish rendering the template (the DOM part) target = $("build");
+ * target.innerHTML = html; root = target.firstChild;
+ * 
+ * domArgs = [root, r.tag.context, 0]; domArgs.push.apply(domArgs,
+ * r.tag.domArgs); domArgs.push.apply(domArgs, outputs);
+ * r.tag.tag.renderDOM.apply(self ? self : r.tag.subject, domArgs);
+ * 
+ * 
  */
 var consoleQueue = [];
 var lastHighlightedObject;
@@ -17946,13 +18180,15 @@ Firebug.ConsoleBase =
 {
     log: function(object, context, className, rep, noThrottle, sourceLink)
     {
-        //dispatch(this.fbListeners,"log",[context, object, className, sourceLink]);
+        // dispatch(this.fbListeners,"log",[context, object, className,
+		// sourceLink]);
         return this.logRow(appendObject, object, context, className, rep, sourceLink, noThrottle);
     },
 
     logFormatted: function(objects, context, className, noThrottle, sourceLink)
     {
-        //dispatch(this.fbListeners,"logFormatted",[context, objects, className, sourceLink]);
+        // dispatch(this.fbListeners,"logFormatted",[context, objects,
+		// className, sourceLink]);
         return this.logRow(appendFormatted, objects, context, className, null, sourceLink, noThrottle);
     },
 
@@ -17969,7 +18205,8 @@ Firebug.ConsoleBase =
     logRow: function(appender, objects, context, className, rep, sourceLink, noThrottle, noRow)
     {
         // TODO: xxxpedro console console2
-        noThrottle = true; // xxxpedro forced because there is no TabContext yet
+        noThrottle = true; // xxxpedro forced because there is no TabContext
+							// yet
 
         if (!context)
             context = FirebugContext;
@@ -17989,18 +18226,17 @@ Firebug.ConsoleBase =
                 var container = panel.panelNode;
 
                 // TODO: xxxpedro what is this? console console2
-                /*
-                var template = Firebug.NetMonitor.NetLimit;
-
-                while (container.childNodes.length > maxQueueRequests + 1)
-                {
-                    clearDomplate(container.firstChild.nextSibling);
-                    container.removeChild(container.firstChild.nextSibling);
-                    panel.limit.limitInfo.totalCount++;
-                    template.updateCounter(panel.limit);
-                }
-                dispatch([Firebug.A11yModel], "onLogRowCreated", [panel , row]);
-                /**/
+                /***************************************************************
+				 * var template = Firebug.NetMonitor.NetLimit;
+				 * 
+				 * while (container.childNodes.length > maxQueueRequests + 1) {
+				 * clearDomplate(container.firstChild.nextSibling);
+				 * container.removeChild(container.firstChild.nextSibling);
+				 * panel.limit.limitInfo.totalCount++;
+				 * template.updateCounter(panel.limit); }
+				 * dispatch([Firebug.A11yModel], "onLogRowCreated", [panel ,
+				 * row]); /
+				 **************************************************************/
                 return row;
             }
             else
@@ -18012,7 +18248,7 @@ Firebug.ConsoleBase =
         {
             if (!context.throttle)
             {
-                //FBTrace.sysout("console.logRow has not context.throttle! ");
+                // FBTrace.sysout("console.logRow has not context.throttle! ");
                 return;
             }
             var args = [appender, objects, context, className, rep, sourceLink, true, noRow];
@@ -18032,13 +18268,12 @@ Firebug.ConsoleBase =
     clear: function(context)
     {
         if (!context)
-            //context = FirebugContext;
+            // context = FirebugContext;
             context = Firebug.context;
 
-        /*
-        if (context)
-            Firebug.Errors.clear(context);
-        /**/
+        /***********************************************************************
+		 * if (context) Firebug.Errors.clear(context); /
+		 **********************************************************************/
 
         var panel = this.getPanel(context, true);
         if (panel)
@@ -18050,7 +18285,7 @@ Firebug.ConsoleBase =
     // Override to direct output to your panel
     getPanel: function(context, noCreate)
     {
-        //return context.getPanel("console", noCreate);
+        // return context.getPanel("console", noCreate);
         // TODO: xxxpedro console console2
         return Firebug.chrome ? Firebug.chrome.getPanel("Console") : null;
     }
@@ -18059,8 +18294,8 @@ Firebug.ConsoleBase =
 
 // ************************************************************************************************
 
-//TODO: xxxpedro
-//var ActivableConsole = extend(Firebug.ActivableModule, Firebug.ConsoleBase);
+// TODO: xxxpedro
+// var ActivableConsole = extend(Firebug.ActivableModule, Firebug.ConsoleBase);
 var ActivableConsole = extend(Firebug.ConsoleBase,
 {
     isAlwaysEnabled: function()
@@ -18070,7 +18305,7 @@ var ActivableConsole = extend(Firebug.ConsoleBase,
 });
 
 Firebug.Console = Firebug.Console = extend(ActivableConsole,
-//Firebug.Console = extend(ActivableConsole,
+// Firebug.Console = extend(ActivableConsole,
 {
     dispatchName: "console",
 
@@ -18090,7 +18325,8 @@ Firebug.Console = Firebug.Console = extend(ActivableConsole,
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // extends Module
 
     showPanel: function(browser, panel)
@@ -18104,10 +18340,20 @@ Firebug.Console = Firebug.Console = extend(ActivableConsole,
         {
             if (FBTrace.DBG_CONSOLE)
                 FBTrace.sysout("getFirebugConsoleElement forcing element");
-            var elementForcer = "(function(){var r=null; try { r = window._getFirebugConsoleElement();}catch(exc){r=exc;} return r;})();";  // we could just add the elements here
+            var elementForcer = "(function(){var r=null; try { r = window._getFirebugConsoleElement();}catch(exc){r=exc;} return r;})();";  // we
+																																			// could
+																																			// just
+																																			// add
+																																			// the
+																																			// elements
+																																			// here
 
             if (context.stopped)
-                Firebug.Console.injector.evaluateConsoleScript(context);  // todo evaluate consoleForcer on stack
+                Firebug.Console.injector.evaluateConsoleScript(context);  // todo
+																			// evaluate
+																			// consoleForcer
+																			// on
+																			// stack
             else
                 var r = Firebug.CommandLine.evaluateInWebPage(elementForcer, context, win);
 
@@ -18125,7 +18371,9 @@ Firebug.Console = Firebug.Console = extend(ActivableConsole,
         return element;
     },
 
-    isReadyElsePreparing: function(context, win) // this is the only code that should call injector.attachIfNeeded
+    isReadyElsePreparing: function(context, win) // this is the only code
+													// that should call
+													// injector.attachIfNeeded
     {
         if (FBTrace.DBG_CONSOLE)
             FBTrace.sysout("console.isReadyElsePreparing, win is " +
@@ -18139,7 +18387,8 @@ Firebug.Console = Firebug.Console = extend(ActivableConsole,
             var attached = true;
             for (var i = 0; i < context.windows.length; i++)
                 attached = attached && this.injector.attachIfNeeded(context, context.windows[i]);
-            // already in the list above attached = attached && this.injector.attachIfNeeded(context, context.window);
+            // already in the list above attached = attached &&
+			// this.injector.attachIfNeeded(context, context.window);
             if (context.windows.indexOf(context.window) == -1)
                 FBTrace.sysout("isReadyElsePreparing ***************** context.window not in context.windows");
             if (FBTrace.DBG_CONSOLE)
@@ -18148,16 +18397,17 @@ Firebug.Console = Firebug.Console = extend(ActivableConsole,
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // extends ActivableModule
 
     initialize: function()
     {
         this.panelName = "console";
 
-        //TODO: xxxpedro
-        //Firebug.ActivableModule.initialize.apply(this, arguments);
-        //Firebug.Debugger.addListener(this);
+        // TODO: xxxpedro
+        // Firebug.ActivableModule.initialize.apply(this, arguments);
+        // Firebug.Debugger.addListener(this);
     },
 
     enable: function()
@@ -18187,7 +18437,8 @@ Firebug.Console = Firebug.Console = extend(ActivableConsole,
         this.clearReloadWarning(context);
     },
 
-    clearReloadWarning: function(context) // remove the warning about reloading.
+    clearReloadWarning: function(context) // remove the warning about
+											// reloading.
     {
          if (context.consoleReloadWarning)
          {
@@ -18213,10 +18464,13 @@ Firebug.Console = Firebug.Console = extend(ActivableConsole,
 
     destroyContext: function(context, persistedState)
     {
-        Firebug.Console.injector.detachConsole(context, context.window);  // TODO iterate windows?
+        Firebug.Console.injector.detachConsole(context, context.window);  // TODO
+																			// iterate
+																			// windows?
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     onPanelEnable: function(panelName)
     {
@@ -18227,7 +18481,9 @@ Firebug.Console = Firebug.Console = extend(ActivableConsole,
             FBTrace.sysout("console.onPanelEnable**************");
 
         this.watchForErrors();
-        Firebug.Debugger.addDependentModule(this); // we inject the console during JS compiles so we need jsd
+        Firebug.Debugger.addDependentModule(this); // we inject the console
+													// during JS compiles so we
+													// need jsd
     },
 
     onPanelDisable: function(panelName)
@@ -18238,10 +18494,13 @@ Firebug.Console = Firebug.Console = extend(ActivableConsole,
         if (FBTrace.DBG_CONSOLE)
             FBTrace.sysout("console.onPanelDisable**************");
 
-        Firebug.Debugger.removeDependentModule(this); // we inject the console during JS compiles so we need jsd
+        Firebug.Debugger.removeDependentModule(this); // we inject the console
+														// during JS compiles so
+														// we need jsd
         this.unwatchForErrors();
 
-        // Make sure possible errors coming from the page and displayed in the Firefox
+        // Make sure possible errors coming from the page and displayed in the
+		// Firefox
         // status bar are removed.
         this.clear();
     },
@@ -18274,7 +18533,8 @@ Firebug.Console = Firebug.Console = extend(ActivableConsole,
         $('fbStatusIcon').removeAttribute("console");
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Firebug.Debugger listener
 
     onMonitorScript: function(context, frame)
@@ -18290,7 +18550,8 @@ Firebug.Console = Firebug.Console = extend(ActivableConsole,
             Firebug.Console.closeGroup(context);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     logRow: function(appender, objects, context, className, rep, sourceLink, noThrottle, noRow)
     {
@@ -18317,10 +18578,11 @@ Firebug.ConsoleListener =
 
 // ************************************************************************************************
 
-Firebug.ConsolePanel = function () {} // XXjjb attach Firebug so this panel can be extended.
+Firebug.ConsolePanel = function () {} // XXjjb attach Firebug so this panel
+										// can be extended.
 
-//TODO: xxxpedro
-//Firebug.ConsolePanel.prototype = extend(Firebug.ActivablePanel,
+// TODO: xxxpedro
+// Firebug.ConsolePanel.prototype = extend(Firebug.ActivablePanel,
 Firebug.ConsolePanel.prototype = extend(Firebug.Panel,
 {
     wasScrolledToBottom: false,
@@ -18340,10 +18602,11 @@ Firebug.ConsolePanel.prototype = extend(Firebug.Panel,
         else
         {
             // xxxHonza: Don't update the this.wasScrolledToBottom flag now.
-            // At the beginning (when the first log is created) the isScrolledToBottom
+            // At the beginning (when the first log is created) the
+			// isScrolledToBottom
             // always returns true.
-            //if (this.panelNode.offsetHeight)
-            //    this.wasScrolledToBottom = isScrolledToBottom(this.panelNode);
+            // if (this.panelNode.offsetHeight)
+            // this.wasScrolledToBottom = isScrolledToBottom(this.panelNode);
 
             var row = this.createRow("logRow", className);
             appender.apply(this, [objects, row, rep]);
@@ -18385,7 +18648,7 @@ Firebug.ConsolePanel.prototype = extend(Firebug.Panel,
             limitPrefsTitle: $STRF("LimitPrefsTitle", [Firebug.prefDomain+".console.logLimit"])
         };
 
-        //TODO: xxxpedro console net limit!?
+        // TODO: xxxpedro console net limit!?
         return;
         var netLimitRep = Firebug.NetMonitor.NetLimit;
         var nodes = netLimitRep.createTable(row, limitInfo);
@@ -18411,7 +18674,8 @@ Firebug.ConsolePanel.prototype = extend(Firebug.Panel,
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     appendObject: function(object, row, rep)
     {
@@ -18457,7 +18721,9 @@ Firebug.ConsolePanel.prototype = extend(Firebug.Panel,
             var part = parts[i];
             if (part && typeof(part) == "object")
             {
-                if (++trialIndex > objects.length)  // then too few parameters for format, assume unformatted.
+                if (++trialIndex > objects.length)  // then too few parameters
+													// for format, assume
+													// unformatted.
                 {
                     format = "";
                     objIndex = -1;
@@ -18508,7 +18774,7 @@ Firebug.ConsolePanel.prototype = extend(Firebug.Panel,
         else
             this.appendFormatted(objects, innerRow, rep);
         row.appendChild(innerRow);
-        //dispatch([Firebug.A11yModel], 'onLogRowCreated', [this, innerRow]);
+        // dispatch([Firebug.A11yModel], 'onLogRowCreated', [this, innerRow]);
         var groupBody = this.createRow("logGroupBody");
         row.appendChild(groupBody);
         groupBody.setAttribute('role', 'group');
@@ -18518,7 +18784,7 @@ Firebug.ConsolePanel.prototype = extend(Firebug.Panel,
         {
             if (isLeftClick(event))
             {
-                //console.log(event.currentTarget == event.target);
+                // console.log(event.currentTarget == event.target);
 
                 var target = event.target || event.srcElement;
 
@@ -18546,9 +18812,12 @@ Firebug.ConsolePanel.prototype = extend(Firebug.Panel,
             this.groups.pop();
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // TODO: xxxpedro console2
     onMouseMove: function(event)
     {
@@ -18593,32 +18862,30 @@ Firebug.ConsolePanel.prototype = extend(Firebug.Panel,
             Firebug.chrome.getPanel("HTML").select(repObject, true);
         }
 
-        /*
-        if(object && instanceOf(object, "Element") && object.nodeType == 1)
-        {
-            if(object != lastHighlightedObject)
-            {
-                Firebug.Inspector.drawBoxModel(object);
-                object = lastHighlightedObject;
-            }
-        }
-        else
-            Firebug.Inspector.hideBoxModel();
-        /**/
+        /***********************************************************************
+		 * if(object && instanceOf(object, "Element") && object.nodeType == 1) {
+		 * if(object != lastHighlightedObject) {
+		 * Firebug.Inspector.drawBoxModel(object); object =
+		 * lastHighlightedObject; } } else Firebug.Inspector.hideBoxModel(); /
+		 **********************************************************************/
 
     },
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // extends Panel
 
     name: "Console",
     title: "Console",
-    //searchable: true,
-    //breakable: true,
-    //editable: false,
+    // searchable: true,
+    // breakable: true,
+    // editable: false,
 
     options:
     {
@@ -18645,8 +18912,10 @@ Firebug.ConsolePanel.prototype = extend(Firebug.Panel,
 
     initialize: function()
     {
-        Firebug.Panel.initialize.apply(this, arguments);  // loads persisted content
-        //Firebug.ActivablePanel.initialize.apply(this, arguments);  // loads persisted content
+        Firebug.Panel.initialize.apply(this, arguments);  // loads persisted
+															// content
+        // Firebug.ActivablePanel.initialize.apply(this, arguments); // loads
+		// persisted content
 
         if (!this.persistedContent && Firebug.Console.isAlwaysEnabled())
         {
@@ -18655,33 +18924,33 @@ Firebug.ConsolePanel.prototype = extend(Firebug.Panel,
             // Initialize log limit and listen for changes.
             this.updateMaxLimit();
 
-            if (this.context.consoleReloadWarning)  // we have not yet injected the console
+            if (this.context.consoleReloadWarning)  // we have not yet injected
+													// the console
                 this.insertReloadWarning();
         }
 
-        //Firebug.Console.injector.install(Firebug.browser.window);
+        // Firebug.Console.injector.install(Firebug.browser.window);
 
         addEvent(this.panelNode, "mouseover", this.onMouseMove);
         addEvent(this.panelNode, "mousedown", this.onMouseDown);
 
         this.clearButton.initialize();
 
-        //consolex.trace();
-        //TODO: xxxpedro remove this
-        /*
-        Firebug.Console.openGroup(["asd"], null, "group", null, false);
-        Firebug.Console.log("asd");
-        Firebug.Console.log("asd");
-        Firebug.Console.log("asd");
-        /**/
+        // consolex.trace();
+        // TODO: xxxpedro remove this
+        /***********************************************************************
+		 * Firebug.Console.openGroup(["asd"], null, "group", null, false);
+		 * Firebug.Console.log("asd"); Firebug.Console.log("asd");
+		 * Firebug.Console.log("asd"); /
+		 **********************************************************************/
 
-        //TODO: xxxpedro preferences prefs
-        //prefs.addObserver(Firebug.prefDomain, this, false);
+        // TODO: xxxpedro preferences prefs
+        // prefs.addObserver(Firebug.prefDomain, this, false);
     },
 
     initializeNode : function()
     {
-        //dispatch([Firebug.A11yModel], 'onInitializeNode', [this]);
+        // dispatch([Firebug.A11yModel], 'onInitializeNode', [this]);
         if (FBTrace.DBG_CONSOLE)
         {
             this.onScroller = bind(this.onScroll, this);
@@ -18695,16 +18964,16 @@ Firebug.ConsolePanel.prototype = extend(Firebug.Panel,
 
     destroyNode : function()
     {
-        //dispatch([Firebug.A11yModel], 'onDestroyNode', [this]);
+        // dispatch([Firebug.A11yModel], 'onDestroyNode', [this]);
         if (this.onScroller)
             removeEvent(this.panelNode, "scroll", this.onScroller);
 
-        //removeEvent(this.resizeEventTarget, "resize", this.onResizer);
+        // removeEvent(this.resizeEventTarget, "resize", this.onResizer);
     },
 
     shutdown: function()
     {
-        //TODO: xxxpedro console console2
+        // TODO: xxxpedro console console2
         this.clearButton.shutdown();
 
         removeEvent(this.panelNode, "mousemove", this.onMouseMove);
@@ -18714,8 +18983,8 @@ Firebug.ConsolePanel.prototype = extend(Firebug.Panel,
 
         Firebug.Panel.shutdown.apply(this, arguments);
 
-        //TODO: xxxpedro preferences prefs
-        //prefs.removeObserver(Firebug.prefDomain, this, false);
+        // TODO: xxxpedro preferences prefs
+        // prefs.removeObserver(Firebug.prefDomain, this, false);
     },
 
     ishow: function(state)
@@ -18852,10 +19121,11 @@ Firebug.ConsolePanel.prototype = extend(Firebug.Panel,
 
     getBreakOnMenuItems: function()
     {
-        //xxxHonza: no BON options for now.
-        /*return [
-            optionMenu("console.option.Persist Break On Error", "persistBreakOnError")
-        ];*/
+        // xxxHonza: no BON options for now.
+        /*
+		 * return [ optionMenu("console.option.Persist Break On Error",
+		 * "persistBreakOnError") ];
+		 */
        return [];
     },
 
@@ -18896,7 +19166,8 @@ Firebug.ConsolePanel.prototype = extend(Firebug.Panel,
         Firebug.setPref(Firebug.servicePrefDomain, "breakOnErrors", breaking);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // private
 
     createRow: function(rowName, className)
@@ -18921,7 +19192,8 @@ Firebug.ConsolePanel.prototype = extend(Firebug.Panel,
             setClass(logRow, "matching");
             setClass(logRow, "matched");
 
-            // Search after a delay because we must wait for a frame to be created for
+            // Search after a delay because we must wait for a frame to be
+			// created for
             // the new logRow so that the finder will be able to locate it
             setTimeout(bindFixed(function()
             {
@@ -18971,14 +19243,14 @@ Firebug.ConsolePanel.prototype = extend(Firebug.Panel,
     updateMaxLimit: function()
     {
         var value = 1000;
-        //TODO: xxxpedro preferences log limit?
-        //var value = Firebug.getPref(Firebug.prefDomain, "console.logLimit");
+        // TODO: xxxpedro preferences log limit?
+        // var value = Firebug.getPref(Firebug.prefDomain, "console.logLimit");
         maxQueueRequests =  value ? value : maxQueueRequests;
     },
 
     showCommandLine: function(shouldShow)
     {
-        //TODO: xxxpedro show command line important
+        // TODO: xxxpedro show command line important
         return;
 
         if (shouldShow)
@@ -19076,7 +19348,7 @@ var appendCloseGroup = Firebug.ConsolePanel.prototype.appendCloseGroup;
 
 // ************************************************************************************************
 
-//Firebug.registerActivableModule(Firebug.Console);
+// Firebug.registerActivableModule(Firebug.Console);
 Firebug.registerModule(Firebug.Console);
 Firebug.registerPanel(Firebug.ConsolePanel);
 
@@ -19091,8 +19363,8 @@ FBL.ns(function() { with (FBL) {
 // ************************************************************************************************
 // Constants
 
-//const Cc = Components.classes;
-//const Ci = Components.interfaces;
+// const Cc = Components.classes;
+// const Ci = Components.interfaces;
 
 var frameCounters = {};
 var traceRecursion = 0;
@@ -19195,7 +19467,8 @@ Firebug.Console.injector =
 
     attachConsoleInjector: function(context, win)
     {
-        var consoleInjection = this.getConsoleInjectionScript();  // Do it all here.
+        var consoleInjection = this.getConsoleInjectionScript();  // Do it all
+																	// here.
 
         if (FBTrace.DBG_CONSOLE)
             FBTrace.sysout("attachConsoleInjector evaluating in "+win.location, consoleInjection);
@@ -19242,7 +19515,11 @@ Firebug.Console.injector =
         var consoleForcer = "window.loadFirebugConsole();";
 
         if (context.stopped)
-            Firebug.Console.injector.evaluateConsoleScript(context);  // todo evaluate consoleForcer on stack
+            Firebug.Console.injector.evaluateConsoleScript(context);  // todo
+																		// evaluate
+																		// consoleForcer
+																		// on
+																		// stack
         else
             Firebug.CommandLine.evaluateInWebPage(consoleForcer, context, win);
 
@@ -19252,13 +19529,17 @@ Firebug.Console.injector =
 
     evaluateConsoleScript: function(context)
     {
-        var scriptSource = this.getConsoleInjectionScript(); // TODO XXXjjb this should be getConsoleInjectionScript
+        var scriptSource = this.getConsoleInjectionScript(); // TODO XXXjjb
+																// this should
+																// be
+																// getConsoleInjectionScript
         Firebug.Debugger.evaluate(scriptSource, context);
     },
 
     addConsoleListener: function(context, win)
     {
-        if (!context.activeConsoleHandlers)  // then we have not been this way before
+        if (!context.activeConsoleHandlers)  // then we have not been this
+												// way before
             context.activeConsoleHandlers = [];
         else
         {   // we've been this way before...
@@ -19277,7 +19558,9 @@ Firebug.Console.injector =
         // We need the element to attach our event listener.
         var element = Firebug.Console.getFirebugConsoleElement(context, win);
         if (element)
-            element.setAttribute("FirebugVersion", Firebug.version); // Initialize Firebug version.
+            element.setAttribute("FirebugVersion", Firebug.version); // Initialize
+																		// Firebug
+																		// version.
         else
             return false;
 
@@ -19310,7 +19593,8 @@ var FirebugConsoleHandler = function FirebugConsoleHandler(context, win)
     this.attachTo = function(element)
     {
         this.element = element;
-        // When raised on our injected element, callback to Firebug and append to console
+        // When raised on our injected element, callback to Firebug and append
+		// to console
         this.boundHandler = bind(this.handleEvent, this);
         this.element.addEventListener('firebugAppendConsole', this.boundHandler, true); // capturing
     };
@@ -19365,16 +19649,17 @@ var FirebugConsoleHandler = function FirebugConsoleHandler(context, win)
 
     this.error = function()
     {
-        //TODO: xxxpedro console error
-        //if (arguments.length == 1)
-        //{
-        //    logAssert("error", arguments);  // add more info based on stack trace
-        //}
-        //else
-        //{
-            //Firebug.Errors.increaseCount(context);
-            logFormatted(arguments, "error", true);  // user already added info
-        //}
+        // TODO: xxxpedro console error
+        // if (arguments.length == 1)
+        // {
+        // logAssert("error", arguments); // add more info based on stack trace
+        // }
+        // else
+        // {
+            // Firebug.Errors.increaseCount(context);
+            logFormatted(arguments, "error", true);  // user already added
+														// info
+        // }
     };
 
     this.exception = function()
@@ -19400,10 +19685,10 @@ var FirebugConsoleHandler = function FirebugConsoleHandler(context, win)
 
     this.dirxml = function(o)
     {
-        ///if (o instanceof Window)
+        // /if (o instanceof Window)
         if (instanceOf(o, "Window"))
             o = o.document.documentElement;
-        ///else if (o instanceof Document)
+        // /else if (o instanceof Document)
         else if (instanceOf(o, "Document"))
             o = o.documentElement;
 
@@ -19412,8 +19697,8 @@ var FirebugConsoleHandler = function FirebugConsoleHandler(context, win)
 
     this.group = function()
     {
-        //TODO: xxxpedro;
-        //var sourceLink = getStackLink();
+        // TODO: xxxpedro;
+        // var sourceLink = getStackLink();
         var sourceLink = null;
         Firebug.Console.openGroup(arguments, null, "group", null, false, sourceLink);
     };
@@ -19426,7 +19711,8 @@ var FirebugConsoleHandler = function FirebugConsoleHandler(context, win)
     this.groupCollapsed = function()
     {
         var sourceLink = getStackLink();
-        // noThrottle true is probably ok, openGroups will likely be short strings.
+        // noThrottle true is probably ok, openGroups will likely be short
+		// strings.
         var row = Firebug.Console.openGroup(arguments, null, "group", null, true, sourceLink);
         removeClass(row, "opened");
     };
@@ -19435,21 +19721,22 @@ var FirebugConsoleHandler = function FirebugConsoleHandler(context, win)
     {
         logFormatted(["console.profile() not supported."], "warn", true);
 
-        //Firebug.Profiler.startProfiling(context, title);
+        // Firebug.Profiler.startProfiling(context, title);
     };
 
     this.profileEnd = function()
     {
         logFormatted(["console.profile() not supported."], "warn", true);
 
-        //Firebug.Profiler.stopProfiling(context);
+        // Firebug.Profiler.stopProfiling(context);
     };
 
     this.count = function(key)
     {
-        // TODO: xxxpedro console2: is there a better way to find a unique ID for the coun() call?
+        // TODO: xxxpedro console2: is there a better way to find a unique ID
+		// for the coun() call?
         var frameId = "0";
-        //var frameId = FBL.getStackFrameId();
+        // var frameId = FBL.getStackFrameId();
         if (frameId)
         {
             if (!frameCounters)
@@ -19550,12 +19837,14 @@ var FirebugConsoleHandler = function FirebugConsoleHandler(context, win)
             stack = stack.replace(/\n\r|\r\n/g, "\n"); // normalize line breaks
             var items = stack.split(/[\n\r]/);
 
-            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+			// * * * * * * * * *
             // Google Chrome
             if (FBL.isSafari)
             {
-                //var reChromeStackItem = /^\s+at\s+([^\(]+)\s\((.*)\)$/;
-                //var reChromeStackItem = /^\s+at\s+(.*)((?:http|https|ftp|file):\/\/.*)$/;
+                // var reChromeStackItem = /^\s+at\s+([^\(]+)\s\((.*)\)$/;
+                // var reChromeStackItem =
+				// /^\s+at\s+(.*)((?:http|https|ftp|file):\/\/.*)$/;
                 var reChromeStackItem = /^\s+at\s+(.*)((?:http|https|ftp|file):\/\/.*)$/;
 
                 var reChromeStackItemName = /\s*\($/;
@@ -19568,9 +19857,10 @@ var FirebugConsoleHandler = function FirebugConsoleHandler(context, win)
                     var item = items[i];
                     var match = item.match(reChromeStackItem);
 
-                    //Firebug.Console.log("["+ framePos +"]--------------------------");
-                    //Firebug.Console.log(item);
-                    //Firebug.Console.log("................");
+                    // Firebug.Console.log("["+ framePos
+					// +"]--------------------------");
+                    // Firebug.Console.log(item);
+                    // Firebug.Console.log("................");
 
                     if (match)
                     {
@@ -19581,7 +19871,7 @@ var FirebugConsoleHandler = function FirebugConsoleHandler(context, win)
                             frame.name = name;
                         }
 
-                        //Firebug.Console.log("name: "+name);
+                        // Firebug.Console.log("name: "+name);
 
                         var value = match[2].match(reChromeStackItemValue);
                         if (value)
@@ -19589,18 +19879,19 @@ var FirebugConsoleHandler = function FirebugConsoleHandler(context, win)
                             frame.href = value[1];
                             frame.lineNo = value[2];
 
-                            //Firebug.Console.log("url: "+value[1]);
-                            //Firebug.Console.log("line: "+value[2]);
+                            // Firebug.Console.log("url: "+value[1]);
+                            // Firebug.Console.log("line: "+value[2]);
                         }
-                        //else
-                        //    Firebug.Console.log(match[2]);
+                        // else
+                        // Firebug.Console.log(match[2]);
 
                     }
                 }
             }
             /**/
 
-            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+			// * * * * * * * * *
             else if (FBL.isFirefox)
             {
                 // Firefox
@@ -19618,7 +19909,7 @@ var FirebugConsoleHandler = function FirebugConsoleHandler(context, win)
                     {
                         var name = match[1];
 
-                        //Firebug.Console.logFormatted("name: "+name);
+                        // Firebug.Console.logFormatted("name: "+name);
 
                         var value = match[2].match(reFirefoxStackItemValue);
                         if (value)
@@ -19626,52 +19917,41 @@ var FirebugConsoleHandler = function FirebugConsoleHandler(context, win)
                             frame.href = value[1];
                             frame.lineNo = value[2];
 
-                            //Firebug.Console.log("href: "+ value[1]);
-                            //Firebug.Console.log("line: " + value[2]);
+                            // Firebug.Console.log("href: "+ value[1]);
+                            // Firebug.Console.log("line: " + value[2]);
                         }
-                        //else
-                        //    Firebug.Console.logFormatted([match[2]]);
+                        // else
+                        // Firebug.Console.logFormatted([match[2]]);
                     }
                 }
             }
             /**/
 
-            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-            /*
-            else if (FBL.isOpera)
-            {
-                // Opera
-                var reOperaStackItem = /^\s\s(?:\.\.\.\s\s)?Line\s(\d+)\sof\s(.+)$/;
-                var reOperaStackItemValue = /^linked\sscript\s(.+)$/;
-
-                for (var i=0, length=items.length; i<length; i+=2)
-                {
-                    var item = items[i];
-
-                    var match = item.match(reOperaStackItem);
-
-                    if (match)
-                    {
-                        //Firebug.Console.log(match[1]);
-
-                        var value = match[2].match(reOperaStackItemValue);
-
-                        if (value)
-                        {
-                            //Firebug.Console.log(value[1]);
-                        }
-                        //else
-                        //    Firebug.Console.log(match[2]);
-
-                        //Firebug.Console.log("--------------------------");
-                    }
-                }
-            }
-            /**/
+            // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+			// * * * * * * * * *
+            /*******************************************************************
+			 * else if (FBL.isOpera) { // Opera var reOperaStackItem =
+			 * /^\s\s(?:\.\.\.\s\s)?Line\s(\d+)\sof\s(.+)$/; var
+			 * reOperaStackItemValue = /^linked\sscript\s(.+)$/;
+			 * 
+			 * for (var i=0, length=items.length; i<length; i+=2) { var item =
+			 * items[i];
+			 * 
+			 * var match = item.match(reOperaStackItem);
+			 * 
+			 * if (match) { //Firebug.Console.log(match[1]);
+			 * 
+			 * var value = match[2].match(reOperaStackItemValue);
+			 * 
+			 * if (value) { //Firebug.Console.log(value[1]); } //else //
+			 * Firebug.Console.log(match[2]);
+			 * 
+			 * //Firebug.Console.log("--------------------------"); } } } /
+			 ******************************************************************/
         }
 
-        //console.log(stack);
-        //console.dir(frames);
+        // console.log(stack);
+        // console.dir(frames);
         Firebug.Console.log({frames: frames}, context, "stackTrace", FirebugReps.StackTrace);
 
         traceRecursion--;
@@ -19778,7 +20058,8 @@ var FirebugConsoleHandler = function FirebugConsoleHandler(context, win)
         Firebug.Console.log(result, context, "errorMessage");
     };
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     function logFormatted(args, className, linkToSource, noThrottle)
     {
@@ -19848,7 +20129,8 @@ var FirebugConsoleHandler = function FirebugConsoleHandler(context, win)
         while (frame && FBL.isSystemURL(frame.filename) )
             frame = frame.caller;
 
-        // Drop two more frames, the injected console function and firebugAppendConsole()
+        // Drop two more frames, the injected console function and
+		// firebugAppendConsole()
         if (frame)
             frame = frame.caller;
         if (frame)
@@ -19864,7 +20146,7 @@ var FirebugConsoleHandler = function FirebugConsoleHandler(context, win)
     {
         // TODO: xxxpedro console2
         return;
-        //return FBL.getFrameSourceLink(getComponentsStackDump());
+        // return FBL.getFrameSourceLink(getComponentsStackDump());
     }
 
     function getJSDUserStack()
@@ -19879,10 +20161,14 @@ var FirebugConsoleHandler = function FirebugConsoleHandler(context, win)
             {
                 if (frames[oldest - i].href.indexOf("chrome:") == 0) break;
                 var fn = frames[oldest - i].fn + "";
-                if (fn && (fn.indexOf("_firebugEvalEvent") != -1) ) break;  // command line
+                if (fn && (fn.indexOf("_firebugEvalEvent") != -1) ) break;  // command
+																			// line
             }
             FBTrace.sysout("consoleInjector getJSDUserStack: "+frames.length+" oldest: "+oldest+" i: "+i+" i - oldest + 2: "+(i - oldest + 2), trace);
-            trace.frames = trace.frames.slice(2 - i);  // take the oldest frames, leave 2 behind they are injection code
+            trace.frames = trace.frames.slice(2 - i);  // take the oldest
+														// frames, leave 2
+														// behind they are
+														// injection code
 
             return trace;
         }
@@ -19896,8 +20182,8 @@ var FirebugConsoleHandler = function FirebugConsoleHandler(context, win)
 
 FBL.registerConsole = function()
 {
-    //TODO: xxxpedro console options override
-    //if (Env.Options.overrideConsole)
+    // TODO: xxxpedro console options override
+    // if (Env.Options.overrideConsole)
     var win = Env.browser.window;
     Firebug.Console.injector.install(win);
 };
@@ -19920,12 +20206,14 @@ var commandPrefix = ">>>";
 var reOpenBracket = /[\[\(\{]/;
 var reCloseBracket = /[\]\)\}]/;
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var commandHistory = [];
 var commandPointer = -1;
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var isAutoCompleting = null;
 var autoCompletePrefix = null;
@@ -19933,13 +20221,15 @@ var autoCompleteExpr = null;
 var autoCompleteBuffer = null;
 var autoCompletePosition = null;
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var fbCommandLine = null;
 var fbLargeCommandLine = null;
 var fbLargeCommandButtons = null;
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var _completion =
 {
@@ -19955,7 +20245,8 @@ var _completion =
     ]
 };
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var _stack = function(command)
 {
@@ -19963,20 +20254,23 @@ var _stack = function(command)
     commandPointer = commandHistory.length;
 };
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 // ************************************************************************************************
 // CommandLine
 
 Firebug.CommandLine = extend(Firebug.Module,
 {
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     element: null,
     isMultiLine: false,
     isActive: false,
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     initialize: function(doc)
     {
@@ -19999,7 +20293,8 @@ Firebug.CommandLine = extend(Firebug.Module,
         removeEvent(Firebug.chrome.window, "error", this.onError);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     activate: function(multiLine, hideToggleIcon, onRun)
     {
@@ -20055,7 +20350,7 @@ Firebug.CommandLine = extend(Firebug.Module,
             addEvent(this.element, "keydown", this.onKeyDown);
         }
 
-        //Firebug.Console.log("activate", this.element);
+        // Firebug.Console.log("activate", this.element);
 
         if (isOpera)
           fixOperaTabKey(this.element);
@@ -20070,7 +20365,7 @@ Firebug.CommandLine = extend(Firebug.Module,
     {
         if (!this.isActive) return;
 
-        //Firebug.Console.log("deactivate", this.element);
+        // Firebug.Console.log("deactivate", this.element);
 
         this.isActive = false;
 
@@ -20098,7 +20393,8 @@ Firebug.CommandLine = extend(Firebug.Module,
         fbLargeCommandButtons = null;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     focus: function()
     {
@@ -20110,14 +20406,16 @@ Firebug.CommandLine = extend(Firebug.Module,
         this.element.blur();
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     clear: function()
     {
         this.element.value = "";
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     evaluate: function(expr)
     {
@@ -20129,7 +20427,8 @@ Firebug.CommandLine = extend(Firebug.Module,
         return result;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     enter: function()
     {
@@ -20146,7 +20445,8 @@ Firebug.CommandLine = extend(Firebug.Module,
         Firebug.Console.log(result);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     prevCommand: function()
     {
@@ -20171,7 +20471,8 @@ Firebug.CommandLine = extend(Firebug.Module,
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     autocomplete: function(reverse)
     {
@@ -20276,7 +20577,8 @@ Firebug.CommandLine = extend(Firebug.Module,
             element.value = autoCompleteExpr + result;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     setMultiLine: function(multiLine)
     {
@@ -20285,7 +20587,8 @@ Firebug.CommandLine = extend(Firebug.Module,
         this.activate(multiLine);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     onError: function(msg, href, lineNo)
     {
@@ -20299,7 +20602,7 @@ Firebug.CommandLine = extend(Firebug.Module,
           ];
 
         // TODO: xxxpedro ajust to Console2
-        //Firebug.Console.writeRow(html, "error");
+        // Firebug.Console.writeRow(html, "error");
     },
 
     onKeyDown: function(e)
@@ -20308,7 +20611,7 @@ Firebug.CommandLine = extend(Firebug.Module,
 
         var code = e.keyCode;
 
-        /*tab, shift, control, alt*/
+        /* tab, shift, control, alt */
         if (code != 9 && code != 16 && code != 17 && code != 18)
         {
             isAutoCompleting = false;
@@ -20418,10 +20721,10 @@ var CommandLineAPI =
 
     dirxml: function(o)
     {
-        ///if (o instanceof Window)
+        // /if (o instanceof Window)
         if (instanceOf(o, "Window"))
             o = o.document.documentElement;
-        ///else if (o instanceof Document)
+        // /else if (o instanceof Document)
         else if (instanceOf(o, "Document"))
             o = o.documentElement;
 
@@ -20498,7 +20801,8 @@ XHRSpy.prototype =
 
 var XMLHttpRequestWrapper = function(activeXObject)
 {
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // XMLHttpRequestWrapper internal variables
 
     var xhrRequest = typeof activeXObject != "undefined" ?
@@ -20513,7 +20817,8 @@ var XMLHttpRequestWrapper = function(activeXObject)
         reqUrl,
         reqStartTS;
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // XMLHttpRequestWrapper internal methods
 
     var updateSelfPropertiesIgnore = {
@@ -20548,13 +20853,14 @@ var XMLHttpRequestWrapper = function(activeXObject)
                 }
                 catch(E)
                 {
-                    //console.log(propName, E.message);
+                    // console.log(propName, E.message);
                 }
             }
         }
         else
         {
-            // will fail to read these xhrRequest properties if the request is not completed
+            // will fail to read these xhrRequest properties if the request is
+			// not completed
             if (xhrRequest.readyState == 4)
             {
                 self.status = xhrRequest.status;
@@ -20595,7 +20901,7 @@ var XMLHttpRequestWrapper = function(activeXObject)
             }
             catch(E)
             {
-                //console.log(propName, E.message);
+                // console.log(propName, E.message);
             }
         }
     };
@@ -20630,23 +20936,18 @@ var XMLHttpRequestWrapper = function(activeXObject)
                 var name = match[1];
                 var value = match[2];
 
-                // update the spy mimeType property so we can detect when to show
+                // update the spy mimeType property so we can detect when to
+				// show
                 // custom response viewers (such as HTML, XML or JSON viewer)
                 if (name == "Content-Type")
                     spy.mimeType = value;
 
-                /*
-                if (name == "Last Modified")
-                {
-                    if (!spy.cacheEntry)
-                        spy.cacheEntry = [];
-
-                    spy.cacheEntry.push({
-                       name: [name],
-                       value: [value]
-                    });
-                }
-                /**/
+                /***************************************************************
+				 * if (name == "Last Modified") { if (!spy.cacheEntry)
+				 * spy.cacheEntry = [];
+				 * 
+				 * spy.cacheEntry.push({ name: [name], value: [value] }); } /
+				 **************************************************************/
 
                 spy.responseHeaders.push({
                    name: [name],
@@ -20658,8 +20959,10 @@ var XMLHttpRequestWrapper = function(activeXObject)
         with({
             row: spy.logRow,
             status: xhrRequest.status == 0 ?
-                        // if xhrRequest.status == 0 then accessing xhrRequest.statusText
-                        // will cause an error, so we must handle this case (Issue 3504)
+                        // if xhrRequest.status == 0 then accessing
+						// xhrRequest.statusText
+                        // will cause an error, so we must handle this case
+						// (Issue 3504)
                         "" : xhrRequest.status + " " + xhrRequest.statusText,
             time: duration,
             success: success
@@ -20669,10 +20972,12 @@ var XMLHttpRequestWrapper = function(activeXObject)
 
                 spy.responseText = xhrRequest.responseText;
 
-                // update row information to avoid "ethernal spinning gif" bug in IE
+                // update row information to avoid "ethernal spinning gif" bug
+				// in IE
                 row = row || spy.logRow;
 
-                // if chrome document is not loaded, there will be no row yet, so just ignore
+                // if chrome document is not loaded, there will be no row yet,
+				// so just ignore
                 if (!row) return;
 
                 // update the XHR representation data
@@ -20682,19 +20987,19 @@ var XMLHttpRequestWrapper = function(activeXObject)
         }
 
         spy.loaded = true;
-        /*
-        // commented because they are being updated by the updateSelfProperties() function
-        self.status = xhrRequest.status;
-        self.statusText = xhrRequest.statusText;
-        self.responseText = xhrRequest.responseText;
-        self.responseXML = xhrRequest.responseXML;
-        /**/
+        /***********************************************************************
+		 * // commented because they are being updated by the
+		 * updateSelfProperties() function self.status = xhrRequest.status;
+		 * self.statusText = xhrRequest.statusText; self.responseText =
+		 * xhrRequest.responseText; self.responseXML = xhrRequest.responseXML; /
+		 **********************************************************************/
         updateSelfProperties();
     };
 
     var handleStateChange = function()
     {
-        //Firebug.Console.log(["onreadystatechange", xhrRequest.readyState, xhrRequest.readyState == 4 && xhrRequest.status]);
+        // Firebug.Console.log(["onreadystatechange", xhrRequest.readyState,
+		// xhrRequest.readyState == 4 && xhrRequest.status]);
 
         self.readyState = xhrRequest.readyState;
 
@@ -20705,7 +21010,7 @@ var XMLHttpRequestWrapper = function(activeXObject)
             xhrRequest.onreadystatechange = function(){};
         }
 
-        //Firebug.Console.log(spy.url + ": " + xhrRequest.readyState);
+        // Firebug.Console.log(spy.url + ": " + xhrRequest.readyState);
 
         self.onreadystatechange();
     };
@@ -20729,19 +21034,21 @@ var XMLHttpRequestWrapper = function(activeXObject)
         }
     };
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // XMLHttpRequestWrapper public properties and handlers
 
     this.readyState = 0;
 
     this.onreadystatechange = function(){};
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // XMLHttpRequestWrapper public methods
 
     this.open = function(method, url, async, user, password)
     {
-        //Firebug.Console.log("xhrRequest open");
+        // Firebug.Console.log("xhrRequest open");
 
         updateSelfProperties();
 
@@ -20771,11 +21078,12 @@ var XMLHttpRequestWrapper = function(activeXObject)
 
     };
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     this.send = function(data)
     {
-        //Firebug.Console.log("xhrRequest send");
+        // Firebug.Console.log("xhrRequest send");
         spy.data = data;
 
         reqStartTS = new Date().getTime();
@@ -20789,7 +21097,7 @@ var XMLHttpRequestWrapper = function(activeXObject)
         catch(e)
         {
             // TODO: xxxpedro XHR throws or not?
-            //throw e;
+            // throw e;
         }
         finally
         {
@@ -20812,7 +21120,8 @@ var XMLHttpRequestWrapper = function(activeXObject)
         }
     };
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     this.setRequestHeader = function(header, value)
     {
@@ -20821,7 +21130,8 @@ var XMLHttpRequestWrapper = function(activeXObject)
     };
 
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     this.abort = function()
     {
@@ -20830,14 +21140,16 @@ var XMLHttpRequestWrapper = function(activeXObject)
         handleRequestStatus(false, "Aborted");
     };
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     this.getResponseHeader = function(header)
     {
         return xhrRequest.getResponseHeader(header);
     };
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     this.getAllResponseHeaders = function()
     {
@@ -20845,7 +21157,8 @@ var XMLHttpRequestWrapper = function(activeXObject)
     };
 
     /**/
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Clone XHR object
 
     // xhrRequest.open.apply not available in IE and will throw an error in
@@ -20893,7 +21206,7 @@ var XMLHttpRequestWrapper = function(activeXObject)
         }
         catch(E)
         {
-            //console.log(propName, E.message);
+            // console.log(propName, E.message);
         }
     }
 
@@ -20965,7 +21278,8 @@ if (!isIE6)
 FBL.ns(function() { with (FBL) {
 // ************************************************************************************************
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var reIgnore = /about:|javascript:|resource:|chrome:|jar:/;
 var layoutInterval = 300;
@@ -20975,10 +21289,11 @@ var cacheSession = null;
 var contexts = new Array();
 var panelName = "net";
 var maxQueueRequests = 500;
-//var panelBar1 = $("fbPanelBar1"); // chrome not available at startup
+// var panelBar1 = $("fbPanelBar1"); // chrome not available at startup
 var activeRequests = [];
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var mimeExtensionMap =
 {
@@ -21056,9 +21371,10 @@ var binaryCategoryMap =
 
 /**
  * @module Represents a module object for the Net panel. This object is derived
- * from <code>Firebug.ActivableModule</code> in order to support activation (enable/disable).
- * This allows to avoid (performance) expensive features if the functionality is not necessary
- * for the user.
+ *         from <code>Firebug.ActivableModule</code> in order to support
+ *         activation (enable/disable). This allows to avoid (performance)
+ *         expensive features if the functionality is not necessary for the
+ *         user.
  */
 Firebug.NetMonitor = extend(Firebug.ActivableModule,
 {
@@ -21072,7 +21388,8 @@ Firebug.NetMonitor = extend(Firebug.ActivableModule,
             panel.clear();
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // extends Module
 
     initialize: function()
@@ -21086,8 +21403,10 @@ Firebug.NetMonitor = extend(Firebug.ActivableModule,
         if (Firebug.TraceModule)
             Firebug.TraceModule.addListener(this.TraceListener);
 
-        // HTTP observer must be registered now (and not in monitorContext, since if a
-        // page is opened in a new tab the top document request would be missed otherwise.
+        // HTTP observer must be registered now (and not in monitorContext,
+		// since if a
+        // page is opened in a new tab the top document request would be missed
+		// otherwise.
         NetHttpObserver.registerObserver();
         NetHttpActivityObserver.registerObserver();
 
@@ -21111,8 +21430,8 @@ Firebug.NetMonitor = extend(Firebug.ActivableModule,
 
 
 /**
- * @domplate Represents a template that is used to reneder detailed info about a request.
- * This template is rendered when a request is expanded.
+ * @domplate Represents a template that is used to reneder detailed info about a
+ *           request. This template is rendered when a request is expanded.
  */
 Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
 {
@@ -21200,7 +21519,8 @@ Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
     customBody:
         DIV({"class": "netInfo$tabId\\Text netInfoText", "role": "tabpanel"}),
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     nameTag:
         SPAN("$param|getParamName"),
@@ -21208,7 +21528,8 @@ Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
     nameWithTooltipTag:
         SPAN({title: "$param.name"}, "$param|getParamName"),
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     getNameTag: function(param)
     {
@@ -21233,7 +21554,8 @@ Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
         return "";
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     hideParams: function(file)
     {
@@ -21253,13 +21575,14 @@ Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
     hideResponse: function(file)
     {
         return false;
-        //return file.category in binaryFileCategories;
+        // return file.category in binaryFileCategories;
     },
 
     hideCache: function(file)
     {
         return true;
-        //xxxHonza: I don't see any reason why not to display the cache also info for images.
+        // xxxHonza: I don't see any reason why not to display the cache also
+		// info for images.
         return !file.cacheEntry; // || file.category=="image";
     },
 
@@ -21278,22 +21601,28 @@ Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
         // TODO: xxxpedro console2
         return param.value;
 
-        // This value is inserted into CODE element and so, make sure the HTML isn't escaped (1210).
+        // This value is inserted into CODE element and so, make sure the HTML
+		// isn't escaped (1210).
         // This is why the second parameter is true.
-        // The CODE (with style white-space:pre) element preserves whitespaces so they are
+        // The CODE (with style white-space:pre) element preserves whitespaces
+		// so they are
         // displayed the same, as they come from the server (1194).
-        // In case of a long header values of post parameters the value must be wrapped (2105).
+        // In case of a long header values of post parameters the value must be
+		// wrapped (2105).
         return wrapText(param.value, true);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     appendTab: function(netInfoBox, tabId, tabTitle)
     {
         // Create new tab and body.
         var args = {tabId: tabId, tabTitle: tabTitle};
-        ///this.customTab.append(args, netInfoBox.getElementsByClassName("netInfoTabs").item(0));
-        ///this.customBody.append(args, netInfoBox.getElementsByClassName("netInfoBodies").item(0));
+        // /this.customTab.append(args,
+		// netInfoBox.getElementsByClassName("netInfoTabs").item(0));
+        // /this.customBody.append(args,
+		// netInfoBox.getElementsByClassName("netInfoBodies").item(0));
         this.customTab.append(args, $$(".netInfoTabs", netInfoBox)[0]);
         this.customBody.append(args, $$(".netInfoBodies", netInfoBox)[0]);
     },
@@ -21315,11 +21644,11 @@ Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
 
         if (selectedTab)
         {
-            //netInfoBox.selectedText.removeAttribute("selected");
+            // netInfoBox.selectedText.removeAttribute("selected");
             removeClass(netInfoBox.selectedText, "netInfoTextSelected");
 
             removeClass(selectedTab, "netInfoTabSelected");
-            //selectedTab.removeAttribute("selected");
+            // selectedTab.removeAttribute("selected");
             selectedTab.setAttribute("aria-selected", "false");
         }
 
@@ -21328,9 +21657,10 @@ Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
         selectedTab = netInfoBox.selectedTab = tab;
 
         netInfoBox.selectedText = $$("."+textBodyName, netInfoBox)[0];
-        //netInfoBox.selectedText = netInfoBox.getElementsByClassName(textBodyName).item(0);
+        // netInfoBox.selectedText =
+		// netInfoBox.getElementsByClassName(textBodyName).item(0);
 
-        //netInfoBox.selectedText.setAttribute("selected", "true");
+        // netInfoBox.selectedText.setAttribute("selected", "true");
         setClass(netInfoBox.selectedText, "netInfoTextSelected");
 
         setClass(selectedTab, "netInfoTabSelected");
@@ -21339,7 +21669,7 @@ Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
 
         var file = Firebug.getRepObject(netInfoBox);
 
-        //var context = Firebug.getElementPanel(netInfoBox).context;
+        // var context = Firebug.getElementPanel(netInfoBox).context;
         var context = Firebug.chrome;
 
         this.updateInfo(netInfoBox, file, context);
@@ -21371,7 +21701,8 @@ Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
         else if (hasClass(tab, "netInfoHeadersTab"))
         {
             var headersText = $$(".netInfoHeadersText", netInfoBox)[0];
-            //var headersText = netInfoBox.getElementsByClassName("netInfoHeadersText").item(0);
+            // var headersText =
+			// netInfoBox.getElementsByClassName("netInfoHeadersText").item(0);
 
             if (file.responseHeaders && !netInfoBox.responseHeadersPresented)
             {
@@ -21391,7 +21722,8 @@ Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
             if (!netInfoBox.postPresented)
             {
                 netInfoBox.postPresented  = true;
-                //var postText = netInfoBox.getElementsByClassName("netInfoPostText").item(0);
+                // var postText =
+				// netInfoBox.getElementsByClassName("netInfoPostText").item(0);
                 var postText = $$(".netInfoPostText", netInfoBox)[0];
                 NetInfoPostData.render(context, postText, file);
             }
@@ -21402,7 +21734,8 @@ Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
             if (!netInfoBox.putPresented)
             {
                 netInfoBox.putPresented  = true;
-                //var putText = netInfoBox.getElementsByClassName("netInfoPutText").item(0);
+                // var putText =
+				// netInfoBox.getElementsByClassName("netInfoPutText").item(0);
                 var putText = $$(".netInfoPutText", netInfoBox)[0];
                 NetInfoPostData.render(context, putText, file);
             }
@@ -21410,7 +21743,8 @@ Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
 
         else if (hasClass(tab, "netInfoResponseTab") && file.loaded && !netInfoBox.responsePresented)
         {
-            ///var responseTextBox = netInfoBox.getElementsByClassName("netInfoResponseText").item(0);
+            // /var responseTextBox =
+			// netInfoBox.getElementsByClassName("netInfoResponseText").item(0);
             var responseTextBox = $$(".netInfoResponseText", netInfoBox)[0];
             if (file.category == "image")
             {
@@ -21422,7 +21756,7 @@ Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
                 clearNode(responseTextBox);
                 responseTextBox.appendChild(responseImage, responseTextBox);
             }
-            else ///if (!(binaryCategoryMap.hasOwnProperty(file.category)))
+            else // /if (!(binaryCategoryMap.hasOwnProperty(file.category)))
             {
                 this.setResponseText(file, netInfoBox, responseTextBox, context);
             }
@@ -21443,10 +21777,11 @@ Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
 
             var text = Utils.getResponseText(file, context);
 
-            ///var iframe = netInfoBox.getElementsByClassName("netInfoHtmlPreview").item(0);
+            // /var iframe =
+			// netInfoBox.getElementsByClassName("netInfoHtmlPreview").item(0);
             var iframe = $$(".netInfoHtmlPreview", netInfoBox)[0];
 
-            ///iframe.contentWindow.document.body.innerHTML = text;
+            // /iframe.contentWindow.document.body.innerHTML = text;
 
             // TODO: xxxpedro net - remove scripts
             var reScript = /<script(.|\s)*?\/script>/gi;
@@ -21457,18 +21792,20 @@ Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
             iframe.contentWindow.document.close();
         }
 
-        // Notify listeners about update so, content of custom tabs can be updated.
+        // Notify listeners about update so, content of custom tabs can be
+		// updated.
         dispatch(NetInfoBody.fbListeners, "updateTabBody", [netInfoBox, file, context]);
     },
 
     setResponseText: function(file, netInfoBox, responseTextBox, context)
     {
-        //**********************************************
-        //**********************************************
-        //**********************************************
+        // **********************************************
+        // **********************************************
+        // **********************************************
         netInfoBox.responsePresented = true;
         // line breaks somehow are different in IE
-        // make this only once in the initialization? we don't have net panels and modules yet.
+        // make this only once in the initialization? we don't have net panels
+		// and modules yet.
         if (isIE)
             responseTextBox.style.whiteSpace = "nowrap";
 
@@ -21479,9 +21816,9 @@ Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
             ] = file.responseText;
 
         return;
-        //**********************************************
-        //**********************************************
-        //**********************************************
+        // **********************************************
+        // **********************************************
+        // **********************************************
 
         // Get response text and make sure it doesn't exceed the max limit.
         var text = Utils.getResponseText(file, context);
@@ -21496,7 +21833,8 @@ Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
         else
             insertWrappedText("", responseTextBox);
 
-        // Append a message informing the user that the response isn't fully displayed.
+        // Append a message informing the user that the response isn't fully
+		// displayed.
         if (limitReached)
         {
             var object = {
@@ -21521,7 +21859,8 @@ Firebug.NetMonitor.NetInfoBody = domplate(Firebug.Rep, new Firebug.Listener(),
             return;
 
         var headersTable = $$(".netInfo"+tableName+"Table", netInfoBox)[0];
-        //var headersTable = netInfoBox.getElementsByClassName("netInfo"+tableName+"Table").item(0);
+        // var headersTable =
+		// netInfoBox.getElementsByClassName("netInfo"+tableName+"Table").item(0);
         var tbody = getChildByClass(headersTable, "netInfo" + rowName + "Body");
         if (!tbody)
             tbody = headersTable.firstChild;
@@ -21537,10 +21876,12 @@ var NetInfoBody = Firebug.NetMonitor.NetInfoBody;
 // ************************************************************************************************
 
 /**
- * @domplate Used within the Net panel to display raw source of request and response headers
- * as well as pretty-formatted summary of these headers.
+ * @domplate Used within the Net panel to display raw source of request and
+ *           response headers as well as pretty-formatted summary of these
+ *           headers.
  */
-Firebug.NetMonitor.NetInfoHeaders = domplate(Firebug.Rep, //new Firebug.Listener(),
+Firebug.NetMonitor.NetInfoHeaders = domplate(Firebug.Rep, // new
+															// Firebug.Listener(),
 {
     tag:
         DIV({"class": "netInfoHeadersTable", "role": "tabpanel"},
@@ -21604,13 +21945,15 @@ Firebug.NetMonitor.NetInfoHeaders = domplate(Firebug.Rep, //new Firebug.Listener
     insertSource: function(netInfoBox, source, rowName)
     {
         // This breaks copy to clipboard.
-        //if (source)
-        //    source = source.replace(/\r\n/gm, "<span style='color:lightgray'>\\r\\n</span>\r\n");
+        // if (source)
+        // source = source.replace(/\r\n/gm, "<span
+		// style='color:lightgray'>\\r\\n</span>\r\n");
 
-        ///var tbody = netInfoBox.getElementsByClassName("netInfo" + rowName + "Body").item(0);
+        // /var tbody = netInfoBox.getElementsByClassName("netInfo" + rowName +
+		// "Body").item(0);
         var tbody = $$(".netInfo" + rowName + "Body", netInfoBox)[0];
         var node = this.sourceTag.replace({}, tbody);
-        ///var sourceNode = node.getElementsByClassName("source").item(0);
+        // /var sourceNode = node.getElementsByClassName("source").item(0);
         var sourceNode = $$(".source", node)[0];
         sourceNode.innerHTML = source;
     },
@@ -21620,8 +21963,10 @@ Firebug.NetMonitor.NetInfoHeaders = domplate(Firebug.Rep, //new Firebug.Listener
         var headersTable = $$(".netInfoHeadersTable", netInfoBox)[0];
         var tbody = $$(".netInfo" + rowName + "Body", headersTable)[0];
 
-        //var headersTable = netInfoBox.getElementsByClassName("netInfoHeadersTable").item(0);
-        //var tbody = headersTable.getElementsByClassName("netInfo" + rowName + "Body").item(0);
+        // var headersTable =
+		// netInfoBox.getElementsByClassName("netInfoHeadersTable").item(0);
+        // var tbody = headersTable.getElementsByClassName("netInfo" + rowName +
+		// "Body").item(0);
 
         clearNode(tbody);
 
@@ -21644,12 +21989,14 @@ Firebug.NetMonitor.NetInfoHeaders = domplate(Firebug.Rep, //new Firebug.Listener
         var viewSource;
 
         viewSource = $$(".request", rootNode)[0];
-        //viewSource = rootNode.getElementsByClassName("netHeadersViewSource request").item(0);
+        // viewSource = rootNode.getElementsByClassName("netHeadersViewSource
+		// request").item(0);
         if (file.requestHeadersText)
             removeClass(viewSource, "collapsed");
 
         viewSource = $$(".response", rootNode)[0];
-        //viewSource = rootNode.getElementsByClassName("netHeadersViewSource response").item(0);
+        // viewSource = rootNode.getElementsByClassName("netHeadersViewSource
+		// response").item(0);
         if (file.responseHeadersText)
             removeClass(viewSource, "collapsed");
     },
@@ -21668,10 +22015,14 @@ var NetInfoHeaders = Firebug.NetMonitor.NetInfoHeaders;
 // ************************************************************************************************
 
 /**
- * @domplate Represents posted data within request info (the info, which is visible when
- * a request entry is expanded. This template renders content of the Post tab.
+ * @domplate Represents posted data within request info (the info, which is
+ *           visible when a request entry is expanded. This template renders
+ *           content of the Post tab.
  */
-Firebug.NetMonitor.NetInfoPostData = domplate(Firebug.Rep, /*new Firebug.Listener(),*/
+Firebug.NetMonitor.NetInfoPostData = domplate(Firebug.Rep, /*
+															 * new
+															 * Firebug.Listener(),
+															 */
 {
     // application/x-www-form-urlencoded
     paramsTable:
@@ -21710,12 +22061,13 @@ Firebug.NetMonitor.NetInfoPostData = domplate(Firebug.Rep, /*new Firebug.Listene
     // application/json
     jsonTable:
         TABLE({"class": "netInfoPostJSONTable", cellpadding: 0, cellspacing: 0, "role": "presentation"},
-            ///TBODY({"role": "list", "aria-label": $STR("jsonviewer.tab.JSON")},
+            // /TBODY({"role": "list", "aria-label":
+			// $STR("jsonviewer.tab.JSON")},
             TBODY({"role": "list", "aria-label": $STR("JSON")},
                 TR({"class": "netInfoPostJSONTitle", "role": "presentation"},
                     TD({"role": "presentation" },
                         DIV({"class": "netInfoPostParams"},
-                            ///$STR("jsonviewer.tab.JSON")
+                            // /$STR("jsonviewer.tab.JSON")
                             $STR("JSON")
                         )
                     )
@@ -21772,54 +22124,56 @@ Firebug.NetMonitor.NetInfoPostData = domplate(Firebug.Rep, /*new Firebug.Listene
 
     render: function(context, parentNode, file)
     {
-        //debugger;
+        // debugger;
         var spy = getAncestorByClass(parentNode, "spyHead");
         var spyObject = spy.repObject;
         var data = spyObject.data;
 
-        ///var contentType = Utils.findHeader(file.requestHeaders, "content-type");
+        // /var contentType = Utils.findHeader(file.requestHeaders,
+		// "content-type");
         var contentType = file.mimeType;
 
-        ///var text = Utils.getPostText(file, context, true);
-        ///if (text == undefined)
-        ///    return;
+        // /var text = Utils.getPostText(file, context, true);
+        // /if (text == undefined)
+        // / return;
 
-        ///if (Utils.isURLEncodedRequest(file, context))
+        // /if (Utils.isURLEncodedRequest(file, context))
         // fake Utils.isURLEncodedRequest identification
         if (contentType && contentType == "application/x-www-form-urlencoded" ||
             data && data.indexOf("=") != -1)
         {
-            ///var lines = text.split("\n");
-            ///var params = parseURLEncodedText(lines[lines.length-1]);
+            // /var lines = text.split("\n");
+            // /var params = parseURLEncodedText(lines[lines.length-1]);
             var params = parseURLEncodedTextArray(data);
             if (params)
                 this.insertParameters(parentNode, params);
         }
 
-        ///if (Utils.isMultiPartRequest(file, context))
-        ///{
-        ///    var data = this.parseMultiPartText(file, context);
-        ///    if (data)
-        ///        this.insertParts(parentNode, data);
-        ///}
+        // /if (Utils.isMultiPartRequest(file, context))
+        // /{
+        // / var data = this.parseMultiPartText(file, context);
+        // / if (data)
+        // / this.insertParts(parentNode, data);
+        // /}
 
         // moved to the top
-        ///var contentType = Utils.findHeader(file.requestHeaders, "content-type");
+        // /var contentType = Utils.findHeader(file.requestHeaders,
+		// "content-type");
 
-        ///if (Firebug.JSONViewerModel.isJSON(contentType))
+        // /if (Firebug.JSONViewerModel.isJSON(contentType))
         var jsonData = {
             responseText: data
         };
 
         if (Firebug.JSONViewerModel.isJSON(contentType, data))
-            ///this.insertJSON(parentNode, file, context);
+            // /this.insertJSON(parentNode, file, context);
             this.insertJSON(parentNode, jsonData, context);
 
-        ///if (Firebug.XMLViewerModel.isXML(contentType))
-        ///    this.insertXML(parentNode, file, context);
+        // /if (Firebug.XMLViewerModel.isXML(contentType))
+        // / this.insertXML(parentNode, file, context);
 
-        ///var postText = Utils.getPostText(file, context);
-        ///postText = Utils.formatPostText(postText);
+        // /var postText = Utils.getPostText(file, context);
+        // /postText = Utils.formatPostText(postText);
         var postText = data;
         if (postText)
             this.insertSource(parentNode, postText);
@@ -21832,8 +22186,9 @@ Firebug.NetMonitor.NetInfoPostData = domplate(Firebug.Rep, /*new Firebug.Listene
 
         var paramTable = this.paramsTable.append({object:{}}, parentNode);
         var row = $$(".netInfoPostParamsTitle", paramTable)[0];
-        //var paramTable = this.paramsTable.append(null, parentNode);
-        //var row = paramTable.getElementsByClassName("netInfoPostParamsTitle").item(0);
+        // var paramTable = this.paramsTable.append(null, parentNode);
+        // var row =
+		// paramTable.getElementsByClassName("netInfoPostParamsTitle").item(0);
 
         var tbody = paramTable.getElementsByTagName("tbody")[0];
 
@@ -21847,24 +22202,27 @@ Firebug.NetMonitor.NetInfoPostData = domplate(Firebug.Rep, /*new Firebug.Listene
 
         var partsTable = this.partsTable.append({object:{}}, parentNode);
         var row = $$(".netInfoPostPartsTitle", paramTable)[0];
-        //var partsTable = this.partsTable.append(null, parentNode);
-        //var row = partsTable.getElementsByClassName("netInfoPostPartsTitle").item(0);
+        // var partsTable = this.partsTable.append(null, parentNode);
+        // var row =
+		// partsTable.getElementsByClassName("netInfoPostPartsTitle").item(0);
 
         NetInfoBody.headerDataTag.insertRows({headers: data.params}, row);
     },
 
     insertJSON: function(parentNode, file, context)
     {
-        ///var text = Utils.getPostText(file, context);
+        // /var text = Utils.getPostText(file, context);
         var text = file.responseText;
-        ///var data = parseJSONString(text, "http://" + file.request.originalURI.host);
+        // /var data = parseJSONString(text, "http://" +
+		// file.request.originalURI.host);
         var data = parseJSONString(text);
         if (!data)
             return;
 
-        ///var jsonTable = this.jsonTable.append(null, parentNode);
+        // /var jsonTable = this.jsonTable.append(null, parentNode);
         var jsonTable = this.jsonTable.append({}, parentNode);
-        ///var jsonBody = jsonTable.getElementsByClassName("netInfoPostJSONBody").item(0);
+        // /var jsonBody =
+		// jsonTable.getElementsByClassName("netInfoPostJSONBody").item(0);
         var jsonBody = $$(".netInfoPostJSONBody", jsonTable)[0];
 
         if (!this.toggles)
@@ -21879,7 +22237,8 @@ Firebug.NetMonitor.NetInfoPostData = domplate(Firebug.Rep, /*new Firebug.Listene
         var text = Utils.getPostText(file, context);
 
         var jsonTable = this.xmlTable.append(null, parentNode);
-        ///var jsonBody = jsonTable.getElementsByClassName("netInfoPostXMLBody").item(0);
+        // /var jsonBody =
+		// jsonTable.getElementsByClassName("netInfoPostXMLBody").item(0);
         var jsonBody = $$(".netInfoPostXMLBody", jsonTable)[0];
 
         Firebug.XMLViewerModel.insertXML(jsonBody, text);
@@ -21889,8 +22248,9 @@ Firebug.NetMonitor.NetInfoPostData = domplate(Firebug.Rep, /*new Firebug.Listene
     {
         var sourceTable = this.sourceTable.append({object:{}}, parentNode);
         var row = $$(".netInfoPostSourceTitle", sourceTable)[0];
-        //var sourceTable = this.sourceTable.append(null, parentNode);
-        //var row = sourceTable.getElementsByClassName("netInfoPostSourceTitle").item(0);
+        // var sourceTable = this.sourceTable.append(null, parentNode);
+        // var row =
+		// sourceTable.getElementsByClassName("netInfoPostSourceTitle").item(0);
 
         var param = {value: [text]};
         this.sourceBodyTag.insertRows({param: param}, row);
@@ -22118,8 +22478,10 @@ Firebug.NetMonitor.Utils =
         if (text && text.toLowerCase().indexOf("content-type: application/x-www-form-urlencoded") == 0)
             return true;
 
-        // The header value doesn't have to be always exactly "application/x-www-form-urlencoded",
-        // there can be even charset specified. So, use indexOf rather than just "==".
+        // The header value doesn't have to be always exactly
+		// "application/x-www-form-urlencoded",
+        // there can be even charset specified. So, use indexOf rather than just
+		// "==".
         var headerValue = Utils.findHeader(file.requestHeaders, "content-type");
         if (headerValue && headerValue.indexOf("application/x-www-form-urlencoded") == 0)
             return true;
@@ -22166,7 +22528,8 @@ Firebug.NetMonitor.Utils =
             var http = QI(request, Ci.nsIHttpChannel);
             file.status = request.responseStatus;
 
-            // xxxHonza: is there any problem to do this in requestedFile method?
+            // xxxHonza: is there any problem to do this in requestedFile
+			// method?
             file.method = http.requestMethod;
             file.urlParams = parseURLParams(file.href);
             file.mimeType = Utils.getMimeType(request.contentType, request.name);
@@ -22242,14 +22605,17 @@ Firebug.NetMonitor.Utils =
                 file.mimeType = mimeExtensionMap[ext.toLowerCase()];
         }
 
-        /*if (FBTrace.DBG_NET)
-            FBTrace.sysout("net.getFileCategory; " + mimeCategoryMap[file.mimeType] +
-                ", mimeType: " + file.mimeType + " for: " + file.href, file);*/
+        /*
+		 * if (FBTrace.DBG_NET) FBTrace.sysout("net.getFileCategory; " +
+		 * mimeCategoryMap[file.mimeType] + ", mimeType: " + file.mimeType + "
+		 * for: " + file.href, file);
+		 */
 
         if (!file.mimeType)
             return "";
 
-        // Solve cases when charset is also specified, eg "text/html; charset=UTF-8".
+        // Solve cases when charset is also specified, eg "text/html;
+		// charset=UTF-8".
         var mimeType = file.mimeType;
         if (mimeType)
             mimeType = mimeType.split(";")[0];
@@ -22262,12 +22628,12 @@ var Utils = Firebug.NetMonitor.Utils;
 
 // ************************************************************************************************
 
-//Firebug.registerRep(Firebug.NetMonitor.NetRequestTable);
-//Firebug.registerActivableModule(Firebug.NetMonitor);
-//Firebug.registerPanel(NetPanel);
+// Firebug.registerRep(Firebug.NetMonitor.NetRequestTable);
+// Firebug.registerActivableModule(Firebug.NetMonitor);
+// Firebug.registerPanel(NetPanel);
 
 Firebug.registerModule(Firebug.NetMonitor);
-//Firebug.registerRep(Firebug.NetMonitor.BreakpointRep);
+// Firebug.registerRep(Firebug.NetMonitor.BreakpointRep);
 
 // ************************************************************************************************
 }});
@@ -22280,8 +22646,8 @@ FBL.ns(function() { with (FBL) {
 // ************************************************************************************************
 // Constants
 
-//const Cc = Components.classes;
-//const Ci = Components.interfaces;
+// const Cc = Components.classes;
+// const Ci = Components.interfaces;
 
 // List of contexts with XHR spy attached.
 var contexts = [];
@@ -22290,13 +22656,13 @@ var contexts = [];
 // Spy Module
 
 /**
- * @module Represents a XHR Spy module. The main purpose of the XHR Spy feature is to monitor
- * XHR activity of the current page and create appropriate log into the Console panel.
- * This feature can be controlled by an option <i>Show XMLHttpRequests</i> (from within the
- * console panel).
- *
- * The module is responsible for attaching/detaching a HTTP Observers when Firebug is
- * activated/deactivated for a site.
+ * @module Represents a XHR Spy module. The main purpose of the XHR Spy feature
+ *         is to monitor XHR activity of the current page and create appropriate
+ *         log into the Console panel. This feature can be controlled by an
+ *         option <i>Show XMLHttpRequests</i> (from within the console panel).
+ * 
+ * The module is responsible for attaching/detaching a HTTP Observers when
+ * Firebug is activated/deactivated for a site.
  */
 Firebug.Spy = extend(Firebug.Module,
 /** @lends Firebug.Spy */
@@ -22332,7 +22698,8 @@ Firebug.Spy = extend(Firebug.Module,
 
     destroyContext: function(context)
     {
-        // For any spies that are in progress, remove our listeners so that they don't leak
+        // For any spies that are in progress, remove our listeners so that they
+		// don't leak
         this.detachObserver(context, null);
 
         if (FBTrace.DBG_SPY && context.spies.length)
@@ -22355,7 +22722,8 @@ Firebug.Spy = extend(Firebug.Module,
     {
         try
         {
-            // This make sure that the existing context is properly removed from "contexts" array.
+            // This make sure that the existing context is properly removed from
+			// "contexts" array.
             this.detachObserver(context, win);
         }
         catch (ex)
@@ -22368,7 +22736,8 @@ Firebug.Spy = extend(Firebug.Module,
 
     updateOption: function(name, value)
     {
-        // XXXjjb Honza, if Console.isEnabled(context) false, then this can't be called,
+        // XXXjjb Honza, if Console.isEnabled(context) false, then this can't be
+		// called,
         // but somehow seems not correct
         if (name == "showXMLHttpRequests")
         {
@@ -22384,12 +22753,14 @@ Firebug.Spy = extend(Firebug.Module,
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Attaching Spy to XHR requests.
 
     /**
-     * Returns false if Spy should not be attached to XHRs executed by the specified window.
-     */
+	 * Returns false if Spy should not be attached to XHRs executed by the
+	 * specified window.
+	 */
     skipSpy: function(win)
     {
         if (!win)
@@ -22436,7 +22807,8 @@ Firebug.Spy = extend(Firebug.Module,
 
                 contexts.splice(i, 1);
 
-                // If no context is using spy, remvove the (only one) HTTP observer.
+                // If no context is using spy, remvove the (only one) HTTP
+				// observer.
                 if (contexts.length == 0)
                 {
                     httpObserver.removeObserver(SpyHttpObserver, "firebug-http-event");
@@ -22452,9 +22824,10 @@ Firebug.Spy = extend(Firebug.Module,
     },
 
     /**
-     * Return XHR object that is associated with specified request <i>nsIHttpChannel</i>.
-     * Returns null if the request doesn't represent XHR.
-     */
+	 * Return XHR object that is associated with specified request
+	 * <i>nsIHttpChannel</i>. Returns null if the request doesn't represent
+	 * XHR.
+	 */
     getXHR: function(request)
     {
         // Does also query-interface for nsIHttpChannel.
@@ -22486,277 +22859,175 @@ Firebug.Spy = extend(Firebug.Module,
 
 // ************************************************************************************************
 
-/*
-function getSpyForXHR(request, xhrRequest, context, noCreate)
-{
-    var spy = null;
-
-    // Iterate all existing spy objects in this context and look for one that is
-    // already created for this request.
-    var length = context.spies.length;
-    for (var i=0; i<length; i++)
-    {
-        spy = context.spies[i];
-        if (spy.request == request)
-            return spy;
-    }
-
-    if (noCreate)
-        return null;
-
-    spy = new Firebug.Spy.XMLHttpRequestSpy(request, xhrRequest, context);
-    context.spies.push(spy);
-
-    var name = request.URI.asciiSpec;
-    var origName = request.originalURI.asciiSpec;
-
-    // Attach spy only to the original request. Notice that there can be more network requests
-    // made by the same XHR if redirects are involved.
-    if (name == origName)
-        spy.attach();
-
-    if (FBTrace.DBG_SPY)
-        FBTrace.sysout("spy.getSpyForXHR; New spy object created (" +
-            (name == origName ? "new XHR" : "redirected XHR") + ") for: " + name, spy);
-
-    return spy;
-}
-/**/
+/*******************************************************************************
+ * function getSpyForXHR(request, xhrRequest, context, noCreate) { var spy =
+ * null;
+ *  // Iterate all existing spy objects in this context and look for one that is //
+ * already created for this request. var length = context.spies.length; for (var
+ * i=0; i<length; i++) { spy = context.spies[i]; if (spy.request == request)
+ * return spy; }
+ * 
+ * if (noCreate) return null;
+ * 
+ * spy = new Firebug.Spy.XMLHttpRequestSpy(request, xhrRequest, context);
+ * context.spies.push(spy);
+ * 
+ * var name = request.URI.asciiSpec; var origName =
+ * request.originalURI.asciiSpec;
+ *  // Attach spy only to the original request. Notice that there can be more
+ * network requests // made by the same XHR if redirects are involved. if (name ==
+ * origName) spy.attach();
+ * 
+ * if (FBTrace.DBG_SPY) FBTrace.sysout("spy.getSpyForXHR; New spy object created (" +
+ * (name == origName ? "new XHR" : "redirected XHR") + ") for: " + name, spy);
+ * 
+ * return spy; } /
+ ******************************************************************************/
 
 // ************************************************************************************************
 
 /**
- * @class This class represents a Spy object that is attached to XHR. This object
- * registers various listeners into the XHR in order to monitor various events fired
- * during the request process (onLoad, onAbort, etc.)
+ * @class This class represents a Spy object that is attached to XHR. This
+ *        object registers various listeners into the XHR in order to monitor
+ *        various events fired during the request process (onLoad, onAbort,
+ *        etc.)
  */
-/*
-Firebug.Spy.XMLHttpRequestSpy = function(request, xhrRequest, context)
-{
-    this.request = request;
-    this.xhrRequest = xhrRequest;
-    this.context = context;
-    this.responseText = "";
+/*******************************************************************************
+ * Firebug.Spy.XMLHttpRequestSpy = function(request, xhrRequest, context) {
+ * this.request = request; this.xhrRequest = xhrRequest; this.context = context;
+ * this.responseText = "";
+ *  // For compatibility with the Net templates. this.isXHR = true;
+ *  // Support for activity-observer this.transactionStarted = false;
+ * this.transactionClosed = false; }; /
+ ******************************************************************************/
 
-    // For compatibility with the Net templates.
-    this.isXHR = true;
-
-    // Support for activity-observer
-    this.transactionStarted = false;
-    this.transactionClosed = false;
-};
-/**/
-
-//Firebug.Spy.XMLHttpRequestSpy.prototype =
+// Firebug.Spy.XMLHttpRequestSpy.prototype =
 /** @lends Firebug.Spy.XMLHttpRequestSpy */
-/*
-{
-    attach: function()
-    {
-        var spy = this;
-        this.onReadyStateChange = function(event) { onHTTPSpyReadyStateChange(spy, event); };
-        this.onLoad = function() { onHTTPSpyLoad(spy); };
-        this.onError = function() { onHTTPSpyError(spy); };
-        this.onAbort = function() { onHTTPSpyAbort(spy); };
-
-        // xxxHonza: #502959 is still failing on Fx 3.5
-        // Use activity distributor to identify 3.6
-        if (SpyHttpActivityObserver.getActivityDistributor())
-        {
-            this.onreadystatechange = this.xhrRequest.onreadystatechange;
-            this.xhrRequest.onreadystatechange = this.onReadyStateChange;
-        }
-
-        this.xhrRequest.addEventListener("load", this.onLoad, false);
-        this.xhrRequest.addEventListener("error", this.onError, false);
-        this.xhrRequest.addEventListener("abort", this.onAbort, false);
-
-        // xxxHonza: should be removed from FB 3.6
-        if (!SpyHttpActivityObserver.getActivityDistributor())
-            this.context.sourceCache.addListener(this);
-    },
-
-    detach: function()
-    {
-        // Bubble out if already detached.
-        if (!this.onLoad)
-            return;
-
-        // If the activity distributor is available, let's detach it when the XHR
-        // transaction is closed. Since, in case of multipart XHRs the onLoad method
-        // (readyState == 4) can be called mutliple times.
-        // Keep in mind:
-        // 1) It can happen that that the TRANSACTION_CLOSE event comes before
-        // the onLoad (if the XHR is made as part of the page load) so, detach if
-        // it's already closed.
-        // 2) In case of immediate cache responses, the transaction doesn't have to
-        // be started at all (or the activity observer is no available in Firefox 3.5).
-        // So, also detach in this case.
-        if (this.transactionStarted && !this.transactionClosed)
-            return;
-
-        if (FBTrace.DBG_SPY)
-            FBTrace.sysout("spy.detach; " + this.href);
-
-        // Remove itself from the list of active spies.
-        remove(this.context.spies, this);
-
-        if (this.onreadystatechange)
-            this.xhrRequest.onreadystatechange = this.onreadystatechange;
-
-        try { this.xhrRequest.removeEventListener("load", this.onLoad, false); } catch (e) {}
-        try { this.xhrRequest.removeEventListener("error", this.onError, false); } catch (e) {}
-        try { this.xhrRequest.removeEventListener("abort", this.onAbort, false); } catch (e) {}
-
-        this.onreadystatechange = null;
-        this.onLoad = null;
-        this.onError = null;
-        this.onAbort = null;
-
-        // xxxHonza: shouuld be removed from FB 1.6
-        if (!SpyHttpActivityObserver.getActivityDistributor())
-            this.context.sourceCache.removeListener(this);
-    },
-
-    getURL: function()
-    {
-        return this.xhrRequest.channel ? this.xhrRequest.channel.name : this.href;
-    },
-
-    // Cache listener
-    onStopRequest: function(context, request, responseText)
-    {
-        if (!responseText)
-            return;
-
-        if (request == this.request)
-            this.responseText = responseText;
-    },
-};
-/**/
+/*******************************************************************************
+ * { attach: function() { var spy = this; this.onReadyStateChange =
+ * function(event) { onHTTPSpyReadyStateChange(spy, event); }; this.onLoad =
+ * function() { onHTTPSpyLoad(spy); }; this.onError = function() {
+ * onHTTPSpyError(spy); }; this.onAbort = function() { onHTTPSpyAbort(spy); };
+ *  // xxxHonza: #502959 is still failing on Fx 3.5 // Use activity distributor
+ * to identify 3.6 if (SpyHttpActivityObserver.getActivityDistributor()) {
+ * this.onreadystatechange = this.xhrRequest.onreadystatechange;
+ * this.xhrRequest.onreadystatechange = this.onReadyStateChange; }
+ * 
+ * this.xhrRequest.addEventListener("load", this.onLoad, false);
+ * this.xhrRequest.addEventListener("error", this.onError, false);
+ * this.xhrRequest.addEventListener("abort", this.onAbort, false);
+ *  // xxxHonza: should be removed from FB 3.6 if
+ * (!SpyHttpActivityObserver.getActivityDistributor())
+ * this.context.sourceCache.addListener(this); },
+ * 
+ * detach: function() { // Bubble out if already detached. if (!this.onLoad)
+ * return;
+ *  // If the activity distributor is available, let's detach it when the XHR //
+ * transaction is closed. Since, in case of multipart XHRs the onLoad method //
+ * (readyState == 4) can be called mutliple times. // Keep in mind: // 1) It can
+ * happen that that the TRANSACTION_CLOSE event comes before // the onLoad (if
+ * the XHR is made as part of the page load) so, detach if // it's already
+ * closed. // 2) In case of immediate cache responses, the transaction doesn't
+ * have to // be started at all (or the activity observer is no available in
+ * Firefox 3.5). // So, also detach in this case. if (this.transactionStarted &&
+ * !this.transactionClosed) return;
+ * 
+ * if (FBTrace.DBG_SPY) FBTrace.sysout("spy.detach; " + this.href);
+ *  // Remove itself from the list of active spies. remove(this.context.spies,
+ * this);
+ * 
+ * if (this.onreadystatechange) this.xhrRequest.onreadystatechange =
+ * this.onreadystatechange;
+ * 
+ * try { this.xhrRequest.removeEventListener("load", this.onLoad, false); }
+ * catch (e) {} try { this.xhrRequest.removeEventListener("error", this.onError,
+ * false); } catch (e) {} try { this.xhrRequest.removeEventListener("abort",
+ * this.onAbort, false); } catch (e) {}
+ * 
+ * this.onreadystatechange = null; this.onLoad = null; this.onError = null;
+ * this.onAbort = null;
+ *  // xxxHonza: shouuld be removed from FB 1.6 if
+ * (!SpyHttpActivityObserver.getActivityDistributor())
+ * this.context.sourceCache.removeListener(this); },
+ * 
+ * getURL: function() { return this.xhrRequest.channel ?
+ * this.xhrRequest.channel.name : this.href; },
+ *  // Cache listener onStopRequest: function(context, request, responseText) {
+ * if (!responseText) return;
+ * 
+ * if (request == this.request) this.responseText = responseText; }, }; /
+ ******************************************************************************/
 // ************************************************************************************************
-/*
-function onHTTPSpyReadyStateChange(spy, event)
-{
-    if (FBTrace.DBG_SPY)
-        FBTrace.sysout("spy.onHTTPSpyReadyStateChange " + spy.xhrRequest.readyState +
-            " (multipart: " + spy.xhrRequest.multipart + ")");
-
-    // Remember just in case spy is detached (readyState == 4).
-    var originalHandler = spy.onreadystatechange;
-
-    // Force response text to be updated in the UI (in case the console entry
-    // has been already expanded and the response tab selected).
-    if (spy.logRow && spy.xhrRequest.readyState >= 3)
-    {
-        var netInfoBox = getChildByClass(spy.logRow, "spyHead", "netInfoBody");
-        if (netInfoBox)
-        {
-            netInfoBox.htmlPresented = false;
-            netInfoBox.responsePresented = false;
-        }
-    }
-
-    // If the request is loading update the end time.
-    if (spy.xhrRequest.readyState == 3)
-    {
-        spy.responseTime = spy.endTime - spy.sendTime;
-        updateTime(spy);
-    }
-
-    // Request loaded. Get all the info from the request now, just in case the
-    // XHR would be aborted in the original onReadyStateChange handler.
-    if (spy.xhrRequest.readyState == 4)
-    {
-        // Cumulate response so, multipart response content is properly displayed.
-        if (SpyHttpActivityObserver.getActivityDistributor())
-            spy.responseText += spy.xhrRequest.responseText;
-        else
-        {
-            // xxxHonza: remove from FB 1.6
-            if (!spy.responseText)
-                spy.responseText = spy.xhrRequest.responseText;
-        }
-
-        // The XHR is loaded now (used also by the activity observer).
-        spy.loaded = true;
-
-        // Update UI.
-        updateHttpSpyInfo(spy);
-
-        // Notify Net pane about a request beeing loaded.
-        // xxxHonza: I don't think this is necessary.
-        var netProgress = spy.context.netProgress;
-        if (netProgress)
-            netProgress.post(netProgress.stopFile, [spy.request, spy.endTime, spy.postText, spy.responseText]);
-
-        // Notify registered listeners about finish of the XHR.
-        dispatch(Firebug.Spy.fbListeners, "onLoad", [spy.context, spy]);
-    }
-
-    // Pass the event to the original page handler.
-    callPageHandler(spy, event, originalHandler);
-}
-
-function onHTTPSpyLoad(spy)
-{
-    if (FBTrace.DBG_SPY)
-        FBTrace.sysout("spy.onHTTPSpyLoad: " + spy.href, spy);
-
-    // Detach must be done in onLoad (not in onreadystatechange) otherwise
-    // onAbort would not be handled.
-    spy.detach();
-
-    // xxxHonza: Still needed for Fx 3.5 (#502959)
-    if (!SpyHttpActivityObserver.getActivityDistributor())
-        onHTTPSpyReadyStateChange(spy, null);
-}
-
-function onHTTPSpyError(spy)
-{
-    if (FBTrace.DBG_SPY)
-        FBTrace.sysout("spy.onHTTPSpyError; " + spy.href, spy);
-
-    spy.detach();
-    spy.loaded = true;
-
-    if (spy.logRow)
-    {
-        removeClass(spy.logRow, "loading");
-        setClass(spy.logRow, "error");
-    }
-}
-
-function onHTTPSpyAbort(spy)
-{
-    if (FBTrace.DBG_SPY)
-        FBTrace.sysout("spy.onHTTPSpyAbort: " + spy.href, spy);
-
-    spy.detach();
-    spy.loaded = true;
-
-    if (spy.logRow)
-    {
-        removeClass(spy.logRow, "loading");
-        setClass(spy.logRow, "error");
-    }
-
-    spy.statusText = "Aborted";
-    updateLogRow(spy);
-
-    // Notify Net pane about a request beeing aborted.
-    // xxxHonza: the net panel shoud find out this itself.
-    var netProgress = spy.context.netProgress;
-    if (netProgress)
-        netProgress.post(netProgress.abortFile, [spy.request, spy.endTime, spy.postText, spy.responseText]);
-}
-/**/
+/*******************************************************************************
+ * function onHTTPSpyReadyStateChange(spy, event) { if (FBTrace.DBG_SPY)
+ * FBTrace.sysout("spy.onHTTPSpyReadyStateChange " + spy.xhrRequest.readyState + "
+ * (multipart: " + spy.xhrRequest.multipart + ")");
+ *  // Remember just in case spy is detached (readyState == 4). var
+ * originalHandler = spy.onreadystatechange;
+ *  // Force response text to be updated in the UI (in case the console entry //
+ * has been already expanded and the response tab selected). if (spy.logRow &&
+ * spy.xhrRequest.readyState >= 3) { var netInfoBox =
+ * getChildByClass(spy.logRow, "spyHead", "netInfoBody"); if (netInfoBox) {
+ * netInfoBox.htmlPresented = false; netInfoBox.responsePresented = false; } }
+ *  // If the request is loading update the end time. if
+ * (spy.xhrRequest.readyState == 3) { spy.responseTime = spy.endTime -
+ * spy.sendTime; updateTime(spy); }
+ *  // Request loaded. Get all the info from the request now, just in case the //
+ * XHR would be aborted in the original onReadyStateChange handler. if
+ * (spy.xhrRequest.readyState == 4) { // Cumulate response so, multipart
+ * response content is properly displayed. if
+ * (SpyHttpActivityObserver.getActivityDistributor()) spy.responseText +=
+ * spy.xhrRequest.responseText; else { // xxxHonza: remove from FB 1.6 if
+ * (!spy.responseText) spy.responseText = spy.xhrRequest.responseText; }
+ *  // The XHR is loaded now (used also by the activity observer). spy.loaded =
+ * true;
+ *  // Update UI. updateHttpSpyInfo(spy);
+ *  // Notify Net pane about a request beeing loaded. // xxxHonza: I don't think
+ * this is necessary. var netProgress = spy.context.netProgress; if
+ * (netProgress) netProgress.post(netProgress.stopFile, [spy.request,
+ * spy.endTime, spy.postText, spy.responseText]);
+ *  // Notify registered listeners about finish of the XHR.
+ * dispatch(Firebug.Spy.fbListeners, "onLoad", [spy.context, spy]); }
+ *  // Pass the event to the original page handler. callPageHandler(spy, event,
+ * originalHandler); }
+ * 
+ * function onHTTPSpyLoad(spy) { if (FBTrace.DBG_SPY)
+ * FBTrace.sysout("spy.onHTTPSpyLoad: " + spy.href, spy);
+ *  // Detach must be done in onLoad (not in onreadystatechange) otherwise //
+ * onAbort would not be handled. spy.detach();
+ *  // xxxHonza: Still needed for Fx 3.5 (#502959) if
+ * (!SpyHttpActivityObserver.getActivityDistributor())
+ * onHTTPSpyReadyStateChange(spy, null); }
+ * 
+ * function onHTTPSpyError(spy) { if (FBTrace.DBG_SPY)
+ * FBTrace.sysout("spy.onHTTPSpyError; " + spy.href, spy);
+ * 
+ * spy.detach(); spy.loaded = true;
+ * 
+ * if (spy.logRow) { removeClass(spy.logRow, "loading"); setClass(spy.logRow,
+ * "error"); } }
+ * 
+ * function onHTTPSpyAbort(spy) { if (FBTrace.DBG_SPY)
+ * FBTrace.sysout("spy.onHTTPSpyAbort: " + spy.href, spy);
+ * 
+ * spy.detach(); spy.loaded = true;
+ * 
+ * if (spy.logRow) { removeClass(spy.logRow, "loading"); setClass(spy.logRow,
+ * "error"); }
+ * 
+ * spy.statusText = "Aborted"; updateLogRow(spy);
+ *  // Notify Net pane about a request beeing aborted. // xxxHonza: the net
+ * panel shoud find out this itself. var netProgress = spy.context.netProgress;
+ * if (netProgress) netProgress.post(netProgress.abortFile, [spy.request,
+ * spy.endTime, spy.postText, spy.responseText]); } /
+ ******************************************************************************/
 
 // ************************************************************************************************
 
 /**
- * @domplate Represents a template for XHRs logged in the Console panel. The body of the
- * log (displayed when expanded) is rendered using {@link Firebug.NetMonitor.NetInfoBody}.
+ * @domplate Represents a template for XHRs logged in the Console panel. The
+ *           body of the log (displayed when expanded) is rendered using
+ *           {@link Firebug.NetMonitor.NetInfoBody}.
  */
 
 Firebug.Spy.XHR = domplate(Firebug.Rep,
@@ -22836,15 +23107,18 @@ Firebug.Spy.XHR = domplate(Firebug.Rep,
             }
             else
             {
-                //var netInfoBox = getChildByClass(spy.logRow, "spyHead", "netInfoBody");
-                //dispatch(Firebug.NetMonitor.NetInfoBody.fbListeners, "destroyTabBody", [netInfoBox, spy]);
-                //if (spyHeadTable)
-                //    spyHeadTable.setAttribute('aria-expanded', 'false');
+                // var netInfoBox = getChildByClass(spy.logRow, "spyHead",
+				// "netInfoBody");
+                // dispatch(Firebug.NetMonitor.NetInfoBody.fbListeners,
+				// "destroyTabBody", [netInfoBox, spy]);
+                // if (spyHeadTable)
+                // spyHeadTable.setAttribute('aria-expanded', 'false');
             }
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     copyURL: function(spy)
     {
@@ -22871,7 +23145,8 @@ Firebug.Spy.XHR = domplate(Firebug.Rep,
         openNewTab(spy.getURL(), spy.postText);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     supportsObject: function(object)
     {
@@ -22955,7 +23230,7 @@ var updateHttpSpyInfo = function updateHttpSpyInfo(spy, logRow)
         return;
 
     if (!spy.params)
-        //spy.params = parseURLParams(spy.href+"");
+        // spy.params = parseURLParams(spy.href+"");
         spy.params = parseURLParams(spy.href+"");
 
     if (!spy.requestHeaders)
@@ -23032,7 +23307,7 @@ function getResponseHeaders(spy)
 // Registration
 
 Firebug.registerModule(Firebug.Spy);
-//Firebug.registerRep(Firebug.Spy.XHR);
+// Firebug.registerRep(Firebug.Spy.XHR);
 
 // ************************************************************************************************
 }});
@@ -23089,7 +23364,8 @@ Firebug.JSONViewerModel = extend(Firebug.Module,
         // The JSON is still no there, try to parse most common cases.
         if (!file.jsonObject)
         {
-            ///if (this.isJSON(safeGetContentType(file.request), file.responseText))
+            // /if (this.isJSON(safeGetContentType(file.request),
+			// file.responseText))
             if (this.isJSON(file.mimeType, file.responseText))
                 file.jsonObject = this.parseJSON(file);
         }
@@ -23098,7 +23374,7 @@ Firebug.JSONViewerModel = extend(Firebug.Module,
         if (file.jsonObject && hasProperties(file.jsonObject))
         {
             Firebug.NetMonitor.NetInfoBody.appendTab(infoBox, "JSON",
-                ///$STR("jsonviewer.tab.JSON"));
+                // /$STR("jsonviewer.tab.JSON"));
                 $STR("JSON"));
 
             if (FBTrace.DBG_JSONVIEWER)
@@ -23113,12 +23389,13 @@ Firebug.JSONViewerModel = extend(Firebug.Module,
         // Let's consider all responses starting with "{" as JSON. In the worst
         // case there will be an exception when parsing. This means that no-JSON
         // responses (and post data) (with "{") can be parsed unnecessarily,
-        // which represents a little overhead, but this happens only if the request
+        // which represents a little overhead, but this happens only if the
+		// request
         // is actually expanded by the user in the UI (Net & Console panels).
 
-        ///var responseText = data ? trimLeft(data) : null;
-        ///if (responseText && responseText.indexOf("{") == 0)
-        ///    return true;
+        // /var responseText = data ? trimLeft(data) : null;
+        // /if (responseText && responseText.indexOf("{") == 0)
+        // / return true;
         var responseText = data ? trim(data) : null;
         if (responseText && responseText.indexOf("{") == 0)
             return true;
@@ -23135,7 +23412,8 @@ Firebug.JSONViewerModel = extend(Firebug.Module,
     updateTabBody: function(infoBox, file, context)
     {
         var tab = infoBox.selectedTab;
-        ///var tabBody = infoBox.getElementsByClassName("netInfoJSONText").item(0);
+        // /var tabBody =
+		// infoBox.getElementsByClassName("netInfoJSONText").item(0);
         var tabBody = $$(".netInfoJSONText", infoBox)[0];
         if (!hasClass(tab, "netInfoJSONTab") || tabBody.updated)
             return;
@@ -23151,7 +23429,8 @@ Firebug.JSONViewerModel = extend(Firebug.Module,
     parseJSON: function(file)
     {
         var jsonString = new String(file.responseText);
-        ///return parseJSONString(jsonString, "http://" + file.request.originalURI.host);
+        // /return parseJSONString(jsonString, "http://" +
+		// file.request.originalURI.host);
         return parseJSONString(jsonString);
     }
 });
@@ -23189,9 +23468,9 @@ var xmlContentTypes =
 // Model implementation
 
 /**
- * @module Implements viewer for XML based network responses. In order to create a new
- * tab wihin network request detail, a listener is registered into
- * <code>Firebug.NetMonitor.NetInfoBody</code> object.
+ * @module Implements viewer for XML based network responses. In order to create
+ *         a new tab wihin network request detail, a listener is registered into
+ *         <code>Firebug.NetMonitor.NetInfoBody</code> object.
  */
 Firebug.XMLViewerModel = extend(Firebug.Module,
 {
@@ -23199,32 +23478,33 @@ Firebug.XMLViewerModel = extend(Firebug.Module,
 
     initialize: function()
     {
-        ///Firebug.ActivableModule.initialize.apply(this, arguments);
+        // /Firebug.ActivableModule.initialize.apply(this, arguments);
         Firebug.Module.initialize.apply(this, arguments);
         Firebug.NetMonitor.NetInfoBody.addListener(this);
     },
 
     shutdown: function()
     {
-        ///Firebug.ActivableModule.shutdown.apply(this, arguments);
+        // /Firebug.ActivableModule.shutdown.apply(this, arguments);
         Firebug.Module.shutdown.apply(this, arguments);
         Firebug.NetMonitor.NetInfoBody.removeListener(this);
     },
 
     /**
-     * Check response's content-type and if it's a XML, create a new tab with XML preview.
-     */
+	 * Check response's content-type and if it's a XML, create a new tab with
+	 * XML preview.
+	 */
     initTabBody: function(infoBox, file)
     {
         if (FBTrace.DBG_XMLVIEWER)
             FBTrace.sysout("xmlviewer.initTabBody", infoBox);
 
         // If the response is XML let's display a pretty preview.
-        ///if (this.isXML(safeGetContentType(file.request)))
+        // /if (this.isXML(safeGetContentType(file.request)))
         if (this.isXML(file.mimeType, file.responseText))
         {
             Firebug.NetMonitor.NetInfoBody.appendTab(infoBox, "XML",
-                ///$STR("xmlviewer.tab.XML"));
+                // /$STR("xmlviewer.tab.XML"));
                 $STR("XML"));
 
             if (FBTrace.DBG_XMLVIEWER)
@@ -23248,12 +23528,13 @@ Firebug.XMLViewerModel = extend(Firebug.Module,
     },
 
     /**
-     * Parse XML response and render pretty printed preview.
-     */
+	 * Parse XML response and render pretty printed preview.
+	 */
     updateTabBody: function(infoBox, file, context)
     {
         var tab = infoBox.selectedTab;
-        ///var tabBody = infoBox.getElementsByClassName("netInfoXMLText").item(0);
+        // /var tabBody =
+		// infoBox.getElementsByClassName("netInfoXMLText").item(0);
         var tabBody = $$(".netInfoXMLText", infoBox)[0];
         if (!hasClass(tab, "netInfoXMLTab") || tabBody.updated)
             return;
@@ -23272,60 +23553,49 @@ Firebug.XMLViewerModel = extend(Firebug.Module,
 
         var root = div.getElementsByTagName("*")[0];
 
-        /***
-        var parser = CCIN("@mozilla.org/xmlextras/domparser;1", "nsIDOMParser");
-        var doc = parser.parseFromString(text, "text/xml");
-        var root = doc.documentElement;
-
-        // Error handling
-        var nsURI = "http://www.mozilla.org/newlayout/xml/parsererror.xml";
-        if (root.namespaceURI == nsURI && root.nodeName == "parsererror")
-        {
-            this.ParseError.tag.replace({error: {
-                message: root.firstChild.nodeValue,
-                source: root.lastChild.textContent
-            }}, parentNode);
-            return;
-        }
-        /**/
+        /***********************************************************************
+		 * var parser = CCIN("@mozilla.org/xmlextras/domparser;1",
+		 * "nsIDOMParser"); var doc = parser.parseFromString(text, "text/xml");
+		 * var root = doc.documentElement;
+		 *  // Error handling var nsURI =
+		 * "http://www.mozilla.org/newlayout/xml/parsererror.xml"; if
+		 * (root.namespaceURI == nsURI && root.nodeName == "parsererror") {
+		 * this.ParseError.tag.replace({error: { message:
+		 * root.firstChild.nodeValue, source: root.lastChild.textContent }},
+		 * parentNode); return; } /
+		 **********************************************************************/
 
         if (FBTrace.DBG_XMLVIEWER)
             FBTrace.sysout("xmlviewer.updateTabBody; XML response parsed", doc);
 
         // Override getHidden in these templates. The parsed XML documen is
         // hidden, but we want to display it using 'visible' styling.
-        /*
-        var templates = [
-            Firebug.HTMLPanel.CompleteElement,
-            Firebug.HTMLPanel.Element,
-            Firebug.HTMLPanel.TextElement,
-            Firebug.HTMLPanel.EmptyElement,
-            Firebug.HTMLPanel.XEmptyElement,
-        ];
-
-        var originals = [];
-        for (var i=0; i<templates.length; i++)
-        {
-            originals[i] = templates[i].getHidden;
-            templates[i].getHidden = function() {
-                return "";
-            }
-        }
-        /**/
+        /***********************************************************************
+		 * var templates = [ Firebug.HTMLPanel.CompleteElement,
+		 * Firebug.HTMLPanel.Element, Firebug.HTMLPanel.TextElement,
+		 * Firebug.HTMLPanel.EmptyElement, Firebug.HTMLPanel.XEmptyElement, ];
+		 * 
+		 * var originals = []; for (var i=0; i<templates.length; i++) {
+		 * originals[i] = templates[i].getHidden; templates[i].getHidden =
+		 * function() { return ""; } } /
+		 **********************************************************************/
 
         // Generate XML preview.
-        ///Firebug.HTMLPanel.CompleteElement.tag.replace({object: doc.documentElement}, parentNode);
+        // /Firebug.HTMLPanel.CompleteElement.tag.replace({object:
+		// doc.documentElement}, parentNode);
 
         // TODO: xxxpedro html3
-        ///Firebug.HTMLPanel.CompleteElement.tag.replace({object: root}, parentNode);
+        // /Firebug.HTMLPanel.CompleteElement.tag.replace({object: root},
+		// parentNode);
         var html = [];
         Firebug.Reps.appendNode(root, html);
         parentNode.innerHTML = html.join("");
 
 
-        /*
-        for (var i=0; i<originals.length; i++)
-            templates[i].getHidden = originals[i];/**/
+        /***********************************************************************
+		 * for (var i=0; i<originals.length; i++) templates[i].getHidden =
+		 * originals[i];/
+		 **********************************************************************/
     }
 });
 
@@ -23334,7 +23604,7 @@ Firebug.XMLViewerModel = extend(Firebug.Module,
 
 /**
  * @domplate Represents a template for displaying XML parser errors. Used by
- * <code>Firebug.XMLViewerModel</code>.
+ *           <code>Firebug.XMLViewerModel</code>.
  */
 Firebug.XMLViewerModel.ParseError = domplate(Firebug.Rep,
 {
@@ -23467,39 +23737,28 @@ Firebug.HTML = extend(Firebug.Module,
                         '</span>&quot;')
                 }
 
-                /*
-                // source code nodes
-                if (nodeName == 'script' || nodeName == 'style')
-                {
-
-                    if(document.all){
-                        var src = node.innerHTML+'\n';
-
-                    }else {
-                        var src = '\n'+node.innerHTML+'\n';
-                    }
-
-                    var match = src.match(/\n/g);
-                    var num = match ? match.length : 0;
-                    var s = [], sl = 0;
-
-                    for(var c=1; c<num; c++){
-                        s[sl++] = '<div line="'+c+'">' + c + '</div>';
-                    }
-
-                    html.push('&gt;</div><div class="nodeGroup"><div class="nodeChildren"><div class="lineNo">',
-                            s.join(''),
-                            '</div><pre class="nodeCode">',
-                            escapeHTML(src),
-                            '</pre>',
-                            '</div><div class="objectBox-element">&lt;/<span class="nodeTag">',
-                            nodeName,
-                            '</span>&gt;</div>',
-                            '</div>'
-                        );
-
-
-                }/**/
+                /***************************************************************
+				 * // source code nodes if (nodeName == 'script' || nodeName ==
+				 * 'style') {
+				 * 
+				 * if(document.all){ var src = node.innerHTML+'\n';
+				 * 
+				 * }else { var src = '\n'+node.innerHTML+'\n'; }
+				 * 
+				 * var match = src.match(/\n/g); var num = match ? match.length :
+				 * 0; var s = [], sl = 0;
+				 * 
+				 * for(var c=1; c<num; c++){ s[sl++] = '<div line="'+c+'">' +
+				 * c + '</div>'; }
+				 * 
+				 * html.push('&gt;</div><div class="nodeGroup"><div
+				 * class="nodeChildren"><div class="lineNo">', s.join(''), '</div><pre class="nodeCode">',
+				 * escapeHTML(src), '</pre>', '</div><div
+				 * class="objectBox-element">&lt;/<span class="nodeTag">',
+				 * nodeName, '</span>&gt;</div>', '</div>' );
+				 * 
+				 *  }/
+				 **************************************************************/
 
                 // Just a single text node child
                 if (hasSingleTextChild)
@@ -23516,7 +23775,8 @@ Firebug.HTML = extend(Firebug.Module,
                             );
                     }
                     else
-                      html.push('/&gt;</span></div>'); // blank text, print as childless node
+                      html.push('/&gt;</span></div>'); // blank text, print as
+														// childless node
 
                 }
                 else if (childLength > 0)
@@ -23674,7 +23934,7 @@ HTMLPanel.prototype = extend(Firebug.Panel,
 
     options: {
         hasSidePanel: true,
-        //hasToolButtons: true,
+        // hasToolButtons: true,
         isPreRendered: true,
         innerHTMLSync: true
     },
@@ -23771,7 +24031,8 @@ Firebug.registerPanel(HTMLPanel);
 var formatStyles = function(styles)
 {
     return isIE ?
-        // IE return CSS property names in upper case, so we need to convert them
+        // IE return CSS property names in upper case, so we need to convert
+		// them
         styles.replace(/([^\s]+)\s*:/g, function(m,g){return g.toLowerCase()+":"}) :
         // other browsers are just fine
         styles;
@@ -23782,7 +24043,8 @@ var formatStyles = function(styles)
 var selectedElement = null
 var fbPanel1 = null;
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 var selectedSidePanelTS, selectedSidePanelTimer;
 
 var selectElement= function selectElement(e)
@@ -23836,7 +24098,8 @@ var selectElement= function selectElement(e)
 
 
 // ************************************************************************************************
-// ***  TODO:  REFACTOR  **************************************************************************
+// *** TODO: REFACTOR
+// **************************************************************************
 // ************************************************************************************************
 Firebug.HTML.onTreeClick = function (e)
 {
@@ -23870,7 +24133,7 @@ Firebug.HTML.onTreeClick = function (e)
 
         var treeNode = isIE ? control.nextSibling : control.parentNode;
 
-        //FBL.Firebug.Console.log(treeNode);
+        // FBL.Firebug.Console.log(treeNode);
 
         if (control.className.indexOf(' nodeMaximized') != -1) {
             FBL.Firebug.HTML.removeTreeChildren(treeNode);
@@ -23880,16 +24143,15 @@ Firebug.HTML.onTreeClick = function (e)
     }
     else if (targ.className == 'nodeValue' || targ.className == 'nodeName')
     {
-        /*
-        var input = FBL.Firebug.chrome.document.getElementById('treeInput');
-
-        input.style.display = "block";
-        input.style.left = targ.offsetLeft + 'px';
-        input.style.top = FBL.topHeight + targ.offsetTop - FBL.fbPanel1.scrollTop + 'px';
-        input.style.width = targ.offsetWidth + 6 + 'px';
-        input.value = targ.textContent || targ.innerText;
-        input.focus();
-        /**/
+        /***********************************************************************
+		 * var input = FBL.Firebug.chrome.document.getElementById('treeInput');
+		 * 
+		 * input.style.display = "block"; input.style.left = targ.offsetLeft +
+		 * 'px'; input.style.top = FBL.topHeight + targ.offsetTop -
+		 * FBL.fbPanel1.scrollTop + 'px'; input.style.width = targ.offsetWidth +
+		 * 6 + 'px'; input.value = targ.textContent || targ.innerText;
+		 * input.focus(); /
+		 **********************************************************************/
     }
 }
 
@@ -23939,12 +24201,11 @@ Firebug.HTML.onListMouseMove = function onListMouseMove(e)
             return;
         }
 
-        /*
-        if (typeof targ.attributes[cacheID] == 'undefined') return;
-
-        var uid = targ.attributes[cacheID];
-        if (!uid) return;
-        /**/
+        /***********************************************************************
+		 * if (typeof targ.attributes[cacheID] == 'undefined') return;
+		 * 
+		 * var uid = targ.attributes[cacheID]; if (!uid) return; /
+		 **********************************************************************/
 
         if (typeof targ.attributes[cacheID] == 'undefined') return;
 
@@ -24018,15 +24279,14 @@ Firebug.Reps = {
 
     appendObject: function(object, html)
     {
-        /*
-        var rep = Firebug.getRep(object);
-        var outputs = [];
-
-        rep.tag.tag.compile();
-
-        var str = rep.tag.renderHTML({object: object}, outputs);
-        html.push(str);
-        /**/
+        /***********************************************************************
+		 * var rep = Firebug.getRep(object); var outputs = [];
+		 * 
+		 * rep.tag.tag.compile();
+		 * 
+		 * var str = rep.tag.renderHTML({object: object}, outputs);
+		 * html.push(str); /
+		 **********************************************************************/
 
         try
         {
@@ -24156,14 +24416,13 @@ Firebug.Reps = {
 
 /* See license.txt for terms of usage */
 
-/*
-
-Hack:
-Firebug.chrome.currentPanel = Firebug.chrome.selectedPanel;
-Firebug.showInfoTips = true;
-Firebug.InfoTip.initializeBrowser(Firebug.chrome);
-
-/**/
+/*******************************************************************************
+ * 
+ * Hack: Firebug.chrome.currentPanel = Firebug.chrome.selectedPanel;
+ * Firebug.showInfoTips = true;
+ * Firebug.InfoTip.initializeBrowser(Firebug.chrome);
+ *  /
+ ******************************************************************************/
 
 FBL.ns(function() { with (FBL) {
 
@@ -24197,14 +24456,14 @@ Firebug.InfoTip = extend(Firebug.Module,
         onLoadImage: function(event)
         {
             var img = event.currentTarget || event.srcElement;
-            ///var bgImg = img.nextSibling;
-            ///if (!bgImg)
-            ///    return; // Sometimes gets called after element is dead
+            // /var bgImg = img.nextSibling;
+            // /if (!bgImg)
+            // / return; // Sometimes gets called after element is dead
 
-            ///var caption = bgImg.nextSibling;
+            // /var caption = bgImg.nextSibling;
             var innerBox = img.parentNode;
 
-            /// TODO: xxxpedro infoTip hack
+            // / TODO: xxxpedro infoTip hack
             var caption = getElementByClass(innerBox, "infoTipCaption");
             var bgImg = getElementByClass(innerBox, "infoTipBgImage");
             if (!bgImg)
@@ -24269,7 +24528,7 @@ Firebug.InfoTip = extend(Firebug.Module,
                 }
             }
 
-            //caption.innerHTML = $STRF("Dimensions", [w, h]);
+            // caption.innerHTML = $STRF("Dimensions", [w, h]);
             caption.innerHTML = $STRF(w + " x " + h);
 
 
@@ -24283,76 +24542,40 @@ Firebug.InfoTip = extend(Firebug.Module,
                 removeClass(innerBox, "infoTipLoading");
             }
 
-            ///
+            // /
         }
 
-        /*
-        /// onLoadImage original
-        onLoadImage: function(event)
-        {
-            var img = event.currentTarget;
-            var bgImg = img.nextSibling;
-            if (!bgImg)
-                return; // Sometimes gets called after element is dead
-
-            var caption = bgImg.nextSibling;
-            var innerBox = img.parentNode;
-
-            var w = img.naturalWidth, h = img.naturalHeight;
-            var repeat = img.getAttribute("repeat");
-
-            if (repeat == "repeat-x" || (w == 1 && h > 1))
-            {
-                collapse(img, true);
-                collapse(bgImg, false);
-                bgImg.style.background = "url(" + img.src + ") repeat-x";
-                bgImg.style.width = maxWidth + "px";
-                if (h > maxHeight)
-                    bgImg.style.height = maxHeight + "px";
-                else
-                    bgImg.style.height = h + "px";
-            }
-            else if (repeat == "repeat-y" || (h == 1 && w > 1))
-            {
-                collapse(img, true);
-                collapse(bgImg, false);
-                bgImg.style.background = "url(" + img.src + ") repeat-y";
-                bgImg.style.height = maxHeight + "px";
-                if (w > maxWidth)
-                    bgImg.style.width = maxWidth + "px";
-                else
-                    bgImg.style.width = w + "px";
-            }
-            else if (repeat == "repeat" || (w == 1 && h == 1))
-            {
-                collapse(img, true);
-                collapse(bgImg, false);
-                bgImg.style.background = "url(" + img.src + ") repeat";
-                bgImg.style.width = maxWidth + "px";
-                bgImg.style.height = maxHeight + "px";
-            }
-            else
-            {
-                if (w > maxWidth || h > maxHeight)
-                {
-                    if (w > h)
-                    {
-                        img.style.width = maxWidth + "px";
-                        img.style.height = Math.round((h / w) * maxWidth) + "px";
-                    }
-                    else
-                    {
-                        img.style.width = Math.round((w / h) * maxHeight) + "px";
-                        img.style.height = maxHeight + "px";
-                    }
-                }
-            }
-
-            caption.innerHTML = $STRF("Dimensions", [w, h]);
-
-            removeClass(innerBox, "infoTipLoading");
-        }
-        /**/
+        /***********************************************************************
+		 * /// onLoadImage original onLoadImage: function(event) { var img =
+		 * event.currentTarget; var bgImg = img.nextSibling; if (!bgImg) return; //
+		 * Sometimes gets called after element is dead
+		 * 
+		 * var caption = bgImg.nextSibling; var innerBox = img.parentNode;
+		 * 
+		 * var w = img.naturalWidth, h = img.naturalHeight; var repeat =
+		 * img.getAttribute("repeat");
+		 * 
+		 * if (repeat == "repeat-x" || (w == 1 && h > 1)) { collapse(img, true);
+		 * collapse(bgImg, false); bgImg.style.background = "url(" + img.src + ")
+		 * repeat-x"; bgImg.style.width = maxWidth + "px"; if (h > maxHeight)
+		 * bgImg.style.height = maxHeight + "px"; else bgImg.style.height = h +
+		 * "px"; } else if (repeat == "repeat-y" || (h == 1 && w > 1)) {
+		 * collapse(img, true); collapse(bgImg, false); bgImg.style.background =
+		 * "url(" + img.src + ") repeat-y"; bgImg.style.height = maxHeight +
+		 * "px"; if (w > maxWidth) bgImg.style.width = maxWidth + "px"; else
+		 * bgImg.style.width = w + "px"; } else if (repeat == "repeat" || (w ==
+		 * 1 && h == 1)) { collapse(img, true); collapse(bgImg, false);
+		 * bgImg.style.background = "url(" + img.src + ") repeat";
+		 * bgImg.style.width = maxWidth + "px"; bgImg.style.height = maxHeight +
+		 * "px"; } else { if (w > maxWidth || h > maxHeight) { if (w > h) {
+		 * img.style.width = maxWidth + "px"; img.style.height = Math.round((h /
+		 * w) * maxWidth) + "px"; } else { img.style.width = Math.round((w / h) *
+		 * maxHeight) + "px"; img.style.height = maxHeight + "px"; } } }
+		 * 
+		 * caption.innerHTML = $STRF("Dimensions", [w, h]);
+		 * 
+		 * removeClass(innerBox, "infoTipLoading"); } /
+		 **********************************************************************/
 
     }),
 
@@ -24361,14 +24584,14 @@ Firebug.InfoTip = extend(Firebug.Module,
         browser.onInfoTipMouseOut = bind(this.onMouseOut, this, browser);
         browser.onInfoTipMouseMove = bind(this.onMouseMove, this, browser);
 
-        ///var doc = browser.contentDocument;
+        // /var doc = browser.contentDocument;
         var doc = browser.document;
         if (!doc)
             return;
 
-        ///doc.addEventListener("mouseover", browser.onInfoTipMouseMove, true);
-        ///doc.addEventListener("mouseout", browser.onInfoTipMouseOut, true);
-        ///doc.addEventListener("mousemove", browser.onInfoTipMouseMove, true);
+        // /doc.addEventListener("mouseover", browser.onInfoTipMouseMove, true);
+        // /doc.addEventListener("mouseout", browser.onInfoTipMouseOut, true);
+        // /doc.addEventListener("mousemove", browser.onInfoTipMouseMove, true);
         addEvent(doc, "mouseover", browser.onInfoTipMouseMove);
         addEvent(doc, "mouseout", browser.onInfoTipMouseOut);
         addEvent(doc, "mousemove", browser.onInfoTipMouseMove);
@@ -24380,11 +24603,14 @@ Firebug.InfoTip = extend(Firebug.Module,
     {
         if (browser.infoTip)
         {
-            ///var doc = browser.contentDocument;
+            // /var doc = browser.contentDocument;
             var doc = browser.document;
-            ///doc.removeEventListener("mouseover", browser.onInfoTipMouseMove, true);
-            ///doc.removeEventListener("mouseout", browser.onInfoTipMouseOut, true);
-            ///doc.removeEventListener("mousemove", browser.onInfoTipMouseMove, true);
+            // /doc.removeEventListener("mouseover", browser.onInfoTipMouseMove,
+			// true);
+            // /doc.removeEventListener("mouseout", browser.onInfoTipMouseOut,
+			// true);
+            // /doc.removeEventListener("mousemove", browser.onInfoTipMouseMove,
+			// true);
             removeEvent(doc, "mouseover", browser.onInfoTipMouseMove);
             removeEvent(doc, "mouseout", browser.onInfoTipMouseOut);
             removeEvent(doc, "mousemove", browser.onInfoTipMouseMove);
@@ -24472,7 +24698,8 @@ Firebug.InfoTip = extend(Firebug.Module,
             this.hideInfoTip(browser.infoTip);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     populateColorInfoTip: function(infoTip, color)
     {
@@ -24490,7 +24717,8 @@ Firebug.InfoTip = extend(Firebug.Module,
         return true;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // extends Module
 
     disable: function()
@@ -24580,7 +24808,8 @@ this.getElementsByXPath = function(doc, xpath)
     }
     catch (exc)
     {
-        // Invalid xpath expressions make their way here sometimes.  If that happens,
+        // Invalid xpath expressions make their way here sometimes. If that
+		// happens,
         // we still want to return an empty set without an exception.
     }
 
@@ -24660,8 +24889,8 @@ var loadExternalStylesheet = function(doc, styleSheetIterator, styleSheet)
 
 
     // remove comments
-    //var reMultiComment = /(\/\*([^\*]|\*(?!\/))*\*\/)/g;
-    //source = source.replace(reMultiComment, "");
+    // var reMultiComment = /(\/\*([^\*]|\*(?!\/))*\*\/)/g;
+    // source = source.replace(reMultiComment, "");
 
     // convert relative addresses to absolute ones
     source = source.replace(/url\(([^\)]+)\)/g, function(a,name){
@@ -24699,7 +24928,7 @@ var loadExternalStylesheet = function(doc, styleSheetIterator, styleSheet)
                     path = path.replace(reBack, "");
                 }
 
-                //console.log("url(" + path + ")");
+                // console.log("url(" + path + ")");
 
                 return "url(" + path + ")";
             }
@@ -24720,12 +24949,12 @@ var loadExternalStylesheet = function(doc, styleSheetIterator, styleSheet)
     style.setAttribute("type", "text/css");
     style.innerHTML = source;
 
-    //debugger;
+    // debugger;
     oldStyle.parentNode.insertBefore(style, oldStyle.nextSibling);
     oldStyle.parentNode.removeChild(oldStyle);
 
 
-    //doc.getElementsByTagName("head")[0].appendChild(style);
+    // doc.getElementsByTagName("head")[0].appendChild(style);
 
     doc.styleSheets[doc.styleSheets.length-1].externalURL = url;
 
@@ -24779,8 +25008,8 @@ FBL.processAllStyleSheets = function(doc, styleSheetIterator)
             styleSheet.restricted = true;
             var ssid = StyleSheetCache(styleSheet);
 
-            /// TODO: xxxpedro external css
-            //loadExternalStylesheet(doc, styleSheetIterator, styleSheet);
+            // / TODO: xxxpedro external css
+            // loadExternalStylesheet(doc, styleSheetIterator, styleSheet);
         }
 
         // process internal and external styleSheets
@@ -24826,7 +25055,8 @@ FBL.processAllStyleSheets = function(doc, styleSheetIterator)
 
                     if (importedStyleSheet)
                     {
-                        // we must read the length to make sure we have permission
+                        // we must read the length to make sure we have
+						// permission
                         // to read the imported stylesheet's content.
                         importedRules = importedStyleSheet.cssRules;
                         importedRules.length;
@@ -24876,7 +25106,8 @@ var processStyleSheet = function(doc, styleSheet)
             selector = selector.replace(reSelectorTag, function(s){return s.toLowerCase();});
         }
 
-        // TODO: xxxpedro break grouped rules (,) into individual rules, otherwise
+        // TODO: xxxpedro break grouped rules (,) into individual rules,
+		// otherwise
         // it will result in a overestimated value for getCSSRuleSpecificity
         CSSRuleMap[rid] =
         {
@@ -24909,22 +25140,18 @@ var processStyleSheet = function(doc, styleSheet)
             ElementCSSRulesMap[eid].push(rid);
         }
 
-        //console.log(selector, elements);
+        // console.log(selector, elements);
     }
 
-    // TODO: xxxpedro. remove this, we don't need this anymore with the new getElementCSSRules
-    /*
-    for (var name in ElementCSSRulesMap)
-    {
-        if (ElementCSSRulesMap.hasOwnProperty(name))
-        {
-            var rules = ElementCSSRulesMap[name];
-
-            rules.sort(sortElementRules);
-            //rules.sort(solveRulesTied);
-        }
-    }
-    /**/
+    // TODO: xxxpedro. remove this, we don't need this anymore with the new
+	// getElementCSSRules
+    /***************************************************************************
+	 * for (var name in ElementCSSRulesMap) { if
+	 * (ElementCSSRulesMap.hasOwnProperty(name)) { var rules =
+	 * ElementCSSRulesMap[name];
+	 * 
+	 * rules.sort(sortElementRules); //rules.sort(solveRulesTied); } } /
+	 **************************************************************************/
 };
 
 FBL.getElementCSSRules = function(element)
@@ -24978,7 +25205,7 @@ FBL.getElementCSSRules = function(element)
     }
 
     rules.sort(sortElementRules);
-    //rules.sort(solveRulesTied);
+    // rules.sort(solveRulesTied);
 
     return rules;
 };
@@ -25041,31 +25268,40 @@ var getCSSRuleSpecificity = function(selector)
 // ************************************************************************************************
 // Constants
 
-//const Cc = Components.classes;
-//const Ci = Components.interfaces;
-//const nsIDOMCSSStyleRule = Ci.nsIDOMCSSStyleRule;
-//const nsIInterfaceRequestor = Ci.nsIInterfaceRequestor;
-//const nsISelectionDisplay = Ci.nsISelectionDisplay;
-//const nsISelectionController = Ci.nsISelectionController;
+// const Cc = Components.classes;
+// const Ci = Components.interfaces;
+// const nsIDOMCSSStyleRule = Ci.nsIDOMCSSStyleRule;
+// const nsIInterfaceRequestor = Ci.nsIInterfaceRequestor;
+// const nsISelectionDisplay = Ci.nsISelectionDisplay;
+// const nsISelectionController = Ci.nsISelectionController;
 
-// See: http://mxr.mozilla.org/mozilla1.9.2/source/content/events/public/nsIEventStateManager.h#153
-//const STATE_ACTIVE  = 0x01;
-//const STATE_FOCUS   = 0x02;
-//const STATE_HOVER   = 0x04;
+// See:
+// http://mxr.mozilla.org/mozilla1.9.2/source/content/events/public/nsIEventStateManager.h#153
+// const STATE_ACTIVE = 0x01;
+// const STATE_FOCUS = 0x02;
+// const STATE_HOVER = 0x04;
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 Firebug.SourceBoxPanel = Firebug.Panel;
 
 var domUtils = null;
 
 var textContent = isIE ? "innerText" : "textContent";
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var CSSDomplateBase = {
     isEditable: function(rule)
@@ -25127,7 +25363,7 @@ var reURL = /url\("?([^"\)]+)?"?\)/;
 
 var reRepeat = /no-repeat|repeat-x|repeat-y|repeat/;
 
-//const sothinkInstalled = !!$("swfcatcherKey_sidebar");
+// const sothinkInstalled = !!$("swfcatcherKey_sidebar");
 var sothinkInstalled = false;
 var styleGroups =
 {
@@ -25267,7 +25503,8 @@ Firebug.CSSModule = extend(Firebug.Module,
               editStyleSheet.setAttribute("media", ownerNode.getAttribute("media"));
             }
 
-            // Insert the edited stylesheet directly after the old one to ensure the styles
+            // Insert the edited stylesheet directly after the old one to ensure
+			// the styles
             // cascade properly.
             ownerNode.parentNode.insertBefore(editStyleSheet, ownerNode.nextSibling);
 
@@ -25303,7 +25540,8 @@ Firebug.CSSModule = extend(Firebug.Module,
     {
         var style = rule.style || rule;
 
-        // Record the original CSS text for the inline case so we can reconstruct at a later
+        // Record the original CSS text for the inline case so we can
+		// reconstruct at a later
         // point for diffing purposes
         var baseText = style.cssText;
 
@@ -25313,7 +25551,8 @@ Firebug.CSSModule = extend(Firebug.Module,
             var prevValue = style.getPropertyValue(propName);
             var prevPriority = style.getPropertyPriority(propName);
 
-            // XXXjoe Gecko bug workaround: Just changing priority doesn't have any effect
+            // XXXjoe Gecko bug workaround: Just changing priority doesn't have
+			// any effect
             // unless we remove the property first
             style.removeProperty(propName);
 
@@ -25323,7 +25562,7 @@ Firebug.CSSModule = extend(Firebug.Module,
         else
         {
             // TODO: xxxpedro parse CSS rule to find property priority in IE?
-            //console.log(propName, propValue);
+            // console.log(propName, propValue);
             style[toCamelCase(propName)] = propValue;
         }
 
@@ -25336,7 +25575,8 @@ Firebug.CSSModule = extend(Firebug.Module,
     {
         var style = rule.style || rule;
 
-        // Record the original CSS text for the inline case so we can reconstruct at a later
+        // Record the original CSS text for the inline case so we can
+		// reconstruct at a later
         // point for diffing purposes
         var baseText = style.cssText;
 
@@ -25356,72 +25596,44 @@ Firebug.CSSModule = extend(Firebug.Module,
         if (propName) {
             dispatch(this.fbListeners, "onCSSRemoveProperty", [style, propName, prevValue, prevPriority, rule, baseText]);
         }
-    }/*,
-
-    cleanupSheets: function(doc, context)
-    {
-        // Due to the manner in which the layout engine handles multiple
-        // references to the same sheet we need to kick it a little bit.
-        // The injecting a simple stylesheet then removing it will force
-        // Firefox to regenerate it's CSS hierarchy.
-        //
-        // WARN: This behavior was determined anecdotally.
-        // See http://code.google.com/p/fbug/issues/detail?id=2440
-        var style = doc.createElementNS("http://www.w3.org/1999/xhtml", "style");
-        style.setAttribute("charset","utf-8");
-        unwrapObject(style).firebugIgnore = true;
-        style.setAttribute("type", "text/css");
-        style.innerHTML = "#fbIgnoreStyleDO_NOT_USE {}";
-        addStyleSheet(doc, style);
-        style.parentNode.removeChild(style);
-
-        // https://bugzilla.mozilla.org/show_bug.cgi?id=500365
-        // This voodoo touches each style sheet to force some Firefox internal change to allow edits.
-        var styleSheets = getAllStyleSheets(context);
-        for(var i = 0; i < styleSheets.length; i++)
-        {
-            try
-            {
-                var rules = styleSheets[i].cssRules;
-                if (rules.length > 0)
-                    var touch = rules[0];
-                if (FBTrace.DBG_CSS && touch)
-                    FBTrace.sysout("css.show() touch "+typeof(touch)+" in "+(styleSheets[i].href?styleSheets[i].href:context.getName()));
-            }
-            catch(e)
-            {
-                if (FBTrace.DBG_ERRORS)
-                    FBTrace.sysout("css.show: sheet.cssRules FAILS for "+(styleSheets[i]?styleSheets[i].href:"null sheet")+e, e);
-            }
-        }
-    },
-    cleanupSheetHandler: function(event, context)
-    {
-        var target = event.target || event.srcElement,
-            tagName = (target.tagName || "").toLowerCase();
-        if (tagName == "link")
-        {
-            this.cleanupSheets(target.ownerDocument, context);
-        }
-    },
-    watchWindow: function(context, win)
-    {
-        var cleanupSheets = bind(this.cleanupSheets, this),
-            cleanupSheetHandler = bind(this.cleanupSheetHandler, this, context),
-            doc = win.document;
-
-        //doc.addEventListener("DOMAttrModified", cleanupSheetHandler, false);
-        //doc.addEventListener("DOMNodeInserted", cleanupSheetHandler, false);
-    },
-    loadedContext: function(context)
-    {
-        var self = this;
-        iterateWindows(context.browser.contentWindow, function(subwin)
-        {
-            self.cleanupSheets(subwin.document, context);
-        });
-    }
-    /**/
+    }/***********************************************************************
+		 * ,
+		 * 
+		 * cleanupSheets: function(doc, context) { // Due to the manner in which
+		 * the layout engine handles multiple // references to the same sheet we
+		 * need to kick it a little bit. // The injecting a simple stylesheet
+		 * then removing it will force // Firefox to regenerate it's CSS
+		 * hierarchy. // // WARN: This behavior was determined anecdotally. //
+		 * See http://code.google.com/p/fbug/issues/detail?id=2440 var style =
+		 * doc.createElementNS("http://www.w3.org/1999/xhtml", "style");
+		 * style.setAttribute("charset","utf-8");
+		 * unwrapObject(style).firebugIgnore = true; style.setAttribute("type",
+		 * "text/css"); style.innerHTML = "#fbIgnoreStyleDO_NOT_USE {}";
+		 * addStyleSheet(doc, style); style.parentNode.removeChild(style);
+		 *  // https://bugzilla.mozilla.org/show_bug.cgi?id=500365 // This
+		 * voodoo touches each style sheet to force some Firefox internal change
+		 * to allow edits. var styleSheets = getAllStyleSheets(context); for(var
+		 * i = 0; i < styleSheets.length; i++) { try { var rules =
+		 * styleSheets[i].cssRules; if (rules.length > 0) var touch = rules[0];
+		 * if (FBTrace.DBG_CSS && touch) FBTrace.sysout("css.show() touch
+		 * "+typeof(touch)+" in
+		 * "+(styleSheets[i].href?styleSheets[i].href:context.getName())); }
+		 * catch(e) { if (FBTrace.DBG_ERRORS) FBTrace.sysout("css.show:
+		 * sheet.cssRules FAILS for "+(styleSheets[i]?styleSheets[i].href:"null
+		 * sheet")+e, e); } } }, cleanupSheetHandler: function(event, context) {
+		 * var target = event.target || event.srcElement, tagName =
+		 * (target.tagName || "").toLowerCase(); if (tagName == "link") {
+		 * this.cleanupSheets(target.ownerDocument, context); } }, watchWindow:
+		 * function(context, win) { var cleanupSheets = bind(this.cleanupSheets,
+		 * this), cleanupSheetHandler = bind(this.cleanupSheetHandler, this,
+		 * context), doc = win.document;
+		 * 
+		 * //doc.addEventListener("DOMAttrModified", cleanupSheetHandler,
+		 * false); //doc.addEventListener("DOMNodeInserted",
+		 * cleanupSheetHandler, false); }, loadedContext: function(context) {
+		 * var self = this; iterateWindows(context.browser.contentWindow,
+		 * function(subwin) { self.cleanupSheets(subwin.document, context); }); } /
+		 **********************************************************************/
 });
 
 // ************************************************************************************************
@@ -25441,7 +25653,8 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
                 )
     }),
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     refresh: function()
     {
@@ -25468,11 +25681,11 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
                 : this.location;
 
             var css = getStyleSheetCSS(styleSheet, this.context);
-            //var topmost = getTopmostRuleLine(this.panelNode);
+            // var topmost = getTopmostRuleLine(this.panelNode);
 
             this.stylesheetEditor.styleSheet = this.location;
             Firebug.Editor.startEditing(this.panelNode, css, this.stylesheetEditor);
-            //this.stylesheetEditor.scrollToLine(topmost.line, topmost.offset);
+            // this.stylesheetEditor.scrollToLine(topmost.line, topmost.offset);
         }
     },
 
@@ -25522,14 +25735,15 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
             {
                 var rule = cssRules[i];
 
-                // TODO: xxxpedro opera instanceof stylesheet remove the following comments when
+                // TODO: xxxpedro opera instanceof stylesheet remove the
+				// following comments when
                 // the issue with opera and style sheet Classes has been solved.
 
-                //if (rule instanceof CSSStyleRule)
+                // if (rule instanceof CSSStyleRule)
                 if (instanceOf(rule, "CSSStyleRule"))
                 {
                     var props = this.getRuleProperties(context, rule);
-                    //var line = domUtils.getRuleLine(rule);
+                    // var line = domUtils.getRuleLine(rule);
                     var line = null;
 
                     var selector = rule.selectorText;
@@ -25546,10 +25760,10 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
                                 isSystemSheet: isSystemSheet,
                                 isSelectorEditable: true});
                 }
-                //else if (rule instanceof CSSImportRule)
+                // else if (rule instanceof CSSImportRule)
                 else if (instanceOf(rule, "CSSImportRule"))
                     rules.push({tag: CSSImportRuleTag.tag, rule: rule});
-                //else if (rule instanceof CSSMediaRule)
+                // else if (rule instanceof CSSMediaRule)
                 else if (instanceOf(rule, "CSSMediaRule"))
                     appendRules.apply(this, [rule.cssRules]);
                 else
@@ -25584,14 +25798,15 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
             var lines = style.cssText.match(/(?:[^;\(]*(?:\([^\)]*?\))?[^;\(]*)*;?/g);
             var propRE = /\s*([^:\s]*)\s*:\s*(.*?)\s*(! important)?;?$/;
             var line,i=0;
-            // TODO: xxxpedro port to firebug: variable leaked into global namespace
+            // TODO: xxxpedro port to firebug: variable leaked into global
+			// namespace
             var m;
 
             while(line=lines[i++]){
                 m = propRE.exec(line);
                 if(!m)
                     continue;
-                //var name = m[1], value = m[2], important = !!m[3];
+                // var name = m[1], value = m[2], important = !!m[3];
                 if (m[2])
                     this.addProperty(m[1], m[2], !!m[3], false, inheritMode, props);
             };
@@ -25605,7 +25820,7 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
         var props = this.parseCSSProps(rule.style, inheritMode);
 
         // TODO: xxxpedro port to firebug: variable leaked into global namespace
-        //var line = domUtils.getRuleLine(rule);
+        // var line = domUtils.getRuleLine(rule);
         var line;
         var ruleId = rule.selectorText+"/"+line;
         this.addOldProperties(context, ruleId, inheritMode, props);
@@ -25681,11 +25896,13 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
             return name;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     editElementStyle: function()
     {
-        ///var rulesBox = this.panelNode.getElementsByClassName("cssElementRuleContainer")[0];
+        // /var rulesBox =
+		// this.panelNode.getElementsByClassName("cssElementRuleContainer")[0];
         var rulesBox = $$(".cssElementRuleContainer", this.panelNode)[0];
         var styleRuleBox = rulesBox && Firebug.getElementByRepObject(rulesBox, this.selection);
         if (!styleRuleBox)
@@ -25693,19 +25910,22 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
             var rule = {rule: this.selection, inherited: false, selector: "element.style", props: []};
             if (!rulesBox)
             {
-                // The element did not have any displayed styles. We need to create the whole tree and remove
+                // The element did not have any displayed styles. We need to
+				// create the whole tree and remove
                 // the no styles message
                 styleRuleBox = this.template.cascadedTag.replace({
                     rules: [rule], inherited: [], inheritLabel: "Inherited from" // $STR("InheritedFrom")
                 }, this.panelNode);
 
-                ///styleRuleBox = styleRuleBox.getElementsByClassName("cssElementRuleContainer")[0];
+                // /styleRuleBox =
+				// styleRuleBox.getElementsByClassName("cssElementRuleContainer")[0];
                 styleRuleBox = $$(".cssElementRuleContainer", styleRuleBox)[0];
             }
             else
                 styleRuleBox = this.template.ruleTag.insertBefore({rule: rule}, rulesBox);
 
-            ///styleRuleBox = styleRuleBox.getElementsByClassName("insertInto")[0];
+            // /styleRuleBox =
+			// styleRuleBox.getElementsByClassName("insertInto")[0];
             styleRuleBox = $$(".insertInto", styleRuleBox)[0];
         }
 
@@ -25800,11 +26020,12 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
         this.markChange(this.name == "stylesheet");
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     onMouseDown: function(event)
     {
-        //console.log("onMouseDown", event.target || event.srcElement, event);
+        // console.log("onMouseDown", event.target || event.srcElement, event);
 
         // xxxpedro adjusting coordinates because the panel isn't a window yet
         var offset = event.clientX - this.panelNode.parentNode.offsetLeft;
@@ -25827,7 +26048,8 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
 
     onDoubleClick: function(event)
     {
-        //console.log("onDoubleClick", event.target || event.srcElement, event);
+        // console.log("onDoubleClick", event.target || event.srcElement,
+		// event);
 
         // xxxpedro adjusting coordinates because the panel isn't a window yet
         var offset = event.clientX - this.panelNode.parentNode.offsetLeft;
@@ -25837,7 +26059,8 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
 
         var target = event.target || event.srcElement;
 
-        //console.log("ok", target, hasClass(target, "textEditorInner"), !isLeftClick(event), offset <= 20);
+        // console.log("ok", target, hasClass(target, "textEditorInner"),
+		// !isLeftClick(event), offset <= 20);
 
         // if the inline editor was clicked, don't insert a new rule
         if (hasClass(target, "textEditorInner"))
@@ -25852,7 +26075,8 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // extends Panel
 
     name: "stylesheet",
@@ -25909,17 +26133,18 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
     {
         Firebug.Panel.initialize.apply(this, arguments);
 
-        //if (!domUtils)
-        //{
-        //    try {
-        //        domUtils = CCSV("@mozilla.org/inspector/dom-utils;1", "inIDOMUtils");
-        //    } catch (exc) {
-        //        if (FBTrace.DBG_ERRORS)
-        //            FBTrace.sysout("@mozilla.org/inspector/dom-utils;1 FAILED to load: "+exc, exc);
-        //    }
-        //}
+        // if (!domUtils)
+        // {
+        // try {
+        // domUtils = CCSV("@mozilla.org/inspector/dom-utils;1", "inIDOMUtils");
+        // } catch (exc) {
+        // if (FBTrace.DBG_ERRORS)
+        // FBTrace.sysout("@mozilla.org/inspector/dom-utils;1 FAILED to load:
+		// "+exc, exc);
+        // }
+        // }
 
-        //TODO: xxxpedro
+        // TODO: xxxpedro
         this.context = Firebug.chrome; // TODO: xxxpedro css2
         this.document = Firebug.chrome.document; // TODO: xxxpedro css2
 
@@ -25937,12 +26162,13 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
             }
         }
 
-        //Firebug.SourceBoxPanel.initialize.apply(this, arguments);
+        // Firebug.SourceBoxPanel.initialize.apply(this, arguments);
     },
 
     shutdown: function()
     {
-        // must destroy the editor when we leave the panel to avoid problems (Issue 2981)
+        // must destroy the editor when we leave the panel to avoid problems
+		// (Issue 2981)
         Firebug.Editor.stopEditing();
 
         if (this.name == "stylesheet")
@@ -25957,12 +26183,13 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
 
     destroy: function(state)
     {
-        //state.scrollTop = this.panelNode.scrollTop ? this.panelNode.scrollTop : this.lastScrollTop;
+        // state.scrollTop = this.panelNode.scrollTop ? this.panelNode.scrollTop
+		// : this.lastScrollTop;
 
-        //persistObjects(this, state);
+        // persistObjects(this, state);
 
         // xxxpedro we are stopping the editor in the shutdown method already
-        //Firebug.Editor.stopEditing();
+        // Firebug.Editor.stopEditing();
         Firebug.Panel.destroy.apply(this, arguments);
     },
 
@@ -25970,16 +26197,16 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
     {
         addEvent(this.panelNode, "mousedown", this.onMouseDown);
         addEvent(this.panelNode, "dblclick", this.onDoubleClick);
-        //Firebug.SourceBoxPanel.initializeNode.apply(this, arguments);
-        //dispatch([Firebug.A11yModel], 'onInitializeNode', [this, 'css']);
+        // Firebug.SourceBoxPanel.initializeNode.apply(this, arguments);
+        // dispatch([Firebug.A11yModel], 'onInitializeNode', [this, 'css']);
     },
 
     destroyNode: function()
     {
         removeEvent(this.panelNode, "mousedown", this.onMouseDown);
         removeEvent(this.panelNode, "dblclick", this.onDoubleClick);
-        //Firebug.SourceBoxPanel.destroyNode.apply(this, arguments);
-        //dispatch([Firebug.A11yModel], 'onDestroyNode', [this, 'css']);
+        // Firebug.SourceBoxPanel.destroyNode.apply(this, arguments);
+        // dispatch([Firebug.A11yModel], 'onDestroyNode', [this, 'css']);
     },
 
     ishow: function(state)
@@ -25988,7 +26215,8 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
 
         this.showToolbarButtons("fbCSSButtons", true);
 
-        if (this.context.loaded && !this.location) // wait for loadedContext to restore the panel
+        if (this.context.loaded && !this.location) // wait for loadedContext to
+													// restore the panel
         {
             restoreObjects(this, state);
 
@@ -26028,12 +26256,14 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
         if (styleSheet.editStyleSheet)
             styleSheet = styleSheet.editStyleSheet.sheet;
 
-        // if it is a restricted stylesheet, show the warning message and abort the update process
+        // if it is a restricted stylesheet, show the warning message and abort
+		// the update process
         if (styleSheet.restricted)
         {
             FirebugReps.Warning.tag.replace({object: "AccessRestricted"}, this.panelNode);
 
-            // TODO: xxxpedro remove when there the external resource problem is fixed
+            // TODO: xxxpedro remove when there the external resource problem is
+			// fixed
             externalStyleSheetWarning.tag.append({
                 object: "The stylesheet could not be loaded due to access restrictions. ",
                 link: "more...",
@@ -26052,9 +26282,11 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
             result = FirebugReps.Warning.tag.replace({object: "EmptyStyleSheet"}, this.panelNode);
 
         // TODO: xxxpedro need to fix showToolbarButtons function
-        //this.showToolbarButtons("fbCSSButtons", !isSystemStyleSheet(this.location));
+        // this.showToolbarButtons("fbCSSButtons",
+		// !isSystemStyleSheet(this.location));
 
-        //dispatch([Firebug.A11yModel], 'onCSSRulesAdded', [this, this.panelNode]);
+        // dispatch([Firebug.A11yModel], 'onCSSRulesAdded', [this,
+		// this.panelNode]);
     },
 
     updateSelection: function(object)
@@ -26152,11 +26384,11 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
             );
         }
 
-        ///if (this.selection instanceof Element)
+        // /if (this.selection instanceof Element)
         if (isElement(this.selection))
         {
             items.push(
-                //"-",
+                // "-",
                 {label: "EditStyle",
                     command: bindFixed(this.editElementStyle, this) }
             );
@@ -26164,7 +26396,7 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
         else if (!isSystemStyleSheet(this.selection))
         {
             items.push(
-                    //"-",
+                    // "-",
                     {label: "NewRule",
                         command: bindFixed(this.insertRule, this, target) }
                 );
@@ -26243,7 +26475,8 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
                 }
                 else if (cssValue.type == "url")
                 {
-                    ///var propNameNode = target.parentNode.getElementsByClassName("cssPropName").item(0);
+                    // /var propNameNode =
+					// target.parentNode.getElementsByClassName("cssPropName").item(0);
                     var propNameNode = getElementByClass(target.parentNode, "cssPropName");
                     if (propNameNode && isImageRule(propNameNode[textContent]))
                     {
@@ -26331,8 +26564,10 @@ Firebug.CSSStyleSheetPanel.prototype = extend(Firebug.SourceBoxPanel,
     {
         var scanRE = Firebug.Search.getTestingRegex(text);
         function scanDoc(styleSheet) {
-            // we don't care about reverse here as we are just looking for existence,
-            // if we do have a result we will handle the reverse logic on display
+            // we don't care about reverse here as we are just looking for
+			// existence,
+            // if we do have a result we will handle the reverse logic on
+			// display
             for (var i = 0; i < styleSheet.cssRules.length; i++)
             {
                 if (scanRE.test(styleSheet.cssRules[i].cssText))
@@ -26442,13 +26677,15 @@ CSSElementPanel.prototype = extend(Firebug.CSSStyleSheetPanel.prototype,
 
         ruleTag:
             isIE ?
-            // IE needs the sourceLink first, otherwise it will be rendered outside the panel
+            // IE needs the sourceLink first, otherwise it will be rendered
+			// outside the panel
             DIV({"class": "cssElementRuleContainer"},
                 TAG(FirebugReps.SourceLink.tag, {object: "$rule.sourceLink"}),
                 TAG(CSSStyleRuleTag.tag, {rule: "$rule"})
             )
             :
-            // other browsers need the sourceLink last, otherwise it will cause an extra space
+            // other browsers need the sourceLink last, otherwise it will cause
+			// an extra space
             // before the rule representation
             DIV({"class": "cssElementRuleContainer"},
                 TAG(CSSStyleRuleTag.tag, {rule: "$rule"}),
@@ -26456,11 +26693,12 @@ CSSElementPanel.prototype = extend(Firebug.CSSStyleSheetPanel.prototype,
             )
     }),
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     updateCascadeView: function(element)
     {
-        //dispatch([Firebug.A11yModel], 'onBeforeCSSRulesAdded', [this]);
+        // dispatch([Firebug.A11yModel], 'onBeforeCSSRulesAdded', [this]);
         var rules = [], sections = [], usedProps = {};
         this.getInheritedRules(element, sections, usedProps);
         this.getElementRules(element, rules, usedProps);
@@ -26470,15 +26708,16 @@ CSSElementPanel.prototype = extend(Firebug.CSSStyleSheetPanel.prototype,
             var inheritLabel = "Inherited from"; // $STR("InheritedFrom");
             var result = this.template.cascadedTag.replace({rules: rules, inherited: sections,
                 inheritLabel: inheritLabel}, this.panelNode);
-            //dispatch([Firebug.A11yModel], 'onCSSRulesAdded', [this, result]);
+            // dispatch([Firebug.A11yModel], 'onCSSRulesAdded', [this, result]);
         }
         else
         {
             var result = FirebugReps.Warning.tag.replace({object: "EmptyElementCSS"}, this.panelNode);
-            //dispatch([Firebug.A11yModel], 'onCSSRulesAdded', [this, result]);
+            // dispatch([Firebug.A11yModel], 'onCSSRulesAdded', [this, result]);
         }
 
-        // TODO: xxxpedro remove when there the external resource problem is fixed
+        // TODO: xxxpedro remove when there the external resource problem is
+		// fixed
         if (externalStyleSheetURLs.length > 0)
             externalStyleSheetWarning.tag.append({
                 object: "The results here may be inaccurate because some " +
@@ -26491,14 +26730,16 @@ CSSElementPanel.prototype = extend(Firebug.CSSStyleSheetPanel.prototype,
     getStylesheetURL: function(rule)
     {
         // if the parentStyleSheet.href is null, CSS std says its inline style.
-        // TODO: xxxpedro IE doesn't have rule.parentStyleSheet so we must fall back to the doc.location
+        // TODO: xxxpedro IE doesn't have rule.parentStyleSheet so we must fall
+		// back to the doc.location
         if (rule && rule.parentStyleSheet && rule.parentStyleSheet.href)
             return rule.parentStyleSheet.href;
         else
             return this.selection.ownerDocument.location.href;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     getInheritedRules: function(element, sections, usedProps)
     {
@@ -26520,8 +26761,8 @@ CSSElementPanel.prototype = extend(Firebug.CSSStyleSheetPanel.prototype,
         var inspectedRules, displayedRules = {};
 
         // TODO: xxxpedro remove document specificity issue
-        //var eid = ElementCache(element);
-        //inspectedRules = ElementCSSRulesMap[eid];
+        // var eid = ElementCache(element);
+        // inspectedRules = ElementCSSRulesMap[eid];
 
         inspectedRules = getElementCSSRules(element);
 
@@ -26536,15 +26777,22 @@ CSSElementPanel.prototype = extend(Firebug.CSSStyleSheetPanel.prototype,
                 var ssid = ruleData.styleSheetId;
                 var parentStyleSheet = StyleSheetCache.get(ssid);
 
-                var href = parentStyleSheet.externalURL ? parentStyleSheet.externalURL : parentStyleSheet.href;  // Null means inline
+                var href = parentStyleSheet.externalURL ? parentStyleSheet.externalURL : parentStyleSheet.href;  // Null
+																													// means
+																													// inline
 
                 var instance = null;
-                //var instance = getInstanceForStyleSheet(rule.parentStyleSheet, element.ownerDocument);
+                // var instance =
+				// getInstanceForStyleSheet(rule.parentStyleSheet,
+				// element.ownerDocument);
 
                 var isSystemSheet = false;
-                //var isSystemSheet = isSystemStyleSheet(rule.parentStyleSheet);
+                // var isSystemSheet =
+				// isSystemStyleSheet(rule.parentStyleSheet);
 
-                if (!Firebug.showUserAgentCSS && isSystemSheet) // This removes user agent rules
+                if (!Firebug.showUserAgentCSS && isSystemSheet) // This removes
+																// user agent
+																// rules
                     continue;
 
                 if (!href)
@@ -26555,7 +26803,7 @@ CSSElementPanel.prototype = extend(Firebug.CSSStyleSheetPanel.prototype,
                     continue;
 
                 //
-                //var line = domUtils.getRuleLine(rule);
+                // var line = domUtils.getRuleLine(rule);
                 var line;
 
                 var ruleId = rule.selectorText+"/"+line;
@@ -26576,55 +26824,43 @@ CSSElementPanel.prototype = extend(Firebug.CSSStyleSheetPanel.prototype,
         if (FBTrace.DBG_CSS)
             FBTrace.sysout("getElementRules "+rules.length+" rules for "+getElementXPath(element), rules);
     },
-    /*
-    getElementRules: function(element, rules, usedProps, inheritMode)
-    {
-        var inspectedRules, displayedRules = {};
-        try
-        {
-            inspectedRules = domUtils ? domUtils.getCSSStyleRules(element) : null;
-        } catch (exc) {}
-
-        if (inspectedRules)
-        {
-            for (var i = 0; i < inspectedRules.Count(); ++i)
-            {
-                var rule = QI(inspectedRules.GetElementAt(i), nsIDOMCSSStyleRule);
-
-                var href = rule.parentStyleSheet.href;  // Null means inline
-
-                var instance = getInstanceForStyleSheet(rule.parentStyleSheet, element.ownerDocument);
-
-                var isSystemSheet = isSystemStyleSheet(rule.parentStyleSheet);
-                if (!Firebug.showUserAgentCSS && isSystemSheet) // This removes user agent rules
-                    continue;
-                if (!href)
-                    href = element.ownerDocument.location.href; // http://code.google.com/p/fbug/issues/detail?id=452
-
-                var props = this.getRuleProperties(this.context, rule, inheritMode);
-                if (inheritMode && !props.length)
-                    continue;
-
-                var line = domUtils.getRuleLine(rule);
-                var ruleId = rule.selectorText+"/"+line;
-                var sourceLink = new SourceLink(href, line, "css", rule, instance);
-
-                this.markOverridenProps(props, usedProps, inheritMode);
-
-                rules.splice(0, 0, {rule: rule, id: ruleId,
-                        selector: rule.selectorText, sourceLink: sourceLink,
-                        props: props, inherited: inheritMode,
-                        isSystemSheet: isSystemSheet});
-            }
-        }
-
-        if (element.style)
-            this.getStyleProperties(element, rules, usedProps, inheritMode);
-
-        if (FBTrace.DBG_CSS)
-            FBTrace.sysout("getElementRules "+rules.length+" rules for "+getElementXPath(element), rules);
-    },
-    /**/
+    /***************************************************************************
+	 * getElementRules: function(element, rules, usedProps, inheritMode) { var
+	 * inspectedRules, displayedRules = {}; try { inspectedRules = domUtils ?
+	 * domUtils.getCSSStyleRules(element) : null; } catch (exc) {}
+	 * 
+	 * if (inspectedRules) { for (var i = 0; i < inspectedRules.Count(); ++i) {
+	 * var rule = QI(inspectedRules.GetElementAt(i), nsIDOMCSSStyleRule);
+	 * 
+	 * var href = rule.parentStyleSheet.href; // Null means inline
+	 * 
+	 * var instance = getInstanceForStyleSheet(rule.parentStyleSheet,
+	 * element.ownerDocument);
+	 * 
+	 * var isSystemSheet = isSystemStyleSheet(rule.parentStyleSheet); if
+	 * (!Firebug.showUserAgentCSS && isSystemSheet) // This removes user agent
+	 * rules continue; if (!href) href = element.ownerDocument.location.href; //
+	 * http://code.google.com/p/fbug/issues/detail?id=452
+	 * 
+	 * var props = this.getRuleProperties(this.context, rule, inheritMode); if
+	 * (inheritMode && !props.length) continue;
+	 * 
+	 * var line = domUtils.getRuleLine(rule); var ruleId =
+	 * rule.selectorText+"/"+line; var sourceLink = new SourceLink(href, line,
+	 * "css", rule, instance);
+	 * 
+	 * this.markOverridenProps(props, usedProps, inheritMode);
+	 * 
+	 * rules.splice(0, 0, {rule: rule, id: ruleId, selector: rule.selectorText,
+	 * sourceLink: sourceLink, props: props, inherited: inheritMode,
+	 * isSystemSheet: isSystemSheet}); } }
+	 * 
+	 * if (element.style) this.getStyleProperties(element, rules, usedProps,
+	 * inheritMode);
+	 * 
+	 * if (FBTrace.DBG_CSS) FBTrace.sysout("getElementRules "+rules.length+"
+	 * rules for "+getElementXPath(element), rules); }, /
+	 **************************************************************************/
     markOverridenProps: function(props, usedProps, inheritMode)
     {
         for (var i = 0; i < props.length; ++i)
@@ -26632,21 +26868,25 @@ CSSElementPanel.prototype = extend(Firebug.CSSStyleSheetPanel.prototype,
             var prop = props[i];
             if ( usedProps.hasOwnProperty(prop.name) )
             {
-                var deadProps = usedProps[prop.name]; // all previous occurrences of this property
+                var deadProps = usedProps[prop.name]; // all previous
+														// occurrences of this
+														// property
                 for (var j = 0; j < deadProps.length; ++j)
                 {
                     var deadProp = deadProps[j];
                     if (!deadProp.disabled && !deadProp.wasInherited && deadProp.important && !prop.important)
                         prop.overridden = true;  // new occurrence overridden
                     else if (!prop.disabled)
-                        deadProp.overridden = true;  // previous occurrences overridden
+                        deadProp.overridden = true;  // previous occurrences
+														// overridden
                 }
             }
             else
                 usedProps[prop.name] = [];
 
             prop.wasInherited = inheritMode ? true : false;
-            usedProps[prop.name].push(prop);  // all occurrences of a property seen so far, by name
+            usedProps[prop.name].push(prop);  // all occurrences of a property
+												// seen so far, by name
         }
     },
 
@@ -26664,7 +26904,8 @@ CSSElementPanel.prototype = extend(Firebug.CSSStyleSheetPanel.prototype,
                         selector: "element.style", props: props, inherited: inheritMode});
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // extends Panel
 
     name: "css",
@@ -26684,14 +26925,15 @@ CSSElementPanel.prototype = extend(Firebug.CSSStyleSheetPanel.prototype,
         if (selection)
             this.select(selection, true);
 
-        //this.updateCascadeView(document.getElementsByTagName("h1")[0]);
-        //this.updateCascadeView(document.getElementById("build"));
+        // this.updateCascadeView(document.getElementsByTagName("h1")[0]);
+        // this.updateCascadeView(document.getElementById("build"));
 
-        /*
-        this.onStateChange = bindFixed(this.contentStateCheck, this);
-        this.onHoverChange = bindFixed(this.contentStateCheck, this, STATE_HOVER);
-        this.onActiveChange = bindFixed(this.contentStateCheck, this, STATE_ACTIVE);
-        /**/
+        /***********************************************************************
+		 * this.onStateChange = bindFixed(this.contentStateCheck, this);
+		 * this.onHoverChange = bindFixed(this.contentStateCheck, this,
+		 * STATE_HOVER); this.onActiveChange = bindFixed(this.contentStateCheck,
+		 * this, STATE_ACTIVE); /
+		 **********************************************************************/
     },
 
     ishow: function(state)
@@ -26702,18 +26944,20 @@ CSSElementPanel.prototype = extend(Firebug.CSSStyleSheetPanel.prototype,
     {
         if (domUtils)
         {
-            // Normally these would not be required, but in order to update after the state is set
-            // using the options menu we need to monitor these global events as well
+            // Normally these would not be required, but in order to update
+			// after the state is set
+            // using the options menu we need to monitor these global events as
+			// well
             var doc = win.document;
-            ///addEvent(doc, "mouseover", this.onHoverChange);
-            ///addEvent(doc, "mousedown", this.onActiveChange);
+            // /addEvent(doc, "mouseover", this.onHoverChange);
+            // /addEvent(doc, "mousedown", this.onActiveChange);
         }
     },
     unwatchWindow: function(win)
     {
         var doc = win.document;
-        ///removeEvent(doc, "mouseover", this.onHoverChange);
-        ///removeEvent(doc, "mousedown", this.onActiveChange);
+        // /removeEvent(doc, "mouseover", this.onHoverChange);
+        // /removeEvent(doc, "mousedown", this.onActiveChange);
 
         if (isAncestor(this.stateChangeEl, doc))
         {
@@ -26747,13 +26991,10 @@ CSSElementPanel.prototype = extend(Firebug.CSSStyleSheetPanel.prototype,
             return;
         }
 
-        /*
-        if (!domUtils)
-        {
-            FirebugReps.Warning.tag.replace({object: "DOMInspectorWarning"}, this.panelNode);
-            return;
-        }
-        /**/
+        /***********************************************************************
+		 * if (!domUtils) { FirebugReps.Warning.tag.replace({object:
+		 * "DOMInspectorWarning"}, this.panelNode); return; } /
+		 **********************************************************************/
 
         if (!element)
             return;
@@ -26798,14 +27039,13 @@ CSSElementPanel.prototype = extend(Firebug.CSSStyleSheetPanel.prototype,
     {
       this.removeStateChangeHandlers();
 
-      /*
-      addEvent(el, "focus", this.onStateChange);
-      addEvent(el, "blur", this.onStateChange);
-      addEvent(el, "mouseup", this.onStateChange);
-      addEvent(el, "mousedown", this.onStateChange);
-      addEvent(el, "mouseover", this.onStateChange);
-      addEvent(el, "mouseout", this.onStateChange);
-      /**/
+      /***********************************************************************
+		 * addEvent(el, "focus", this.onStateChange); addEvent(el, "blur",
+		 * this.onStateChange); addEvent(el, "mouseup", this.onStateChange);
+		 * addEvent(el, "mousedown", this.onStateChange); addEvent(el,
+		 * "mouseover", this.onStateChange); addEvent(el, "mouseout",
+		 * this.onStateChange); /
+		 **********************************************************************/
 
       this.stateChangeEl = el;
     },
@@ -26815,14 +27055,14 @@ CSSElementPanel.prototype = extend(Firebug.CSSStyleSheetPanel.prototype,
         var sel = this.stateChangeEl;
         if (sel)
         {
-            /*
-            removeEvent(sel, "focus", this.onStateChange);
-            removeEvent(sel, "blur", this.onStateChange);
-            removeEvent(sel, "mouseup", this.onStateChange);
-            removeEvent(sel, "mousedown", this.onStateChange);
-            removeEvent(sel, "mouseover", this.onStateChange);
-            removeEvent(sel, "mouseout", this.onStateChange);
-            /**/
+            /*******************************************************************
+			 * removeEvent(sel, "focus", this.onStateChange); removeEvent(sel,
+			 * "blur", this.onStateChange); removeEvent(sel, "mouseup",
+			 * this.onStateChange); removeEvent(sel, "mousedown",
+			 * this.onStateChange); removeEvent(sel, "mouseover",
+			 * this.onStateChange); removeEvent(sel, "mouseout",
+			 * this.onStateChange); /
+			 ******************************************************************/
         }
     },
 
@@ -26839,7 +27079,8 @@ CSSElementPanel.prototype = extend(Firebug.CSSStyleSheetPanel.prototype,
                 }
             }, this);
 
-            // Delay exec until after the event has processed and the state has been updated
+            // Delay exec until after the event has processed and the state has
+			// been updated
             setTimeout(timeoutRunner, 0);
         }
     }
@@ -26886,7 +27127,8 @@ CSSComputedElementPanel.prototype = extend(CSSElementPanel.prototype,
             )
     }),
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     updateComputedView: function(element)
     {
@@ -26903,7 +27145,7 @@ CSSComputedElementPanel.prototype = extend(CSSElementPanel.prototype,
         for (var groupName in styleGroups)
         {
             // TODO: xxxpedro i18n $STR
-            //var title = $STR("StyleGroup-" + groupName);
+            // var title = $STR("StyleGroup-" + groupName);
             var title = styleGroupTitles[groupName];
             var group = {title: title, props: []};
             groups.push(group);
@@ -26926,10 +27168,11 @@ CSSComputedElementPanel.prototype = extend(CSSElementPanel.prototype,
         }
 
         var result = this.template.computedTag.replace({groups: groups}, this.panelNode);
-        //dispatch([Firebug.A11yModel], 'onCSSRulesAdded', [this, result]);
+        // dispatch([Firebug.A11yModel], 'onCSSRulesAdded', [this, result]);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // extends Panel
 
     name: "computed",
@@ -26965,8 +27208,10 @@ CSSEditor.prototype = domplate(Firebug.InlineEditor.prototype,
         var rule = Firebug.getRepObject(target);
         var emptyProp =
         {
-            // TODO: xxxpedro - uses charCode(255) to force the element being rendered,
-            // allowing webkit to get the correct position of the property name "span",
+            // TODO: xxxpedro - uses charCode(255) to force the element being
+			// rendered,
+            // allowing webkit to get the correct position of the property name
+			// "span",
             // when inserting a new CSS rule?
             name: "",
             value: "",
@@ -26982,7 +27227,8 @@ CSSEditor.prototype = domplate(Firebug.InlineEditor.prototype,
     saveEdit: function(target, value, previousValue)
     {
     	// We need to check the value first in order to avoid a problem in IE8
-    	// See Issue 3038: Empty (null) styles when adding CSS styles in Firebug Lite
+    	// See Issue 3038: Empty (null) styles when adding CSS styles in Firebug
+		// Lite
     	if (!value) return;
 
         target.innerHTML = escapeForCss(value);
@@ -26995,7 +27241,8 @@ CSSEditor.prototype = domplate(Firebug.InlineEditor.prototype,
 
         if (hasClass(target, "cssPropName"))
         {
-            if (value && previousValue != value)  // name of property has changed.
+            if (value && previousValue != value)  // name of property has
+													// changed.
             {
                 var propValue = getChildByClass(row, "cssPropValue")[textContent];
                 var parsedValue = parsePriority(propValue);
@@ -27008,7 +27255,8 @@ CSSEditor.prototype = domplate(Firebug.InlineEditor.prototype,
                     Firebug.CSSModule.setProperty(rule, value, parsedValue.value, parsedValue.priority);
                 }
             }
-            else if (!value) // name of the property has been deleted, so remove the property.
+            else if (!value) // name of the property has been deleted, so
+								// remove the property.
                 Firebug.CSSModule.removeProperty(rule, previousValue);
         }
         else if (getAncestorByClass(target, "cssPropValue"))
@@ -27036,11 +27284,12 @@ CSSEditor.prototype = domplate(Firebug.InlineEditor.prototype,
 
     advanceToNext: function(target, charCode)
     {
-        if (charCode == 58 /*":"*/ && hasClass(target, "cssPropName"))
+        if (charCode == 58 /* ":" */ && hasClass(target, "cssPropName"))
             return true;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     getAutoCompleteRange: function(value, offset)
     {
@@ -27065,8 +27314,8 @@ CSSEditor.prototype = domplate(Firebug.InlineEditor.prototype,
     }
 });
 
-//************************************************************************************************
-//CSSRuleEditor
+// ************************************************************************************************
+// CSSRuleEditor
 
 function CSSRuleEditor(doc)
 {
@@ -27241,7 +27490,8 @@ StyleSheetEditor.prototype = domplate(Firebug.BaseEditor,
         return true;
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     onInput: function()
     {
@@ -27443,7 +27693,8 @@ ScriptPanel.prototype = extend(Firebug.Panel,
     title: "Script",
 
     selectIndex: 0, // index of the current selectNode's option
-    sourceIndex: -1, // index of the script node, based in doc.getElementsByTagName("script")
+    sourceIndex: -1, // index of the script node, based in
+						// doc.getElementsByTagName("script")
 
     options: {
         hasToolButtons: true
@@ -27543,7 +27794,8 @@ ScriptPanel.prototype = extend(Firebug.Panel,
                     hl = 0;
 
                 src = isIE && !isExternal ?
-                        src+'\n' :  // IE put an extra line when reading source of local resources
+                        src+'\n' :  // IE put an extra line when reading source
+									// of local resources
                         '\n'+src;
 
                 // find the number of lines of code
@@ -27711,7 +27963,8 @@ var getFileName = function getFileName(path)
 FBL.ns(function() { with (FBL) {
 // ************************************************************************************************
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var ElementCache = Firebug.Lite.Cache.Element;
 
@@ -27741,7 +27994,8 @@ var ignoreVars =
 if (Firebug.ignoreFirebugElements)
     ignoreVars[Firebug.Lite.Cache.ID] = 1;
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 var memberPanelRep =
     isIE6 ?
@@ -27814,7 +28068,8 @@ var DirTablePlate = domplate(Firebug.Rep,
         return getMembers(object, level);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     onClick: function(event)
     {
@@ -27920,8 +28175,8 @@ var DirTablePlate = domplate(Firebug.Rep,
             var lastRow = row;
 
             var delay = 0;
-            //var setSize = members.length;
-            //var rowCount = 1;
+            // var setSize = members.length;
+            // var rowCount = 1;
             while (members.length)
             {
                 with({slice: members.splice(0, insertSliceSize), isLast: !members.length})
@@ -27932,8 +28187,10 @@ var DirTablePlate = domplate(Firebug.Rep,
                         {
                             var result = rowTag.insertRows({members: slice}, lastRow);
                             lastRow = result[1];
-                            //dispatch([Firebug.A11yModel], 'onMemberRowSliceAdded', [null, result, rowCount, setSize]);
-                            //rowCount += insertSliceSize;
+                            // dispatch([Firebug.A11yModel],
+							// 'onMemberRowSliceAdded', [null, result, rowCount,
+							// setSize]);
+                            // rowCount += insertSliceSize;
                         }
                         if (isLast)
                             row.removeAttribute("insertTimeout");
@@ -27961,8 +28218,10 @@ Firebug.DOMBasePanel.prototype = extend(Firebug.Panel,
     getRealObject: function(object)
     {
         // TODO: Move this to some global location
-        // TODO: Unwrapping should be centralized rather than sprinkling it around ad hoc.
-        // TODO: We might be able to make this check more authoritative with QueryInterface.
+        // TODO: Unwrapping should be centralized rather than sprinkling it
+		// around ad hoc.
+        // TODO: We might be able to make this check more authoritative with
+		// QueryInterface.
         if (!object) return object;
         if (object.wrappedJSObject) return object.wrappedJSObject;
         return object;
@@ -27970,13 +28229,13 @@ Firebug.DOMBasePanel.prototype = extend(Firebug.Panel,
 
     rebuild: function(update, scrollTop)
     {
-        //dispatch([Firebug.A11yModel], 'onBeforeDomUpdateSelection', [this]);
+        // dispatch([Firebug.A11yModel], 'onBeforeDomUpdateSelection', [this]);
         var members = getMembers(this.selection);
         expandMembers(members, this.toggles, 0, 0);
 
         this.showMembers(members, update, scrollTop);
 
-        //TODO: xxxpedro statusbar
+        // TODO: xxxpedro statusbar
         if (!this.parentPanel)
             updateStatusBar(this);
     },
@@ -27998,7 +28257,8 @@ Firebug.DOMBasePanel.prototype = extend(Firebug.Panel,
         var panelNode = this.panelNode;
         var priorScrollTop = scrollTop == undefined ? panelNode.scrollTop : scrollTop;
 
-        // If we are asked to "update" the current view, then build the new table
+        // If we are asked to "update" the current view, then build the new
+		// table
         // offscreen and swap it in when it's done
         var offscreen = update && panelNode.firstChild;
         var dest = offscreen ? panelNode.ownerDocument : panelNode;
@@ -28008,16 +28268,17 @@ Firebug.DOMBasePanel.prototype = extend(Firebug.Panel,
         var rowTag = DirTablePlate.rowTag;
 
         // Insert the first slice immediately
-        //var slice = members.splice(0, insertSliceSize);
-        //var result = rowTag.insertRows({members: slice}, tbody.lastChild);
+        // var slice = members.splice(0, insertSliceSize);
+        // var result = rowTag.insertRows({members: slice}, tbody.lastChild);
 
-        //var setSize = members.length;
-        //var rowCount = 1;
+        // var setSize = members.length;
+        // var rowCount = 1;
 
         var panel = this;
         var result;
 
-        //dispatch([Firebug.A11yModel], 'onMemberRowSliceAdded', [panel, result, rowCount, setSize]);
+        // dispatch([Firebug.A11yModel], 'onMemberRowSliceAdded', [panel,
+		// result, rowCount, setSize]);
         var timeouts = [];
 
         var delay = 0;
@@ -28037,15 +28298,17 @@ Firebug.DOMBasePanel.prototype = extend(Firebug.Panel,
 
                     result = rowTag.insertRows({members: slice}, tbody.lastChild);
 
-                    //rowCount += insertSliceSize;
-                    //dispatch([Firebug.A11yModel], 'onMemberRowSliceAdded', [panel, result, rowCount, setSize]);
+                    // rowCount += insertSliceSize;
+                    // dispatch([Firebug.A11yModel], 'onMemberRowSliceAdded',
+					// [panel, result, rowCount, setSize]);
 
                     if ((panelNode.scrollHeight+panelNode.offsetHeight) >= priorScrollTop)
                         panelNode.scrollTop = priorScrollTop;
 
 
                     // enable to measure rendering performance
-                    //if (isLast) alert(new Date().getTime() - renderStart + "ms");
+                    // if (isLast) alert(new Date().getTime() - renderStart +
+					// "ms");
 
 
                 }, delay));
@@ -28077,115 +28340,76 @@ Firebug.DOMBasePanel.prototype = extend(Firebug.Panel,
         this.timeouts = timeouts;
     },
 
-    /*
-    // new
-    showMembers: function(members, update, scrollTop)
-    {
-        // If we are still in the midst of inserting rows, cancel all pending
-        // insertions here - this is a big speedup when stepping in the debugger
-        if (this.timeouts)
-        {
-            for (var i = 0; i < this.timeouts.length; ++i)
-                this.context.clearTimeout(this.timeouts[i]);
-            delete this.timeouts;
-        }
-
-        if (!members.length)
-            return this.showEmptyMembers();
-
-        var panelNode = this.panelNode;
-        var priorScrollTop = scrollTop == undefined ? panelNode.scrollTop : scrollTop;
-
-        // If we are asked to "update" the current view, then build the new table
-        // offscreen and swap it in when it's done
-        var offscreen = update && panelNode.firstChild;
-        var dest = offscreen ? panelNode.ownerDocument : panelNode;
-
-        var table = this.tag.replace({domPanel: this, toggles: this.toggles}, dest);
-        var tbody = table.lastChild;
-        var rowTag = DirTablePlate.rowTag;
-
-        // Insert the first slice immediately
-        //var slice = members.splice(0, insertSliceSize);
-        //var result = rowTag.insertRows({members: slice}, tbody.lastChild);
-
-        //var setSize = members.length;
-        //var rowCount = 1;
-
-        var panel = this;
-        var result;
-
-        //dispatch([Firebug.A11yModel], 'onMemberRowSliceAdded', [panel, result, rowCount, setSize]);
-        var timeouts = [];
-
-        var delay = 0;
-        var _insertSliceSize = insertSliceSize;
-        var _insertInterval = insertInterval;
-
-        // enable to measure rendering performance
-        var renderStart = new Date().getTime();
-        var lastSkip = renderStart, now;
-
-        while (members.length)
-        {
-            with({slice: members.splice(0, _insertSliceSize), isLast: !members.length})
-            {
-                var _tbody = tbody;
-                var _rowTag = rowTag;
-                var _panelNode = panelNode;
-                var _priorScrollTop = priorScrollTop;
-
-                timeouts.push(this.context.setTimeout(function()
-                {
-                    // TODO: xxxpedro can this be a timing error related to the
-                    // "iteration number" approach insted of "duration time"?
-                    // avoid error in IE8
-                    if (!_tbody.lastChild) return;
-
-                    result = _rowTag.insertRows({members: slice}, _tbody.lastChild);
-
-                    //rowCount += _insertSliceSize;
-                    //dispatch([Firebug.A11yModel], 'onMemberRowSliceAdded', [panel, result, rowCount, setSize]);
-
-                    if ((_panelNode.scrollHeight + _panelNode.offsetHeight) >= _priorScrollTop)
-                        _panelNode.scrollTop = _priorScrollTop;
-
-
-                    // enable to measure rendering performance
-                    //alert("gap: " + (new Date().getTime() - lastSkip));
-                    //lastSkip = new Date().getTime();
-
-                    //if (isLast) alert("new: " + (new Date().getTime() - renderStart) + "ms");
-
-                }, delay));
-
-                delay += _insertInterval;
-            }
-        }
-
-        if (offscreen)
-        {
-            timeouts.push(this.context.setTimeout(function()
-            {
-                if (panelNode.firstChild)
-                    panelNode.replaceChild(table, panelNode.firstChild);
-                else
-                    panelNode.appendChild(table);
-
-                // Scroll back to where we were before
-                panelNode.scrollTop = priorScrollTop;
-            }, delay));
-        }
-        else
-        {
-            timeouts.push(this.context.setTimeout(function()
-            {
-                panelNode.scrollTop = scrollTop == undefined ? 0 : scrollTop;
-            }, delay));
-        }
-        this.timeouts = timeouts;
-    },
-    /**/
+    /***************************************************************************
+	 * // new showMembers: function(members, update, scrollTop) { // If we are
+	 * still in the midst of inserting rows, cancel all pending // insertions
+	 * here - this is a big speedup when stepping in the debugger if
+	 * (this.timeouts) { for (var i = 0; i < this.timeouts.length; ++i)
+	 * this.context.clearTimeout(this.timeouts[i]); delete this.timeouts; }
+	 * 
+	 * if (!members.length) return this.showEmptyMembers();
+	 * 
+	 * var panelNode = this.panelNode; var priorScrollTop = scrollTop ==
+	 * undefined ? panelNode.scrollTop : scrollTop;
+	 *  // If we are asked to "update" the current view, then build the new
+	 * table // offscreen and swap it in when it's done var offscreen = update &&
+	 * panelNode.firstChild; var dest = offscreen ? panelNode.ownerDocument :
+	 * panelNode;
+	 * 
+	 * var table = this.tag.replace({domPanel: this, toggles: this.toggles},
+	 * dest); var tbody = table.lastChild; var rowTag = DirTablePlate.rowTag;
+	 *  // Insert the first slice immediately //var slice = members.splice(0,
+	 * insertSliceSize); //var result = rowTag.insertRows({members: slice},
+	 * tbody.lastChild);
+	 * 
+	 * //var setSize = members.length; //var rowCount = 1;
+	 * 
+	 * var panel = this; var result;
+	 * 
+	 * //dispatch([Firebug.A11yModel], 'onMemberRowSliceAdded', [panel, result,
+	 * rowCount, setSize]); var timeouts = [];
+	 * 
+	 * var delay = 0; var _insertSliceSize = insertSliceSize; var
+	 * _insertInterval = insertInterval;
+	 *  // enable to measure rendering performance var renderStart = new
+	 * Date().getTime(); var lastSkip = renderStart, now;
+	 * 
+	 * while (members.length) { with({slice: members.splice(0,
+	 * _insertSliceSize), isLast: !members.length}) { var _tbody = tbody; var
+	 * _rowTag = rowTag; var _panelNode = panelNode; var _priorScrollTop =
+	 * priorScrollTop;
+	 * 
+	 * timeouts.push(this.context.setTimeout(function() { // TODO: xxxpedro can
+	 * this be a timing error related to the // "iteration number" approach
+	 * insted of "duration time"? // avoid error in IE8 if (!_tbody.lastChild)
+	 * return;
+	 * 
+	 * result = _rowTag.insertRows({members: slice}, _tbody.lastChild);
+	 * 
+	 * //rowCount += _insertSliceSize; //dispatch([Firebug.A11yModel],
+	 * 'onMemberRowSliceAdded', [panel, result, rowCount, setSize]);
+	 * 
+	 * if ((_panelNode.scrollHeight + _panelNode.offsetHeight) >=
+	 * _priorScrollTop) _panelNode.scrollTop = _priorScrollTop;
+	 * 
+	 *  // enable to measure rendering performance //alert("gap: " + (new
+	 * Date().getTime() - lastSkip)); //lastSkip = new Date().getTime();
+	 * 
+	 * //if (isLast) alert("new: " + (new Date().getTime() - renderStart) +
+	 * "ms");
+	 *  }, delay));
+	 * 
+	 * delay += _insertInterval; } }
+	 * 
+	 * if (offscreen) { timeouts.push(this.context.setTimeout(function() { if
+	 * (panelNode.firstChild) panelNode.replaceChild(table,
+	 * panelNode.firstChild); else panelNode.appendChild(table);
+	 *  // Scroll back to where we were before panelNode.scrollTop =
+	 * priorScrollTop; }, delay)); } else {
+	 * timeouts.push(this.context.setTimeout(function() { panelNode.scrollTop =
+	 * scrollTop == undefined ? 0 : scrollTop; }, delay)); } this.timeouts =
+	 * timeouts; }, /
+	 **************************************************************************/
 
     showEmptyMembers: function()
     {
@@ -28237,163 +28461,75 @@ Firebug.DOMBasePanel.prototype = extend(Firebug.Panel,
                 return object[propName];
         }
     },
-    /*
-    copyProperty: function(row)
-    {
-        var value = this.getRowPropertyValue(row);
-        copyToClipboard(value);
-    },
-
-    editProperty: function(row, editValue)
-    {
-        if (hasClass(row, "watchNewRow"))
-        {
-            if (this.context.stopped)
-                Firebug.Editor.startEditing(row, "");
-            else if (Firebug.Console.isAlwaysEnabled())  // not stopped in debugger, need command line
-            {
-                if (Firebug.CommandLine.onCommandLineFocus())
-                    Firebug.Editor.startEditing(row, "");
-                else
-                    row.innerHTML = $STR("warning.Command line blocked?");
-            }
-            else
-                row.innerHTML = $STR("warning.Console must be enabled");
-        }
-        else if (hasClass(row, "watchRow"))
-            Firebug.Editor.startEditing(row, getRowName(row));
-        else
-        {
-            var object = this.getRowObject(row);
-            this.context.thisValue = object;
-
-            if (!editValue)
-            {
-                var propValue = this.getRowPropertyValue(row);
-
-                var type = typeof(propValue);
-                if (type == "undefined" || type == "number" || type == "boolean")
-                    editValue = propValue;
-                else if (type == "string")
-                    editValue = "\"" + escapeJS(propValue) + "\"";
-                else if (propValue == null)
-                    editValue = "null";
-                else if (object instanceof Window || object instanceof jsdIStackFrame)
-                    editValue = getRowName(row);
-                else
-                    editValue = "this." + getRowName(row);
-            }
-
-
-            Firebug.Editor.startEditing(row, editValue);
-        }
-    },
-
-    deleteProperty: function(row)
-    {
-        if (hasClass(row, "watchRow"))
-            this.deleteWatch(row);
-        else
-        {
-            var object = getRowOwnerObject(row);
-            if (!object)
-                object = this.selection;
-            object = this.getRealObject(object);
-
-            if (object)
-            {
-                var name = getRowName(row);
-                try
-                {
-                    delete object[name];
-                }
-                catch (exc)
-                {
-                    return;
-                }
-
-                this.rebuild(true);
-                this.markChange();
-            }
-        }
-    },
-
-    setPropertyValue: function(row, value)  // value must be string
-    {
-        if(FBTrace.DBG_DOM)
-        {
-            FBTrace.sysout("row: "+row);
-            FBTrace.sysout("value: "+value+" type "+typeof(value), value);
-        }
-
-        var name = getRowName(row);
-        if (name == "this")
-            return;
-
-        var object = this.getRowObject(row);
-        object = this.getRealObject(object);
-        if (object && !(object instanceof jsdIStackFrame))
-        {
-             // unwrappedJSObject.property = unwrappedJSObject
-             Firebug.CommandLine.evaluate(value, this.context, object, this.context.getGlobalScope(),
-                 function success(result, context)
-                 {
-                     if (FBTrace.DBG_DOM)
-                         FBTrace.sysout("setPropertyValue evaluate success object["+name+"]="+result+" type "+typeof(result), result);
-                     object[name] = result;
-                 },
-                 function failed(exc, context)
-                 {
-                     try
-                     {
-                         if (FBTrace.DBG_DOM)
-                              FBTrace.sysout("setPropertyValue evaluate failed with exc:"+exc+" object["+name+"]="+value+" type "+typeof(value), exc);
-                         // If the value doesn't parse, then just store it as a string.  Some users will
-                         // not realize they're supposed to enter a JavaScript expression and just type
-                         // literal text
-                         object[name] = String(value);  // unwrappedJSobject.property = string
-                     }
-                     catch (exc)
-                     {
-                         return;
-                     }
-                  }
-             );
-        }
-        else if (this.context.stopped)
-        {
-            try
-            {
-                Firebug.CommandLine.evaluate(name+"="+value, this.context);
-            }
-            catch (exc)
-            {
-                try
-                {
-                    // See catch block above...
-                    object[name] = String(value); // unwrappedJSobject.property = string
-                }
-                catch (exc)
-                {
-                    return;
-                }
-            }
-        }
-
-        this.rebuild(true);
-        this.markChange();
-    },
-
-    highlightRow: function(row)
-    {
-        if (this.highlightedRow)
-            cancelClassTimed(this.highlightedRow, "jumpHighlight", this.context);
-
-        this.highlightedRow = row;
-
-        if (row)
-            setClassTimed(row, "jumpHighlight", this.context);
-    },/**/
+    /***************************************************************************
+	 * copyProperty: function(row) { var value = this.getRowPropertyValue(row);
+	 * copyToClipboard(value); },
+	 * 
+	 * editProperty: function(row, editValue) { if (hasClass(row,
+	 * "watchNewRow")) { if (this.context.stopped)
+	 * Firebug.Editor.startEditing(row, ""); else if
+	 * (Firebug.Console.isAlwaysEnabled()) // not stopped in debugger, need
+	 * command line { if (Firebug.CommandLine.onCommandLineFocus())
+	 * Firebug.Editor.startEditing(row, ""); else row.innerHTML =
+	 * $STR("warning.Command line blocked?"); } else row.innerHTML =
+	 * $STR("warning.Console must be enabled"); } else if (hasClass(row,
+	 * "watchRow")) Firebug.Editor.startEditing(row, getRowName(row)); else {
+	 * var object = this.getRowObject(row); this.context.thisValue = object;
+	 * 
+	 * if (!editValue) { var propValue = this.getRowPropertyValue(row);
+	 * 
+	 * var type = typeof(propValue); if (type == "undefined" || type == "number" ||
+	 * type == "boolean") editValue = propValue; else if (type == "string")
+	 * editValue = "\"" + escapeJS(propValue) + "\""; else if (propValue ==
+	 * null) editValue = "null"; else if (object instanceof Window || object
+	 * instanceof jsdIStackFrame) editValue = getRowName(row); else editValue =
+	 * "this." + getRowName(row); }
+	 * 
+	 * 
+	 * Firebug.Editor.startEditing(row, editValue); } },
+	 * 
+	 * deleteProperty: function(row) { if (hasClass(row, "watchRow"))
+	 * this.deleteWatch(row); else { var object = getRowOwnerObject(row); if
+	 * (!object) object = this.selection; object = this.getRealObject(object);
+	 * 
+	 * if (object) { var name = getRowName(row); try { delete object[name]; }
+	 * catch (exc) { return; }
+	 * 
+	 * this.rebuild(true); this.markChange(); } } },
+	 * 
+	 * setPropertyValue: function(row, value) // value must be string {
+	 * if(FBTrace.DBG_DOM) { FBTrace.sysout("row: "+row); FBTrace.sysout("value:
+	 * "+value+" type "+typeof(value), value); }
+	 * 
+	 * var name = getRowName(row); if (name == "this") return;
+	 * 
+	 * var object = this.getRowObject(row); object = this.getRealObject(object);
+	 * if (object && !(object instanceof jsdIStackFrame)) { //
+	 * unwrappedJSObject.property = unwrappedJSObject
+	 * Firebug.CommandLine.evaluate(value, this.context, object,
+	 * this.context.getGlobalScope(), function success(result, context) { if
+	 * (FBTrace.DBG_DOM) FBTrace.sysout("setPropertyValue evaluate success
+	 * object["+name+"]="+result+" type "+typeof(result), result); object[name] =
+	 * result; }, function failed(exc, context) { try { if (FBTrace.DBG_DOM)
+	 * FBTrace.sysout("setPropertyValue evaluate failed with exc:"+exc+"
+	 * object["+name+"]="+value+" type "+typeof(value), exc); // If the value
+	 * doesn't parse, then just store it as a string. Some users will // not
+	 * realize they're supposed to enter a JavaScript expression and just type //
+	 * literal text object[name] = String(value); // unwrappedJSobject.property =
+	 * string } catch (exc) { return; } } ); } else if (this.context.stopped) {
+	 * try { Firebug.CommandLine.evaluate(name+"="+value, this.context); } catch
+	 * (exc) { try { // See catch block above... object[name] = String(value); //
+	 * unwrappedJSobject.property = string } catch (exc) { return; } } }
+	 * 
+	 * this.rebuild(true); this.markChange(); },
+	 * 
+	 * highlightRow: function(row) { if (this.highlightedRow)
+	 * cancelClassTimed(this.highlightedRow, "jumpHighlight", this.context);
+	 * 
+	 * this.highlightedRow = row;
+	 * 
+	 * if (row) setClassTimed(row, "jumpHighlight", this.context); },/
+	 **************************************************************************/
 
     onMouseMove: function(event)
     {
@@ -28415,7 +28551,8 @@ Firebug.DOMBasePanel.prototype = extend(Firebug.Panel,
 
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // extends Panel
 
     create: function()
@@ -28447,26 +28584,21 @@ Firebug.DOMBasePanel.prototype = extend(Firebug.Panel,
         Firebug.Panel.shutdown.apply(this, arguments);
     },
 
-    /*
-    destroy: function(state)
-    {
-        var view = this.viewPath[this.pathIndex];
-        if (view && this.panelNode.scrollTop)
-            view.scrollTop = this.panelNode.scrollTop;
-
-        if (this.pathIndex)
-            state.pathIndex = this.pathIndex;
-        if (this.viewPath)
-            state.viewPath = this.viewPath;
-        if (this.propertyPath)
-            state.propertyPath = this.propertyPath;
-
-        if (this.propertyPath.length > 0 && !this.propertyPath[1])
-            state.firstSelection = persistObject(this.getPathObject(1), this.context);
-
-        Firebug.Panel.destroy.apply(this, arguments);
-    },
-    /**/
+    /***************************************************************************
+	 * destroy: function(state) { var view = this.viewPath[this.pathIndex]; if
+	 * (view && this.panelNode.scrollTop) view.scrollTop =
+	 * this.panelNode.scrollTop;
+	 * 
+	 * if (this.pathIndex) state.pathIndex = this.pathIndex; if (this.viewPath)
+	 * state.viewPath = this.viewPath; if (this.propertyPath) state.propertyPath =
+	 * this.propertyPath;
+	 * 
+	 * if (this.propertyPath.length > 0 && !this.propertyPath[1])
+	 * state.firstSelection = persistObject(this.getPathObject(1),
+	 * this.context);
+	 * 
+	 * Firebug.Panel.destroy.apply(this, arguments); }, /
+	 **************************************************************************/
 
     ishow: function(state)
     {
@@ -28540,14 +28672,10 @@ Firebug.DOMBasePanel.prototype = extend(Firebug.Panel,
             this.select(selection);
         }
     },
-    /*
-    hide: function()
-    {
-        var view = this.viewPath[this.pathIndex];
-        if (view && this.panelNode.scrollTop)
-            view.scrollTop = this.panelNode.scrollTop;
-    },
-    /**/
+    /***************************************************************************
+	 * hide: function() { var view = this.viewPath[this.pathIndex]; if (view &&
+	 * this.panelNode.scrollTop) view.scrollTop = this.panelNode.scrollTop; }, /
+	 **************************************************************************/
 
     supportsObject: function(object)
     {
@@ -28582,7 +28710,8 @@ Firebug.DOMBasePanel.prototype = extend(Firebug.Panel,
 
             if (newPath)
             {
-                // Remove everything after the point where we are inserting, so we
+                // Remove everything after the point where we are inserting, so
+				// we
                 // essentially replace it with the new path
                 if (previousView)
                 {
@@ -28590,8 +28719,10 @@ Firebug.DOMBasePanel.prototype = extend(Firebug.Panel,
                         previousView.scrollTop = this.panelNode.scrollTop;
 
                     var start = previousIndex + 1,
-                        // Opera needs the length argument in splice(), otherwise
-                        // it will consider that only one element should be removed
+                        // Opera needs the length argument in splice(),
+						// otherwise
+                        // it will consider that only one element should be
+						// removed
                         length = this.objectPath.length - start;
 
                     this.objectPath.splice(start, length);
@@ -28633,7 +28764,7 @@ Firebug.DOMBasePanel.prototype = extend(Firebug.Panel,
                 this.toggles = {};
 
                 var win = Firebug.browser.window;
-                //var win = this.context.getGlobalScope();
+                // var win = this.context.getGlobalScope();
                 if (object === win)
                 {
                     this.pathIndex = 0;
@@ -28679,85 +28810,57 @@ Firebug.DOMBasePanel.prototype = extend(Firebug.Panel,
     getDefaultSelection: function()
     {
         return Firebug.browser.window;
-        //return this.context.getGlobalScope();
-    }/*,
-
-    updateOption: function(name, value)
-    {
-        const optionMap = {showUserProps: 1, showUserFuncs: 1, showDOMProps: 1,
-            showDOMFuncs: 1, showDOMConstants: 1};
-        if ( optionMap.hasOwnProperty(name) )
-            this.rebuild(true);
-    },
-
-    getOptionsMenuItems: function()
-    {
-        return [
-            optionMenu("ShowUserProps", "showUserProps"),
-            optionMenu("ShowUserFuncs", "showUserFuncs"),
-            optionMenu("ShowDOMProps", "showDOMProps"),
-            optionMenu("ShowDOMFuncs", "showDOMFuncs"),
-            optionMenu("ShowDOMConstants", "showDOMConstants"),
-            "-",
-            {label: "Refresh", command: bindFixed(this.rebuild, this, true) }
-        ];
-    },
-
-    getContextMenuItems: function(object, target)
-    {
-        var row = getAncestorByClass(target, "memberRow");
-
-        var items = [];
-
-        if (row)
-        {
-            var rowName = getRowName(row);
-            var rowObject = this.getRowObject(row);
-            var rowValue = this.getRowPropertyValue(row);
-
-            var isWatch = hasClass(row, "watchRow");
-            var isStackFrame = rowObject instanceof jsdIStackFrame;
-
-            if (typeof(rowValue) == "string" || typeof(rowValue) == "number")
-            {
-                // Functions already have a copy item in their context menu
-                items.push(
-                    "-",
-                    {label: "CopyValue",
-                        command: bindFixed(this.copyProperty, this, row) }
-                );
-            }
-
-            items.push(
-                "-",
-                {label: isWatch ? "EditWatch" : (isStackFrame ? "EditVariable" : "EditProperty"),
-                    command: bindFixed(this.editProperty, this, row) }
-            );
-
-            if (isWatch || (!isStackFrame && !isDOMMember(rowObject, rowName)))
-            {
-                items.push(
-                    {label: isWatch ? "DeleteWatch" : "DeleteProperty",
-                        command: bindFixed(this.deleteProperty, this, row) }
-                );
-            }
-        }
-
-        items.push(
-            "-",
-            {label: "Refresh", command: bindFixed(this.rebuild, this, true) }
-        );
-
-        return items;
-    },
-
-    getEditor: function(target, value)
-    {
-        if (!this.editor)
-            this.editor = new DOMEditor(this.document);
-
-        return this.editor;
-    }/**/
+        // return this.context.getGlobalScope();
+    }/***********************************************************************
+		 * ,
+		 * 
+		 * updateOption: function(name, value) { const optionMap =
+		 * {showUserProps: 1, showUserFuncs: 1, showDOMProps: 1, showDOMFuncs:
+		 * 1, showDOMConstants: 1}; if ( optionMap.hasOwnProperty(name) )
+		 * this.rebuild(true); },
+		 * 
+		 * getOptionsMenuItems: function() { return [
+		 * optionMenu("ShowUserProps", "showUserProps"),
+		 * optionMenu("ShowUserFuncs", "showUserFuncs"),
+		 * optionMenu("ShowDOMProps", "showDOMProps"),
+		 * optionMenu("ShowDOMFuncs", "showDOMFuncs"),
+		 * optionMenu("ShowDOMConstants", "showDOMConstants"), "-", {label:
+		 * "Refresh", command: bindFixed(this.rebuild, this, true) } ]; },
+		 * 
+		 * getContextMenuItems: function(object, target) { var row =
+		 * getAncestorByClass(target, "memberRow");
+		 * 
+		 * var items = [];
+		 * 
+		 * if (row) { var rowName = getRowName(row); var rowObject =
+		 * this.getRowObject(row); var rowValue = this.getRowPropertyValue(row);
+		 * 
+		 * var isWatch = hasClass(row, "watchRow"); var isStackFrame = rowObject
+		 * instanceof jsdIStackFrame;
+		 * 
+		 * if (typeof(rowValue) == "string" || typeof(rowValue) == "number") { //
+		 * Functions already have a copy item in their context menu items.push(
+		 * "-", {label: "CopyValue", command: bindFixed(this.copyProperty, this,
+		 * row) } ); }
+		 * 
+		 * items.push( "-", {label: isWatch ? "EditWatch" : (isStackFrame ?
+		 * "EditVariable" : "EditProperty"), command:
+		 * bindFixed(this.editProperty, this, row) } );
+		 * 
+		 * if (isWatch || (!isStackFrame && !isDOMMember(rowObject, rowName))) {
+		 * items.push( {label: isWatch ? "DeleteWatch" : "DeleteProperty",
+		 * command: bindFixed(this.deleteProperty, this, row) } ); } }
+		 * 
+		 * items.push( "-", {label: "Refresh", command: bindFixed(this.rebuild,
+		 * this, true) } );
+		 * 
+		 * return items; },
+		 * 
+		 * getEditor: function(target, value) { if (!this.editor) this.editor =
+		 * new DOMEditor(this.document);
+		 * 
+		 * return this.editor; }/
+		 **********************************************************************/
 });
 
 // ************************************************************************************************
@@ -28832,12 +28935,13 @@ DOMMainPanel.prototype = extend(Firebug.DOMBasePanel.prototype,
 
         // Make sure we get a fresh status path for the object, since otherwise
         // it might find the object in the existing path and not refresh it
-        //Firebug.chrome.clearStatusPath();
+        // Firebug.chrome.clearStatusPath();
 
         this.select(target.repObject, true);
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     onClick: function(event)
     {
@@ -28854,7 +28958,8 @@ DOMMainPanel.prototype = extend(Firebug.DOMBasePanel.prototype,
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // extends Panel
 
     name: "DOM",
@@ -28873,7 +28978,7 @@ DOMMainPanel.prototype = extend(Firebug.DOMBasePanel.prototype,
 
         this.onClick = bind(this.onClick, this);
 
-        //TODO: xxxpedro
+        // TODO: xxxpedro
         this.onClickStatusBar = bind(this.onClickStatusBar, this);
 
         this.panelNode.style.padding = "0 1px";
@@ -28881,8 +28986,8 @@ DOMMainPanel.prototype = extend(Firebug.DOMBasePanel.prototype,
 
     initialize: function(oldPanelNode)
     {
-        //this.panelNode.addEventListener("click", this.onClick, false);
-        //dispatch([Firebug.A11yModel], 'onInitializeNode', [this, 'console']);
+        // this.panelNode.addEventListener("click", this.onClick, false);
+        // dispatch([Firebug.A11yModel], 'onInitializeNode', [this, 'console']);
 
         Firebug.DOMBasePanel.prototype.initialize.apply(this, arguments);
 
@@ -28891,57 +28996,41 @@ DOMMainPanel.prototype = extend(Firebug.DOMBasePanel.prototype,
         // TODO: xxxpedro dom
         this.ishow();
 
-        //TODO: xxxpedro
+        // TODO: xxxpedro
         addEvent(this.statusBarNode, "click", this.onClickStatusBar);
     },
 
     shutdown: function()
     {
-        //this.panelNode.removeEventListener("click", this.onClick, false);
-        //dispatch([Firebug.A11yModel], 'onDestroyNode', [this, 'console']);
+        // this.panelNode.removeEventListener("click", this.onClick, false);
+        // dispatch([Firebug.A11yModel], 'onDestroyNode', [this, 'console']);
 
         removeEvent(this.panelNode, "click", this.onClick);
 
         Firebug.DOMBasePanel.prototype.shutdown.apply(this, arguments);
-    }/*,
-
-    search: function(text, reverse)
-    {
-        if (!text)
-        {
-            delete this.currentSearch;
-            this.highlightRow(null);
-            return false;
-        }
-
-        var row;
-        if (this.currentSearch && text == this.currentSearch.text)
-            row = this.currentSearch.findNext(true, undefined, reverse, Firebug.searchCaseSensitive);
-        else
-        {
-            function findRow(node) { return getAncestorByClass(node, "memberRow"); }
-            this.currentSearch = new TextSearch(this.panelNode, findRow);
-            row = this.currentSearch.find(text, reverse, Firebug.searchCaseSensitive);
-        }
-
-        if (row)
-        {
-            var sel = this.document.defaultView.getSelection();
-            sel.removeAllRanges();
-            sel.addRange(this.currentSearch.range);
-
-            scrollIntoCenterView(row, this.panelNode);
-
-            this.highlightRow(row);
-            dispatch([Firebug.A11yModel], 'onDomSearchMatchFound', [this, text, row]);
-            return true;
-        }
-        else
-        {
-            dispatch([Firebug.A11yModel], 'onDomSearchMatchFound', [this, text, null]);
-            return false;
-        }
-    }/**/
+    }/***********************************************************************
+		 * ,
+		 * 
+		 * search: function(text, reverse) { if (!text) { delete
+		 * this.currentSearch; this.highlightRow(null); return false; }
+		 * 
+		 * var row; if (this.currentSearch && text == this.currentSearch.text)
+		 * row = this.currentSearch.findNext(true, undefined, reverse,
+		 * Firebug.searchCaseSensitive); else { function findRow(node) { return
+		 * getAncestorByClass(node, "memberRow"); } this.currentSearch = new
+		 * TextSearch(this.panelNode, findRow); row =
+		 * this.currentSearch.find(text, reverse, Firebug.searchCaseSensitive); }
+		 * 
+		 * if (row) { var sel = this.document.defaultView.getSelection();
+		 * sel.removeAllRanges(); sel.addRange(this.currentSearch.range);
+		 * 
+		 * scrollIntoCenterView(row, this.panelNode);
+		 * 
+		 * this.highlightRow(row); dispatch([Firebug.A11yModel],
+		 * 'onDomSearchMatchFound', [this, text, row]); return true; } else {
+		 * dispatch([Firebug.A11yModel], 'onDomSearchMatchFound', [this, text,
+		 * null]); return false; } }/
+		 **********************************************************************/
 });
 
 Firebug.registerPanel(DOMMainPanel);
@@ -28954,7 +29043,10 @@ Firebug.registerPanel(DOMMainPanel);
 // ************************************************************************************************
 // Local Helpers
 
-var getMembers = function getMembers(object, level)  // we expect object to be user-level object wrapped in security blanket
+var getMembers = function getMembers(object, level)  // we expect object to
+														// be user-level object
+														// wrapped in security
+														// blanket
 {
     if (!level)
         level = 0;
@@ -28965,8 +29057,8 @@ var getMembers = function getMembers(object, level)  // we expect object to be u
     try
     {
         var domMembers = getDOMMembers(object);
-        //var domMembers = {}; // TODO: xxxpedro
-        //var domConstantMap = {};  // TODO: xxxpedro
+        // var domMembers = {}; // TODO: xxxpedro
+        // var domConstantMap = {}; // TODO: xxxpedro
 
         if (object.wrappedJSObject)
             var insecureObject = object.wrappedJSObject;
@@ -28979,7 +29071,8 @@ var getMembers = function getMembers(object, level)  // we expect object to be u
 
         for (var name in insecureObject)  // enumeration is safe
         {
-            if (ignoreVars[name] == 1)  // javascript.options.strict says ignoreVars is undefined.
+            if (ignoreVars[name] == 1)  // javascript.options.strict says
+										// ignoreVars is undefined.
                 continue;
 
             var val;
@@ -29010,15 +29103,14 @@ var getMembers = function getMembers(object, level)  // we expect object to be u
             }
             else
             {
-                //TODO: xxxpedro
-                /*
-                var getterFunction = insecureObject.__lookupGetter__(name),
-                    setterFunction = insecureObject.__lookupSetter__(name),
-                    prefix = "";
-
-                if(getterFunction && !setterFunction)
-                    prefix = "get ";
-                /**/
+                // TODO: xxxpedro
+                /***************************************************************
+				 * var getterFunction = insecureObject.__lookupGetter__(name),
+				 * setterFunction = insecureObject.__lookupSetter__(name),
+				 * prefix = "";
+				 * 
+				 * if(getterFunction && !setterFunction) prefix = "get "; /
+				 **************************************************************/
 
                 var prefix = "";
 
@@ -29034,11 +29126,12 @@ var getMembers = function getMembers(object, level)  // we expect object to be u
     catch (exc)
     {
         // Sometimes we get exceptions just from trying to iterate the members
-        // of certain objects, like StorageList, but don't let that gum up the works
+        // of certain objects, like StorageList, but don't let that gum up the
+		// works
         throw exc;
         if (FBTrace.DBG_ERRORS && FBTrace.DBG_DOM)
             FBTrace.sysout("dom.getMembers FAILS: ", exc);
-        //throw exc;
+        // throw exc;
     }
 
     function sortName(a, b) { return a.name > b.name ? 1 : -1; }
@@ -29087,7 +29180,9 @@ var getMembers = function getMembers(object, level)  // we expect object to be u
     return members;
 }
 
-function expandMembers(members, toggles, offset, level)  // recursion starts with offset=0, level=0
+function expandMembers(members, toggles, offset, level)  // recursion starts
+															// with offset=0,
+															// level=0
 {
     var expanded = 0;
     for (var i = offset; i < members.length; ++i)
@@ -29098,23 +29193,26 @@ function expandMembers(members, toggles, offset, level)  // recursion starts wit
 
         if ( toggles.hasOwnProperty(member.name) )
         {
-            member.open = "opened";  // member.level <= level && member.name in toggles.
+            member.open = "opened";  // member.level <= level && member.name
+										// in toggles.
 
-            var newMembers = getMembers(member.value, level+1);  // sets newMembers.level to level+1
+            var newMembers = getMembers(member.value, level+1);  // sets
+																	// newMembers.level
+																	// to
+																	// level+1
 
             var args = [i+1, 0];
             args.push.apply(args, newMembers);
             members.splice.apply(members, args);
 
-            /*
-            if (FBTrace.DBG_DOM)
-            {
-                FBTrace.sysout("expandMembers member.name", member.name);
-                FBTrace.sysout("expandMembers toggles", toggles);
-                FBTrace.sysout("expandMembers toggles[member.name]", toggles[member.name]);
-                FBTrace.sysout("dom.expandedMembers level: "+level+" member", member);
-            }
-            /**/
+            /*******************************************************************
+			 * if (FBTrace.DBG_DOM) { FBTrace.sysout("expandMembers
+			 * member.name", member.name); FBTrace.sysout("expandMembers
+			 * toggles", toggles); FBTrace.sysout("expandMembers
+			 * toggles[member.name]", toggles[member.name]);
+			 * FBTrace.sysout("dom.expandedMembers level: "+level+" member",
+			 * member); } /
+			 ******************************************************************/
 
             expanded += newMembers.length;
             i += newMembers.length + expandMembers(members, toggles[member.name], i+1, level+1);
@@ -29124,7 +29222,8 @@ function expandMembers(members, toggles, offset, level)  // recursion starts wit
     return expanded;
 }
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 
 function isClassFunction(fn)
@@ -29158,10 +29257,11 @@ FBL.ErrorCopy = function(message)
 
 var addMember = function addMember(type, props, name, value, level, order)
 {
-    var rep = Firebug.getRep(value);    // do this first in case a call to instanceof reveals contents
+    var rep = Firebug.getRep(value);    // do this first in case a call to
+										// instanceof reveals contents
     var tag = rep.shortTag ? rep.shortTag : rep.tag;
 
-    var ErrorCopy = function(){}; //TODO: xxxpedro
+    var ErrorCopy = function(){}; // TODO: xxxpedro
 
     var valueType = typeof(value);
     var hasChildren = hasProperties(value) && !(value instanceof ErrorCopy) &&
@@ -29241,9 +29341,12 @@ var getPath = function getPath(row)
 // ************************************************************************************************
 
 
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+// * * * * * * * * *
 
 
 // ************************************************************************************************
@@ -29289,7 +29392,7 @@ DOMSidePanel.prototype = extend(Firebug.DOMBasePanel.prototype,
 
         // Make sure we get a fresh status path for the object, since otherwise
         // it might find the object in the existing path and not refresh it
-        //Firebug.chrome.clearStatusPath();
+        // Firebug.chrome.clearStatusPath();
 
         var object = target.repObject;
 
@@ -29304,28 +29407,24 @@ DOMSidePanel.prototype = extend(Firebug.DOMBasePanel.prototype,
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
 
     onClick: function(event)
     {
-        /*
-        var target = event.srcElement || event.target;
-
-        var object = getAncestorByClass(target, "objectLink");
-        object = object ? object.repObject : null;
-
-        if(!object) return;
-
-        if (instanceOf(object, "Element"))
-        {
-            Firebug.HTML.selectTreeNode(ElementCache(object));
-        }
-        else
-        {
-            Firebug.chrome.selectPanel("DOM");
-            Firebug.chrome.getPanel("DOM").select(object, true);
-        }
-        /**/
+        /***********************************************************************
+		 * var target = event.srcElement || event.target;
+		 * 
+		 * var object = getAncestorByClass(target, "objectLink"); object =
+		 * object ? object.repObject : null;
+		 * 
+		 * if(!object) return;
+		 * 
+		 * if (instanceOf(object, "Element")) {
+		 * Firebug.HTML.selectTreeNode(ElementCache(object)); } else {
+		 * Firebug.chrome.selectPanel("DOM");
+		 * Firebug.chrome.getPanel("DOM").select(object, true); } /
+		 **********************************************************************/
 
 
         var target = event.srcElement || event.target;
@@ -29342,7 +29441,8 @@ DOMSidePanel.prototype = extend(Firebug.DOMBasePanel.prototype,
         /**/
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // extends Panel
 
     name: "DOMSidePanel",
@@ -29382,7 +29482,7 @@ DOMSidePanel.prototype = extend(Firebug.DOMBasePanel.prototype,
 
     reattach: function(oldChrome)
     {
-        //this.isInitialized = oldChrome.getPanel("DOM").isInitialized;
+        // this.isInitialized = oldChrome.getPanel("DOM").isInitialized;
         this.toggles = oldChrome.getPanel("DOMSidePanel").toggles;
     }
 
@@ -29455,7 +29555,7 @@ this.getPanel = function()
     return this.module ? this.module.getPanel() : null;
 };
 
-//*************************************************************************************************
+// *************************************************************************************************
 
 this.logFormatted = function(objects, className)
 {
@@ -29521,7 +29621,7 @@ this.writeRow = function(message, className)
     this.appendRow(row);
 };
 
-//*************************************************************************************************
+// *************************************************************************************************
 
 function appendText(object, html)
 {
@@ -29537,7 +29637,7 @@ function getTimestamp()
     return now.toLocaleTimeString() + "." + ms;
 };
 
-//*************************************************************************************************
+// *************************************************************************************************
 
 var HTMLtoEntity =
 {
@@ -29558,7 +29658,7 @@ function escapeHTML(value)
     return (value+"").replace(/[<>&"']/g, replaceChars);
 };
 
-//*************************************************************************************************
+// *************************************************************************************************
 
 function objectToString(object)
 {
@@ -29649,7 +29749,7 @@ Firebug.registerPanel(TracePanel);
 }});
 
 
-//***********ATE plugin********
+// ***********ATE plugin********
 FBL.ns(function() { with (FBL) {
 
 	// ************************************************************************************************
@@ -29684,7 +29784,8 @@ FBL.ns(function() { with (FBL) {
 	        offlineFragment = null;
 	    },
 	    
-	    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// * * * * * * * * * * *
 	    // Inspect functions
 	    
 	    toggleInspect: function()
@@ -29704,7 +29805,7 @@ FBL.ns(function() { with (FBL) {
 	    {
 	        isInspecting = true;
 	        
-	        //Firebug.chrome.selectPanel("HTML");
+	        // Firebug.chrome.selectPanel("HTML");
 	        
 	        createInspectorFrame();
 	        
@@ -29713,29 +29814,31 @@ FBL.ns(function() { with (FBL) {
 	        fbInspectFrame.style.width = size.width + "px";
 	        fbInspectFrame.style.height = size.height + "px";
 	        
-	        //addEvent(Firebug.browser.document.documentElement, "mousemove", Firebug.Plugin.onInspectingBody);
+	        // addEvent(Firebug.browser.document.documentElement, "mousemove",
+			// Firebug.Plugin.onInspectingBody);
 	        
 	        addEvent(fbInspectFrame, "mousemove", Firebug.Plugin.onInspecting);
 	        addEvent(fbInspectFrame, "mousedown", Firebug.Plugin.onInspectingClick);
 	    },
 	    
-//		createInspectorFrame:  function()
-//		{
-//		    fbInspectFrame = createGlobalElement("div");
-//		    fbInspectFrame.id = "fbInspectFrame";
-//		    fbInspectFrame.firebugIgnore = true;
-//		    fbInspectFrame.style.cssText = inspectFrameStyle;
-//		    Firebug.browser.document.getElementsByTagName("body")[0].appendChild(fbInspectFrame);
-//		},
+// createInspectorFrame: function()
+// {
+// fbInspectFrame = createGlobalElement("div");
+// fbInspectFrame.id = "fbInspectFrame";
+// fbInspectFrame.firebugIgnore = true;
+// fbInspectFrame.style.cssText = inspectFrameStyle;
+// Firebug.browser.document.getElementsByTagName("body")[0].appendChild(fbInspectFrame);
+// },
 	    
 	    stopInspecting: function()
 	    {
 	        isInspecting = false;
-//	        if (this.angular == null) {
-//	        	this.angular = document.getElementById("FirebugUI").contentWindow.angular;
-//	        }
-	        //var angscope = this.angular.element(document.getElementById("FirebugUI").contentDocument.getElementById("abctest")).scope();
-	        //angscope.launchFireBug();
+// if (this.angular == null) {
+// this.angular = document.getElementById("FirebugUI").contentWindow.angular;
+// }
+	        // var angscope =
+			// this.angular.element(document.getElementById("FirebugUI").contentDocument.getElementById("abctest")).scope();
+	        // angscope.launchFireBug();
 	        if (outlineVisible) this.hideOutline();
 	        removeEvent(fbInspectFrame, "mousemove", Firebug.Plugin.onInspecting);
 	        removeEvent(fbInspectFrame, "mousedown", Firebug.Plugin.onInspectingClick);
@@ -29763,7 +29866,7 @@ FBL.ns(function() { with (FBL) {
 	        while (targ.nodeType != 1) targ = targ.parentNode;
 	        document.getElementById("FirebugUI").contentDocument.getElementById("removeTitle").innerHTML=targ.outerHTML;
 	        
-	        //Firebug.Console.log(targ);
+	        // Firebug.Console.log(targ);
 	        Firebug.Plugin.stopInspecting();
 	    },
 	    
@@ -29785,7 +29888,7 @@ FBL.ns(function() { with (FBL) {
 	    
 	            if (targ.nodeName.toLowerCase() == "body") return;
 	    
-	            //Firebug.Console.log(e.clientX, e.clientY, targ);
+	            // Firebug.Console.log(e.clientX, e.clientY, targ);
 	            Firebug.Plugin.drawOutline(targ);
 	            
 	            if (ElementCache(targ))
@@ -29831,7 +29934,7 @@ FBL.ns(function() { with (FBL) {
 	    
 	            if (targ.nodeName.toLowerCase() == "body") return;
 	    
-	            //Firebug.Console.log(e.clientX, e.clientY, targ);
+	            // Firebug.Console.log(e.clientX, e.clientY, targ);
 	            Firebug.Plugin.drawOutline(targ);
 	            
 	            if (ElementCache.has(targ))
@@ -29842,14 +29945,9 @@ FBL.ns(function() { with (FBL) {
 	    },
 	    
 	    /**
-	     * 
-	     *   llttttttrr
-	     *   llttttttrr
-	     *   ll      rr
-	     *   ll      rr
-	     *   llbbbbbbrr
-	     *   llbbbbbbrr
-	     */
+		 * 
+		 * llttttttrr llttttttrr ll rr ll rr llbbbbbbrr llbbbbbbrr
+		 */
 	    drawOutline: function(el)
 	    {
 	        var border = 2;
@@ -29867,11 +29965,17 @@ FBL.ns(function() { with (FBL) {
 	        var width = box.width;
 	        
 	        var freeHorizontalSpace = scrollPosition.left + windowSize.width - left - width - 
-	                (!isIE && scrollSize.height > windowSize.height ? // is *vertical* scrollbar visible
+	                (!isIE && scrollSize.height > windowSize.height ? // is
+																		// *vertical*
+																		// scrollbar
+																		// visible
 	                 scrollbarSize : 0);
 	        
 	        var freeVerticalSpace = scrollPosition.top + windowSize.height - top - height -
-	                (!isIE && scrollSize.width > windowSize.width ? // is *horizontal* scrollbar visible
+	                (!isIE && scrollSize.width > windowSize.width ? // is
+																	// *horizontal*
+																	// scrollbar
+																	// visible
 	                scrollbarSize : 0);
 	        
 	        var numVerticalBorders = freeVerticalSpace > 0 ? 2 : 1;
@@ -29897,14 +30001,15 @@ FBL.ns(function() { with (FBL) {
 	            style.top = top+height + "px";
 	            style.left = left + "px";
 	            style.width = width + "px";
-	            //style.height = border + "px"; // TODO: on initialize() or worst case?
+	            // style.height = border + "px"; // TODO: on initialize() or
+				// worst case?
 	        }
 	        else
 	        {
 	            style.top = -2*border + "px";
 	            style.left = -2*border + "px";
 	            style.width = border + "px";
-	            //style.height = border + "px";
+	            // style.height = border + "px";
 	        }
 	        
 	        style = o.fbOutlineR.style;
@@ -29948,7 +30053,8 @@ FBL.ns(function() { with (FBL) {
 	        outlineVisible = true;
 	    },
 	  
-	    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+		// * * * * * * * * * * *
 	    // Box Model
 	    
 	    drawBoxModel: function(el)
@@ -29965,7 +30071,8 @@ FBL.ns(function() { with (FBL) {
 	        // element may be occluded by the chrome, when in frame mode
 	        var offsetHeight = Firebug.chrome.type == "frame" ? FirebugChrome.height : 0;
 	        
-	        // if element box is not inside the viewport, don't draw the box model
+	        // if element box is not inside the viewport, don't draw the box
+			// model
 	        if (box.top > scrollPosition.top + windowSize.height - offsetHeight ||
 	            box.left > scrollPosition.left + windowSize.width ||
 	            scrollPosition.top > box.top + box.height ||
@@ -30028,12 +30135,14 @@ FBL.ns(function() { with (FBL) {
 	// Inspector Internals
 
 
-	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * * * *
 	// Shared variables
 
 
 
-	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * * * *
 	// Internal variables
 
 	var offlineFragment = null;
@@ -30046,7 +30155,8 @@ FBL.ns(function() { with (FBL) {
 	    boxPadding, boxPaddingStyle, 
 	    boxContent, boxContentStyle;
 
-	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * * * *
 
 	var resetStyle = "margin:0; padding:0; border:0; position:absolute; overflow:hidden; display:block;";
 	var offscreenStyle = resetStyle + "top:-1234px; left:-1234px;";
@@ -30055,7 +30165,9 @@ FBL.ns(function() { with (FBL) {
 	var inspectFrameStyle = resetStyle + "z-index: 2147483550; top:0; left:0; background:url(" +
 	                        Env.Location.skinDir + "pixel_transparent.gif);";
 
-	//if (Env.Options.enableTrace) inspectFrameStyle = resetStyle + "z-index: 2147483550; top: 0; left: 0; background: #ff0; opacity: 0.05; _filter: alpha(opacity=5);";
+	// if (Env.Options.enableTrace) inspectFrameStyle = resetStyle + "z-index:
+	// 2147483550; top: 0; left: 0; background: #ff0; opacity: 0.05; _filter:
+	// alpha(opacity=5);";
 
 	var inspectModelOpacity = isIE ? "filter:alpha(opacity=80);" : "opacity:0.8;";
 	var inspectModelStyle = inspectStyle + inspectModelOpacity;
@@ -30070,13 +30182,15 @@ FBL.ns(function() { with (FBL) {
 	    fbVerticalLine: "background: #3875D7;width: 2px;"
 	}
 
-	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * * * *
 
 	var lastInspecting = 0;
 	var fbInspectFrame = null;
 
 
-	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * * * *
 
 	var outlineVisible = false;
 	var outlineElements = {};
@@ -30087,7 +30201,7 @@ FBL.ns(function() { with (FBL) {
 	  "fbOutlineR": "fbVerticalLine"
 	};
 
-	//var angularHandler = angular;
+	// var angularHandler = angular;
 	
 	var getInspectingTarget = function()
 	{
@@ -30205,14 +30319,14 @@ PluginPanel.prototype = extend(Firebug.Panel,
         	caption: "GetElement",
             title: "Get Element to Train",
             type: "toggle",
-            //element: $("fbChrome_btInspect"),
+            // element: $("fbChrome_btInspect"),
             owner: Firebug.Plugin,
             
             onPress: Firebug.Plugin.startInspecting,
             onUnpress: Firebug.Plugin.stopInspecting          
         });
     },
-//TODO add destroy function here    
+// TODO add destroy function here
     initialize: function(){
         Firebug.Panel.initialize.apply(this, arguments);
         
@@ -30268,7 +30382,8 @@ append(Firebug,
         }
     },
 
-    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+	// * * * * * * * * *
     // Registration
 
     registerModule: function()
@@ -30341,13 +30456,15 @@ FirebugChrome.Skin =
         </div> \
         <div class="panel-body"> \
 	          <div ng-replace>Fruits: <small>(data is generated in pure Java via an asynchronous call)</small></div> \
-	          <table class="table table-striped"> \
+        <button class="btn btn-lg btn-success" ng-click="launchFireBug()">Update data</button> \
+        <button class="btn btn-lg btn-success" ng-click="launchBrowser()">homePage</button> \
+    		<table class="table table-striped"> \
 	          	<thead> \
 	          		<tr><th>Name</th></tr> \
 	          	</thead> \
 	          	<tbody> \
 	          		<tr ng-repeat="fruit in fruits"> \
-	          			<td>{{fruit}}</td> \
+	          			<td><input id="{{fruit}}" value="{{fruit}}"></input></td><td>{{fruit}}</td> \
 	          		</tr> \
 	          	</tbody> \
 	          </table> \
@@ -30374,9 +30491,6 @@ FirebugChrome.Skin =
   	 \
     </div> \
 </div> \
-<a href="index.html">Reload page</a> \
-	          <button class="btn btn-lg btn-success" ng-click="launchFireBug()">Update data</button> \
-	          <button class="btn btn-lg btn-success" ng-click="launchBrowser()">homePage</button> \
   	 \
   </div> <table id="fbChrome" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td id="fbTop" colspan="2"><div id="fbWindowButtons"><a id="fbWindow_btDeactivate" class="fbSmallButton fbHover" title="Deactivate Firebug for this web page">&nbsp;</a><a id="fbWindow_btDetach" class="fbSmallButton fbHover" title="Open Firebug in popup window">&nbsp;</a><a id="fbWindow_btClose" class="fbSmallButton fbHover" title="Minimize Firebug">&nbsp;</a></div><div id="fbToolbar"><div id="fbToolbarContent"><span id="fbToolbarIcon"><a id="fbFirebugButton" class="fbIconButton" class="fbHover" target="_blank">&nbsp;</a></span><span id="fbToolbarButtons"><span id="fbFixedButtons"><a id="fbChrome_btInspect" class="fbButton fbHover" title="Click an element in the page to inspect">Inspect</a></span><span id="fbConsoleButtons" class="fbToolbarButtons"><a id="fbConsole_btClear" class="fbButton fbHover" title="Clear the console">Clear</a></span></span><span id="fbStatusBarBox"><span class="fbToolbarSeparator"></span></span></div></div><div id="fbPanelBarBox"><div id="fbPanelBar1" class="fbPanelBar"><a id="fbConsoleTab" class="fbTab fbHover"><span class="fbTabL"></span><span class="fbTabText">Console</span><span class="fbTabMenuTarget"></span><span class="fbTabR"></span></a><a id="fbHTMLTab" class="fbTab fbHover"><span class="fbTabL"></span><span class="fbTabText">HTML</span><span class="fbTabR"></span></a><a class="fbTab fbHover"><span class="fbTabL"></span><span class="fbTabText">CSS</span><span class="fbTabR"></span></a><a class="fbTab fbHover"><span class="fbTabL"></span><span class="fbTabText">Script</span><span class="fbTabR"></span></a><a class="fbTab fbHover"><span class="fbTabL"></span><span class="fbTabText">DOM</span><span class="fbTabR"></span></a></div><div id="fbPanelBar2Box" class="hide"><div id="fbPanelBar2" class="fbPanelBar"></div></div></div><div id="fbHSplitter">&nbsp;</div></td></tr><tr id="fbContent"><td id="fbPanelBox1"><div id="fbPanel1" class="fbFitHeight"><div id="fbConsole" class="fbPanel"></div><div id="fbHTML" class="fbPanel"></div></div></td><td id="fbPanelBox2" class="hide"><div id="fbVSplitter" class="fbVSplitter">&nbsp;</div><div id="fbPanel2" class="fbFitHeight"><div id="fbHTML_Style" class="fbPanel"></div><div id="fbHTML_Layout" class="fbPanel"></div><div id="fbHTML_DOM" class="fbPanel"></div></div><textarea id="fbLargeCommandLine" class="fbFitHeight"></textarea><div id="fbLargeCommandButtons"><a id="fbCommand_btRun" class="fbButton fbHover">Run</a><a id="fbCommand_btClear" class="fbButton fbHover">Clear</a><a id="fbSmallCommandLineIcon" class="fbSmallButton fbHover"></a></div></td></tr><tr id="fbBottom" class="hide"><td id="fbCommand" colspan="2"><div id="fbCommandBox"><div id="fbCommandIcon">&gt;&gt;&gt;</div><input id="fbCommandLine" name="fbCommandLine" type="text"/><a id="fbLargeCommandLineIcon" class="fbSmallButton fbHover"></a></div></td></tr></tbody></table><span id="fbMiniChrome"><span id="fbMiniContent"><span id="fbMiniIcon" title="Open Firebug Lite"></span><span id="fbMiniErrors" class="fbErrors">2 errors</span></span></span>'
 };

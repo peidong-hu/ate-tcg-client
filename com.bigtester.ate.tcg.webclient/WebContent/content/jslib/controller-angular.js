@@ -65,7 +65,8 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 				}
 
 		$http.post('http://172.16.173.132:8080/com.bigtester.ate.tcg/greeting3',dom).success(function(data, status, headers, config) {
-			$scope.message = data.content;
+			$scope.fruits = [data.content, 'hello'];
+			$scope.apply();
 		}).error(function(data, status, headers, config) {
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});		

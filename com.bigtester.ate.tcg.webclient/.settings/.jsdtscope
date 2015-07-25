@@ -4,52 +4,6 @@
 	<classpathentry excluding="**/bower_components/*/|**/node_modules/*/|**/*.min.js/" kind="src" path="WebContent"/>
 	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="build/chrome-extension"/>
 	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="build/chrome-extension-beta"/>
-	<classpathentry excluding="firerainbow/chrome/content/|**/bower_components/*|firebug1.4/|**/node_modules/*|firerainbow/defaults/preferences/|firerainbow/chrome/content/codemirror/|lite/|**/*.min.js|firediff/content/firediff/|firediff/content/firediff-original/|firebug1.4/lib/" kind="src" path="content"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|lib/|**/*.min.js" kind="src" path="content/firebug1.4"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="content/firebug1.4/lib"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="content/firediff/content/firediff"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="content/firediff/content/firediff-original"/>
-	<classpathentry excluding="**/bower_components/*|codemirror/|**/node_modules/*|**/*.min.js" kind="src" path="content/firerainbow/chrome/content"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="content/firerainbow/chrome/content/codemirror"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="content/firerainbow/defaults/preferences"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="content/lite"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="docs/beta"/>
-	<classpathentry excluding="HelloModule/app/modules_v2/Lite/Firebug/|issues/3504-jQuery-XHR/|**/node_modules/*|HelloModule/app/modules_v2/Common/Lib/|HelloModule/app/modules/FBL/Domplate/|HelloModule/requirejs/build/jslib/|sandbox/syntaxHighlight/coremirror/highlight_files/|HelloModule/requirejs/build/|HelloModule/app/modules_v2/Common/Domplate/|HelloModule/requirejs/|sandbox/orion/samples/|sandbox/syntaxHighlight/|HelloModule/requirejs/require/|**/bower_components/*|HelloModule/app/|sandbox/requireScope/|sandbox/orion_nightly/samples/|firequery/|sandbox/requireScope/Firebug/|**/*.min.js|sandbox/orion/js/|sandbox/requireNamespace/|HelloModule/app/modules/|HelloModule/app/content/|sandbox/orion_nightly/js/|HelloModule/app/modules/FBL/|HelloModule/app/modules/Core/|HelloModule/app/modules_v2/Mozilla/Firebug/|sandbox/requireScope/v2/|HelloModule/|sandbox/requireScope/Lib/|HelloModule/app/modules_v2/Common/Firebug/|HelloModule/app/webapp/|sandbox/orion/js-tests/|plugin/|HelloModule/app/modules_v2/Common/|sandbox/flexBox/include/|sandbox/orion_nightly/js-tests/" kind="src" path="sandbox"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/firequery"/>
-	<classpathentry excluding="app/modules/FBL/|app/modules/Core/|requirejs/build/jslib/|**/node_modules/*|app/modules_v2/Common/|app/modules_v2/Lite/Firebug/|app/modules/|app/modules_v2/Common/Lib/|**/bower_components/*|app/modules/FBL/Domplate/|app/content/|requirejs/|app/modules_v2/Mozilla/Firebug/|app/|app/modules_v2/Common/Domplate/|requirejs/build/|**/*.min.js|app/modules_v2/Common/Firebug/|app/webapp/|requirejs/require/" kind="src" path="sandbox/HelloModule"/>
-	<classpathentry excluding="modules_v2/Common/Firebug/|webapp/|modules/FBL/|modules/Core/|**/node_modules/*|modules_v2/Common/|modules/|**/bower_components/*|content/|modules_v2/Lite/Firebug/|modules_v2/Common/Lib/|modules/FBL/Domplate/|modules_v2/Mozilla/Firebug/|**/*.min.js|modules_v2/Common/Domplate/" kind="src" path="sandbox/HelloModule/app"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/HelloModule/app/content"/>
-	<classpathentry excluding="FBL/|Core/|**/bower_components/*|FBL/Domplate/|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/HelloModule/app/modules"/>
-	<classpathentry excluding="Lib/|**/bower_components/*|**/node_modules/*|Domplate/|**/*.min.js|Firebug/" kind="src" path="sandbox/HelloModule/app/modules_v2/Common"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/HelloModule/app/modules_v2/Common/Domplate"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/HelloModule/app/modules_v2/Common/Firebug"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/HelloModule/app/modules_v2/Common/Lib"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/HelloModule/app/modules_v2/Lite/Firebug"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/HelloModule/app/modules_v2/Mozilla/Firebug"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/HelloModule/app/modules/Core"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|Domplate/|**/*.min.js" kind="src" path="sandbox/HelloModule/app/modules/FBL"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/HelloModule/app/modules/FBL/Domplate"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/HelloModule/app/webapp"/>
-	<classpathentry excluding="require/|**/bower_components/*|**/node_modules/*|build/jslib/|**/*.min.js|build/" kind="src" path="sandbox/HelloModule/requirejs"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|jslib/|**/*.min.js" kind="src" path="sandbox/HelloModule/requirejs/build"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/HelloModule/requirejs/build/jslib"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/HelloModule/requirejs/require"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/issues/3504-jQuery-XHR"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/plugin"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/sandbox/flexBox/include"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/sandbox/orion_nightly/js"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/sandbox/orion_nightly/js-tests"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/sandbox/orion_nightly/samples"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/sandbox/orion/js"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/sandbox/orion/js-tests"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/sandbox/orion/samples"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/sandbox/requireNamespace"/>
-	<classpathentry excluding="v2/|Lib/|**/bower_components/*|**/node_modules/*|**/*.min.js|Firebug/" kind="src" path="sandbox/sandbox/requireScope"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/sandbox/requireScope/Firebug"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/sandbox/requireScope/Lib"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/sandbox/requireScope/v2"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js|coremirror/highlight_files/" kind="src" path="sandbox/sandbox/syntaxHighlight"/>
-	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="sandbox/sandbox/syntaxHighlight/coremirror/highlight_files"/>
 	<classpathentry excluding="**/bower_components/*|**/node_modules/*|**/*.min.js" kind="src" path="tests/fbtest"/>
 	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path=""/>
