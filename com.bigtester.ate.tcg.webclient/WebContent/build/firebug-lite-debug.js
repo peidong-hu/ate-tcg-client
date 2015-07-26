@@ -436,7 +436,7 @@ var findLocation =  function findLocation()
         // Always use the local skin when running in the same domain
         // See Issue 3554: Firebug Lite should use local images when loaded
 		// locally
-        Env.useLocalSkin = path.indexOf(location.protocol + "//" + location.host + "/") == 0;
+        Env.useLocalSkin = path.indexOf(location.protocol + "//" + location.host + "/") != 0;
 
         // detecting development and debug modes via file name
         if (fileName == "firebug-lite-dev.js")
