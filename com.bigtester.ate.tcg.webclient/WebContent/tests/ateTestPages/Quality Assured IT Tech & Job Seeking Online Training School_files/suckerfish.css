@@ -1,0 +1,158 @@
+ul li{
+list-style:none}
+
+#nav{
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   z-index: 999;
+   list-style: none;
+   font-weight:bold;
+
+
+}
+
+#nav li{
+   float: left;
+   margin-right: 3px;
+   background: url(../images/suckerfish_right.gif) no-repeat right top;
+   font-size: 12px;
+}
+
+#nav li.active{
+   background-position: right bottom;
+}
+
+#nav li a{
+   float: left;
+   display: block;
+   height: 22px;
+   padding: 9px 14px 0;
+   background: url(../images/suckerfish_left.gif) no-repeat left top;
+   color: #fff;
+   text-decoration: none;
+   list-style: none;
+  
+}
+
+#nav li.active a{
+   background-position: left bottom;
+   color:#fff;
+}
+
+#nav li:hover,
+#nav li.sfhover{
+   background: url(../images/suckerfish_right.gif) no-repeat right top;
+   background-position: right -31px;
+}
+
+#nav li.active:hover,
+#nav li.sfhover.active{
+   background-position: right bottom;
+   color:#fff;
+
+}
+
+#nav li:hover a,
+#nav li.sfhover a{
+   background-position: left -31px;
+   color: #fff;
+}
+
+#nav li.active:hover a {
+   background-position: left bottom;
+   color: #9d9e9e;
+}
+
+#nav li#nav_home.active{
+   background-position: right top;
+   color:#ccc;
+
+}
+
+#nav li#nav_home.active a{
+   background-position: left top;
+   color: #9d9e9e;
+}
+
+#nav li.active#nav_home:hover,
+#nav li.active.sfhover#nav_home{
+   background-position: right -31px;
+}
+
+#nv li.active#nav_home:hover,
+#nav li.active.sfhover#nav_home a{
+   background-position: left -31px;
+   color: #fff;
+}
+
+#nav li ul{
+   clear: left;
+   position: absolute;
+   left: -999em;
+   z-index: 999;
+   width: 161px;
+   margin-top: 31px;
+   margin-left: -1px;
+   border-top: 0;
+   border-bottom: 0;
+   list-style: none;
+   line-height: 1;
+
+}
+
+/* http://thatnorwegianguy.wordpress.com/2007/03/20/ie7-css-filter-hack/ */
+*+html #nav li ul{
+   margin-top: 0;
+}
+
+#nav li li{
+   display: inline;
+   float: none;
+   margin: 0;
+   font-size: 12px;
+   text-transform: none;
+   font-weight:normal;
+   color: #9d9e9e;
+
+}
+
+#nav li ul ul{
+   margin: -31px 0 0 161px;
+}
+
+#nav li:hover ul ul,
+#nav li.sfhover ul ul{
+   left: -999em;
+}
+
+#nav li:hover ul,
+#nav li li:hover ul,
+#nav li.sfhover ul,
+#nav li li.sfhover ul{
+   left: auto;
+   
+}
+
+#nav li li li{
+   font-size: 1em;
+      color: #9d9e9e;
+
+}
+
+#nav li:hover li a,
+#nav li.sfhover li a{
+   float: none;
+   width: 133px;
+   height: auto;
+   padding: 9px 14px;
+   background: #687079;
+   border-bottom: 1px solid #818b94;
+   color: #f9f9f9;
+}
+
+#nav li:hover li a:hover,
+#nav li.sfhover li a:hover{
+   background: #191a19;
+}
+

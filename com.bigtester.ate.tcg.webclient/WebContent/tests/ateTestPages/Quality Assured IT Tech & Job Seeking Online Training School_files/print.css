@@ -1,0 +1,13 @@
+body{
+margin:0;
+padding:0;
+text-align: left;
+background: white;
+background-image: none;
+color:#000000;
+font-family:"Times New Roman", Times, serif; font-size:1.2em;
+}
+#logo{
+display:none;}
+#banner{
+display:none;}
