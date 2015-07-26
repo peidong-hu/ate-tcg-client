@@ -9766,6 +9766,9 @@ var getChromeTemplate = function(isPopup)
 {
     var tpl = FirebugChrome.Skin;
     var r = [], i = -1;
+    if (Env.isDebugMode) {
+        var pathToAngularJS = "../../"
+    }
 
     r[++i] = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/DTD/strict.dtd">';
     r[++i] = '<html ng-app="javafxwebdemo"><head><title>';
@@ -9781,17 +9784,17 @@ var getChromeTemplate = function(isPopup)
     r[++i] = '</style>';
     /**/
 
-    r[++i] = '<script src="http://172.16.173.132:9080/firebuglite/content/jslib/angular.min.js" type="text/javascript"></script> \
-    	<script src="http://172.16.173.132:9080/firebuglite/content/jslib/angular-resource.min.js" type="text/javascript"></script> \
+    r[++i] = '<script src="' + pathToAngularJS +'content/jslib/angular.min.js" type="text/javascript"></script> \
+    	<script src="' + pathToAngularJS +'content/jslib/angular-resource.min.js" type="text/javascript"></script> \
 	<!-- Latest compiled and minified CSS -->  \
-	<link rel="stylesheet" href="http://172.16.173.132:9080/firebuglite/content/css/bootstrap.min.css">  \
+	<link rel="stylesheet" href="' + pathToAngularJS +'content/css/bootstrap.min.css">  \
    	 \
 	<!-- Optional theme -->  \
-	<link rel="stylesheet" href="http://172.16.173.132:9080/firebuglite/content/css/bootstrap-theme.min.css">  \
+	<link rel="stylesheet" href="' + pathToAngularJS +'content/css/bootstrap-theme.min.css">  \
    	 \
 	<!-- Latest compiled and minified JavaScript -->  \
-	<script src="http://172.16.173.132:9080/firebuglite/content/jslib/bootstrap.min.js"></script>  \
-	<script src="http://172.16.173.132:9080/firebuglite/content/jslib/controller-angular.js"></script>';
+	<script src="' + pathToAngularJS +'content/jslib/bootstrap.min.js"></script>  \
+	<script src="' + pathToAngularJS +'content/jslib/controller-angular.js"></script>';
     
     r[++i] = '</head><body class="fbBody' + (isPopup ? ' FirebugPopup' : '') + '">';
     r[++i] = tpl.HTML;
