@@ -520,7 +520,7 @@ function loadModules() {
 
     var sufix = isApplicationContext ? "#app" : "";
 
-    var useDocWrite = true; //test for web driver js executor
+    var useDocWrite = false; //test for web driver js executor
     //var useDocWrite = isIE || isSafari;
 
     var moduleURL, script;
@@ -548,9 +548,9 @@ function loadModules() {
     /**/
 
     // new module loader
-    /*
+
     var length = FBDev.modules.length;
-    var loadModule = function(index){
+    var loadModule = function(index, sufix){
         if (index == length) return;
 
         var module = FBDev.modules[index];
@@ -561,39 +561,34 @@ function loadModules() {
         script.onload = function() {
             if ( !script.onloadDone ) {
                 script.onloadDone = true;
-                loadModule(index+1);
+                loadModule(index+1, sufix);
             }
         };
         script.onreadystatechange = function() {
             if ( ( "loaded" === script.readyState || "complete" === script.readyState ) && !script.onloadDone ) {
                 script.onloadDone = true;
-                loadModule(index+1);
+                loadModule(index+1, sufix);
             }
         }
 
         document.getElementsByTagName("head")[0].appendChild(script);
     };
-    loadModule(0);
+    loadModule(0, sufix);
     /**/
 
+    //for (var i=0, module; module=FBDev.modules[i]; i++)
+    //{
 
-    for (var i=0, module; module=FBDev.modules[i]; i++)
-    {
-        var moduleURL = sourceURL + module + sufix;
 
-        if(useDocWrite)
-        {
-            scriptTags.push("<script src='", moduleURL, "'><\/script>");
-        }
-        else
-        {
-            script = document.createElement("script");
-            script.src = moduleURL;
+      //  if(useDocWrite)
+        //{
+        //    scriptTags.push("<script src='", moduleURL, "'><\/script>");
+        //}
+        //else
+        //{
 
-            document.getElementsByTagName("head")[0].appendChild(script);
-            //document.getElementsByTagName("body")[0].appendChild(script);
-        }
-    }
+        //}
+    //}
 
     if(useDocWrite)
     {
