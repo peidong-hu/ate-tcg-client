@@ -50,7 +50,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 		var dataObj = document;	
 		var req = {
 				 method: 'POST',
-				 url: 'http://172.16.173.132:8080/com.bigtester.ate.tcg/greeting3',
+				 url: 'http://localhost:9080/com.bigtester.ate.tcg/greeting3',
 //				 data: {content: document.documentElement.innerHTML}
 				 headers: {'Content-Type': 'application/json'},
 				 data: JSON.stringify(dom)
@@ -58,13 +58,13 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 				}
 		var req2 = {
 				 method: 'GET',
-				 url: 'http://172.16.173.132:8080/com.bigtester.ate.tcg/greeting4',
+				 url: 'http://localhost:9080/com.bigtester.ate.tcg/greeting4',
 //				 data: {content: document.documentElement.innerHTML}
 //				 data: {content: 'eidkdidkdkdkddkkdkdkdkdkdkdk'},
 //		headers: {'Content-Type': 'application/json'}
 				}
 
-		$http.post('http://172.16.173.132:8080/com.bigtester.ate.tcg/greeting3',dom).success(function(data, status, headers, config) {
+		$http.post('http://localhost:9080/com.bigtester.ate.tcg/greeting3',dom).success(function(data, status, headers, config) {
 			$scope.fruits = [data.content, 'hello'];
 			$scope.apply();
 		}).error(function(data, status, headers, config) {
