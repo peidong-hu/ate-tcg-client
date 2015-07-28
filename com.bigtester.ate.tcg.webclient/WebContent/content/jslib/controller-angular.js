@@ -41,6 +41,26 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 	$scope.launchFireBug = function() {
 		$scope.addDomAsyncAsJSON();
 	}*/
+	$scope.allDocs = [{parentIndex: 0, xpathOfFrame: window.parent.FBL.getElementXPath(window.parent.document.documentElement), domDoc: window.parent.document.documentElement.outerHTML}];
+	$scope.getAllDocumentsOnPage = function(topDocument, parentDocIndex, startingIndex) {
+		//topDocument = window.parent.document.documentElement;
+		iframeElements = topDocument.getElementsByTagName("iframe");
+		frameElements = topDocument.getElementsByTagName("frame");
+		allFrameNodes = iframeElements;
+		for (i = 0; i < allFrameNodes.length; i++) {
+			frameDoc = allFrameNodes[i].contentWindow.document;
+			if (allFrameNodes[i].getAttribute("id")!=="FirebugUI") {
+				$scope.allDocs[i + startingIndex] = {
+					parentIndex: parentDocIndex,
+					xpathOfFrame: window.parent.FBL.getElementXPath(allFrameNodes[i]),
+					domDoc: frameDoc.documentElement.outerHTML
+				};
+				$scope.getAllDocumentsOnPage(frameDoc, i + startingIndex, i + startingIndex + 1);
+				startingIndex = $scope.allDocs.length - i;
+			}
+		}
+	}
+	$scope.getAllDocumentsOnPage(window.parent.document.documentElement, 0, 1);
 	$scope.preprocessing = function(){
 		// Writing it to the server
 		//
@@ -58,9 +78,9 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 				 url: 'http://localhost:9080/com.bigtester.ate.tcg/preprocessing',
 //				 data: {content: document.documentElement.innerHTML}
 				 headers: {'Content-Type': 'application/json'},
-				 data: dom
-		
-				}
+				 data: $scope.allDocs
+
+		}
 		$http(req).success(function(data, status, headers, config) {
 			$scope.fruits = [{inputLabelName: data.content, inputMLHtmlCode: data.content}];
 		}).error(function(data, status, headers, config) {

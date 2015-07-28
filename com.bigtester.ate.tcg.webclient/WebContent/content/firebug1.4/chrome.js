@@ -478,7 +478,7 @@ var getChromeTemplate = function(isPopup)
     if (!Env.isDebugMode) {
         var pathToAngularJS = "../../"
     } else {
-        var pathToAngularJS = "http://localhost:63342/ate-tcg-client/com.bigtester.ate.tcg.webclient/WebContent/"
+        var pathToAngularJS = "https://localhost:63342/ate-tcg-client/com.bigtester.ate.tcg.webclient/WebContent/"
     }
     r[++i] = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/DTD/strict.dtd">';
     r[++i] = '<html ng-app="javafxwebdemo"><head><title>';
