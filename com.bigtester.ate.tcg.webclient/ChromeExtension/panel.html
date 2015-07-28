@@ -12,7 +12,7 @@
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="jslib/bootstrap.min.js"></script>
-	<script src="jslib/controller-angular.js"></script>
+	<script src="controller-angular.js"></script>
 
 </head>
 <body>
@@ -54,7 +54,7 @@
 						</div>
 						<div class="panel-body">
 
-							Number1: <input ng-model="number1" class="form-control"><br>
+							Number1: <input id="number1" ng-model="number1" class="form-control"><br>
 							Number2: <input ng-model="number2" class="form-control"><br>
 
 							<p>
@@ -67,7 +67,7 @@
 
 			</div>
 		</div>
-		<a href="ate_home.html">Reload page</a>
+		<a href="panel.html">Reload page</a>
 		<button class="btn btn-lg btn-success" ng-click="launchFireBug()">Update data</button>
 		<button class="btn btn-lg btn-success" ng-click="launchBrowser()">homePage</button>
 
