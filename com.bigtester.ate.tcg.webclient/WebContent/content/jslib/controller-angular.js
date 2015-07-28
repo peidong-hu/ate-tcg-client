@@ -33,43 +33,60 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 	$scope.number2 = 2;
 
 	$scope.sum = function() {
-		return calculatorService.sum($scope.number1, $scope.number2);
+		//return calculatorService.sum($scope.number1, $scope.number2);
 	}
-	$scope.launchBrowser = function() {
+	/*$scope.launchBrowser = function() {
 		browserService.launchUserHomepage();
 	}
 	$scope.launchFireBug = function() {
 		$scope.addDomAsyncAsJSON();
-	}
-	$scope.addDomAsyncAsJSON = function(){		
+	}*/
+	$scope.preprocessing = function(){
 		// Writing it to the server
 		//
+		//add markers for invisible elements. so server can exclude them from processing.
+		var hiddenElements = $( "body", window.parent.document ).find( ":hidden" ).not( "script" );
+		for (hiddenIndex = 0; hiddenIndex < hiddenElements.length; hiddenIndex ++) {
+			hiddenElements[hiddenIndex].setAttribute("ate-invisible","yes")
+		}
 		var dom = {
 				content: window.parent.document.documentElement.outerHTML
 		}
 		var dataObj = document;	
 		var req = {
 				 method: 'POST',
-				 url: 'http://172.16.173.132:8080/com.bigtester.ate.tcg/greeting3',
+				 url: 'http://localhost:9080/com.bigtester.ate.tcg/preprocessing',
 //				 data: {content: document.documentElement.innerHTML}
 				 headers: {'Content-Type': 'application/json'},
-				 data: JSON.stringify(dom)
+				 data: dom
 		
 				}
-		var req2 = {
-				 method: 'GET',
-				 url: 'http://172.16.173.132:8080/com.bigtester.ate.tcg/greeting4',
-//				 data: {content: document.documentElement.innerHTML}
-//				 data: {content: 'eidkdidkdkdkddkkdkdkdkdkdkdk'},
-//		headers: {'Content-Type': 'application/json'}
-				}
-
-		$http.post('http://172.16.173.132:8080/com.bigtester.ate.tcg/greeting3',dom).success(function(data, status, headers, config) {
-			$scope.fruits = [data.content, 'hello'];
-			$scope.apply();
+		$http(req).success(function(data, status, headers, config) {
+			$scope.fruits = [{inputLabelName: data.content, inputMLHtmlCode: data.content}];
 		}).error(function(data, status, headers, config) {
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});		
 		
-	};      
+	};
+
+	$scope.predict = function(){
+		// Writing it to the server
+		//
+		//add markers for invisible elements. so server can exclude them from processing.
+
+		var req = {
+			method: 'GET',
+			url: 'http://localhost:9080/com.bigtester.ate.tcg/predict',
+//				 data: {content: document.documentElement.innerHTML}
+			headers: {'Content-Type': 'application/json'},
+
+
+		}
+		$http(req).success(function(data, status, headers, config) {
+			$scope.fruits = data;
+		}).error(function(data, status, headers, config) {
+			alert( "failure message: " + JSON.stringify({data: data}));
+		});
+
+	};
 });

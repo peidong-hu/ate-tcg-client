@@ -10,15 +10,15 @@ FirebugChrome.Skin =
 		</div> \
 		<div class="panel-body"> \
 		<div ng-replace>Fruits: <small>(data is generated in pure Java via an asynchronous call)</small></div> \
-		<button class="btn btn-lg btn-success" ng-click="launchFireBug()">Update data</button> \
-		<button class="btn btn-lg btn-success" ng-click="launchBrowser()">homePage</button> \
+		<button class="btn btn-sm btn-success" ng-click="preprocessing()">Preprocessing</button> \
+		<button class="btn btn-sm btn-success" ng-click="predict()">Predict</button> \
 		<table class="table table-striped"> \
 		<thead> \
 		<tr><th>Name</th></tr> \
 		</thead> \
 		<tbody> \
 		<tr ng-repeat="fruit in fruits"> \
-		<td><input id="{{fruit}}" value="{{fruit}}"></input></td><td>{{fruit}}</td> \
+		<td><input id="{{fruit.inputLabelName}}" value="{{fruit.inputLabelName}}"></input></td><td>{{fruit.inputMLHtmlCode}}</td> \
 </tr> \
 </tbody> \
 </table> \
