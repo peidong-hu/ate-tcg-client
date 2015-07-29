@@ -34,8 +34,10 @@ getAllDocumentsOnPage = function(topDocument, parentDocIndex, startingIndex) {
                 xpathOfFrame: "xxpath",
                 domDoc: frameDoc.documentElement.outerHTML
             };
-    //        getAllDocumentsOnPage(frameDoc, i + startingIndex, i + startingIndex + 1);
-            //startingIndex = allDocs.length - i;
+            var tempLength;
+            tempLength = ate_ml_allDocs_in_page.length;
+            getAllDocumentsOnPage(frameDoc.documentElement, i + startingIndex, i + startingIndex + 1);
+            startingIndex = ate_ml_allDocs_in_page.length - tempLength + startingIndex;
         }
     }
 }
