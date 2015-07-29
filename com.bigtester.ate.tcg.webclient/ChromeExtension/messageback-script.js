@@ -8,7 +8,13 @@ function sendObjectToDevTools(message) {
     // The callback here can be used to execute something on receipt
     chrome.extension.sendMessage(message, function(message){});
 }
-
+function ate_add_invisible_marker(document) {
+    var ate_hiddenElements = $("body", document).find(":hidden").not("script");
+    for (ate_hiddenIndex = 0; ate_hiddenIndex < ate_hiddenElements.length; ate_hiddenIndex++) {
+        ate_hiddenElements[ate_hiddenIndex].setAttribute("ate-invisible", "yes")
+    }
+}
+ate_add_invisible_marker(document);
 ate_ml_allDocs_in_page = [{parentIndex: 0, xpathOfFrame: "path0", domDoc: document.documentElement.outerHTML}];
 getAllDocumentsOnPage = function(topDocument, parentDocIndex, startingIndex) {
     //topDocument = window.parent.document.documentElement;
@@ -21,6 +27,7 @@ getAllDocumentsOnPage = function(topDocument, parentDocIndex, startingIndex) {
     allFrameNodes = iframeElements;
     for (i = 0; i < allFrameNodes.length; i++) {
         frameDoc = allFrameNodes[i].contentWindow.document;
+        ate_add_invisible_marker(frameDoc);
         if (allFrameNodes[i].getAttribute("id")!=="FirebugUI") {
             ate_ml_allDocs_in_page[i + startingIndex] = {
                 parentIndex: parentDocIndex,

@@ -43,8 +43,9 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 	}*/
 	//sendObjectToInspectedPage({action: "code", content: "document.body.innerHTML='<button>Send message to DevTools</button>'"});
 
-	sendObjectToInspectedPage({action: "script", content: "messageback-script.js"});
-//	$scope.allDocs = [{parentIndex: 0, xpathOfFrame: window.parent.chrome.getElementXPath(chrome.devtools.inspectedWindow.document.documentElement), domDoc: chrome.devtools.inspectedWindow.document.documentElement.outerHTML}];
+//	sendObjectToInspectedPage({action: "script", content: "messageback-script.js"});
+	sendObjectToInspectedPage({action: "script", content: "messageback-jquer-existence.js"});
+/*	$scope.allDocs = [{parentIndex: 0, xpathOfFrame: window.parent.chrome.getElementXPath(chrome.devtools.inspectedWindow.document.documentElement), domDoc: chrome.devtools.inspectedWindow.document.documentElement.outerHTML}];
 	$scope.getAllDocumentsOnPage = function(topDocument, parentDocIndex, startingIndex) {
 		//topDocument = window.parent.document.documentElement;
 		iframeElements = topDocument.getElementsByTagName("iframe");
@@ -63,25 +64,24 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 			}
 		}
 	}
-//	$scope.getAllDocumentsOnPage(window.parent.document.documentElement, 0, 1);
+	$scope.getAllDocumentsOnPage(window.parent.document.documentElement, 0, 1);*/
 	$scope.preprocessing = function(){
 		// Writing it to the server
 		//
 		//add markers for invisible elements. so server can exclude them from processing.
-		var hiddenElements = $( "body", window.parent.document ).find( ":hidden" ).not( "script" );
+		//$scope.allDocs = [{parentIndex: 0, xpathOfFrame: window.parent.chrome.getElementXPath(chrome.devtools.inspectedWindow.document.documentElement), domDoc: chrome.devtools.inspectedWindow.document.documentElement.outerHTML}];
+		/*var hiddenElements = $( "body", window.parent.document ).find( ":hidden" ).not( "script" );
 		for (hiddenIndex = 0; hiddenIndex < hiddenElements.length; hiddenIndex ++) {
 			hiddenElements[hiddenIndex].setAttribute("ate-invisible","yes")
-		}
-		var dom = {
-				content: window.parent.document.documentElement.outerHTML
-		}
-		var dataObj = document;	
+		}*/
+
+		//var dataObj = document;
 		var req = {
 				 method: 'POST',
 				 url: 'http://localhost:9080/com.bigtester.ate.tcg/preprocessing',
 //				 data: {content: document.documentElement.innerHTML}
 				 headers: {'Content-Type': 'application/json'},
-				 data: $scope.allDocs
+				 data: ate_global_page_documents
 
 		}
 		$http(req).success(function(data, status, headers, config) {

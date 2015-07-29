@@ -7,7 +7,7 @@
 //   content: [String|Path to script|Object], // data to be passed through
 //   tabId: [Automatically added]
 // }
-
+var ate_global_page_documents;
 (function createChannel() {
     //Create a port with background page for continous message communication
     var port = chrome.extension.connect({
@@ -16,9 +16,15 @@
 
     // Listen to messages from the background page
     port.onMessage.addListener(function (message) {
-      document.querySelector('#number1').setAttribute("value", message.content[0].domDoc
-      + message.content[1].domDoc + message.content[2].domDoc + message.content[3].domDoc
-      + message.content[4].domDoc);
+        if (message.content === "ate_page_jquery_not_exist") {
+            sendObjectToInspectedPage({action: "script", content: "jslib/jquery-1.9.1.min.js"});
+            sendObjectToInspectedPage({action: "script", content: "messageback-script.js"});
+        } else if (message.content === "ate_page_jquery_exist") {
+            sendObjectToInspectedPage({action: "script", content: "messageback-script.js"});
+        } else {
+            ate_global_page_documents = message.content;
+            document.querySelector('#number1').setAttribute("value", message.content[0].domDoc);
+        }
       // port.postMessage(message);
     });
 

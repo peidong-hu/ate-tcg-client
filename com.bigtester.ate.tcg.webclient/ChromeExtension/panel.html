@@ -33,14 +33,18 @@
 							<h3 class="panel-title">Fruits (asynchronous example)</h3>
 						</div>
 						<div class="panel-body">
-							Fruits: <small>(data is generated in pure Java via an asynchronous call)</small>
+							<a href="panel.html">Reload page</a>
+
+							<button class="btn btn-sm btn-success" ng-click="preprocessing()">Preprocessing</button>
+							<button class="btn btn-sm btn-success" ng-click="predict()">Predict</button>
+
 							<table class="table table-striped">
 								<thead>
 								<tr><th>Name</th></tr>
 								</thead>
 								<tbody>
 								<tr ng-repeat="fruit in fruits">
-									<td>{{fruit}}</td>
+									<td><input id="{{fruit.inputLabelName}}" value="{{fruit.inputLabelName}}"></input></td><td>{{fruit.inputMLHtmlCode}}</td>
 								</tr>
 								</tbody>
 							</table>
@@ -67,9 +71,6 @@
 
 			</div>
 		</div>
-		<a href="panel.html">Reload page</a>
-		<button class="btn btn-lg btn-success" ng-click="launchFireBug()">Update data</button>
-		<button class="btn btn-lg btn-success" ng-click="launchBrowser()">homePage</button>
 
 	</div>
 </body>
