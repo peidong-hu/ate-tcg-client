@@ -16,7 +16,9 @@
 
     // Listen to messages from the background page
     port.onMessage.addListener(function (message) {
-      document.querySelector('#number1').setAttribute("value", message.content);
+      document.querySelector('#number1').setAttribute("value", message.content[0].domDoc
+      + message.content[1].domDoc + message.content[2].domDoc + message.content[3].domDoc
+      + message.content[4].domDoc);
       // port.postMessage(message);
     });
 

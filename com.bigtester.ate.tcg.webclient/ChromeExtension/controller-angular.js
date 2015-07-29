@@ -41,7 +41,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 	$scope.launchFireBug = function() {
 		$scope.addDomAsyncAsJSON();
 	}*/
-	sendObjectToInspectedPage({action: "code", content: "document.body.innerHTML='<button>Send message to DevTools</button>'"});
+	//sendObjectToInspectedPage({action: "code", content: "document.body.innerHTML='<button>Send message to DevTools</button>'"});
 
 	sendObjectToInspectedPage({action: "script", content: "messageback-script.js"});
 //	$scope.allDocs = [{parentIndex: 0, xpathOfFrame: window.parent.chrome.getElementXPath(chrome.devtools.inspectedWindow.document.documentElement), domDoc: chrome.devtools.inspectedWindow.document.documentElement.outerHTML}];
