@@ -92,6 +92,42 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 		
 	};
 
+	$scope.pioPredict = function(){
+		// Writing it to the server
+		//
+		//add markers for invisible elements. so server can exclude them from processing.
+
+		var req = {
+			method: 'POST',
+			url: 'http://localhost:9080/com.bigtester.ate.tcg/pioPredict',
+			headers: {'Content-Type': 'application/json'},
+			data: $scope.fruits
+		}
+		$http(req).success(function(data, status, headers, config) {
+			$scope.fruits = data;
+		}).error(function(data, status, headers, config) {
+			alert( "failure message: " + JSON.stringify({data: data}));
+		});
+
+	};
+	$scope.trainIntoPIO = function(){
+		// Writing it to the server
+		//
+		//add markers for invisible elements. so server can exclude them from processing.
+
+		var req = {
+			method: 'POST',
+			url: 'http://localhost:9080/com.bigtester.ate.tcg/trainIntoPIO',
+			headers: {'Content-Type': 'application/json'},
+			data: $scope.fruits
+		}
+		$http(req).success(function(data, status, headers, config) {
+			$scope.fruits = data;
+		}).error(function(data, status, headers, config) {
+			alert( "failure message: " + JSON.stringify({data: data}));
+		});
+
+	};
 	$scope.predict = function(){
 		// Writing it to the server
 		//
