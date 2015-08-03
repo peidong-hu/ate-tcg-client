@@ -38,14 +38,12 @@
 							<a href="panel.html">Reload page</a>
 
 							<button class="btn btn-sm btn-success" ng-click="preprocessing()">Preprocessing</button>
-							<button class="btn btn-sm btn-success" ng-click="predict()">Predict</button>
-							<button class="btn btn-sm btn-success" ng-click="trainIntoPIO()">Pio Training</button>
+							<button class="btn btn-sm btn-success" ng-click="predict()">PrePredict</button>
+							<button class="btn btn-sm btn-success" ng-click="trainIntoPIO()">Pio Import</button>
 							<button class="btn btn-sm btn-success" ng-click="pioPredict()">Pio Predict</button>
-
-
 							<table class="table table-striped">
 								<thead>
-								<tr><th>Name</th></tr>
+								<tr><th>Field</th><th>Html</th><th>PioImportId</th><th>PioPredictResult</th><th>PioConfidence</th></tr>
 								</thead>
 								<tbody>
 								<tr ng-repeat="fruit in fruits">

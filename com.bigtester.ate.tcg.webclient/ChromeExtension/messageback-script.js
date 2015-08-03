@@ -14,10 +14,41 @@ function ate_add_invisible_marker(document) {
         ate_hiddenElements[ate_hiddenIndex].setAttribute("ate-invisible", "yes")
     }
 }
+getAllClickBindElements = function(documentE) {
+    var allelmts = $('body').find("*");
+    for (var i =0; i< allelmts.length; i++) {
+    var tempEvents = $._data(allelmts[i], "events");
+        if (typeof tempEvents !=="undefined") {
+            for (var j = 0; j < tempEvents.length; j++) {
+                alert("ab");
+                var oneevent = tempEvents[j];
+                alert(oneevent.type);
+                //for (var k=0; k<
+            }
+        }
+    }
+    //return temp;
+}
+getAllClickablesOnPage = function(docElmt){
+    var allClickables1 = $(docElmt).find("[onclick]");
+    var allClickables2 = $(docElmt).find("input[type=button],input[type=submit],input[type=reset], button, a");
+    var allClickables = allClickables1.add(allClickables2).add(getAllClickBindElements(docElmt));
+    var offset = ate_ml_allClickables_in_page.length;
+    for (var i = offset ; i< allClickables.length; i++) {
+        var tmp = {clickable: allClickables[i - offset].outerHTML};
+        if ($.inArray(tmp, ate_ml_allClickables_in_page)===-1) {
+            ate_ml_allClickables_in_page[i] = tmp;
+        }
+    };
+    //var offset = ate_ml_allClickables_in_page.length;
+
+}
 ate_add_invisible_marker(document);
 ate_ml_allDocs_in_page = [{parentIndex: 0, xpathOfFrame: "path0", domDoc: document.documentElement.outerHTML}];
+ate_ml_allClickables_in_page = [];
+getAllClickablesOnPage(document.documentElement);
 getAllDocumentsOnPage = function(topDocument, parentDocIndex, startingIndex) {
-    //topDocument = window.parent.document.documentElement;
+    getAllClickablesOnPage(topDocument);
     var iframeElements;
     var frameElements;
     var allFrameNodes;
@@ -25,7 +56,7 @@ getAllDocumentsOnPage = function(topDocument, parentDocIndex, startingIndex) {
     iframeElements = topDocument.getElementsByTagName("iframe");
     frameElements = topDocument.getElementsByTagName("frame");
     allFrameNodes = iframeElements;
-    for (i = 0; i < allFrameNodes.length; i++) {
+    for (var i = 0; i < allFrameNodes.length; i++) {
         frameDoc = allFrameNodes[i].contentWindow.document;
         ate_add_invisible_marker(frameDoc);
         if (allFrameNodes[i].getAttribute("id")!=="FirebugUI") {
@@ -44,4 +75,4 @@ getAllDocumentsOnPage = function(topDocument, parentDocIndex, startingIndex) {
 getAllDocumentsOnPage(document.documentElement, 0, 1);
 
 
-sendObjectToDevTools({content: ate_ml_allDocs_in_page});
+sendObjectToDevTools({content: {pages: ate_ml_allDocs_in_page, allClickables: ate_ml_allClickables_in_page}});

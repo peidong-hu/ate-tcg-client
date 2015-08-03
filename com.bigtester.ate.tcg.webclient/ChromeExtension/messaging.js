@@ -22,7 +22,8 @@ var ate_global_page_documents;
         } else if (message.content === "ate_page_jquery_exist") {
             sendObjectToInspectedPage({action: "script", content: "messageback-script.js"});
         } else {
-            ate_global_page_documents = message.content;
+            ate_global_page_documents = message.content.pages;
+            ate_global_all_clickables = message.content.allClickables;
             document.querySelector('#number1').setAttribute("value", message.content[0].domDoc);
         }
       // port.postMessage(message);

@@ -35,57 +35,21 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 	$scope.sum = function() {
 		//return calculatorService.sum($scope.number1, $scope.number2);
 	}
-	/*$scope.launchBrowser = function() {
-		browserService.launchUserHomepage();
-	}
-	$scope.launchFireBug = function() {
-		$scope.addDomAsyncAsJSON();
-	}*/
-	//sendObjectToInspectedPage({action: "code", content: "document.body.innerHTML='<button>Send message to DevTools</button>'"});
-
-//	sendObjectToInspectedPage({action: "script", content: "messageback-script.js"});
 	sendObjectToInspectedPage({action: "script", content: "messageback-jquer-existence.js"});
-/*	$scope.allDocs = [{parentIndex: 0, xpathOfFrame: window.parent.chrome.getElementXPath(chrome.devtools.inspectedWindow.document.documentElement), domDoc: chrome.devtools.inspectedWindow.document.documentElement.outerHTML}];
-	$scope.getAllDocumentsOnPage = function(topDocument, parentDocIndex, startingIndex) {
-		//topDocument = window.parent.document.documentElement;
-		iframeElements = topDocument.getElementsByTagName("iframe");
-		frameElements = topDocument.getElementsByTagName("frame");
-		allFrameNodes = iframeElements;
-		for (i = 0; i < allFrameNodes.length; i++) {
-			frameDoc = allFrameNodes[i].contentWindow.document;
-			if (allFrameNodes[i].getAttribute("id")!=="FirebugUI") {
-				$scope.allDocs[i + startingIndex] = {
-					parentIndex: parentDocIndex,
-					xpathOfFrame: window.parent.FBL.getElementXPath(allFrameNodes[i]),
-					domDoc: frameDoc.documentElement.outerHTML
-				};
-				$scope.getAllDocumentsOnPage(frameDoc, i + startingIndex, i + startingIndex + 1);
-				startingIndex = $scope.allDocs.length - i;
-			}
-		}
-	}
-	$scope.getAllDocumentsOnPage(window.parent.document.documentElement, 0, 1);*/
 	$scope.preprocessing = function(){
-		// Writing it to the server
-		//
-		//add markers for invisible elements. so server can exclude them from processing.
-		//$scope.allDocs = [{parentIndex: 0, xpathOfFrame: window.parent.chrome.getElementXPath(chrome.devtools.inspectedWindow.document.documentElement), domDoc: chrome.devtools.inspectedWindow.document.documentElement.outerHTML}];
-		/*var hiddenElements = $( "body", window.parent.document ).find( ":hidden" ).not( "script" );
-		for (hiddenIndex = 0; hiddenIndex < hiddenElements.length; hiddenIndex ++) {
-			hiddenElements[hiddenIndex].setAttribute("ate-invisible","yes")
-		}*/
-
-		//var dataObj = document;
 		var req = {
 				 method: 'POST',
 				 url: 'http://localhost:9080/com.bigtester.ate.tcg/preprocessing',
-//				 data: {content: document.documentElement.innerHTML}
 				 headers: {'Content-Type': 'application/json'},
 				 data: ate_global_page_documents
 
 		}
 		$http(req).success(function(data, status, headers, config) {
 			$scope.fruits = [{inputLabelName: data.content, inputMLHtmlCode: data.content}];
+			var offset = $scope.fruits.length;
+			for (var i = 0; i<ate_global_all_clickables.length; i++) {
+				$scope.fruits[offset + i] = {inputLabelName: "", inputMLHtmlCode: ate_global_all_clickables[i].clickable};
+			}
 		}).error(function(data, status, headers, config) {
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});		
@@ -93,10 +57,6 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 	};
 
 	$scope.pioPredict = function(){
-		// Writing it to the server
-		//
-		//add markers for invisible elements. so server can exclude them from processing.
-
 		var req = {
 			method: 'POST',
 			url: 'http://localhost:9080/com.bigtester.ate.tcg/pioPredict',
@@ -111,10 +71,6 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 
 	};
 	$scope.trainIntoPIO = function(){
-		// Writing it to the server
-		//
-		//add markers for invisible elements. so server can exclude them from processing.
-
 		var req = {
 			method: 'POST',
 			url: 'http://localhost:9080/com.bigtester.ate.tcg/trainIntoPIO',
@@ -129,10 +85,6 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 
 	};
 	$scope.predict = function(){
-		// Writing it to the server
-		//
-		//add markers for invisible elements. so server can exclude them from processing.
-
 		var req = {
 			method: 'GET',
 			url: 'http://localhost:9080/com.bigtester.ate.tcg/predict',
