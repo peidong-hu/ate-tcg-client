@@ -29,10 +29,13 @@
 		<div class="container-fluid">
 			<div class="row">
 
-				<div class="col-sm-6">
+				<div class="col-sm-10">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title">Fruits (asynchronous example)</h3>
+							<h3 class="panel-title">Test Suite<input ng-model="testSuiteName" type="text" maxlength="20"/>
+								Test Case<input ng-model="testCaseName" type="text" maxlength="20"/>
+								Page Name<input ng-model="pageName" type="text" maxlength="20"/>
+							</h3>
 						</div>
 						<div class="panel-body">
 							<a href="panel.html">Reload page</a>
@@ -41,17 +44,18 @@
 							<button class="btn btn-sm btn-success" ng-click="predict()">PrePredict</button>
 							<button class="btn btn-sm btn-success" ng-click="trainIntoPIO()">Pio Import</button>
 							<button class="btn btn-sm btn-success" ng-click="pioPredict()">Pio Predict</button>
+							<button class="btn btn-sm btn-success" ng-click="saveIntermediateResult()">Save Intermediate Result</button>
 							<table class="table table-striped">
 								<thead>
-								<tr><th>Field</th><th>Html</th><th>PioImportId</th><th>PioPredictResult</th><th>PioConfidence</th></tr>
+								<tr><th>Field</th><th>PioImportId</th><th>PioPredictResult</th><th>PioConfidence</th><th>Html</th></tr>
 								</thead>
 								<tbody>
 								<tr ng-repeat="fruit in fruits">
 									<td><input type="text" id="{{fruit.inputLabelName}}" ng-model="fruit.inputLabelName"/></td>
-									<td>{{fruit.inputMLHtmlCode}}</td>
 									<td>{{fruit.trainedResult}}</td>
 									<td>{{fruit.pioPredictLabelResult}}</td>
 									<td>{{fruit.pioPredictConfidence}}</td>
+									<td>{{fruit.inputMLHtmlCode}}</td>
 								</tr>
 								</tbody>
 							</table>

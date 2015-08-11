@@ -15,6 +15,7 @@ function ate_add_invisible_marker(document) {
     }
 }
 getAllClickBindElements = function(documentE) {
+    //TODO this needs to be working for elements bind with jquery click event
     var allelmts = $('body').find("*");
     for (var i =0; i< allelmts.length; i++) {
     var tempEvents = $._data(allelmts[i], "events");

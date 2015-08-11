@@ -31,6 +31,8 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 	// calculator
 	$scope.number1 = 0;
 	$scope.number2 = 2;
+	$scope.testSuiteName= "JobApplication";
+	$scope.testCaseName = "QuickApply";
 
 	$scope.sum = function() {
 		//return calculatorService.sum($scope.number1, $scope.number2);
@@ -45,7 +47,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 
 		}
 		$http(req).success(function(data, status, headers, config) {
-			$scope.fruits = [{inputLabelName: data.content, inputMLHtmlCode: data.content}];
+			$scope.fruits = data;
 			var offset = $scope.fruits.length;
 			for (var i = 0; i<ate_global_all_clickables.length; i++) {
 				$scope.fruits[offset + i] = {inputLabelName: "", inputMLHtmlCode: ate_global_all_clickables[i].clickable};
@@ -56,6 +58,20 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 		
 	};
 
+	$scope.saveIntermediateResult = function() {
+		var req = {
+			method: 'POST',
+			url: 'http://localhost:9080/com.bigtester.ate.tcg/saveIntermediateResult',
+			headers: {'Content-Type': 'application/json'},
+			data: {uitrs: $scope.fruits, domStrings: ate_global_page_documents}
+		}
+		$http(req).success(function(data, status, headers, config) {
+			$scope.fruits.length = 0;
+			$scope.fruits[0] = {inputLabelName: "SaveResult", inputMLHtmlCode: data.toString()};
+		}).error(function(data, status, headers, config) {
+			alert( "failure message: " + JSON.stringify({data: data}));
+		});
+	}
 	$scope.pioPredict = function(){
 		var req = {
 			method: 'POST',
