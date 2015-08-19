@@ -1,9 +1,20 @@
 <!DOCTYPE html>
-<html ng-app="javafxwebdemo">
+<html class="no-js" ng-app="javafxwebdemo">
 <head>
+
 	<script src="jslib/angular.min.js" type="text/javascript"></script>
 	<script src="jslib/jquery-1.9.1.min.js" type="text/javascript"></script>
-
+	<link rel="stylesheet" href="css/angucomplete-alt.css">
+	<script src="jslib/angucomplete-alt.min.js"></script>
+	<script src="jslib/angular-touch.min.js"></script>
+	<!-- <script src="jslib/app.js"></script> -->
+	<style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+	<style>
+		#ex1_dropdown {
+			overflow-y: auto;
+			max-height: 150px;
+		}
+	</style>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 
@@ -24,7 +35,7 @@
 	<script src="messaging.js"></script>
 	<script src="panel.js"></script>
 
-	<div id="abctest" ng-controller="JavaFXWebDemoController">
+	<div id="abctest" ng-controller="JavaFXWebDemoController" class="ng-scope">
 		<h1 id="removeTitle">ATE Test Case Generator User Training Console</h1>
 		<div class="container-fluid">
 			<div class="row">
@@ -35,27 +46,56 @@
 							<h3 class="panel-title">Test Suite<input ng-model="testSuiteName" type="text" maxlength="20"/>
 								Test Case<input ng-model="testCaseName" type="text" maxlength="20"/>
 								Page Name<input ng-model="pageName" type="text" maxlength="20"/>
+
+								<div angucomplete-alt="" id="ex1" placeholder="Page Name" maxlength="50" pause="100"
+									 selected-object="selectedCountry" local-data="countries" search-fields="name"
+									 title-field="name" minlength="1" input-class="form-control form-control-small"
+									 match-class="highlight" class="ng-isolate-scope">
+									<div class="angucomplete-holder"
+										 ng-class="{'angucomplete-dropdown-visible': showDropdown}"><input
+											id="ex1_value" name="" ng-class="{'angucomplete-input-not-empty': notEmpty}"
+											ng-model="searchStr" ng-disabled="disableInput" type="text"
+											placeholder="Search countries" maxlength="50" ng-focus="onFocusHandler()"
+											class="form-control form-control-small ng-valid-maxlength ng-touched"
+											ng-blur="hideResults($event)" autocapitalize="off" autocorrect="off"
+											autocomplete="off" ng-change="inputChangeHandler(searchStr)">
+
+										<div id="ex1_dropdown" class="angucomplete-dropdown ng-hide"
+											 ng-show="showDropdown">
+											<div class="angucomplete-searching ng-binding ng-hide" ng-show="searching"
+												 ng-bind="textSearching">Searching...
+											</div>
+											<div class="angucomplete-searching ng-binding"
+												 ng-show="!searching &amp;&amp; (!results || results.length == 0)"
+												 ng-bind="textNoResults">No results found
+											</div>
+											<!-- ngRepeat: result in results -->  </div>
+									</div>
+								</div>
 							</h3>
 						</div>
 						<div class="panel-body">
 							<a href="panel.html">Reload page</a>
-							<button class="btn btn-sm btn-success" ng-click="injectProcessor()">InjectPageProcessor</button>
-							<button class="btn btn-sm btn-success" ng-click="preprocessing()">Preprocessing</button>
-							<button class="btn btn-sm btn-success" ng-click="predict()">PrePredict</button>
-							<button class="btn btn-sm btn-success" ng-click="trainIntoPIO()">Pio Import</button>
-							<button class="btn btn-sm btn-success" ng-click="pioPredict()">Pio Predict</button>
-							<button class="btn btn-sm btn-success" ng-click="saveIntermediateResult()">Save Intermediate Result</button>
+							<button class="btn btn-sm btn-success" ng-click="injectProcessor()">Inject</button>
+							<button class="btn btn-sm btn-success" ng-click="preprocessing()">Preproc</button>
+							<button class="btn btn-sm btn-success" ng-click="predict()">PrePred</button>
+							<button class="btn btn-sm btn-success" ng-click="trainIntoPIO()">PioImport</button>
+							<button class="btn btn-sm btn-success" ng-click="pioPredict()">PioPredict</button>
+							<button class="btn btn-sm btn-success" ng-click="saveIntermediateResult()">Save Result</button>
+							<button class="btn btn-sm btn-success" ng-click="addWebElement()">AddElement</button>
+
 							<table class="table table-striped">
 								<thead>
 								<tr><th>Field</th><th>PioImportId</th><th>PioPredictResult</th><th>PioConfidence</th><th>Html</th></tr>
 								</thead>
 								<tbody>
 								<tr ng-repeat="fruit in fruits">
-									<td><input type="text" id="{{fruit.inputLabelName}}" ng-model="fruit.inputLabelName"/></td>
+									<td><input type="button" value="Remove" class="btn btn-sm" ng-click="removeRow(fruit)"/></td>
+									<td><input type="text" ng-model="fruit.inputLabelName"/></td>
 									<td>{{fruit.trainedResult}}</td>
 									<td>{{fruit.pioPredictLabelResult}}</td>
 									<td>{{fruit.pioPredictConfidence}}</td>
-									<td>{{fruit.inputMLHtmlCode}}</td>
+									<td><input type="text" size="300" ng-model="fruit.inputMLHtmlCode"/></td>
 								</tr>
 								</tbody>
 							</table>
