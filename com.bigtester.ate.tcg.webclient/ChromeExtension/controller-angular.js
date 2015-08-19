@@ -37,7 +37,11 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 	$scope.sum = function() {
 		//return calculatorService.sum($scope.number1, $scope.number2);
 	}
-	sendObjectToInspectedPage({action: "script", content: "messageback-jquer-existence.js"});
+
+	$scope.injectProcessor = function(){
+		sendObjectToInspectedPage({action: "script", content: "messageback-jquery-existence.js"});
+	}
+
 	$scope.preprocessing = function(){
 		var req = {
 				 method: 'POST',
