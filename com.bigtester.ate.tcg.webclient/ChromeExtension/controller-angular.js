@@ -1,4 +1,4 @@
-var app1 = angular.module('javafxwebdemo', ["ngTouch", "angucomplete-alt"]);
+var app1 = angular.module('javafxwebdemo', ["ngTouch", "angucomplete-alt", "ngSanitize"]);
 
 app1.directive('ngReplace', function() {
 	  return {
@@ -11,7 +11,7 @@ app1.directive('ngReplace', function() {
 	    template: '<div ><h4>Weather for {{message}}</h4></div>'
 	  }
 	});
-app1.controller('JavaFXWebDemoController', function($scope, $http) {
+app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 
 	// fruits
 	$scope.fruits = [ "loading..." ];
@@ -47,6 +47,8 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 	$scope.removeRow = function(index) {
 		$scope.fruits.splice($scope.fruits.indexOf(index), 1);
 	}
+
+	$scope.trustAsHtml = $sce.trustAsHtml;
 	$scope.preprocessing = function(){
 		var req = {
 				 method: 'POST',
@@ -109,6 +111,23 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 		});
 
 	};
+
+	$scope.queryAllScreenNames = function() {
+		var req = {
+			method: 'GET',
+			url: 'http://localhost:9080/com.bigtester.ate.tcg/queryScreenNames',
+//				 data: {content: document.documentElement.innerHTML}
+			headers: {'Content-Type': 'application/json'},
+
+
+		}
+		$http(req).success(function(data, status, headers, config) {
+			$scope.countries = data.screenNames;
+		}).error(function(data, status, headers, config) {
+			alert( "failure message: " + JSON.stringify({data: data}));
+		});
+
+	}
 	$scope.predict = function(){
 		var req = {
 			method: 'GET',
@@ -150,7 +169,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $http) {
 		{name: 'Albania', code: 'AL'},
 		{name: 'Zimbabwe', code: 'ZW'}
 	];
-
+	$scope.queryAllScreenNames();
 	$scope.countrySelected9 = {name: 'Zimbabwe', code: 'ZW'};
 	$scope.countrySelectedFn9 = function(selected) {
 		if (selected) {

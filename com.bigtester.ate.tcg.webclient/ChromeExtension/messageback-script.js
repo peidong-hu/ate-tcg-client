@@ -36,9 +36,11 @@ getAllClickablesOnPage = function(docElmt){
     var allClickables = allClickables1.add(allClickables2).add(getAllClickBindElements(docElmt));
     var offset = ate_ml_allClickables_in_page.length;
     for (var i = offset ; i< allClickables.length; i++) {
-        var tmp = {clickable: allClickables[i - offset].outerHTML};
-        if ($.inArray(tmp, ate_ml_allClickables_in_page)===-1) {
-            ate_ml_allClickables_in_page[i] = tmp;
+        if (allClickables[i - offset].getAttribute("ate-invisible")!=="yes") {
+            var tmp = {clickable: allClickables[i - offset].outerHTML};
+            if ($.inArray(tmp, ate_ml_allClickables_in_page) === -1) {
+                ate_ml_allClickables_in_page[i] = tmp;
+            }
         }
     };
     //var offset = ate_ml_allClickables_in_page.length;
