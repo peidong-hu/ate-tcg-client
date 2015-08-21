@@ -88,7 +88,8 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 		}
 		$http(req).success(function(data, status, headers, config) {
 			$scope.fruits.length = 0;
-			$scope.fruits[0] = {inputLabelName: "SaveResult", inputMLHtmlCode: data.toString()};
+			//$scope.fruits[0] = {inputLabelName: "SaveResult", inputMLHtmlCode: data.toString()};
+			$scope.fruits = data;
 		}).error(function(data, status, headers, config) {
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});
