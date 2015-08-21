@@ -1,5 +1,19 @@
 var app1 = angular.module('javafxwebdemo', ["ngTouch", "angucomplete-alt", "ngSanitize"]);
-
+app1.directive('clickAndDisable', function() {
+	return {
+		scope: {
+			clickAndDisable: '&'
+		},
+		link: function(scope, iElement, iAttrs) {
+			iElement.bind('click', function() {
+				iElement.prop('disabled',true);
+				scope.clickAndDisable().finally(function() {
+					iElement.prop('disabled',false);
+				})
+			});
+		}
+	};
+});
 app1.directive('ngReplace', function() {
 	  return {
 	    restrict: 'A',
@@ -79,6 +93,12 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 		
 	};
 
+	$scope.pioResult2Npl = function(index) {
+		$scope.fruits[index].inputLabelName = $scope.fruits[index].pioPredictLabelResult;
+	}
+	$scope.nplResult2Pio = function(index) {
+		$scope.fruits[index].pioPredictLabelResult = $scope.fruits[index].inputLabelName;
+	}
 	$scope.saveIntermediateResult = function() {
 		var req = {
 			method: 'POST',
@@ -90,9 +110,11 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 			$scope.fruits.length = 0;
 			//$scope.fruits[0] = {inputLabelName: "SaveResult", inputMLHtmlCode: data.toString()};
 			$scope.fruits = data;
+			alert( "success!");
 		}).error(function(data, status, headers, config) {
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});
+
 	}
 	$scope.pioPredict = function(){
 		var req = {

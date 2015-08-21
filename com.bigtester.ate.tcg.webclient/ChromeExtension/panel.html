@@ -117,26 +117,42 @@
 							<button class="btn btn-sm btn-success" ng-click="pioPredict()">5: PioPredict-></button>
 							<label class="lbl lbl-sm lbl-success" >6: Adjust Field Results-></label>
 							<label class="lbl lbl-sm lbl-success" >7: Fill out user values-></label>
-							<button class="btn btn-sm btn-success" ng-click="saveIntermediateResult()">8: Save Result</button>
+							<button class="btn btn-sm btn-success" click-and-disable="saveIntermediateResult()">8: Save Result</button>
+							<button class="btn btn-sm btn-success" ng-click="saveIntermediateResult()">9: re-Save if failed</button>
 
 
 							<table class="table table-striped">
 								<thead>
-								<tr><th/><th>UserValue</th><th>NPLPredictField</th><th>PioPredictField</th>
+								<tr><th/><th>UserValue</th><th>NPLPredictField</th><th class="col-sm-3">--</th><th>PioPredictField</th>
 									<th>PioConfidence</th><th>UserInputType</th><th>PioImportId</th>
-									<th>Element Snapshot</th><th>Html</th></tr>
+									<th>Element Snapshot</th>
+									<th>Html</th>
+								</tr>
 								</thead>
 								<tbody>
 								<tr ng-repeat="fruit in fruits">
+									<!--<table>
+										<tr> -->
 									<td><input type="button" value="Remove" class="btn btn-sm" ng-click="removeRow(fruit)"/></td>
 									<td><input type="text" ng-model="fruit.userValue"/></td>
-									<td><input type="text" ng-model="fruit.inputLabelName"/></td>
-									<td><input type="text" size="20" ng-model="fruit.pioPredictLabelResult"/></td>
+									<td><input type="text" size="15" ng-model="fruit.inputLabelName"/></td>
+									<td><a href="" ng-click="pioResult2Npl(fruits.indexOf(fruit))"><-</a><br/>
+										<a href="" ng-click="nplResult2Pio(fruits.indexOf(fruit))">-></a>
+									</td>
+									<td><input type="text" size="15" ng-model="fruit.pioPredictLabelResult"/></td>
 									<td><input type="text" size="5" ng-model="fruit.pioPredictConfidence"/></td>
-									<td><input type="text" size="10" ng-model="fruit.userInputType"/></td>
-									<td>{{fruit.trainedResult}}</td>
+									<td><select ng-model="fruit.userInputType">
+										<option value="CLICKABLE">CLICKABLE</option>
+										<option value="INPUT">INPUT</option>
+										</select>
+									</td>
+									<td><input type="text" size="10" ng-model="fruit.trainedResult" disabled/></td></td>
 									<td class="col-md-1"><p ng-bind-html="trustAsHtml(fruit.inputMLHtmlCode)"></p></td>
-									<td><input type="text" size="300" ng-model="fruit.inputMLHtmlCode"/></td>
+										<!--</tr>
+										<tr>-->
+									<td colspan="9"><input type="text" size="200" ng-model="fruit.inputMLHtmlCode"/></td>
+							<!--			</tr>
+									</table>-->
 								</tr>
 								</tbody>
 							</table>
