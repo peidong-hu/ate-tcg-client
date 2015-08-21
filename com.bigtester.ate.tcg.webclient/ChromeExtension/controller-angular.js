@@ -49,6 +49,9 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 	}
 
 	$scope.trustAsHtml = $sce.trustAsHtml;
+	//$scope.html2canvas = html2canvas;
+	//$scope.testVar = html2canvas("<div>test</div>")
+
 	$scope.preprocessing = function(){
 		var req = {
 				 method: 'POST',
@@ -59,10 +62,17 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 		}
 		$http(req).success(function(data, status, headers, config) {
 			$scope.fruits = data;
-			var offset = $scope.fruits.length;
-			for (var i = 0; i<ate_global_all_clickables.length; i++) {
-				$scope.fruits[offset + i] = {inputLabelName: "", inputMLHtmlCode: ate_global_all_clickables[i].clickable};
-			}
+			//var offset = $scope.fruits.length;
+			//for (var i = 0; i<ate_global_all_clickables.length; i++) {
+			//	$scope.fruits[offset + i] = {inputLabelName: "", inputMLHtmlCode: ate_global_all_clickables[i].clickable};
+				/*html2canvas(ate_global_all_clickables[i].clickable, {
+						onrendered: function(canvas) {
+							$scope.fruits[offset + i].snapshot = canvas.outerHtml;
+						},
+						width: 100,
+						height: 30
+					})*/
+			//}
 		}).error(function(data, status, headers, config) {
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});		
