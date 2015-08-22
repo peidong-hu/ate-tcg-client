@@ -9,6 +9,7 @@
 	<script src="jslib/angular-sanitize.min.js"></script>
 	<script src="jslib/html2canvas.min.js"></script>
 	<script src="jslib/angucomplete-alt.js"></script>
+	<script src="jslib/angular-recursion.min.js"></script>
 	<script src="jslib/angular-touch.min.js"></script>
 	<!-- <script src="jslib/app.js"></script> -->
 	<style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
@@ -48,11 +49,18 @@
 						<div class="panel-heading">
 							<br class="panel-title">
 							<!-- use this to populate the industry category recursion http://stackoverflow.com/questions/14430655/recursion-in-angular-directives-->
-								Industry Code<input ng-model="industryCode" type="text" maxlength="20"/>
+							Industry<input ng-model="industryCategoriesMap[0].name" disabled type="text" maxlength="20"/>
+							<span ng-repeat="industryCat in industryCategoriesMap" ng-if="$index >= 1">
+								=><input ng-model="industryCat.name" disabled type="text" maxlength="20"/>
+							</span>
+								<!--Industry Code<input ng-model="industryCode" type="text" maxlength="20"/>
 								IndustryName<input ng-model="testIndustryName" type="text" maxlength="20"/>
-								Industry Sub-Category<input ng-model="testIndustrySubCategory" type="text" maxlength="20"/>
-								Test Suite<input ng-model="testSuiteName" type="text" maxlength="20"/>
-								Test Case<input ng-model="testCaseName" type="text" maxlength="20"/><br/>
+								Industry Sub-Category<input ng-model="testIndustrySubCategory" type="text" maxlength="20"/>-->
+								Test Suite<input ng-model="testSuitesMap[0].suiteName" disabled type="text" maxlength="20"/>
+							<span ng-repeat="testSuite in testSuitesMap" ng-if="$index >= 1">
+								=><input ng-model="testSuite.suiteName" disabled type="text" maxlength="20"/>
+							</span>
+								Test Case<input ng-model="testCaseName" disabled type="text" maxlength="20"/><br/>
 							Domain Name<input ng-model="domainName" type="text" maxlength="30" disabled/>
 							Screen URL<input ng-model="screenUrl" type="text" maxlength="30" disabled/>
 

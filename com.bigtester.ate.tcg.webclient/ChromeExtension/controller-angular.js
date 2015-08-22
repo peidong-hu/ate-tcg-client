@@ -1,4 +1,4 @@
-var app1 = angular.module('javafxwebdemo', ["ngTouch", "angucomplete-alt", "ngSanitize"]);
+var app1 = angular.module('javafxwebdemo', ["ngTouch", "angucomplete-alt", "ngSanitize", "RecursionHelper"]);
 app1.directive('clickAndDisable', function() {
 	return {
 		scope: {
@@ -14,6 +14,28 @@ app1.directive('clickAndDisable', function() {
 		}
 	};
 });
+
+app1.directive('ngIndustryCategories', function() {
+	return {
+		restrict: "E",
+		scope: {family: '='},
+		template:
+		'<p>{{ family.name }}{{test }}</p>'+
+		'<ul>' +
+		'<li ng-repeat="child in family.children">' +
+		'<ngIndustryCategories family="child"></ngIndustryCategories>' +
+		'</li>' +
+		'</ul>',
+		compile: function(element) {
+			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn){
+				// Define your normal link function here.
+				// Alternative: instead of passing a function,
+				// you can also pass an object with
+				// a 'pre'- and 'post'-link function.
+			});
+		}
+	};
+	});
 app1.directive('ngReplace', function() {
 	  return {
 	    restrict: 'A',
@@ -25,7 +47,7 @@ app1.directive('ngReplace', function() {
 	    template: '<div ><h4>Weather for {{message}}</h4></div>'
 	  }
 	});
-app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
+app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $location) {
 
 	// fruits
 	$scope.fruits = [ "loading..." ];
@@ -45,10 +67,13 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 	// calculator
 	$scope.number1 = 0;
 	$scope.number2 = 2;
-	$scope.industryCode = "000000";
-	$scope.testIndustryName= "HCM";
-	$scope.testIndustrySubCategory= "Recruitment";
-	$scope.testSuiteName= "JobApplication";
+	////alert(JSON.stringify(ate_global_page_context));
+
+	$scope.testSuitesMap=[{suiteName: "JobApplication"},  {suiteName: "WebJobApplication"}];
+
+
+
+	$scope.industryCategoriesMap=[{name: "HCM", code: "000000"},{name: "Recruitment"}];
 	$scope.testCaseName = "QuickApply";
 
 	$scope.sum = function() {
@@ -57,6 +82,8 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 
 	$scope.injectProcessor = function(){
 		sendObjectToInspectedPage({action: "script", content: "messageback-jquery-existence.js"});
+		$scope.screenUrl = ate_global_page_context.screenUrl;
+		$scope.domainName = ate_global_page_context.domain;
 	}
 	$scope.addWebElement = function(){
 		$scope.fruits.splice(0, 0, {inputLabelName: "", inputMLHtmlCode: ""});
@@ -74,7 +101,8 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 				 method: 'POST',
 				 url: 'http://localhost:9080/com.bigtester.ate.tcg/preprocessing',
 				 headers: {'Content-Type': 'application/json'},
-				 data: ate_global_page_documents
+				 //data: ate_global_page_documents
+			data: ate_global_page_context.pages
 
 		}
 		$http(req).success(function(data, status, headers, config) {
@@ -107,7 +135,8 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 			method: 'POST',
 			url: 'http://localhost:9080/com.bigtester.ate.tcg/saveIntermediateResult',
 			headers: {'Content-Type': 'application/json'},
-			data: {uitrs: $scope.fruits, domStrings: ate_global_page_documents}
+			//data: {uitrs: $scope.fruits, domStrings: ate_global_page_documents}
+			data: {uitrs: $scope.fruits, domStrings: ate_global_page_context.pages}
 		}
 		$http(req).success(function(data, status, headers, config) {
 			$scope.fruits.length = 0;

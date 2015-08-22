@@ -78,4 +78,4 @@ getAllDocumentsOnPage = function(topDocument, parentDocIndex, startingIndex) {
 getAllDocumentsOnPage(document.documentElement, 0, 1);
 
 
-sendObjectToDevTools({content: {pages: ate_ml_allDocs_in_page, allClickables: ate_ml_allClickables_in_page}});
+sendObjectToDevTools({content: {pages: ate_ml_allDocs_in_page, allClickables: ate_ml_allClickables_in_page, screenUrl: window.location.href, domain: window.location.host}});
