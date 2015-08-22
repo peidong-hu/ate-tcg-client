@@ -47,7 +47,7 @@ app1.directive('ngReplace', function() {
 	    template: '<div ><h4>Weather for {{message}}</h4></div>'
 	  }
 	});
-app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $location) {
+app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 
 	// fruits
 	$scope.fruits = [ "loading..." ];
@@ -82,9 +82,26 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $locati
 
 	$scope.injectProcessor = function(){
 		sendObjectToInspectedPage({action: "script", content: "messageback-jquery-existence.js"});
-		$scope.screenUrl = ate_global_page_context.screenUrl;
-		$scope.domainName = ate_global_page_context.domain;
-	}
+		/*$scope.$watch('ate_global_page_context', function() {
+			$scope.screenUrl = ate_global_page_context.screenUrl;
+			$scope.domainName = ate_global_page_context.domain;
+
+		});
+*/
+		setTimeout(function() {
+			//window.ate_global_page_context = {prop: "new value"};
+			ate_global_page_context_Watch.trigger();
+		}, 1000);
+		}
+
+	var unbind = ate_global_page_context_Watch.watch(function(newVal) {
+		$scope.screenUrl = newVal.screenUrl;
+		$scope.domainName = newVal.domain;
+	});
+
+	// Unbind the listener when the scope is destroyed
+	$scope.$on('$destroy', unbind);
+
 	$scope.addWebElement = function(){
 		$scope.fruits.splice(0, 0, {inputLabelName: "", inputMLHtmlCode: ""});
 	}

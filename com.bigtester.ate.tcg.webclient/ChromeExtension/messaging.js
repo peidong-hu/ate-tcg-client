@@ -9,6 +9,34 @@
 // }
 var ate_global_page_documents;
 var ate_global_page_context;
+
+var ate_global_page_context_Watch = (function() {
+    var watches = {};
+
+    return {
+        watch: function(callback) {
+            var id = Math.random().toString();
+            watches[id] = callback;
+
+            // Return a function that removes the listener
+            return function() {
+                watches[id] = null;
+                delete watches[id];
+            }
+        },
+        trigger: function() {
+            for (var k in watches) {
+                watches[k](window.ate_global_page_context);
+            }
+        }
+    }
+})();
+
+/*setTimeout(function() {
+    window.ate_global_page_context = {prop: "new value"};
+    ate_global_page_context_Watch.trigger();
+}, 1000);*/
+
 (function createChannel() {
     //Create a port with background page for continous message communication
     var port = chrome.extension.connect({
