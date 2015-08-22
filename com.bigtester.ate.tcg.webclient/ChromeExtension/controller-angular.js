@@ -45,6 +45,9 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 	// calculator
 	$scope.number1 = 0;
 	$scope.number2 = 2;
+	$scope.industryCode = "000000";
+	$scope.testIndustryName= "HCM";
+	$scope.testIndustrySubCategory= "Recruitment";
 	$scope.testSuiteName= "JobApplication";
 	$scope.testCaseName = "QuickApply";
 

@@ -39,15 +39,23 @@
 	<script src="panel.js"></script>
 
 	<div id="abctest" ng-controller="JavaFXWebDemoController" class="ng-scope">
-		<h1 id="removeTitle">ATE Test Case Generator User Training Console</h1>
+		<h2 id="removeTitle">ATE Test Case Generator User Training Console</h2>
 		<div class="container-fluid">
 			<div class="row">
 
 				<div class="col-sm-15">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title">Test Suite<input ng-model="testSuiteName" type="text" maxlength="20"/>
-								Test Case<input ng-model="testCaseName" type="text" maxlength="20"/>
+							<br class="panel-title">
+							<!-- use this to populate the industry category recursion http://stackoverflow.com/questions/14430655/recursion-in-angular-directives-->
+								Industry Code<input ng-model="industryCode" type="text" maxlength="20"/>
+								IndustryName<input ng-model="testIndustryName" type="text" maxlength="20"/>
+								Industry Sub-Category<input ng-model="testIndustrySubCategory" type="text" maxlength="20"/>
+								Test Suite<input ng-model="testSuiteName" type="text" maxlength="20"/>
+								Test Case<input ng-model="testCaseName" type="text" maxlength="20"/><br/>
+							Domain Name<input ng-model="domainName" type="text" maxlength="30" disabled/>
+							Screen URL<input ng-model="screenUrl" type="text" maxlength="30" disabled/>
+
 								<!--Page Name<input ng-model="pageName" type="text" maxlength="20"/>-->
 
 								<div angucomplete-alt="" id="ex1" placeholder="Screen Name" maxlength="20" pause="100"
@@ -57,7 +65,7 @@
 									<div class="angucomplete-holder"
 										 ng-class="{'angucomplete-dropdown-visible': showDropdown}">
 										<input
-											id="ex1_value" name="" ng-class="{'angucomplete-input-not-empty': notEmpty}"
+											id="ex1_value" name="" size="30" ng-class="{'angucomplete-input-not-empty': notEmpty}"
 											ng-model="searchStr" ng-disabled="disableInput" type="text"
 											placeholder="Screen Name" maxlength="20" ng-focus="onFocusHandler()"
 											class="form-control form-control-small ng-valid-maxlength ng-touched"
