@@ -97,6 +97,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 	var unbind = ate_global_page_context_Watch.watch(function(newVal) {
 		$scope.screenUrl = newVal.screenUrl;
 		$scope.domainName = newVal.domain;
+		$scope.update();
 	});
 
 	// Unbind the listener when the scope is destroyed
@@ -153,7 +154,11 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 			url: 'http://localhost:9080/com.bigtester.ate.tcg/saveIntermediateResult',
 			headers: {'Content-Type': 'application/json'},
 			//data: {uitrs: $scope.fruits, domStrings: ate_global_page_documents}
-			data: {uitrs: $scope.fruits, domStrings: ate_global_page_context.pages}
+			data: {uitrs: $scope.fruits, domStrings: ate_global_page_context.pages,
+				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
+				testCaseName:$scope.testCaseName, screenUrl: $scope.screenUrl,
+				domainName: $scope.domainName, screenName: $scope.searchStr
+			}
 		}
 		$http(req).success(function(data, status, headers, config) {
 			$scope.fruits.length = 0;
