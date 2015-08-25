@@ -67,6 +67,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 	// calculator
 	$scope.number1 = 0;
 	$scope.number2 = 2;
+	//$scope.searchStr = "";
 	////alert(JSON.stringify(ate_global_page_context));
 
 	$scope.testSuitesMap=[{suiteName: "JobApplication"},  {suiteName: "WebJobApplication"}];
@@ -157,13 +158,14 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 			data: {uitrs: $scope.fruits, domStrings: ate_global_page_context.pages,
 				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
 				testCaseName:$scope.testCaseName, screenUrl: $scope.screenUrl,
-				domainName: $scope.domainName, screenName: $scope.searchStr
+				domainName: $scope.domainName, screenName: $scope.countrySelected14.originalObject.name
 			}
 		}
 		$http(req).success(function(data, status, headers, config) {
 			$scope.fruits.length = 0;
 			//$scope.fruits[0] = {inputLabelName: "SaveResult", inputMLHtmlCode: data.toString()};
-			$scope.fruits = data;
+			$scope.fruits = data.uitrs;
+			ate_global_page_context.pages = data.domStrings;
 			alert( "success!");
 		}).error(function(data, status, headers, config) {
 			alert( "failure message: " + JSON.stringify({data: data}));

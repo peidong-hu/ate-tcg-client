@@ -65,12 +65,45 @@
 							Screen URL<input ng-model="screenUrl" type="text" maxlength="30" disabled/>
 
 								<!--Page Name<input ng-model="pageName" type="text" maxlength="20"/>-->
-
-								<div angucomplete-alt="" id="ex1" placeholder="Screen Name" maxlength="20" pause="100"
-									 selected-object="selectedCountry" local-data="countries" search-fields="name"
-									 title-field="name" minlength="1" input-class="form-control form-control-small"
-									 match-class="highlight" class="ng-isolate-scope">
-									<div class="angucomplete-holder"
+							<script type="text/ng-template" id="/my-custom-template.html">
+								<div class="angucomplete-holder" ng-class="{'angucomplete-dropdown-visible': showDropdown}">
+									<input ng-model="searchStr"
+										   ng-disabled="disableInput"
+										   type="text"
+										   placeholder="{{placeholder}}"
+										   ng-focus="onFocusHandler()"
+										   class="{{inputClass}}"
+										   ng-focus="resetHideResults()"
+										   ng-blur="hideResults($event)"
+										   autocapitalize="off"
+										   autocorrect="off"
+										   autocomplete="off"
+										   ng-change="inputChangeHandler(searchStr)"/>
+									<div class="angucomplete-dropdown" ng-show="showDropdown">
+										<div class="angucomplete-searching" ng-show="searching" ng-bind="textSearching"></div>
+										<div class="angucomplete-searching" ng-show="!searching && (!results || results.length == 0)" ng-bind="textNoResults"></div>
+										<div class="angucomplete-row" ng-repeat="result in results" ng-click="selectResult(result)" ng-mouseenter="hoverRow($index)" ng-class="{'angucomplete-selected-row': $index == currentIndex}">
+											<div ng-if="imageField" class="angucomplete-image-holder">
+												<img ng-if="result.image && result.image != ''" ng-src="{{result.image}}" class="angucomplete-image"/>
+												<div ng-if="!result.image && result.image != ''" class="angucomplete-image-default"></div>
+											</div>
+											<div class="angucomplete-title" ng-if="matchClass" ng-bind-html="result.title"></div>
+											<div class="angucomplete-title" ng-if="!matchClass">{{ result.title }}</div>
+											<div ng-if="matchClass && result.description && result.description != ''" class="angucomplete-description" ng-bind-html="result.description"></div>
+											<div ng-if="!matchClass && result.description && result.description != ''" class="angucomplete-description">{{result.description}}</div>
+										</div>
+										<div class="angucomplete-row" ng-click="selectResult({title: searchStr, originalObject: { name: searchStr, custom: true }})" ng-mouseenter="hoverRow(results.length)" ng-class="{'angucomplete-selected-row': results.length == currentIndex}">
+											<div class="angucomplete-title">Select custom country '{{ searchStr }}'</div>
+										</div>
+									</div>
+								</div>
+							</script>
+							<div angucomplete-alt="" id="ex14" placeholder="Search countries" pause="100"
+								 selected-object="countrySelected14" local-data="countries" search-fields="name"
+								 title-field="name" minlength="1" input-class="form-control form-control-small"
+								 match-class="highlight" template-url="/my-custom-template.html"
+								 class="ng-isolate-scope">
+							<!--		<div class="angucomplete-holder"
 										 ng-class="{'angucomplete-dropdown-visible': showDropdown}">
 										<input
 											id="ex1_value" name="" size="30" ng-class="{'angucomplete-input-not-empty': notEmpty}"
@@ -89,8 +122,8 @@
 												 ng-show="!searching &amp;&amp; (!results || results.length == 0)"
 												 ng-bind="textNoResults">No results found
 											</div>
-											<!-- ngRepeat: result in results -->  </div>
-									</div>
+											&lt;!&ndash; ngRepeat: result in results &ndash;&gt;  </div>
+									</div>-->
 								</div>
 								<!--<div angucomplete-alt="" id="ex5" placeholder="Type in Screen Name" pause="500"
 									 selected-object="selectedProject"
