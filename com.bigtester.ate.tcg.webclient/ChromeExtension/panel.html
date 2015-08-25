@@ -64,6 +64,7 @@
 							Domain Name<input ng-model="domainName" type="text" maxlength="30" disabled/>
 							Screen URL<input ng-model="screenUrl" type="text" maxlength="30" disabled/>
 
+							<!--PagePredictionConfidence<input ng-model="pagePredictionConfidence" type="text" maxlength="30" disabled/>-->
 								<!--Page Name<input ng-model="pageName" type="text" maxlength="20"/>-->
 							<script type="text/ng-template" id="/my-custom-template.html">
 								<div class="angucomplete-holder" ng-class="{'angucomplete-dropdown-visible': showDropdown}">
@@ -101,7 +102,7 @@
 							<div angucomplete-alt="" id="ex14" placeholder="Search countries" pause="100"
 								 selected-object="countrySelected14" local-data="countries" search-fields="name"
 								 title-field="name" minlength="1" input-class="form-control form-control-small"
-								 match-class="highlight" template-url="/my-custom-template.html"
+								 match-class="highlight" initial-value="countrySelected14" template-url="/my-custom-template.html"
 								 class="ng-isolate-scope">
 							<!--		<div class="angucomplete-holder"
 										 ng-class="{'angucomplete-dropdown-visible': showDropdown}">
@@ -164,6 +165,7 @@
 							<button class="btn btn-sm btn-success" ng-click="addWebElement()">4: AddElement-></button>
 							<!--<button class="btn btn-sm btn-success" ng-click="trainIntoPIO()">PioImport</button>-->
 							<button class="btn btn-sm btn-success" ng-click="pioPredict()">5: PioPredict-></button>
+							<!--<button class="btn btn-sm btn-success" ng-click="pagePredict()">5.1: PagePredict-></button>-->
 							<label class="lbl lbl-sm lbl-success" >6: Adjust Predict Results-></label>
 							<label class="lbl lbl-sm lbl-success" >7: Fill out user values-></label>
 							<button class="btn btn-sm btn-success" click-and-disable="saveIntermediateResult()">8: Save Result</button>
@@ -172,8 +174,10 @@
 
 							<table class="table table-striped">
 								<thead>
-								<tr><th/><th>UserValue</th><th>NPLPredictField</th><th class="col-sm-3">--</th><th>PioPredictField</th>
-									<th>PioConfidence</th><th>UserInputType</th><th>PioImportId</th>
+								<tr><th/><th>UserValue</th><th>NPLPredictField</th><th class="col-sm-3">--</th><th>PioPredictField--></th>
+									<th>PioConfidence</th><th>UserInputType</th>
+									<!--<th>ActionPredictResult</th><th>ActionConfidence</th>-->
+									<th>PioImportId</th>
 									<th>Element Snapshot</th>
 									<th>Html</th>
 								</tr>
@@ -195,7 +199,9 @@
 										<option value="INPUT">INPUT</option>
 										</select>
 									</td>
-									<td><input type="text" size="10" ng-model="fruit.trainedResult" disabled/></td></td>
+									<!--<td><input type="text" size="10" ng-model="fruit.actionTrainedWeight"/></td>
+									<td><input type="text" size="10" ng-model="fruit.actionConfidence"/></td>-->
+									<td><input type="text" size="10" ng-model="fruit.trainedResult" disabled/></td>
 									<td class="col-md-1"><p ng-bind-html="trustAsHtml(fruit.inputMLHtmlCode)"></p></td>
 										<!--</tr>
 										<tr>-->

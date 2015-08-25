@@ -126,6 +126,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 		}
 		$http(req).success(function(data, status, headers, config) {
 			$scope.fruits = data;
+			$scope.pagePredict();
 			//var offset = $scope.fruits.length;
 			//for (var i = 0; i<ate_global_all_clickables.length; i++) {
 			//	$scope.fruits[offset + i] = {inputLabelName: "", inputMLHtmlCode: ate_global_all_clickables[i].clickable};
@@ -181,6 +182,20 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 		}
 		$http(req).success(function(data, status, headers, config) {
 			$scope.fruits = data;
+		}).error(function(data, status, headers, config) {
+			alert( "failure message: " + JSON.stringify({data: data}));
+		});
+
+	};
+	$scope.pagePredict = function(){
+		var req = {
+			method: 'POST',
+			url: 'http://localhost:9080/com.bigtester.ate.tcg/pagePredict',
+			headers: {'Content-Type': 'application/json'},
+			data: ate_global_page_context.pages
+		}
+		$http(req).success(function(data, status, headers, config) {
+			$scope.countrySelected14 = Object.keys(data)[0];
 		}).error(function(data, status, headers, config) {
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});
