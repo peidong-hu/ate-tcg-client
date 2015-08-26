@@ -47,7 +47,7 @@ getAllClickablesOnPage = function(docElmt){
 
 }
 ate_add_invisible_marker(document);
-ate_ml_allDocs_in_page = [{parentIndex: 0, xpathOfFrame: "path0", domDoc: document.documentElement.outerHTML}];
+ate_ml_allDocs_in_page = [{parentIndex: 0, xpathOfFrame: "path0", domDoc: document.documentElement.outerHTML, docText: getText(document.body).replace(/\s\s+/g, ' ')}];
 ate_ml_allClickables_in_page = [];
 getAllClickablesOnPage(document.documentElement);
 getAllDocumentsOnPage = function(topDocument, parentDocIndex, startingIndex) {
@@ -66,7 +66,9 @@ getAllDocumentsOnPage = function(topDocument, parentDocIndex, startingIndex) {
             ate_ml_allDocs_in_page[i + startingIndex] = {
                 parentIndex: parentDocIndex,
                 xpathOfFrame: "xxpath",
-                domDoc: frameDoc.documentElement.outerHTML
+                domDoc: frameDoc.documentElement.outerHTML,
+                docText: getText(frameDoc.body).replace(/\s\s+/g, ' '),
+                frameSrc: allFrameNodes[i].getAttribute("src")
             };
             var tempLength;
             tempLength = ate_ml_allDocs_in_page.length;
@@ -79,3 +81,18 @@ getAllDocumentsOnPage(document.documentElement, 0, 1);
 
 
 sendObjectToDevTools({content: {pages: ate_ml_allDocs_in_page, allClickables: ate_ml_allClickables_in_page, screenUrl: window.location.href, domain: window.location.host}});
+//http://stackoverflow.com/questions/17727977/how-to-get-all-text-from-all-tags-in-one-array to get the text on the page. need to iterate the frames
+
+function getText(bodyElement) {
+    var elements = bodyElement.getElementsByTagName("*");
+    var retVal = " ";
+    for(var i = 0; i < elements.length; i++) {
+        var current = elements[i];
+        if(current.children.length === 0 && current.textContent.replace(/ |\n/g,'') !== '') {
+            // Check the element has no children && that it is not empty
+            if (current.tagName.toLowerCase() != 'script' && current.tagName.toLowerCase() != 'style')
+                retVal = retVal + " " + (current.textContent);
+        }
+    }
+    return retVal;
+}
