@@ -1,4 +1,4 @@
-var app1 = angular.module('javafxwebdemo', ["ngTouch", "angucomplete-alt", "ngSanitize", "RecursionHelper"]);
+var app1 = angular.module('javafxwebdemo', ["ngTouch", "angucomplete-alt", "ngSanitize", "RecursionHelper", "ngStorage"]);
 app1.directive('clickAndDisable', function() {
 	return {
 		scope: {
@@ -47,13 +47,14 @@ app1.directive('ngReplace', function() {
 	    template: '<div ><h4>Weather for {{message}}</h4></div>'
 	  }
 	});
-app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
+app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localStorage) {
 
 	// fruits
 	$scope.fruits = [ "loading..." ];
 	angular.element(document).ready(function() {
 		$scope.update();
 	});
+	$scope.$storage = $localStorage;
 
 	$scope.update = function() {
 		$scope.fruits = [ "loading..." ];
@@ -162,13 +163,17 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 				domainName: $scope.domainName, screenName: $scope.countrySelected14.originalObject.name
 			}
 		}
+		$localStorage.lastScreenNode = req.data;
+
 		$http(req).success(function(data, status, headers, config) {
 			$scope.fruits.length = 0;
 			//$scope.fruits[0] = {inputLabelName: "SaveResult", inputMLHtmlCode: data.toString()};
 			$scope.fruits = data.uitrs;
 			ate_global_page_context.pages = data.domStrings;
+			$localStorage.lastScreenNodeBk = $localStorage.lastScreenNode;
 			alert( "success!");
 		}).error(function(data, status, headers, config) {
+			$localStorage.lastScreenNode = $localStorage.lastScreenNodeBk;
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});
 
