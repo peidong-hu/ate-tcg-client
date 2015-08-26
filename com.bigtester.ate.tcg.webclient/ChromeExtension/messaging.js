@@ -8,6 +8,35 @@
 //   tabId: [Automatically added]
 // }
 var ate_global_page_documents;
+var ate_global_page_context;
+
+var ate_global_page_context_Watch = (function() {
+    var watches = {};
+
+    return {
+        watch: function(callback) {
+            var id = Math.random().toString();
+            watches[id] = callback;
+
+            // Return a function that removes the listener
+            return function() {
+                watches[id] = null;
+                delete watches[id];
+            }
+        },
+        trigger: function() {
+            for (var k in watches) {
+                watches[k](window.ate_global_page_context);
+            }
+        }
+    }
+})();
+
+/*setTimeout(function() {
+    window.ate_global_page_context = {prop: "new value"};
+    ate_global_page_context_Watch.trigger();
+}, 1000);*/
+
 (function createChannel() {
     //Create a port with background page for continous message communication
     var port = chrome.extension.connect({
@@ -22,8 +51,10 @@ var ate_global_page_documents;
         } else if (message.content === "ate_page_jquery_exist") {
             sendObjectToInspectedPage({action: "script", content: "messageback-script.js"});
         } else {
+            ate_global_page_context = message.content;
             ate_global_page_documents = message.content.pages;
             ate_global_all_clickables = message.content.allClickables;
+            ate_global_screenUrl = message.content.screenUrl;
             document.querySelector('#number1').setAttribute("value", message.content[0].domDoc);
         }
       // port.postMessage(message);

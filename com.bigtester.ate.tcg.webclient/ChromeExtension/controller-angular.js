@@ -1,5 +1,41 @@
-var app1 = angular.module('javafxwebdemo', ["ngTouch", "angucomplete-alt", "ngSanitize"]);
+var app1 = angular.module('javafxwebdemo', ["ngTouch", "angucomplete-alt", "ngSanitize", "RecursionHelper", "ngStorage"]);
+app1.directive('clickAndDisable', function() {
+	return {
+		scope: {
+			clickAndDisable: '&'
+		},
+		link: function(scope, iElement, iAttrs) {
+			iElement.bind('click', function() {
+				iElement.prop('disabled',true);
+				scope.clickAndDisable().finally(function() {
+					iElement.prop('disabled',false);
+				})
+			});
+		}
+	};
+});
 
+app1.directive('ngIndustryCategories', function() {
+	return {
+		restrict: "E",
+		scope: {family: '='},
+		template:
+		'<p>{{ family.name }}{{test }}</p>'+
+		'<ul>' +
+		'<li ng-repeat="child in family.children">' +
+		'<ngIndustryCategories family="child"></ngIndustryCategories>' +
+		'</li>' +
+		'</ul>',
+		compile: function(element) {
+			return RecursionHelper.compile(element, function(scope, iElement, iAttrs, controller, transcludeFn){
+				// Define your normal link function here.
+				// Alternative: instead of passing a function,
+				// you can also pass an object with
+				// a 'pre'- and 'post'-link function.
+			});
+		}
+	};
+	});
 app1.directive('ngReplace', function() {
 	  return {
 	    restrict: 'A',
@@ -11,13 +47,14 @@ app1.directive('ngReplace', function() {
 	    template: '<div ><h4>Weather for {{message}}</h4></div>'
 	  }
 	});
-app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
+app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localStorage) {
 
 	// fruits
 	$scope.fruits = [ "loading..." ];
 	angular.element(document).ready(function() {
 		$scope.update();
 	});
+	$scope.$storage = $localStorage;
 
 	$scope.update = function() {
 		$scope.fruits = [ "loading..." ];
@@ -31,7 +68,14 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 	// calculator
 	$scope.number1 = 0;
 	$scope.number2 = 2;
-	$scope.testSuiteName= "JobApplication";
+	//$scope.searchStr = "";
+	////alert(JSON.stringify(ate_global_page_context));
+
+	$scope.testSuitesMap=[{suiteName: "JobApplication"},  {suiteName: "WebJobApplication"}];
+
+
+
+	$scope.industryCategoriesMap=[{name: "HCM", code: "000000"},{name: "Recruitment"}];
 	$scope.testCaseName = "QuickApply";
 
 	$scope.sum = function() {
@@ -40,7 +84,27 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 
 	$scope.injectProcessor = function(){
 		sendObjectToInspectedPage({action: "script", content: "messageback-jquery-existence.js"});
-	}
+		/*$scope.$watch('ate_global_page_context', function() {
+			$scope.screenUrl = ate_global_page_context.screenUrl;
+			$scope.domainName = ate_global_page_context.domain;
+
+		});
+*/
+		setTimeout(function() {
+			//window.ate_global_page_context = {prop: "new value"};
+			ate_global_page_context_Watch.trigger();
+		}, 1000);
+		}
+
+	var unbind = ate_global_page_context_Watch.watch(function(newVal) {
+		$scope.screenUrl = newVal.screenUrl;
+		$scope.domainName = newVal.domain;
+		$scope.update();
+	});
+
+	// Unbind the listener when the scope is destroyed
+	$scope.$on('$destroy', unbind);
+
 	$scope.addWebElement = function(){
 		$scope.fruits.splice(0, 0, {inputLabelName: "", inputMLHtmlCode: ""});
 	}
@@ -57,11 +121,13 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 				 method: 'POST',
 				 url: 'http://localhost:9080/com.bigtester.ate.tcg/preprocessing',
 				 headers: {'Content-Type': 'application/json'},
-				 data: ate_global_page_documents
+				 //data: ate_global_page_documents
+			data: ate_global_page_context.pages
 
 		}
 		$http(req).success(function(data, status, headers, config) {
 			$scope.fruits = data;
+			$scope.pagePredict();
 			//var offset = $scope.fruits.length;
 			//for (var i = 0; i<ate_global_all_clickables.length; i++) {
 			//	$scope.fruits[offset + i] = {inputLabelName: "", inputMLHtmlCode: ate_global_all_clickables[i].clickable};
@@ -79,19 +145,38 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 		
 	};
 
+	$scope.pioResult2Npl = function(index) {
+		$scope.fruits[index].inputLabelName = $scope.fruits[index].pioPredictLabelResult;
+	}
+	$scope.nplResult2Pio = function(index) {
+		$scope.fruits[index].pioPredictLabelResult = $scope.fruits[index].inputLabelName;
+	}
 	$scope.saveIntermediateResult = function() {
 		var req = {
 			method: 'POST',
 			url: 'http://localhost:9080/com.bigtester.ate.tcg/saveIntermediateResult',
 			headers: {'Content-Type': 'application/json'},
-			data: {uitrs: $scope.fruits, domStrings: ate_global_page_documents}
+			//data: {uitrs: $scope.fruits, domStrings: ate_global_page_documents}
+			data: {uitrs: $scope.fruits, domStrings: ate_global_page_context.pages,
+				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
+				testCaseName:$scope.testCaseName, screenUrl: $scope.screenUrl,
+				domainName: $scope.domainName, screenName: $scope.countrySelected14.originalObject.name
+			}
 		}
+		$localStorage.lastScreenNode = req.data;
+
 		$http(req).success(function(data, status, headers, config) {
 			$scope.fruits.length = 0;
-			$scope.fruits[0] = {inputLabelName: "SaveResult", inputMLHtmlCode: data.toString()};
+			//$scope.fruits[0] = {inputLabelName: "SaveResult", inputMLHtmlCode: data.toString()};
+			$scope.fruits = data.uitrs;
+			ate_global_page_context.pages = data.domStrings;
+			$localStorage.lastScreenNodeBk = $localStorage.lastScreenNode;
+			alert( "success!");
 		}).error(function(data, status, headers, config) {
+			$localStorage.lastScreenNode = $localStorage.lastScreenNodeBk;
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});
+
 	}
 	$scope.pioPredict = function(){
 		var req = {
@@ -102,6 +187,20 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http) {
 		}
 		$http(req).success(function(data, status, headers, config) {
 			$scope.fruits = data;
+		}).error(function(data, status, headers, config) {
+			alert( "failure message: " + JSON.stringify({data: data}));
+		});
+
+	};
+	$scope.pagePredict = function(){
+		var req = {
+			method: 'POST',
+			url: 'http://localhost:9080/com.bigtester.ate.tcg/pagePredict',
+			headers: {'Content-Type': 'application/json'},
+			data: ate_global_page_context.pages
+		}
+		$http(req).success(function(data, status, headers, config) {
+			$scope.countrySelected14 = Object.keys(data)[0];
 		}).error(function(data, status, headers, config) {
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});
