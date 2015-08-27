@@ -50,20 +50,22 @@
 						<div class="panel-heading">
 							<br class="panel-title">
 							<!-- use this to populate the industry category recursion http://stackoverflow.com/questions/14430655/recursion-in-angular-directives-->
-							Industry<input ng-model="industryCategoriesMap[0].name" disabled type="text" maxlength="20"/>
+							Industry<input ng-model="industryCategoriesMap[0].name" disabled type="text" size="20"/>
 							<span ng-repeat="industryCat in industryCategoriesMap" ng-if="$index >= 1">
-								=><input ng-model="industryCat.name" disabled type="text" maxlength="20"/>
+								=><input ng-model="industryCat.name" disabled type="text" size="20"/>
 							</span>
 								<!--Industry Code<input ng-model="industryCode" type="text" maxlength="20"/>
 								IndustryName<input ng-model="testIndustryName" type="text" maxlength="20"/>
 								Industry Sub-Category<input ng-model="testIndustrySubCategory" type="text" maxlength="20"/>-->
-								Test Suite<input ng-model="testSuitesMap[0].suiteName" disabled type="text" maxlength="20"/>
+								Test Suite<input ng-model="testSuitesMap[0].suiteName" disabled type="text" size="20"/>
 							<span ng-repeat="testSuite in testSuitesMap" ng-if="$index >= 1">
-								=><input ng-model="testSuite.suiteName" disabled type="text" maxlength="20"/>
+								=><input ng-model="testSuite.suiteName" disabled type="text" size="20"/>
 							</span>
-								Test Case<input ng-model="testCaseName" disabled type="text" maxlength="20"/><br/>
-							Domain Name<input ng-model="domainName" type="text" maxlength="30" disabled/>
-							Screen URL<input ng-model="screenUrl" type="text" maxlength="30" disabled/>
+								Test Case<input ng-model="testCaseName" disabled type="text" size="20"/><br/>
+							Protocol<input ng-model="page_context.domainProtocol" type="text" size="10" disabled/>
+							Domain Name<input ng-model="domainName" type="text" size="30" disabled/>
+							Domain Port<input ng-model="page_context.domainPort" type="text" size="7" disabled/>
+							Screen URL<input ng-model="page_context.screenUrl" type="text" size="50"  disabled/>
 
 							<!--PagePredictionConfidence<input ng-model="pagePredictionConfidence" type="text" maxlength="30" disabled/>-->
 								<!--Page Name<input ng-model="pageName" type="text" maxlength="20"/>-->
@@ -95,67 +97,18 @@
 											<div ng-if="!matchClass && result.description && result.description != ''" class="angucomplete-description">{{result.description}}</div>
 										</div>
 										<div class="angucomplete-row" ng-click="selectResult({title: searchStr, originalObject: { name: searchStr, custom: true }})" ng-mouseenter="hoverRow(results.length)" ng-class="{'angucomplete-selected-row': results.length == currentIndex}">
-											<div class="angucomplete-title">Select custom country '{{ searchStr }}'</div>
+											<div class="angucomplete-title">Create New Screen Name '{{ searchStr }}'</div>
 										</div>
 									</div>
 								</div>
 							</script>
-							<div angucomplete-alt="" id="ex14" placeholder="Search countries" pause="100"
+							<div angucomplete-alt="" id="ex14" placeholder="Screen Name" pause="100"
 								 selected-object="countrySelected14" local-data="countries" search-fields="name"
-								 title-field="name" minlength="1" input-class="form-control form-control-small"
+								 title-field="name" minlength="1" input-class="form-control form-control-small input-sm"
 								 match-class="highlight" initial-value="countrySelected14" template-url="/my-custom-template.html"
-								 class="ng-isolate-scope">
-							<!--		<div class="angucomplete-holder"
-										 ng-class="{'angucomplete-dropdown-visible': showDropdown}">
-										<input
-											id="ex1_value" name="" size="30" ng-class="{'angucomplete-input-not-empty': notEmpty}"
-											ng-model="searchStr" ng-disabled="disableInput" type="text"
-											placeholder="Screen Name" maxlength="20" ng-focus="onFocusHandler()"
-											class="form-control form-control-small ng-valid-maxlength ng-touched"
-											ng-blur="hideResults($event)" autocapitalize="off" autocorrect="off"
-											autocomplete="off" ng-change="inputChangeHandler(searchStr)">
+								 class="ng-isolate-scope col-xs-2 ">
 
-										<div id="ex1_dropdown" class="angucomplete-dropdown ng-hide"
-											 ng-show="showDropdown">
-											<div class="angucomplete-searching ng-binding ng-hide" ng-show="searching"
-												 ng-bind="textSearching">Searching...
-											</div>
-											<div class="angucomplete-searching ng-binding"
-												 ng-show="!searching &amp;&amp; (!results || results.length == 0)"
-												 ng-bind="textNoResults">No results found
-											</div>
-											&lt;!&ndash; ngRepeat: result in results &ndash;&gt;  </div>
-									</div>-->
 								</div>
-								<!--<div angucomplete-alt="" id="ex5" placeholder="Type in Screen Name" pause="500"
-									 selected-object="selectedProject"
-									 remote-url="http://localhost:9080/com.bigtester.ate.tcg/queryScreenNames"
-									 remote-url-request-formatter="remoteUrlRequestFn" remote-url-data-field="screenNames"
-									 title-field="name" description-field="desc" minlength="2"
-									 input-class="form-control form-control-small" match-class="highlight"
-									 class="ng-isolate-scope">
-									<div class="angucomplete-holder"
-										 ng-class="{'angucomplete-dropdown-visible': showDropdown}"><input
-											id="ex5_value" name="" ng-class="{'angucomplete-input-not-empty': notEmpty}"
-											ng-model="searchStr" ng-disabled="disableInput" type="text"
-											placeholder="Search projects" maxlength="524288" ng-focus="onFocusHandler()"
-											class="form-control form-control-small ng-valid-maxlength ng-dirty ng-valid-parse ng-touched"
-											ng-blur="hideResults($event)" autocapitalize="off" autocorrect="off"
-											autocomplete="off" ng-change="inputChangeHandler(searchStr)">
-
-										<div id="ex5_dropdown" class="angucomplete-dropdown ng-hide"
-											 ng-show="showDropdown" ate-invisible="yes">
-											<div class="angucomplete-searching ng-binding ng-hide" ng-show="searching"
-												 ng-bind="textSearching" ate-invisible="yes">Searching...
-											</div>
-											<div class="angucomplete-searching ng-binding"
-												 ng-show="!searching &amp;&amp; (!results || results.length == 0)"
-												 ng-bind="textNoResults" ate-invisible="yes">No results found
-											</div>
-											&lt;!&ndash; ngRepeat: result in results &ndash;&gt;  </div>
-									</div>
-								</div>
--->
 							</h3>
 						</div>
 						<div class="panel-body">

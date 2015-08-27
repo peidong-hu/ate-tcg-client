@@ -54,7 +54,7 @@ var ate_global_page_context_Watch = (function() {
             ate_global_page_context = message.content;
             ate_global_page_documents = message.content.pages;
             ate_global_all_clickables = message.content.allClickables;
-            ate_global_screenUrl = message.content.screenUrl;
+            /*ate_global_screenUrl = message.content.screenUrl;*/
             document.querySelector('#number1').setAttribute("value", message.content[0].domDoc);
         }
       // port.postMessage(message);

@@ -2,11 +2,12 @@
 //  chrome.extension.sendMessage({action: 'message', content:"Changed by page"}, function(message){});
 // });
 /*document.querySelector('button').addEventListener('click', function() {
-    sendObjectToDevTools({content: "Changed by page"});
-});*/
+ sendObjectToDevTools({content: "Changed by page"});
+ });*/
 function sendObjectToDevTools(message) {
     // The callback here can be used to execute something on receipt
-    chrome.extension.sendMessage(message, function(message){});
+    chrome.extension.sendMessage(message, function (message) {
+    });
 }
 function ate_add_invisible_marker(document) {
     var ate_hiddenElements = $("body", document).find(":hidden").not("script");
@@ -14,12 +15,12 @@ function ate_add_invisible_marker(document) {
         ate_hiddenElements[ate_hiddenIndex].setAttribute("ate-invisible", "yes")
     }
 }
-getAllClickBindElements = function(documentE) {
+getAllClickBindElements = function (documentE) {
     //TODO this needs to be working for elements bind with jquery click event
     var allelmts = $('body').find("*");
-    for (var i =0; i< allelmts.length; i++) {
-    var tempEvents = $._data(allelmts[i], "events");
-        if (typeof tempEvents !=="undefined") {
+    for (var i = 0; i < allelmts.length; i++) {
+        var tempEvents = $._data(allelmts[i], "events");
+        if (typeof tempEvents !== "undefined") {
             for (var j = 0; j < tempEvents.length; j++) {
                 alert("ab");
                 var oneevent = tempEvents[j];
@@ -30,27 +31,33 @@ getAllClickBindElements = function(documentE) {
     }
     //return temp;
 }
-getAllClickablesOnPage = function(docElmt){
+getAllClickablesOnPage = function (docElmt) {
     var allClickables1 = $(docElmt).find("[onclick]");
     var allClickables2 = $(docElmt).find("input[type=button],input[type=submit],input[type=reset], button, a");
     var allClickables = allClickables1.add(allClickables2).add(getAllClickBindElements(docElmt));
     var offset = ate_ml_allClickables_in_page.length;
-    for (var i = offset ; i< allClickables.length; i++) {
-        if (allClickables[i - offset].getAttribute("ate-invisible")!=="yes") {
+    for (var i = offset; i < allClickables.length; i++) {
+        if (allClickables[i - offset].getAttribute("ate-invisible") !== "yes") {
             var tmp = {clickable: allClickables[i - offset].outerHTML};
             if ($.inArray(tmp, ate_ml_allClickables_in_page) === -1) {
                 ate_ml_allClickables_in_page[i] = tmp;
             }
         }
-    };
+    }
+    ;
     //var offset = ate_ml_allClickables_in_page.length;
 
 }
 ate_add_invisible_marker(document);
-ate_ml_allDocs_in_page = [{parentIndex: 0, xpathOfFrame: "path0", domDoc: document.documentElement.outerHTML, docText: getText(document.body).replace(/\s\s+/g, ' ')}];
+ate_ml_allDocs_in_page = [{
+    parentIndex: 0,
+    xpathOfFrame: "path0",
+    domDoc: document.documentElement.outerHTML,
+    docText: getText(document.body).replace(/\s\s+/g, ' ')
+}];
 ate_ml_allClickables_in_page = [];
 getAllClickablesOnPage(document.documentElement);
-getAllDocumentsOnPage = function(topDocument, parentDocIndex, startingIndex) {
+getAllDocumentsOnPage = function (topDocument, parentDocIndex, startingIndex) {
     getAllClickablesOnPage(topDocument);
     var iframeElements;
     var frameElements;
@@ -62,7 +69,7 @@ getAllDocumentsOnPage = function(topDocument, parentDocIndex, startingIndex) {
     for (var i = 0; i < allFrameNodes.length; i++) {
         frameDoc = allFrameNodes[i].contentWindow.document;
         ate_add_invisible_marker(frameDoc);
-        if (allFrameNodes[i].getAttribute("id")!=="FirebugUI") {
+        if (allFrameNodes[i].getAttribute("id") !== "FirebugUI") {
             ate_ml_allDocs_in_page[i + startingIndex] = {
                 parentIndex: parentDocIndex,
                 xpathOfFrame: "xxpath",
@@ -80,15 +87,24 @@ getAllDocumentsOnPage = function(topDocument, parentDocIndex, startingIndex) {
 getAllDocumentsOnPage(document.documentElement, 0, 1);
 
 
-sendObjectToDevTools({content: {pages: ate_ml_allDocs_in_page, allClickables: ate_ml_allClickables_in_page, screenUrl: window.location.href, domain: window.location.host}});
+sendObjectToDevTools({
+    content: {
+        pages: ate_ml_allDocs_in_page,
+        allClickables: ate_ml_allClickables_in_page,
+        screenUrl: window.location.href.replace(/^.*\/\/[^\/]+/, ''),
+        domain: window.location.host,
+        domainProtocol: window.location.protocol,
+        domainPort: window.location.port
+    }
+});
 //http://stackoverflow.com/questions/17727977/how-to-get-all-text-from-all-tags-in-one-array to get the text on the page. need to iterate the frames
 
 function getText(bodyElement) {
     var elements = bodyElement.getElementsByTagName("*");
     var retVal = " ";
-    for(var i = 0; i < elements.length; i++) {
+    for (var i = 0; i < elements.length; i++) {
         var current = elements[i];
-        if(current.children.length === 0 && current.textContent.replace(/ |\n/g,'') !== '') {
+        if (current.children.length === 0 && current.textContent.replace(/ |\n/g, '') !== '') {
             // Check the element has no children && that it is not empty
             if (current.tagName.toLowerCase() != 'script' && current.tagName.toLowerCase() != 'style')
                 retVal = retVal + " " + (current.textContent);

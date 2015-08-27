@@ -99,6 +99,8 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	var unbind = ate_global_page_context_Watch.watch(function(newVal) {
 		$scope.screenUrl = newVal.screenUrl;
 		$scope.domainName = newVal.domain;
+		$scope.page_context = ate_global_page_context;
+
 		$scope.update();
 	});
 
@@ -273,10 +275,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	];
 
 	$scope.countries = [
-		{name: 'Afghanistan', code: 'AF'},
-		{name: 'Aland Islands', code: 'AX'},
-		{name: 'Albania', code: 'AL'},
-		{name: 'Zimbabwe', code: 'ZW'}
+		{name: 'Homepage', code: 'AF'}
 	];
 	$scope.queryAllScreenNames();
 	$scope.countrySelected9 = {name: 'Zimbabwe', code: 'ZW'};
