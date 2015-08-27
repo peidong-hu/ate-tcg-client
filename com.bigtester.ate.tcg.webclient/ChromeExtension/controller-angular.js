@@ -50,14 +50,14 @@ app1.directive('ngReplace', function() {
 app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localStorage) {
 
 	// fruits
-	$scope.fruits = [ "loading..." ];
+	$scope.fruits = {};
 	angular.element(document).ready(function() {
 		$scope.update();
 	});
 	$scope.$storage = $localStorage;
 
 	$scope.update = function() {
-		$scope.fruits = [ "loading..." ];
+		$scope.fruits = {};
 		$scope.$apply();
 		// fruitsService.loadFruits(function(data){
 		// $scope.fruits = data;
@@ -103,6 +103,11 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 
 		$scope.update();
 	});
+
+	$scope.tmpUserValue = function(selected) {
+		if (typeof selected != undefined)
+		$scope.fruits[this.$parent.$index].userValue = selected.title;
+	}
 
 	// Unbind the listener when the scope is destroyed
 	$scope.$on('$destroy', unbind);

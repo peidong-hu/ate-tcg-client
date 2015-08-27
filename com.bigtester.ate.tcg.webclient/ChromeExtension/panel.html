@@ -128,7 +128,7 @@
 
 							<table class="table table-striped">
 								<thead>
-								<tr><th/><th>UserValue</th><th>NPLPredictField</th><th class="col-sm-3">--</th><th>PioPredictField--></th>
+								<tr><th/><th>ScreenInputValue</th><th>NPLPredictField</th><th class="col-sm-3">--</th><th>PioPredictField--></th>
 									<th>PioConfidence</th><th>UserInputType</th>
 									<!--<th>ActionPredictResult</th><th>ActionConfidence</th>-->
 									<th>PioImportId</th>
@@ -141,7 +141,13 @@
 									<!--<table>
 										<tr> -->
 									<td><input type="button" value="Remove" class="btn btn-sm" ng-click="removeRow(fruit)"/></td>
-									<td><input type="text" ng-model="fruit.userValue"/></td>
+									<!--<td><input type="text" ng-model="fruit.userValue"/></td>-->
+									<td><div angucomplete-alt="" id="ex{{$index}}" placeholder="Screen Name" pause="100"
+										 selected-object="$parent.tmpUserValue" local-data="countries" search-fields="name"
+										 title-field="name" minlength="1" input-class="form-control form-control-small input-sm"
+										 match-class="highlight" initial-value="$parent.fruits[0].userValue" template-url="/my-custom-template.html"
+										 class="ng-isolate-scope ">
+									</div></td>
 									<td><input type="text" size="15" ng-model="fruit.inputLabelName"/></td>
 									<td><a href="" ng-click="pioResult2Npl(fruits.indexOf(fruit))"><-</a><br/>
 										<a href="" ng-click="nplResult2Pio(fruits.indexOf(fruit))">-></a>
