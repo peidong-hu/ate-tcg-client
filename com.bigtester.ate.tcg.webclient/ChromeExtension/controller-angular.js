@@ -154,6 +154,9 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		$scope.fruits[index].pioPredictLabelResult = $scope.fruits[index].inputLabelName;
 	}
 	$scope.saveIntermediateResult = function() {
+		var tmpScreenName;
+		if (typeof $scope.countrySelected14.originalObject != 'undefined') tmpScreenName = $scope.countrySelected14.originalObject.name;
+		else tmpScreenName = $scope.countrySelected14;
 		var req = {
 			method: 'POST',
 			url: 'http://localhost:9080/com.bigtester.ate.tcg/saveIntermediateResult',
@@ -162,7 +165,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			data: {uitrs: $scope.fruits, domStrings: ate_global_page_context.pages,
 				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
 				testCaseName:$scope.testCaseName, screenUrl: $scope.screenUrl,
-				domainName: $scope.domainName, screenName: $scope.countrySelected14.originalObject.name
+				domainName: $scope.domainName, screenName: tmpScreenName
 			}
 		}
 		$localStorage.lastScreenNode = req.data;
