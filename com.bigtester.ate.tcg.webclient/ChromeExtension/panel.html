@@ -143,16 +143,22 @@
 									<td><input type="button" value="Remove" class="btn btn-sm" ng-click="removeRow(fruit)"/></td>
 									<!--<td><input type="text" ng-model="fruit.userValue"/></td>-->
 									<td><div angucomplete-alt="" id="userInuptValue{{$index}}" placeholder="Input Value" pause="100"
-										 selected-object="$parent.tmpUserValue" local-data="countries" search-fields="name"
-										 title-field="name" minlength="1" input-class="form-control form-control-small input-sm"
-										 match-class="highlight" initial-value="$parent.fruits[$index].userValue" template-url="/my-custom-template.html"
+										 selected-object="$parent.tmpUserValue" local-data="allUserValues" search-fields="value"
+										 title-field="value" minlength="1" input-class="form-control form-control-small input-sm"
+										 match-class="highlight" initial-value="$parent.fruits[$index].userValues[0].value" template-url="/my-custom-template.html"
 										 class="ng-isolate-scope ">
 									</div></td>
 									<td><input type="text" size="15" ng-model="fruit.inputLabelName"/></td>
 									<td><a href="" ng-click="pioResult2Npl(fruits.indexOf(fruit))"><-</a><br/>
 										<a href="" ng-click="nplResult2Pio(fruits.indexOf(fruit))">-></a>
 									</td>
-									<td><input type="text" size="15" ng-model="fruit.pioPredictLabelResult"/></td>
+									<!--<td><input type="text" size="15" ng-model="fruit.pioPredictLabelResult"/></td>-->
+									<td><div angucomplete-alt="" id="pioPredictLabelResult{{$index}}" placeholder="Input Value" pause="100"
+											 selected-object="$parent.tmpPioPredictLabelResult" local-data="allFieldNames" search-fields="value"
+											 title-field="value" minlength="1" input-class="form-control form-control-small input-sm"
+											 match-class="highlight" initial-value="$parent.fruits[$index].pioPredictLabelResult.value" template-url="/my-custom-template.html"
+											 class="ng-isolate-scope ">
+									</div></td>
 									<td><input type="text" size="5" ng-model="fruit.pioPredictConfidence"/></td>
 									<td><select ng-model="fruit.userInputType">
 										<option value="CLICKABLE">CLICKABLE</option>

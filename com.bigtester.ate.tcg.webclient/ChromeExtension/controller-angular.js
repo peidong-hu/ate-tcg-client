@@ -106,8 +106,13 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 
 	$scope.tmpUserValue = function(selected) {
 		if (typeof selected != undefined)
-		$scope.fruits[this.$parent.$index].userValue = selected.title;
+		$scope.fruits[this.$parent.$index].userValues.push({value: selected.title});
 	}
+	$scope.tmpPioPredictLabelResult = function(selected) {
+		if (typeof selected != undefined)
+			$scope.fruits[this.$parent.$index].pioPredictLabelResult = {value: selected.title};
+	}
+
 
 	// Unbind the listener when the scope is destroyed
 	$scope.$on('$destroy', unbind);
@@ -153,10 +158,10 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	};
 
 	$scope.pioResult2Npl = function(index) {
-		$scope.fruits[index].inputLabelName = $scope.fruits[index].pioPredictLabelResult;
+		$scope.fruits[index].inputLabelName = $scope.fruits[index].pioPredictLabelResult.value;
 	}
 	$scope.nplResult2Pio = function(index) {
-		$scope.fruits[index].pioPredictLabelResult = $scope.fruits[index].inputLabelName;
+		$scope.fruits[index].pioPredictLabelResult.value = $scope.fruits[index].inputLabelName;
 	}
 	$scope.saveIntermediateResult = function() {
 		var tmpScreenName;
@@ -231,6 +236,34 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 
 	};
 
+	$scope.queryAllUserInputValues = function() {
+		var req = {
+			method: 'GET',
+			url: 'http://localhost:9080/com.bigtester.ate.tcg/queryUserInputValues',
+//				 data: {content: document.documentElement.innerHTML}
+			headers: {'Content-Type': 'application/json'},
+		}
+		$http(req).success(function(data, status, headers, config) {
+			$scope.allUserValues = data.userValues;
+		}).error(function(data, status, headers, config) {
+			alert( "failure message: " + JSON.stringify({data: data}));
+		});
+
+	}
+	$scope.queryPioPredictedFieldNames = function() {
+		var req = {
+			method: 'GET',
+			url: 'http://localhost:9080/com.bigtester.ate.tcg/queryPioPredictedFieldNames',
+//				 data: {content: document.documentElement.innerHTML}
+			headers: {'Content-Type': 'application/json'},
+		}
+		$http(req).success(function(data, status, headers, config) {
+			$scope.allFieldNames = data.fieldNames;
+		}).error(function(data, status, headers, config) {
+			alert( "failure message: " + JSON.stringify({data: data}));
+		});
+
+	}
 	$scope.queryAllScreenNames = function() {
 		var req = {
 			method: 'GET',
@@ -272,28 +305,21 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		return {q: str};
 	};
 
-	$scope.countrySelected = function(selected) {
-		window.alert('You have selected ' + selected.title);
-	};
-
-	$scope.people = [
-		{firstName: "Daryl", surname: "Rowland", twitter: "@darylrowland", pic: "img/daryl.jpeg"},
-		{firstName: "Alan", surname: "Partridge", twitter: "@alangpartridge", pic: "img/alanp.jpg"},
-		{firstName: "Annie", surname: "Rowland", twitter: "@anklesannie", pic: "img/annie.jpg"}
-	];
 
 	$scope.countries = [
 		{name: 'Homepage', code: 'AF'}
 	];
 	$scope.queryAllScreenNames();
-	$scope.countrySelected9 = {name: 'Zimbabwe', code: 'ZW'};
-	$scope.countrySelectedFn9 = function(selected) {
+	$scope.queryAllUserInputValues();
+	$scope.queryPioPredictedFieldNames();
+	//$scope.countrySelected9 = {name: 'Zimbabwe', code: 'ZW'};
+	/*$scope.countrySelectedFn9 = function(selected) {
 		if (selected) {
 			$scope.countrySelected9 = selected.originalObject;
 		} else {
 			$scope.countrySelected9 = null;
 		}
-	}
+	}*/
 
 	$scope.inputChanged = function(str) {
 		$scope.console10 = str;
