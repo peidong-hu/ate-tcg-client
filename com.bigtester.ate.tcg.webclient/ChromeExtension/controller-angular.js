@@ -163,6 +163,12 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.nplResult2Pio = function(index) {
 		$scope.fruits[index].pioPredictLabelResult.value = $scope.fruits[index].inputLabelName;
 	}
+
+	$scope.startNewRootScreenNode = function() {
+		$localStorage.lastScreenNodeBk = {};
+		$localStorage.lastScreenNode = {};
+	}
+
 	$scope.saveIntermediateResult = function() {
 		var tmpScreenName;
 		if (typeof $scope.countrySelected14.originalObject != 'undefined') tmpScreenName = $scope.countrySelected14.originalObject.name;
@@ -175,7 +181,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			data: {uitrs: $scope.fruits, domStrings: ate_global_page_context.pages,
 				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
 				testCaseName:$scope.testCaseName, screenUrl: $scope.screenUrl,
-				domainName: $scope.domainName, screenName: tmpScreenName
+				domainName: $scope.domainName, screenName: tmpScreenName, lastScreenNodeIntermediateResult: $localStorage.lastScreenNodeBk
 			}
 		}
 		$localStorage.lastScreenNode = req.data;
