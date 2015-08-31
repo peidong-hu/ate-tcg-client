@@ -167,18 +167,29 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.startNewRootScreenNode = function() {
 		$localStorage.lastScreenNodeBk = {};
 		$localStorage.lastScreenNode = {};
+		//TODO refresh all the graph ids
+		alert("next screen will be saved as independent node. Please don't forget fresh this page to clean up the graph ids.");
 	}
 
 	$scope.saveIntermediateResult = function() {
 		var tmpScreenName;
 		if (typeof $scope.countrySelected14.originalObject != 'undefined') tmpScreenName = $scope.countrySelected14.originalObject.name;
 		else tmpScreenName = $scope.countrySelected14;
+		var uitrs=[];
+		var actionUitrs = [];
+		for (ind = 0; ind < $scope.fruits.length; ind++) {
+			if ($scope.fruits[ind].userInputType === "CLICKABLE") {
+				actionUitrs.push($scope.fruits[ind]);
+			} else {
+				uitrs.push($scope.fruits[ind]);
+			}
+		}
 		var req = {
 			method: 'POST',
 			url: 'http://localhost:9080/com.bigtester.ate.tcg/saveIntermediateResult',
 			headers: {'Content-Type': 'application/json'},
 			//data: {uitrs: $scope.fruits, domStrings: ate_global_page_documents}
-			data: {uitrs: $scope.fruits, domStrings: ate_global_page_context.pages,
+			data: {uitrs: uitrs, actionUitrs: actionUitrs, domStrings: ate_global_page_context.pages,
 				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
 				testCaseName:$scope.testCaseName, screenUrl: $scope.screenUrl,
 				domainName: $scope.domainName, screenName: tmpScreenName, lastScreenNodeIntermediateResult: $localStorage.lastScreenNodeBk
@@ -189,7 +200,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		$http(req).success(function(data, status, headers, config) {
 			$scope.fruits.length = 0;
 			//$scope.fruits[0] = {inputLabelName: "SaveResult", inputMLHtmlCode: data.toString()};
-			$scope.fruits = data.uitrs;
+			$scope.fruits = data.uitrs.concat(data.actionUitrs);
 			ate_global_page_context.pages = data.domStrings;
 			$localStorage.lastScreenNodeBk = $localStorage.lastScreenNode;
 			alert( "success!");
