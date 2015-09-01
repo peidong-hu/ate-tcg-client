@@ -71,7 +71,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	//$scope.searchStr = "";
 	////alert(JSON.stringify(ate_global_page_context));
 
-	$scope.testSuitesMap=[{suiteName: "JobApplication"},  {suiteName: "WebJobApplication"}];
+	$scope.testSuitesMap=[{name: "JobApplication"},  {name: "WebJobApplication"}];
 
 
 

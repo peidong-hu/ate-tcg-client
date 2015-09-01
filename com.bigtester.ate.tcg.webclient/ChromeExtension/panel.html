@@ -57,9 +57,9 @@
 								<!--Industry Code<input ng-model="industryCode" type="text" maxlength="20"/>
 								IndustryName<input ng-model="testIndustryName" type="text" maxlength="20"/>
 								Industry Sub-Category<input ng-model="testIndustrySubCategory" type="text" maxlength="20"/>-->
-								Test Suite<input ng-model="testSuitesMap[0].suiteName" disabled type="text" size="20"/>
+								Test Suite<input ng-model="testSuitesMap[0].name" disabled type="text" size="20"/>
 							<span ng-repeat="testSuite in testSuitesMap" ng-if="$index >= 1">
-								=><input ng-model="testSuite.suiteName" disabled type="text" size="20"/>
+								=><input ng-model="testSuite.name" disabled type="text" size="20"/>
 							</span>
 								Test Case<input ng-model="testCaseName" disabled type="text" size="20"/><br/>
 							Protocol<input ng-model="page_context.domainProtocol" type="text" size="10" disabled/>
