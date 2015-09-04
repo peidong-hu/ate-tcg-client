@@ -162,6 +162,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	}
 	$scope.nplResult2Pio = function(index) {
 		$scope.fruits[index].pioPredictLabelResult.value = $scope.fruits[index].inputLabelName;
+		$("#pioPredictLabelResult" + index).find("input").get(0).value = ($scope.fruits[index].inputLabelName);
 	}
 
 	$scope.startNewRootScreenNode = function() {
