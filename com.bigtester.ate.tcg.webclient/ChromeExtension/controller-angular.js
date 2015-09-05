@@ -104,13 +104,29 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		$scope.update();
 	});
 
+	$scope.duplicatedUserValue = function(userValues, userValue) {
+		for(var i=0; i<userValues.length; i++) {
+			if (userValues[i].value === userValue.value)
+				return i;
+		}
+		return -1
+	}
 	$scope.tmpUserValue = function(selected) {
-		if (typeof selected != undefined)
-		$scope.fruits[this.$parent.$index].userValues.push({value: selected.title});
+		if (typeof selected !== undefined) {
+			var tmpObj = {name: selected.title, value: selected.title};
+			if ($scope.duplicatedUserValue($scope.fruits[this.$parent.$index].userValues, tmpObj) === -1)
+				$scope.fruits[this.$parent.$index].userValues.push(tmpObj);
+		}
 	}
 	$scope.tmpPioPredictLabelResult = function(selected) {
-		if (typeof selected != undefined)
-			$scope.fruits[this.$parent.$index].pioPredictLabelResult = {value: selected.title};
+		if (typeof selected !== undefined) {
+			if ($scope.fruits[this.$parent.$index].pioPredictLabelResult !== undefined) {
+				$scope.fruits[this.$parent.$index].pioPredictLabelResult.name = selected.title;
+				$scope.fruits[this.$parent.$index].pioPredictLabelResult.value = selected.title;
+			} else {
+				$scope.fruits[this.$parent.$index].pioPredictLabelResult = {name: selected.title, value: selected.title}
+			}
+		}
 	}
 
 

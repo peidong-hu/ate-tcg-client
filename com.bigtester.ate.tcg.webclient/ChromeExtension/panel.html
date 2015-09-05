@@ -69,6 +69,39 @@
 
 							<!--PagePredictionConfidence<input ng-model="pagePredictionConfidence" type="text" maxlength="30" disabled/>-->
 								<!--Page Name<input ng-model="pageName" type="text" maxlength="20"/>-->
+							<script type="text/ng-template" id="/my-custom-template-value.html">
+								<div class="angucomplete-holder" ng-class="{'angucomplete-dropdown-visible': showDropdown}">
+									<input ng-model="searchStr"
+										   ng-disabled="disableInput"
+										   type="text"
+										   placeholder="{{placeholder}}"
+										   ng-focus="onFocusHandler()"
+										   class="{{inputClass}}"
+										   ng-focus="resetHideResults()"
+										   ng-blur="hideResults($event)"
+										   autocapitalize="off"
+										   autocorrect="off"
+										   autocomplete="off"
+										   ng-change="inputChangeHandler(searchStr)"/>
+									<div class="angucomplete-dropdown" ng-show="showDropdown">
+										<div class="angucomplete-searching" ng-show="searching" ng-bind="textSearching"></div>
+										<div class="angucomplete-searching" ng-show="!searching && (!results || results.length == 0)" ng-bind="textNoResults"></div>
+										<div class="angucomplete-row" ng-repeat="result in results" ng-click="selectResult(result)" ng-mouseenter="hoverRow($index)" ng-class="{'angucomplete-selected-row': $index == currentIndex}">
+											<div ng-if="imageField" class="angucomplete-image-holder">
+												<img ng-if="result.image && result.image != ''" ng-src="{{result.image}}" class="angucomplete-image"/>
+												<div ng-if="!result.image && result.image != ''" class="angucomplete-image-default"></div>
+											</div>
+											<div class="angucomplete-title" ng-if="matchClass" ng-bind-html="result.title"></div>
+											<div class="angucomplete-title" ng-if="!matchClass">{{ result.title }}</div>
+											<div ng-if="matchClass && result.description && result.description != ''" class="angucomplete-description" ng-bind-html="result.description"></div>
+											<div ng-if="!matchClass && result.description && result.description != ''" class="angucomplete-description">{{result.description}}</div>
+										</div>
+										<div class="angucomplete-row" ng-click="selectResult({title: searchStr, originalObject: { name: searchStr, custom: true }})" ng-mouseenter="hoverRow(results.length)" ng-class="{'angucomplete-selected-row': results.length == currentIndex}">
+											<div class="angucomplete-title">Create New User Value '{{ searchStr }}'</div>
+										</div>
+									</div>
+								</div>
+							</script>
 							<script type="text/ng-template" id="/my-custom-template.html">
 								<div class="angucomplete-holder" ng-class="{'angucomplete-dropdown-visible': showDropdown}">
 									<input ng-model="searchStr"
@@ -127,6 +160,39 @@
 							<button class="btn btn-sm btn-success" ng-click="startNewRootScreenNode()">10: start New Home</button>
 
 
+							<script type="text/ng-template" id="/my-custom-template_field.html">
+								<div class="angucomplete-holder" ng-class="{'angucomplete-dropdown-visible': showDropdown}">
+									<input ng-model="searchStr"
+										   ng-disabled="disableInput"
+										   type="text"
+										   placeholder="{{placeholder}}"
+										   ng-focus="onFocusHandler()"
+										   class="{{inputClass}}"
+										   ng-focus="resetHideResults()"
+										   ng-blur="hideResults($event)"
+										   autocapitalize="off"
+										   autocorrect="off"
+										   autocomplete="off"
+										   ng-change="inputChangeHandler(searchStr)"/>
+									<div class="angucomplete-dropdown" ng-show="showDropdown">
+										<div class="angucomplete-searching" ng-show="searching" ng-bind="textSearching"></div>
+										<div class="angucomplete-searching" ng-show="!searching && (!results || results.length == 0)" ng-bind="textNoResults"></div>
+										<div class="angucomplete-row" ng-repeat="result in results" ng-click="selectResult(result)" ng-mouseenter="hoverRow($index)" ng-class="{'angucomplete-selected-row': $index == currentIndex}">
+											<div ng-if="imageField" class="angucomplete-image-holder">
+												<img ng-if="result.image && result.image != ''" ng-src="{{result.image}}" class="angucomplete-image"/>
+												<div ng-if="!result.image && result.image != ''" class="angucomplete-image-default"></div>
+											</div>
+											<div class="angucomplete-title" ng-if="matchClass" ng-bind-html="result.title"></div>
+											<div class="angucomplete-title" ng-if="!matchClass">{{ result.title }}</div>
+											<div ng-if="matchClass && result.description && result.description != ''" class="angucomplete-description" ng-bind-html="result.description"></div>
+											<div ng-if="!matchClass && result.description && result.description != ''" class="angucomplete-description">{{result.description}}</div>
+										</div>
+										<div class="angucomplete-row" ng-click="selectResult({title: searchStr, originalObject: { name: searchStr, custom: true }})" ng-mouseenter="hoverRow(results.length)" ng-class="{'angucomplete-selected-row': results.length == currentIndex}">
+											<div class="angucomplete-title">Create New Field Name '{{ searchStr }}'</div>
+										</div>
+									</div>
+								</div>
+							</script>
 							<table class="table table-striped">
 								<thead>
 								<tr><th/><th>ScreenInputValue</th><th>NPLPredictField</th><th class="col-sm-3">--</th><th>PioPredictField--></th>
@@ -144,9 +210,9 @@
 									<td><input type="button" value="Remove" class="btn btn-sm" ng-click="removeRow(fruit)"/></td>
 									<!--<td><input type="text" ng-model="fruit.userValue"/></td>-->
 									<td><div angucomplete-alt="" id="userInuptValue{{$index}}" placeholder="Input Value" pause="100"
-										 selected-object="$parent.tmpUserValue" local-data="$parent.allUserValues" search-fields="value"
-										 title-field="value" minlength="1" input-class="form-control form-control-small input-sm"
-										 match-class="highlight" initial-value="$parent.fruits[$index].userValues[0].value" template-url="/my-custom-template.html"
+										 selected-object="$parent.tmpUserValue" local-data="$parent.allUserValues" search-fields="name"
+										 title-field="name" minlength="1" input-class="form-control form-control-small input-sm"
+										 match-class="highlight" initial-value="$parent.fruits[$index].userValues[0].value" template-url="/my-custom-template-value.html"
 										 class="ng-isolate-scope ">
 									</div></td>
 									<td><input type="text" size="15" ng-model="fruit.inputLabelName"/></td>
@@ -155,9 +221,9 @@
 									</td>
 									<!--<td><input type="text" size="15" ng-model="fruit.pioPredictLabelResult"/></td>-->
 									<td><div angucomplete-alt="" id="pioPredictLabelResult{{$index}}" placeholder="Input Value" pause="100"
-											 selected-object="$parent.tmpPioPredictLabelResult" local-data="$parent.allFieldNames" search-fields="value"
-											 title-field="value" minlength="1" input-class="form-control form-control-small input-sm"
-											 match-class="highlight" initial-value="$parent.fruits[$index].pioPredictLabelResult.value" template-url="/my-custom-template.html"
+											 selected-object="$parent.tmpPioPredictLabelResult" local-data="$parent.allFieldNames" search-fields="name"
+											 title-field="name" minlength="1" input-class="form-control form-control-small input-sm"
+											 match-class="highlight" initial-value="$parent.fruits[$index].pioPredictLabelResult.value" template-url="/my-custom-template_field.html"
 											 class="ng-isolate-scope ">
 									</div></td>
 									<td><input type="text" size="5" ng-model="fruit.pioPredictConfidence"/></td>
