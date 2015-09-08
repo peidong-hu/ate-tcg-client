@@ -50,8 +50,10 @@ getAllClickablesOnPage = function (docElmt) {
 }
 ate_add_invisible_marker(document);
 ate_ml_allDocs_in_page = [{
+    index: 0,
     parentIndex: 0,
     xpathOfFrame: "path0",
+    visible: true,
     domDoc: document.documentElement.outerHTML,
     docText: getText(document.body).replace(/\s\s+/g, ' ')
 }];
@@ -71,8 +73,10 @@ getAllDocumentsOnPage = function (topDocument, parentDocIndex, startingIndex) {
         ate_add_invisible_marker(frameDoc);
         if (allFrameNodes[i].getAttribute("id") !== "FirebugUI") {
             ate_ml_allDocs_in_page[i + startingIndex] = {
+                index: i + startingIndex,
                 parentIndex: parentDocIndex,
-                xpathOfFrame: "xxpath",
+                visible: (allFrameNodes[i].getAttribute("ate-invisible") === "yes") ? false : true,
+                xpathOfFrame: getElementXPath(allFrameNodes[i]),
                 domDoc: frameDoc.documentElement.outerHTML,
                 docText: getText(frameDoc.body).replace(/\s\s+/g, ' '),
                 frameSrc: allFrameNodes[i].getAttribute("src")
@@ -112,3 +116,40 @@ function getText(bodyElement) {
     }
     return retVal;
 }
+
+/**
+ * Gets an XPath for an element which describes its hierarchical location.
+ */
+function getElementXPath(element)
+{
+    if (element && element.id)
+        return '//*[@id="' + element.id + '"]';
+    else
+        return this.getElementTreeXPath(element);
+};
+
+function getElementTreeXPath(element)
+{
+    var paths = [];
+
+    // Use nodeName (instead of localName) so namespace prefix is included (if any).
+    for (; element && element.nodeType == 1; element = element.parentNode)
+    {
+        var index = 0;
+        for (var sibling = element.previousSibling; sibling; sibling = sibling.previousSibling)
+        {
+            // Ignore document type declaration.
+            if (sibling.nodeType == Node.DOCUMENT_TYPE_NODE)
+                continue;
+
+            if (sibling.nodeName == element.nodeName)
+                ++index;
+        }
+
+        var tagName = element.nodeName.toLowerCase();
+        var pathIndex = (index ? "[" + (index+1) + "]" : "");
+        paths.splice(0, 0, tagName + pathIndex);
+    }
+
+    return paths.length ? "/" + paths.join("/") : null;
+};

@@ -193,10 +193,13 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		if (typeof $scope.countrySelected14.originalObject != 'undefined') tmpScreenName = $scope.countrySelected14.originalObject.name;
 		else tmpScreenName = $scope.countrySelected14;
 		var uitrs=[];
+		var clickUitrs=[];
 		var actionUitrs = [];
 		for (ind = 0; ind < $scope.fruits.length; ind++) {
 			if ($scope.fruits[ind].userInputType === "CLICKABLE") {
 				actionUitrs.push($scope.fruits[ind]);
+			} else if ($scope.fruits[ind].userInputType === "CLICKINPUT") {
+				clickUitrs.push($scope.fruits[ind])
 			} else {
 				uitrs.push($scope.fruits[ind]);
 			}
@@ -206,7 +209,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			url: 'http://localhost:9080/com.bigtester.ate.tcg/saveIntermediateResult',
 			headers: {'Content-Type': 'application/json'},
 			//data: {uitrs: $scope.fruits, domStrings: ate_global_page_documents}
-			data: {uitrs: uitrs, actionUitrs: actionUitrs, domStrings: ate_global_page_context.pages,
+			data: {uitrs: uitrs, clickUitrs: clickUitrs, actionUitrs: actionUitrs, domStrings: ate_global_page_context.pages,
 				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
 				testCaseName:$scope.testCaseName, screenUrl: $scope.screenUrl,
 				domainName: $scope.domainName, screenName: tmpScreenName, lastScreenNodeIntermediateResult: $localStorage.lastScreenNodeBk
@@ -217,7 +220,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		$http(req).success(function(data, status, headers, config) {
 			$scope.fruits.length = 0;
 			//$scope.fruits[0] = {inputLabelName: "SaveResult", inputMLHtmlCode: data.toString()};
-			$scope.fruits = data.uitrs.concat(data.actionUitrs);
+			$scope.fruits = data.uitrs.concat(data.actionUitrs).concat(data.clickUitrs);
 			ate_global_page_context.pages = data.domStrings;
 			$localStorage.lastScreenNodeBk = $localStorage.lastScreenNode;
 			alert( "success!");
