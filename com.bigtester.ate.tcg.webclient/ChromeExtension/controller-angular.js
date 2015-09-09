@@ -74,7 +74,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.testSuitesMap=[{name: "JobApplication"},  {name: "WebJobApplication"}];
 
 
-
+	$scope.screenType = "HTML";
 	$scope.industryCategoriesMap=[{name: "HCM", code: "000000"},{name: "Recruitment"}];
 	$scope.testCaseName = "QuickApply";
 
@@ -129,7 +129,23 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		}
 	}
 
-
+	$scope.screenTypeSwitcher = function() {
+		switch($scope.screenType) {
+			case "WINDOWFILEPICKER":
+				$scope.fruits.length = 0;
+				if (typeof $localStorage.lastScreenNode != "undefined") {
+					for (var index=0; index < $localStorage.lastScreenNode.clickUitrs.length; index++) {
+						$scope.fruits[index] = $localStorage.lastScreenNode.clickUitrs[index];
+					}
+				} else {
+					alert("there is no element to trigger the file picker in previous screen.")
+				}
+				$scope.$apply();
+				break;
+			default:
+				break;
+		}
+	}
 	// Unbind the listener when the scope is destroyed
 	$scope.$on('$destroy', unbind);
 
@@ -188,6 +204,49 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		alert("next screen will be saved as independent node. Please don't forget fresh this page to clean up the graph ids.");
 	}
 
+	$scope.saveIntermediateResultForWindowsFilePicker = function() {
+		var tmpScreenName;
+		if (typeof $scope.countrySelected14.originalObject != 'undefined') tmpScreenName = $scope.countrySelected14.originalObject.name;
+		else tmpScreenName = $scope.countrySelected14;
+		var uitrs=[];
+		var clickUitrs=[];
+		var actionUitrs = [];
+		for (ind = 0; ind < $scope.fruits.length; ind++) {
+			if ($scope.fruits[ind].userInputType === "CLICKABLE") {
+				alert("WindowsFilePicker Screen should not be triggered by Clickables")
+			} else if ($scope.fruits[ind].userInputType === "CLICKINPUT") {
+				clickUitrs.push($scope.fruits[ind])
+			} else {
+				alert("WindowsFilePicker Screen should be triggered only by ClickInput")
+			}
+		}
+		if (clickUitrs.length != 1) alert("this windows file picker screen should have been triggered by only one ClickInput");
+
+		var req = {
+			method: 'POST',
+			url: 'http://localhost:9080/com.bigtester.ate.tcg/saveIntermediateResultForWindowsFilePicker',
+			headers: {'Content-Type': 'application/json'},
+			data: {previousScreenTriggerClickUitr: clickUitrs[0], screenType: $scope.screenType, uitrs: uitrs, clickUitrs: clickUitrs, actionUitrs: actionUitrs, domStrings: ate_global_page_context.pages,
+				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
+				testCaseName:$scope.testCaseName, screenUrl: $scope.screenUrl,
+				domainName: $scope.domainName, screenName: tmpScreenName, lastScreenNodeIntermediateResult: $localStorage.lastScreenNodeBk
+			}
+		}
+		$localStorage.lastScreenNode = req.data;
+
+		$http(req).success(function(data, status, headers, config) {
+			$scope.fruits.length = 0;
+			//$scope.fruits[0] = {inputLabelName: "SaveResult", inputMLHtmlCode: data.toString()};
+			$scope.fruits = data.uitrs.concat(data.actionUitrs).concat(data.clickUitrs);
+			ate_global_page_context.pages = data.domStrings;
+			$localStorage.lastScreenNodeBk = $localStorage.lastScreenNode;
+			alert( "success!");
+		}).error(function(data, status, headers, config) {
+			$localStorage.lastScreenNode = $localStorage.lastScreenNodeBk;
+			alert( "failure message: " + JSON.stringify({data: data}));
+		});
+
+	}
 	$scope.saveIntermediateResult = function() {
 		var tmpScreenName;
 		if (typeof $scope.countrySelected14.originalObject != 'undefined') tmpScreenName = $scope.countrySelected14.originalObject.name;
@@ -209,7 +268,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			url: 'http://localhost:9080/com.bigtester.ate.tcg/saveIntermediateResult',
 			headers: {'Content-Type': 'application/json'},
 			//data: {uitrs: $scope.fruits, domStrings: ate_global_page_documents}
-			data: {uitrs: uitrs, clickUitrs: clickUitrs, actionUitrs: actionUitrs, domStrings: ate_global_page_context.pages,
+			data: {screenType: $scope.screenType, uitrs: uitrs, clickUitrs: clickUitrs, actionUitrs: actionUitrs, domStrings: ate_global_page_context.pages,
 				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
 				testCaseName:$scope.testCaseName, screenUrl: $scope.screenUrl,
 				domainName: $scope.domainName, screenName: tmpScreenName, lastScreenNodeIntermediateResult: $localStorage.lastScreenNodeBk
