@@ -132,7 +132,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.screenTypeSwitcher = function() {
 		switch($scope.screenType) {
 			case "WINDOWFILEPICKER":
-				$scope.fruits.length = 0;
+				$scope.fruits.length = 1;
 				if (typeof $localStorage.lastScreenNode != "undefined") {
 					for (var index=0; index < $localStorage.lastScreenNode.clickUitrs.length; index++) {
 						$scope.fruits[index] = $localStorage.lastScreenNode.clickUitrs[index];
@@ -140,7 +140,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 				} else {
 					alert("there is no element to trigger the file picker in previous screen.")
 				}
-				$scope.$apply();
+				//$scope.$apply();
 				break;
 			default:
 				break;
@@ -215,6 +215,10 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			if ($scope.fruits[ind].userInputType === "CLICKABLE") {
 				alert("WindowsFilePicker Screen should not be triggered by Clickables")
 			} else if ($scope.fruits[ind].userInputType === "CLICKINPUT") {
+				if ($scope.fruits[ind].userValues.length === 0) {
+					alert("please give a value for the click input. For example, if this is a file picker screen, please give the file name with its path. ")
+					return false;
+				}
 				clickUitrs.push($scope.fruits[ind])
 			} else {
 				alert("WindowsFilePicker Screen should be triggered only by ClickInput")
@@ -226,23 +230,23 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			method: 'POST',
 			url: 'http://localhost:9080/com.bigtester.ate.tcg/saveIntermediateResultForWindowsFilePicker',
 			headers: {'Content-Type': 'application/json'},
-			data: {previousScreenTriggerClickUitr: clickUitrs[0], screenType: $scope.screenType, uitrs: uitrs, clickUitrs: clickUitrs, actionUitrs: actionUitrs, domStrings: ate_global_page_context.pages,
+			data: {previousScreenTriggerClickUitr: clickUitrs[0], screenType: $scope.screenType, uitrs: uitrs, clickUitrs: clickUitrs, actionUitrs: actionUitrs,
 				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
 				testCaseName:$scope.testCaseName, screenUrl: $scope.screenUrl,
 				domainName: $scope.domainName, screenName: tmpScreenName, lastScreenNodeIntermediateResult: $localStorage.lastScreenNodeBk
 			}
 		}
-		$localStorage.lastScreenNode = req.data;
+		//$localStorage.lastScreenNode = req.data;
 
 		$http(req).success(function(data, status, headers, config) {
 			$scope.fruits.length = 0;
 			//$scope.fruits[0] = {inputLabelName: "SaveResult", inputMLHtmlCode: data.toString()};
 			$scope.fruits = data.uitrs.concat(data.actionUitrs).concat(data.clickUitrs);
 			ate_global_page_context.pages = data.domStrings;
-			$localStorage.lastScreenNodeBk = $localStorage.lastScreenNode;
+			//$localStorage.lastScreenNodeBk = $localStorage.lastScreenNode;
 			alert( "success!");
 		}).error(function(data, status, headers, config) {
-			$localStorage.lastScreenNode = $localStorage.lastScreenNodeBk;
+			//$localStorage.lastScreenNode = $localStorage.lastScreenNodeBk;
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});
 
@@ -340,7 +344,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			headers: {'Content-Type': 'application/json'},
 		}
 		$http(req).success(function(data, status, headers, config) {
-			$scope.allUserValues = data.userValues;
+			$scope.allUserValues = $scope.uniquearr(data.userValues);
 		}).error(function(data, status, headers, config) {
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});
@@ -354,11 +358,30 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			headers: {'Content-Type': 'application/json'},
 		}
 		$http(req).success(function(data, status, headers, config) {
-			$scope.allFieldNames = data.fieldNames;
+			$scope.allFieldNames = $scope.uniquearr(data.fieldNames);
 		}).error(function(data, status, headers, config) {
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});
 
+	}
+	$scope.uniquearr = function(origArr) {
+		var newArr = [],
+			origLen = origArr.length,
+			found, x, y;
+
+		for (x = 0; x < origLen; x++) {
+			found = undefined;
+			for (y = 0; y < newArr.length; y++) {
+				if (JSON.stringify(origArr[x]) === JSON.stringify(newArr[y])) {
+					found = true;
+					break;
+				}
+			}
+			if (!found) {
+				newArr.push(origArr[x]);
+			}
+		}
+		return newArr;
 	}
 	$scope.queryAllScreenNames = function() {
 		var req = {
@@ -370,7 +393,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 
 		}
 		$http(req).success(function(data, status, headers, config) {
-			$scope.countries = data.screenNames;
+			$scope.countries = $scope.uniquearr(data.screenNames);
 		}).error(function(data, status, headers, config) {
 			alert( "failure message: " + JSON.stringify({data: data}));
 		});
