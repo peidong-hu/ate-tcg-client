@@ -11,8 +11,16 @@ function sendObjectToDevTools(message) {
 }
 function ate_add_invisible_marker(document) {
     var ate_hiddenElements = $("body", document).find(":hidden").not("script");
-    for (ate_hiddenIndex = 0; ate_hiddenIndex < ate_hiddenElements.length; ate_hiddenIndex++) {
-        ate_hiddenElements[ate_hiddenIndex].setAttribute("ate-invisible", "yes")
+    for (var ate_hiddenIndex = 0; ate_hiddenIndex < ate_hiddenElements.length; ate_hiddenIndex++) {
+        ate_hiddenElements[ate_hiddenIndex].setAttribute("ate-invisible", "yes");
+    }
+    //some elements might have been mis-marked as hidden by previous screen's js, for example, the new screen's frame was hidden in previous one.
+    // need to do double check
+    var ate_hidden_markedElements = $("body", document).find("[ate-invisible='yes']");
+    for (var ate_index = 0; ate_index < ate_hidden_markedElements.length; ate_index ++ ) {
+        if (!$.inArray(ate_hidden_markedElements[ate_index], ate_hiddenElements)) {
+            ate_hidden_markedElements[ate_index].setAttribute("ate-invisible", "no");
+        }
     }
 }
 getAllClickBindElements = function (documentE) {
