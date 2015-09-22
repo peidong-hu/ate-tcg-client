@@ -112,15 +112,15 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		return -1
 	}
 	$scope.tmpUserValue = function(selected) {
-		if (typeof selected !== undefined) {
+		if (typeof selected !== "undefined") {
 			var tmpObj = {name: selected.title, value: selected.title};
 			if ($scope.duplicatedUserValue($scope.fruits[this.$parent.$index].userValues, tmpObj) === -1)
 				$scope.fruits[this.$parent.$index].userValues.push(tmpObj);
 		}
 	}
 	$scope.tmpPioPredictLabelResult = function(selected) {
-		if (typeof selected !== undefined) {
-			if ($scope.fruits[this.$parent.$index].pioPredictLabelResult !== undefined) {
+		if (typeof selected !== "undefined") {
+			if ($scope.fruits[this.$parent.$index].pioPredictLabelResult !== "undefined") {
 				$scope.fruits[this.$parent.$index].pioPredictLabelResult.name = selected.title;
 				$scope.fruits[this.$parent.$index].pioPredictLabelResult.value = selected.title;
 			} else {
@@ -206,7 +206,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 
 	$scope.saveIntermediateResultForWindowsFilePicker = function() {
 		var tmpScreenName;
-		if (typeof $scope.countrySelected14.originalObject != 'undefined') tmpScreenName = $scope.countrySelected14.originalObject.name;
+		if (typeof $scope.countrySelected14.originalObject !== 'undefined') tmpScreenName = $scope.countrySelected14.originalObject.name;
 		else tmpScreenName = $scope.countrySelected14;
 		var uitrs=[];
 		var clickUitrs=[];
@@ -253,7 +253,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	}
 	$scope.saveIntermediateResult = function() {
 		var tmpScreenName;
-		if (typeof $scope.countrySelected14.originalObject != 'undefined') tmpScreenName = $scope.countrySelected14.originalObject.name;
+		if (typeof $scope.countrySelected14.originalObject !== 'undefined') tmpScreenName = $scope.countrySelected14.originalObject.name;
 		else tmpScreenName = $scope.countrySelected14;
 		var uitrs=[];
 		var clickUitrs=[];
@@ -370,7 +370,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			found, x, y;
 
 		for (x = 0; x < origLen; x++) {
-			found = undefined;
+			found = "undefined";
 			for (y = 0; y < newArr.length; y++) {
 				if (JSON.stringify(origArr[x]) === JSON.stringify(newArr[y])) {
 					found = true;
