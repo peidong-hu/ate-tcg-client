@@ -302,14 +302,17 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			ate_global_page_context.pages = data.domStrings;
 			$localStorage.lastScreenNodeBk = $localStorage.lastScreenNode;
 			alert( "success!");
-			pageNotSavedYet = false;
-			return $q.resolve();
+			$scope.pageNotSavedYet = false;
+			$scope.update();
+			//return $q.resolve();
 		}).error(function(data, status, headers, config) {
 			$localStorage.lastScreenNode = $localStorage.lastScreenNodeBk;
 			alert( "failure message: " + JSON.stringify({data: data}));
-			return $q.reject();
+			//return $q.reject();
 			//return false;
 		});
+
+
 
 	}
 	$scope.pioPredict = function(){
