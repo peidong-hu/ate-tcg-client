@@ -47,7 +47,7 @@ app1.directive('ngReplace', function() {
 	    template: '<div ><h4>Weather for {{message}}</h4></div>'
 	  }
 	});
-app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localStorage) {
+app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localStorage, $q) {
 
 	// fruits
 	$scope.fruits = {};
@@ -68,6 +68,8 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	// calculator
 	$scope.number1 = 0;
 	$scope.number2 = 2;
+
+	$scope.pageNotSavedYet = true;
 	//$scope.searchStr = "";
 	////alert(JSON.stringify(ate_global_page_context));
 
@@ -230,7 +232,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			method: 'POST',
 			url: 'http://localhost:9080/com.bigtester.ate.tcg/saveIntermediateResultForWindowsFilePicker',
 			headers: {'Content-Type': 'application/json'},
-			data: {previousScreenTriggerClickUitr: clickUitrs[0], screenType: $scope.screenType, uitrs: uitrs, clickUitrs: clickUitrs, actionUitrs: actionUitrs,
+			data: {previousScreenTriggerClickUitr: clickUitrs[0], samePageUpdate: samePageUpdate, screenType: $scope.screenType, uitrs: uitrs, clickUitrs: clickUitrs, actionUitrs: actionUitrs,
 				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
 				testCaseName:$scope.testCaseName, screenUrl: $scope.screenUrl,
 				domainName: $scope.domainName, screenName: tmpScreenName, lastScreenNodeIntermediateResult: $localStorage.lastScreenNodeBk
@@ -251,8 +253,13 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		});
 
 	}
-	$scope.saveIntermediateResult = function() {
+	$scope.saveIntermediateResult = function(samePageUpdate) {
 		var tmpScreenName;
+		if (typeof $scope.countrySelected14 === 'undefined') {
+			alert( "no screen name set yet!");
+			return $q.reject();
+
+		}
 		if (typeof $scope.countrySelected14.originalObject !== 'undefined') tmpScreenName = $scope.countrySelected14.originalObject.name;
 		else tmpScreenName = $scope.countrySelected14;
 		var uitrs=[];
@@ -267,12 +274,20 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 				uitrs.push($scope.fruits[ind]);
 			}
 		}
+		if (actionUitrs.length === 0) {
+
+			var r = confirm("There is no Clickable element collected. Is it the last page of your test case?", "yes", "no");
+			if (r === false) {
+
+				return $q.reject();
+			}
+		}
 		var req = {
 			method: 'POST',
 			url: 'http://localhost:9080/com.bigtester.ate.tcg/saveIntermediateResult',
 			headers: {'Content-Type': 'application/json'},
 			//data: {uitrs: $scope.fruits, domStrings: ate_global_page_documents}
-			data: {screenType: $scope.screenType, uitrs: uitrs, clickUitrs: clickUitrs, actionUitrs: actionUitrs, domStrings: ate_global_page_context.pages,
+			data: {samePageUpdate: samePageUpdate, screenType: $scope.screenType, uitrs: uitrs, clickUitrs: clickUitrs, actionUitrs: actionUitrs, domStrings: ate_global_page_context.pages,
 				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
 				testCaseName:$scope.testCaseName, screenUrl: $scope.screenUrl,
 				domainName: $scope.domainName, screenName: tmpScreenName, lastScreenNodeIntermediateResult: $localStorage.lastScreenNodeBk
@@ -287,9 +302,13 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			ate_global_page_context.pages = data.domStrings;
 			$localStorage.lastScreenNodeBk = $localStorage.lastScreenNode;
 			alert( "success!");
+			pageNotSavedYet = false;
+			return $q.resolve();
 		}).error(function(data, status, headers, config) {
 			$localStorage.lastScreenNode = $localStorage.lastScreenNodeBk;
 			alert( "failure message: " + JSON.stringify({data: data}));
+			return $q.reject();
+			//return false;
 		});
 
 	}
@@ -365,12 +384,13 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 
 	}
 	$scope.uniquearr = function(origArr) {
-		var newArr = [],
-			origLen = origArr.length,
-			found, x, y;
+		var newArr = [];
+		var origLen = origArr.length;
+		var	found = false;
+			var x, y;
 
 		for (x = 0; x < origLen; x++) {
-			found = "undefined";
+			//found = "undefined";
 			for (y = 0; y < newArr.length; y++) {
 				if (JSON.stringify(origArr[x]) === JSON.stringify(newArr[y])) {
 					found = true;

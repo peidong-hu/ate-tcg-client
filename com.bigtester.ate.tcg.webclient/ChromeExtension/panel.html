@@ -161,8 +161,8 @@
 								<button class="btn btn-sm btn-success" ng-click="pioPredict()">5: PioPredict-></button>
 								<label class="lbl lbl-sm lbl-success" >6: Adjust Predict Results-></label>
 								<label class="lbl lbl-sm lbl-success" >7: Fill out user values-></label>
-								<button class="btn btn-sm btn-success" click-and-disable="saveIntermediateResult()">8: Save Result</button>
-								<button class="btn btn-sm btn-success" ng-click="saveIntermediateResult()">9: re-Save </button>
+								<button class="btn btn-sm btn-success" click-and-disable="saveIntermediateResult(false)">8: Save Result</button>
+								<button class="btn btn-sm btn-success" ng-disabled="pageNotSavedYet" ng-click="saveIntermediateResult(true)">9: update </button>
 							</span>
 							<span id="windowFilePickerCommandBlock" ng-show="screenType == 'WINDOWFILEPICKER'">
 								<label class="lbl lbl-sm lbl-success" >Note: These elements are previous screen's ClickInputs. Delete the one(s) not triggering this screen.-></label>
