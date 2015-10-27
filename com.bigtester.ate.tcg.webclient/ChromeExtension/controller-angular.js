@@ -206,8 +206,13 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		alert("next screen will be saved as independent node. Please don't forget fresh this page to clean up the graph ids.");
 	}
 
-	$scope.saveIntermediateResultForWindowsFilePicker = function() {
+	$scope.saveIntermediateResultForWindowsFilePicker = function(samePageUpdate) {
 		var tmpScreenName;
+		if (typeof $scope.countrySelected14 === 'undefined') {
+			alert( "no screen name set yet!");
+			return $q.reject();
+
+		}
 		if (typeof $scope.countrySelected14.originalObject !== 'undefined') tmpScreenName = $scope.countrySelected14.originalObject.name;
 		else tmpScreenName = $scope.countrySelected14;
 		var uitrs=[];
@@ -241,6 +246,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		//$localStorage.lastScreenNode = req.data;
 
 		$http(req).success(function(data, status, headers, config) {
+			$scope.pageNotSavedYet = false;
 			$scope.fruits.length = 0;
 			//$scope.fruits[0] = {inputLabelName: "SaveResult", inputMLHtmlCode: data.toString()};
 			$scope.fruits = data.uitrs.concat(data.actionUitrs).concat(data.clickUitrs);
@@ -296,14 +302,15 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		$localStorage.lastScreenNode = req.data;
 
 		$http(req).success(function(data, status, headers, config) {
+			$scope.pageNotSavedYet = false;
+			//$scope.update();
 			$scope.fruits.length = 0;
 			//$scope.fruits[0] = {inputLabelName: "SaveResult", inputMLHtmlCode: data.toString()};
 			$scope.fruits = data.uitrs.concat(data.actionUitrs).concat(data.clickUitrs);
 			ate_global_page_context.pages = data.domStrings;
 			$localStorage.lastScreenNodeBk = $localStorage.lastScreenNode;
 			alert( "success!");
-			$scope.pageNotSavedYet = false;
-			$scope.update();
+
 			//return $q.resolve();
 		}).error(function(data, status, headers, config) {
 			$localStorage.lastScreenNode = $localStorage.lastScreenNodeBk;
