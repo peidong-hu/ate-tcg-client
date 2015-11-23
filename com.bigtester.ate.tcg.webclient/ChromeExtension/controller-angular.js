@@ -79,7 +79,8 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.screenType = "HTML";
 	$scope.industryCategoriesMap=[{name: "HCM", code: "000000"},{name: "Recruitment"}];
 	$scope.testCaseName = "QuickApply";
-
+	$scope.inScreenJump = false;
+	$scope.lastScreenOfTestCase = false;
 	$scope.sum = function() {
 		//return calculatorService.sum($scope.number1, $scope.number2);
 	}
@@ -136,9 +137,10 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			case "WINDOWFILEPICKER":
 				$scope.fruits.length = 1;
 				if (typeof $localStorage.lastScreenNode != "undefined") {
-					for (var index=0; index < $localStorage.lastScreenNode.clickUitrs.length; index++) {
-						$scope.fruits[index] = $localStorage.lastScreenNode.clickUitrs[index];
+					for (var index=0; index < $localStorage.lastScreenNode.actionUitrs.length; index++) {
+						$scope.fruits[index] = $localStorage.lastScreenNode.actionUitrs[index];
 					}
+
 				} else {
 					alert("there is no element to trigger the file picker in previous screen.")
 				}
@@ -165,7 +167,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.preprocessing = function(){
 		var req = {
 				 method: 'POST',
-				 url: 'http://localhost:9080/com.bigtester.ate.tcg/preprocessing',
+				 url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/preprocessing',
 				 headers: {'Content-Type': 'application/json'},
 				 //data: ate_global_page_documents
 			data: ate_global_page_context.pages
@@ -219,9 +221,9 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		var clickUitrs=[];
 		var actionUitrs = [];
 		for (ind = 0; ind < $scope.fruits.length; ind++) {
-			if ($scope.fruits[ind].userInputType === "CLICKABLE") {
+			if ($scope.fruits[ind].userInputType === "SCREENJUMPER") {
 				alert("WindowsFilePicker Screen should not be triggered by Clickables")
-			} else if ($scope.fruits[ind].userInputType === "CLICKINPUT") {
+			} else if ($scope.fruits[ind].userInputType === "INSCREENJUMPER") {
 				if ($scope.fruits[ind].userValues.length === 0) {
 					alert("please give a value for the click input. For example, if this is a file picker screen, please give the file name with its path. ")
 					return false;
@@ -235,7 +237,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 
 		var req = {
 			method: 'POST',
-			url: 'http://localhost:9080/com.bigtester.ate.tcg/saveIntermediateResultForWindowsFilePicker',
+			url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/saveIntermediateResultForWindowsFilePicker',
 			headers: {'Content-Type': 'application/json'},
 			data: {previousScreenTriggerClickUitr: clickUitrs[0], samePageUpdate: samePageUpdate, screenType: $scope.screenType, uitrs: uitrs, clickUitrs: clickUitrs, actionUitrs: actionUitrs,
 				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
@@ -271,29 +273,76 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		var uitrs=[];
 		var clickUitrs=[];
 		var actionUitrs = [];
+		var actionTrigger = [];
 		for (ind = 0; ind < $scope.fruits.length; ind++) {
-			if ($scope.fruits[ind].userInputType === "CLICKABLE") {
+			if ($scope.fruits[ind].userInputType === "SCREENJUMPER") {
 				actionUitrs.push($scope.fruits[ind]);
-			} else if ($scope.fruits[ind].userInputType === "CLICKINPUT") {
+			} else if ($scope.fruits[ind].userInputType === "INSCREENJUMPER") {
 				clickUitrs.push($scope.fruits[ind])
 			} else {
 				uitrs.push($scope.fruits[ind]);
 			}
+			if ($scope.fruits[ind].actionTrigger) {
+				actionTrigger.push($scope.fruits[ind]);
+			}
+
 		}
-		if (actionUitrs.length === 0) {
-
-			var r = confirm("There is no Clickable element collected. Is it the last page of your test case?", "yes", "no");
+		if (actionTrigger.length === 0 ) {
+			var r = confirm("There is no screen jumper element collected. Are you doing last screen element collection?", "yes", "no");
 			if (r === false) {
-
 				return $q.reject();
+			} else {
+				$scope.lastScreenOfTestCase = true;
+			}
+		} else if (actionTrigger.length > 1) {
+			alert("Please choose one and only one element as the actionTrigger or add element either being screen jumper or in-screen jumper");
+			return $q.reject();
+		} else {
+
+			if (actionTrigger[0].userInputType === "INSCREENJUMPER") {
+				var r1 = confirm("Is it a in-screen jump?", "yes", "no");
+				if (r1)
+					$scope.inScreenJump = true;
+				else
+					return $q.reject();
+			}
+
+			if (actionTrigger[0].userInputType === "SCREENJUMPER") {
+				var r2 = confirm("Is it a screen jump action?", "yes", "no");
+				if (r2)
+					$scope.lastScreenOfTestCase = false;
+				else
+					return $q.reject();
+			}
+			if (actionTrigger[0].userInputType === "USERINPUT") {
+				var r3 = confirm("Are you sure this user input is a screen jumper?", "yes", "no");
+				if (r3)
+					$scope.inScreenJump = true;
+				else
+					return $q.reject();
 			}
 		}
+/*
+		if (actionUitrs.length === 0 && !$scope.inScreenJump && !$scope.lastScreenOfTestCase) {
+
+			var r = confirm("There is no Clickable element collected. Are you doing an in-screen action?", "yes", "no");
+			if (r === true) {
+				$scope.inScreenJump = true;
+			} else {
+				var r1 = confirm("Is this the last screen of your test case?", "yes", "no");
+				if (r1 === false) {
+					return $q.reject();
+				}
+				$scope.lastScreenOfTestCase = true;
+			}
+		}*/
+
 		var req = {
 			method: 'POST',
-			url: 'http://localhost:9080/com.bigtester.ate.tcg/saveIntermediateResult',
+			url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/saveIntermediateResult',
 			headers: {'Content-Type': 'application/json'},
 			//data: {uitrs: $scope.fruits, domStrings: ate_global_page_documents}
-			data: {samePageUpdate: samePageUpdate, screenType: $scope.screenType, uitrs: uitrs, clickUitrs: clickUitrs, actionUitrs: actionUitrs, domStrings: ate_global_page_context.pages,
+			data: {lastScreenOfTestCase: $scope.lastScreenOfTestCase, inScreenJump: $scope.inScreenJump, samePageUpdate: samePageUpdate, screenType: $scope.screenType, uitrs: uitrs, clickUitrs: clickUitrs, actionUitrs: actionUitrs, domStrings: ate_global_page_context.pages,
 				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
 				testCaseName:$scope.testCaseName, screenUrl: $scope.screenUrl,
 				domainName: $scope.domainName, screenName: tmpScreenName, lastScreenNodeIntermediateResult: $localStorage.lastScreenNodeBk
@@ -325,7 +374,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.pioPredict = function(){
 		var req = {
 			method: 'POST',
-			url: 'http://localhost:9080/com.bigtester.ate.tcg/pioPredict',
+			url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/pioPredict',
 			headers: {'Content-Type': 'application/json'},
 			data: $scope.fruits
 		}
@@ -339,7 +388,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.pagePredict = function(){
 		var req = {
 			method: 'POST',
-			url: 'http://localhost:9080/com.bigtester.ate.tcg/pagePredict',
+			url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/pagePredict',
 			headers: {'Content-Type': 'application/json'},
 			data: ate_global_page_context.pages
 		}
@@ -353,7 +402,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.trainIntoPIO = function(){
 		var req = {
 			method: 'POST',
-			url: 'http://localhost:9080/com.bigtester.ate.tcg/trainIntoPIO',
+			url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/trainIntoPIO',
 			headers: {'Content-Type': 'application/json'},
 			data: $scope.fruits
 		}
@@ -368,7 +417,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.queryAllUserInputValues = function() {
 		var req = {
 			method: 'GET',
-			url: 'http://localhost:9080/com.bigtester.ate.tcg/queryUserInputValues',
+			url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/queryUserInputValues',
 //				 data: {content: document.documentElement.innerHTML}
 			headers: {'Content-Type': 'application/json'},
 		}
@@ -382,7 +431,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.queryPioPredictedFieldNames = function() {
 		var req = {
 			method: 'GET',
-			url: 'http://localhost:9080/com.bigtester.ate.tcg/queryPioPredictedFieldNames',
+			url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/queryPioPredictedFieldNames',
 //				 data: {content: document.documentElement.innerHTML}
 			headers: {'Content-Type': 'application/json'},
 		}
@@ -416,7 +465,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.queryAllScreenNames = function() {
 		var req = {
 			method: 'GET',
-			url: 'http://localhost:9080/com.bigtester.ate.tcg/queryScreenNames',
+			url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/queryScreenNames',
 //				 data: {content: document.documentElement.innerHTML}
 			headers: {'Content-Type': 'application/json'},
 
@@ -432,7 +481,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.predict = function(){
 		var req = {
 			method: 'GET',
-			url: 'http://localhost:9080/com.bigtester.ate.tcg/predict',
+			url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/predict',
 //				 data: {content: document.documentElement.innerHTML}
 			headers: {'Content-Type': 'application/json'},
 

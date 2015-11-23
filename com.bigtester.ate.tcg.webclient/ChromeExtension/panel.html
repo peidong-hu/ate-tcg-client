@@ -2,13 +2,13 @@
 <html class="no-js" ng-app="javafxwebdemo">
 <head>
 
-	<script src="jslib/angular.min.js" type="text/javascript"></script>
+	<script src="jslib/angular.min.1.4.5.js" type="text/javascript"></script>
 	<script src="jslib/jquery-1.9.1.min.js" type="text/javascript"></script>
 	<link rel="stylesheet" href="css/angucomplete-alt.css">
 
 	<script src="jslib/angular-sanitize.min.js"></script>
 	<script src="jslib/html2canvas.min.js"></script>
-	<script src="jslib/angucomplete-alt.js"></script>
+	<script src="jslib/angucomplete-alt.min.2.1.0.js"></script>
 	<script src="jslib/angular-recursion.min.js"></script>
 	<script src="jslib/angular-touch.min.js"></script>
 	<script src="jslib/ngStorage.min.js"></script>
@@ -208,8 +208,8 @@
 							</script>
 							<table class="table table-striped">
 								<thead>
-								<tr><th/><th>ScreenInputValue</th><th>NPLPredictField</th><th class="col-sm-3">--</th><th>PioPredField--></th>
-									<th>PioConfidence</th><th>UserInputType</th>
+								<tr><th/><th>ScreenInputVal</th><th>NPLPredictField</th><th class="col-sm-3">--</th><th>PioPredField--></th>
+									<th>PioConfidence</th><th>UserInputType</th><th>ActTrigger</th>
 									<!--<th>ActionPredictResult</th><th>ActionConfidence</th>-->
 									<th>PioImportId</th>
 									<th>Element Snapshot</th>
@@ -241,13 +241,13 @@
 									</div></td>
 									<td><input type="text" size="5" ng-model="fruit.pioPredictConfidence"/></td>
 									<td><select ng-model="fruit.userInputType">
-										USERINPUT, SCREENJUMPER, INSCREENJUMPER
-										<option value="SCREENJUMPER">PAGEJUMPER</option>
-										<option value="USERINPUT">INPUTBOX</option>
-										<option value="INSCREENJUMPER">DROPDOWN</option>
+										<option value="SCREENJUMPER">SCREENJUMPER</option>
+										<option value="USERINPUT">USERINPUT</option>
+										<option value="INSCREENJUMPER">INSCREENJUMPER</option>
 
 										</select>
 									</td>
+									<td><input type="checkbox" ng-model="fruit.actionTrigger"/></td>
 									<!--<td><input type="text" size="10" ng-model="fruit.actionTrainedWeight"/></td>
 									<td><input type="text" size="10" ng-model="fruit.actionConfidence"/></td>-->
 									<td><input type="text" size="10" ng-model="fruit.trainedResult" disabled/></td>
