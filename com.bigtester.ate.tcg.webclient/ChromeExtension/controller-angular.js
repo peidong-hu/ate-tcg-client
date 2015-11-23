@@ -167,7 +167,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.preprocessing = function(){
 		var req = {
 				 method: 'POST',
-				 url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/preprocessing',
+				 url: 'http://192.168.10.15:9080/com.bigtester.ate.tcg/preprocessing',
 				 headers: {'Content-Type': 'application/json'},
 				 //data: ate_global_page_documents
 			data: ate_global_page_context.pages
@@ -237,7 +237,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 
 		var req = {
 			method: 'POST',
-			url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/saveIntermediateResultForWindowsFilePicker',
+			url: 'http://192.168.10.15:9080/com.bigtester.ate.tcg/saveIntermediateResultForWindowsFilePicker',
 			headers: {'Content-Type': 'application/json'},
 			data: {previousScreenTriggerClickUitr: clickUitrs[0], samePageUpdate: samePageUpdate, screenType: $scope.screenType, uitrs: uitrs, clickUitrs: clickUitrs, actionUitrs: actionUitrs,
 				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
@@ -339,7 +339,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 
 		var req = {
 			method: 'POST',
-			url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/saveIntermediateResult',
+			url: 'http://192.168.10.15:9080/com.bigtester.ate.tcg/saveIntermediateResult',
 			headers: {'Content-Type': 'application/json'},
 			//data: {uitrs: $scope.fruits, domStrings: ate_global_page_documents}
 			data: {lastScreenOfTestCase: $scope.lastScreenOfTestCase, inScreenJump: $scope.inScreenJump, samePageUpdate: samePageUpdate, screenType: $scope.screenType, uitrs: uitrs, clickUitrs: clickUitrs, actionUitrs: actionUitrs, domStrings: ate_global_page_context.pages,
@@ -374,7 +374,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.pioPredict = function(){
 		var req = {
 			method: 'POST',
-			url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/pioPredict',
+			url: 'http://192.168.10.15:9080/com.bigtester.ate.tcg/pioPredict',
 			headers: {'Content-Type': 'application/json'},
 			data: $scope.fruits
 		}
@@ -388,7 +388,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.pagePredict = function(){
 		var req = {
 			method: 'POST',
-			url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/pagePredict',
+			url: 'http://192.168.10.15:9080/com.bigtester.ate.tcg/pagePredict',
 			headers: {'Content-Type': 'application/json'},
 			data: ate_global_page_context.pages
 		}
@@ -402,7 +402,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.trainIntoPIO = function(){
 		var req = {
 			method: 'POST',
-			url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/trainIntoPIO',
+			url: 'http://192.168.10.15:9080/com.bigtester.ate.tcg/trainIntoPIO',
 			headers: {'Content-Type': 'application/json'},
 			data: $scope.fruits
 		}
@@ -417,7 +417,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.queryAllUserInputValues = function() {
 		var req = {
 			method: 'GET',
-			url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/queryUserInputValues',
+			url: 'http://192.168.10.15:9080/com.bigtester.ate.tcg/queryUserInputValues',
 //				 data: {content: document.documentElement.innerHTML}
 			headers: {'Content-Type': 'application/json'},
 		}
@@ -431,7 +431,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.queryPioPredictedFieldNames = function() {
 		var req = {
 			method: 'GET',
-			url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/queryPioPredictedFieldNames',
+			url: 'http://192.168.10.15:9080/com.bigtester.ate.tcg/queryPioPredictedFieldNames',
 //				 data: {content: document.documentElement.innerHTML}
 			headers: {'Content-Type': 'application/json'},
 		}
@@ -465,7 +465,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.queryAllScreenNames = function() {
 		var req = {
 			method: 'GET',
-			url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/queryScreenNames',
+			url: 'http://192.168.10.15:9080/com.bigtester.ate.tcg/queryScreenNames',
 //				 data: {content: document.documentElement.innerHTML}
 			headers: {'Content-Type': 'application/json'},
 
@@ -481,7 +481,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.predict = function(){
 		var req = {
 			method: 'GET',
-			url: 'http://172.17.42.1:9080/com.bigtester.ate.tcg/predict',
+			url: 'http://192.168.10.15:9080/com.bigtester.ate.tcg/predict',
 //				 data: {content: document.documentElement.innerHTML}
 			headers: {'Content-Type': 'application/json'},
 
