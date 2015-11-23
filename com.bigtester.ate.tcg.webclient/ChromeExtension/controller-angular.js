@@ -300,7 +300,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		} else {
 
 			if (actionTrigger[0].userInputType === "INSCREENJUMPER") {
-				var r1 = confirm("Is it a in-screen jump?", "yes", "no");
+				var r1 = confirm("Is it a in-screen jump ?", "yes", "no");
 				if (r1)
 					$scope.inScreenJump = true;
 				else
