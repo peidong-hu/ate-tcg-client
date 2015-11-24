@@ -135,12 +135,13 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.screenTypeSwitcher = function() {
 		switch($scope.screenType) {
 			case "WINDOWFILEPICKER":
-				//$scope.fruits.length = 0;
+
 				if (typeof $localStorage.lastScreenNode != "undefined") {
-					for (var index=0; index < $localStorage.lastScreenNode.actionUitrs.length; index++) {
-						$scope.fruits[index] = $localStorage.lastScreenNode.actionUitrs[index];
+					$scope.fruits = [];
+					for (var index=0; index < $localStorage.lastScreenNode.clickUitrs.length; index++) {
+						$scope.fruits[index] = $localStorage.lastScreenNode.clickUitrs[index];
 					}
-					$scope.fruits.length = index;
+
 				} else {
 					alert("there is no element to trigger the file picker in previous screen.")
 				}
@@ -222,7 +223,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		var actionUitrs = [];
 		for (ind = 0; ind < $scope.fruits.length; ind++) {
 			if ($scope.fruits[ind].userInputType === "SCREENJUMPER") {
-				alert("WindowsFilePicker Screen should not be triggered by Clickables")
+				alert("WindowsFilePicker Screen should not be triggered by INSCREENJUMPER")
 			} else if ($scope.fruits[ind].userInputType === "INSCREENJUMPER") {
 				if ($scope.fruits[ind].userValues.length === 0) {
 					alert("please give a value for the click input. For example, if this is a file picker screen, please give the file name with its path. ")
@@ -230,7 +231,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 				}
 				clickUitrs.push($scope.fruits[ind])
 			} else {
-				alert("WindowsFilePicker Screen should be triggered only by ClickInput")
+				alert("WindowsFilePicker Screen should be triggered only by INSCREENJUMPER")
 			}
 		}
 		if (clickUitrs.length != 1) alert("this windows file picker screen should have been triggered by only one ClickInput");
