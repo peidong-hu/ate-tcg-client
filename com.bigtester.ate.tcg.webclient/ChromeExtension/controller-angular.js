@@ -140,7 +140,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 					for (var index=0; index < $localStorage.lastScreenNode.actionUitrs.length; index++) {
 						$scope.fruits[index] = $localStorage.lastScreenNode.actionUitrs[index];
 					}
-					$scope.fruits.length = index + 1;
+					$scope.fruits.length = index;
 				} else {
 					alert("there is no element to trigger the file picker in previous screen.")
 				}
