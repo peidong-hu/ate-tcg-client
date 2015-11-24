@@ -135,12 +135,12 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	$scope.screenTypeSwitcher = function() {
 		switch($scope.screenType) {
 			case "WINDOWFILEPICKER":
-				$scope.fruits.length = 1;
+				//$scope.fruits.length = 0;
 				if (typeof $localStorage.lastScreenNode != "undefined") {
 					for (var index=0; index < $localStorage.lastScreenNode.actionUitrs.length; index++) {
 						$scope.fruits[index] = $localStorage.lastScreenNode.actionUitrs[index];
 					}
-
+					$scope.fruits.length = index + 1;
 				} else {
 					alert("there is no element to trigger the file picker in previous screen.")
 				}
@@ -270,17 +270,17 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		}
 		if (typeof $scope.countrySelected14.originalObject !== 'undefined') tmpScreenName = $scope.countrySelected14.originalObject.name;
 		else tmpScreenName = $scope.countrySelected14;
-		var uitrs=[];
-		var clickUitrs=[];
-		var actionUitrs = [];
+		var userInputUitrs=[];
+		var inScreenJumperUitrs=[];
+		var screenJumperUitrs = [];
 		var actionTrigger = [];
 		for (ind = 0; ind < $scope.fruits.length; ind++) {
 			if ($scope.fruits[ind].userInputType === "SCREENJUMPER") {
-				actionUitrs.push($scope.fruits[ind]);
+				screenJumperUitrs.push($scope.fruits[ind]);
 			} else if ($scope.fruits[ind].userInputType === "INSCREENJUMPER") {
-				clickUitrs.push($scope.fruits[ind])
+				inScreenJumperUitrs.push($scope.fruits[ind])
 			} else {
-				uitrs.push($scope.fruits[ind]);
+				userInputUitrs.push($scope.fruits[ind]);
 			}
 			if ($scope.fruits[ind].actionTrigger) {
 				actionTrigger.push($scope.fruits[ind]);
@@ -342,7 +342,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			url: 'http://192.168.10.15:9080/com.bigtester.ate.tcg/saveIntermediateResult',
 			headers: {'Content-Type': 'application/json'},
 			//data: {uitrs: $scope.fruits, domStrings: ate_global_page_documents}
-			data: {lastScreenOfTestCase: $scope.lastScreenOfTestCase, inScreenJump: $scope.inScreenJump, samePageUpdate: samePageUpdate, screenType: $scope.screenType, uitrs: uitrs, clickUitrs: clickUitrs, actionUitrs: actionUitrs, domStrings: ate_global_page_context.pages,
+			data: {lastScreenOfTestCase: $scope.lastScreenOfTestCase, inScreenJump: $scope.inScreenJump, samePageUpdate: samePageUpdate, screenType: $scope.screenType, uitrs: userInputUitrs, clickUitrs: inScreenJumperUitrs, actionUitrs: screenJumperUitrs, domStrings: ate_global_page_context.pages,
 				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
 				testCaseName:$scope.testCaseName, screenUrl: $scope.screenUrl,
 				domainName: $scope.domainName, screenName: tmpScreenName, lastScreenNodeIntermediateResult: $localStorage.lastScreenNodeBk
