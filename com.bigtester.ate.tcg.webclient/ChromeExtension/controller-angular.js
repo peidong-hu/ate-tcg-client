@@ -68,7 +68,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 	// calculator
 	$scope.number1 = 0;
 	$scope.number2 = 2;
-	$scope.TCG_SERVER_IP = "192.168.10.15";
+	$scope.TCG_SERVER_IP = "192.168.10.140";
 
 	$scope.pageNotSavedYet = true;
 	//$scope.searchStr = "";
