@@ -66,6 +66,9 @@ ate_ml_allDocs_in_page = [{
     docText: getText(document.body).replace(/\s\s+/g, ' ')
 }];
 ate_ml_allClickables_in_page = [];
+
+ate_ml_allElements_in_page = [];
+
 getAllClickablesOnPage(document.documentElement);
 getAllDocumentsOnPage = function (topDocument, parentDocIndex, startingIndex) {
     getAllClickablesOnPage(topDocument);
@@ -97,7 +100,7 @@ getAllDocumentsOnPage = function (topDocument, parentDocIndex, startingIndex) {
     }
 }
 getAllDocumentsOnPage(document.documentElement, 0, 1);
-
+getAllElementsInBody(document.body);
 
 sendObjectToDevTools({
     content: {
@@ -106,7 +109,8 @@ sendObjectToDevTools({
         screenUrl: window.location.href.replace(/^.*\/\/[^\/]+/, ''),
         domain: window.location.host,
         domainProtocol: window.location.protocol,
-        domainPort: window.location.port
+        domainPort: window.location.port,
+        allElementsInBody: ate_ml_allElements_in_page
     }
 });
 //http://stackoverflow.com/questions/17727977/how-to-get-all-text-from-all-tags-in-one-array to get the text on the page. need to iterate the frames
@@ -160,4 +164,11 @@ function getElementTreeXPath(element)
     }
 
     return paths.length ? "/" + paths.join("/") : null;
+};
+
+function getAllElementsInBody(bodyElement)
+{
+    ate_ml_allElements_in_page = bodyElement.getElementsByTagName("*");
+
+
 };

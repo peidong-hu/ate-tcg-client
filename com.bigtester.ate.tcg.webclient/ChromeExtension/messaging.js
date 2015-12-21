@@ -56,6 +56,7 @@ var ate_global_page_context_Watch = (function() {
             ate_global_all_clickables = message.content.allClickables;
             /*ate_global_screenUrl = message.content.screenUrl;*/
             document.querySelector('#number1').setAttribute("value", message.content[0].domDoc);
+            ate_global_all_elements_in_body = message.content.allElementsInBody;
         }
       // port.postMessage(message);
     });
