@@ -463,6 +463,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			if (!found) {
 				newArr.push(origArr[x]);
 			}
+			found = false;
 		}
 		return newArr;
 	}
