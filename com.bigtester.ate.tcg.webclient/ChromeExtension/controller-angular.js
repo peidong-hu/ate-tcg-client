@@ -319,7 +319,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 					return $q.reject();
 			}
 			if (actionTrigger[0].userInputType === "USERINPUT") {
-				var r3 = confirm("Are you sure this user input is a screen jumper?", "yes", "no");
+				var r3 = confirm("Are you sure this  user input is a screen jumper?", "yes", "no");
 				if (r3)
 					$scope.inScreenJump = true;
 				else
