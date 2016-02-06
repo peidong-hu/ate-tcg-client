@@ -95,6 +95,8 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		});
 */
 		setTimeout(function() {
+
+
 			//window.ate_global_page_context = {prop: "new value"};
 			ate_global_page_context_Watch.trigger();
 		}, 1000);
