@@ -16,11 +16,17 @@ function ate_add_invisible_marker(document) {
     }
     //some elements might have been mis-marked as hidden by previous screen's js, for example, the new screen's frame was hidden in previous one.
     // need to do double check
-    var ate_hidden_markedElements = $("body", document).find("[ate-invisible='yes']");
-    for (var ate_index = 0; ate_index < ate_hidden_markedElements.length; ate_index ++ ) {
-        if (!$.inArray(ate_hidden_markedElements[ate_index], ate_hiddenElements)) {
-            ate_hidden_markedElements[ate_index].setAttribute("ate-invisible", "no");
-        }
+    //var ate_hidden_markedElements = $("body", document).find("[ate-invisible='yes']");
+    //for (var ate_index = 0; ate_index < ate_hidden_markedElements.length; ate_index ++ ) {
+    //    if (!$.inArray(ate_hidden_markedElements[ate_index], ate_hiddenElements)) {
+    //        ate_hidden_markedElements[ate_index].setAttribute("ate-invisible", "no");
+    //    }
+    //}
+}
+function ate_remove_ate_invisible_marker(document) {
+    var ate_invisibleElements = $("body", document).find("[ate-invisible='yes']");
+    for (var ate_invisibleIndex = 0; ate_invisibleIndex < ate_invisibleElements.length; ate_invisibleIndex++) {
+        ate_invisibleElements[ate_invisibleIndex].setAttribute("ate-invisible", "no");
     }
 }
 getAllClickBindElements = function (documentE) {
@@ -56,6 +62,7 @@ getAllClickablesOnPage = function (docElmt) {
     //var offset = ate_ml_allClickables_in_page.length;
 
 }
+ate_remove_ate_invisible_marker(document);
 ate_add_invisible_marker(document);
 ate_ml_allDocs_in_page = [{
     index: 0,
@@ -81,6 +88,7 @@ getAllDocumentsOnPage = function (topDocument, parentDocIndex, startingIndex) {
     allFrameNodes = iframeElements;
     for (var i = 0; i < allFrameNodes.length; i++) {
         frameDoc = allFrameNodes[i].contentWindow.document;
+        ate_remove_ate_invisible_marker(frameDoc);
         ate_add_invisible_marker(frameDoc);
         if (allFrameNodes[i].getAttribute("id") !== "FirebugUI") {
             ate_ml_allDocs_in_page[i + startingIndex] = {
