@@ -146,7 +146,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 					}
 
 				} else {
-					alert("there is  no element to trigger the file picker in previous screen.")
+					alert("there is no element to trigger the file picker in previous screen.")
 				}
 				//$scope.$apply();
 				break;
