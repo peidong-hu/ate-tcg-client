@@ -141,8 +141,8 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 
 				if (typeof $localStorage.lastScreenNode != "undefined") {
 					$scope.fruits = [];
-					for (var index=0; index < $localStorage.lastScreenNode.clickUitrs.length; index++) {
-						$scope.fruits[index] = $localStorage.lastScreenNode.clickUitrs[index];
+					for (var index=0; index < $localStorage.lastScreenNode.inScreenJumperUitrs.length; index++) {
+						$scope.fruits[index] = $localStorage.lastScreenNode.inScreenJumperUitrs[index];
 					}
 
 				} else {
@@ -222,28 +222,28 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		if (typeof $scope.countrySelected14.originalObject !== 'undefined') tmpScreenName = $scope.countrySelected14.originalObject.name;
 		else tmpScreenName = $scope.countrySelected14;
 		var uitrs=[];
-		var clickUitrs=[];
+		var inScreenJumperUitrs=[];
 		var actionUitrs = [];
 		for (ind = 0; ind < $scope.fruits.length; ind++) {
 			if ($scope.fruits[ind].userInputType === "SCREENJUMPER") {
-				alert("WindowsFilePicker Screen should not be triggered by INSCREENJUMPER")
+				alert("WindowsFilePicker Screen should not be triggered by SCREENJUMPER")
 			} else if ($scope.fruits[ind].userInputType === "INSCREENJUMPER") {
 				if ($scope.fruits[ind].userValues.length === 0) {
-					alert("please give a value for the click input. For example, if this is a file picker screen, please give the file name with its path. ")
+					alert("please give a value for the input. For example, if this is a file picker screen, please give the file name with its path. ")
 					return false;
 				}
-				clickUitrs.push($scope.fruits[ind])
+				inScreenJumperUitrs.push($scope.fruits[ind])
 			} else {
 				alert("WindowsFilePicker Screen should be triggered only by INSCREENJUMPER")
 			}
 		}
-		if (clickUitrs.length != 1) alert("this windows file picker screen should have been triggered by only one ClickInput");
+		if (inScreenJumperUitrs.length != 1) alert("this windows file picker screen should have been triggered by only one inScreenJumper");
 
 		var req = {
 			method: 'POST',
 			url: 'http://' + $scope.TCG_SERVER_IP +':9080/com.bigtester.ate.tcg/saveIntermediateResultForWindowsFilePicker',
 			headers: {'Content-Type': 'application/json'},
-			data: {previousScreenTriggerClickUitr: clickUitrs[0], samePageUpdate: samePageUpdate, screenType: $scope.screenType, uitrs: uitrs, clickUitrs: clickUitrs, actionUitrs: actionUitrs,
+			data: {previousScreenTriggerClickUitr: inScreenJumperUitrs[0], samePageUpdate: samePageUpdate, screenType: $scope.screenType, uitrs: uitrs, inScreenJumperUitrs: inScreenJumperUitrs, actionUitrs: actionUitrs,
 				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
 				testCaseName:$scope.testCaseName, screenUrl: $scope.screenUrl,
 				domainName: $scope.domainName, screenName: tmpScreenName, lastScreenNodeIntermediateResult: $localStorage.lastScreenNodeBk
@@ -255,7 +255,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			$scope.pageNotSavedYet = false;
 			$scope.fruits.length = 0;
 			//$scope.fruits[0] = {inputLabelName: "SaveResult", inputMLHtmlCode: data.toString()};
-			$scope.fruits = data.uitrs.concat(data.actionUitrs).concat(data.clickUitrs);
+			$scope.fruits = data.uitrs.concat(data.actionUitrs).concat(data.inScreenJumperUitrs);
 			ate_global_page_context.pages = data.domStrings;
 			//$localStorage.lastScreenNodeBk = $localStorage.lastScreenNode;
 			alert( "success!");
@@ -346,7 +346,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			url: 'http://' + $scope.TCG_SERVER_IP +':9080/com.bigtester.ate.tcg/saveIntermediateResult',
 			headers: {'Content-Type': 'application/json'},
 			//data: {uitrs: $scope.fruits, domStrings: ate_global_page_documents}
-			data: {lastScreenOfTestCase: $scope.lastScreenOfTestCase, inScreenJump: $scope.inScreenJump, samePageUpdate: samePageUpdate, screenType: $scope.screenType, uitrs: userInputUitrs, clickUitrs: inScreenJumperUitrs, actionUitrs: screenJumperUitrs, domStrings: ate_global_page_context.pages,
+			data: {lastScreenOfTestCase: $scope.lastScreenOfTestCase, inScreenJump: $scope.inScreenJump, samePageUpdate: samePageUpdate, screenType: $scope.screenType, uitrs: userInputUitrs, inScreenJumperUitrs: inScreenJumperUitrs, actionUitrs: screenJumperUitrs, domStrings: ate_global_page_context.pages,
 				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
 				testCaseName:$scope.testCaseName, screenUrl: $scope.screenUrl,
 				domainName: $scope.domainName, screenName: tmpScreenName, lastScreenNodeIntermediateResult: $localStorage.lastScreenNodeBk
@@ -359,7 +359,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			//$scope.update();
 			$scope.fruits.length = 0;
 			//$scope.fruits[0] = {inputLabelName: "SaveResult", inputMLHtmlCode: data.toString()};
-			$scope.fruits = data.uitrs.concat(data.actionUitrs).concat(data.clickUitrs);
+			$scope.fruits = data.uitrs.concat(data.actionUitrs).concat(data.inScreenJumperUitrs);
 			ate_global_page_context.pages = data.domStrings;
 			$localStorage.lastScreenNodeBk = $localStorage.lastScreenNode;
 			alert( "success!");
