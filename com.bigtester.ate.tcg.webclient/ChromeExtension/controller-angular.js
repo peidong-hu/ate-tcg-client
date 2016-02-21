@@ -221,7 +221,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		}
 		if (typeof $scope.countrySelected14.originalObject !== 'undefined') tmpScreenName = $scope.countrySelected14.originalObject.name;
 		else tmpScreenName = $scope.countrySelected14;
-		var uitrs=[];
+		var userInputUitrs=[];
 		var inScreenJumperUitrs=[];
 		var actionUitrs = [];
 		for (ind = 0; ind < $scope.fruits.length; ind++) {
@@ -243,7 +243,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			method: 'POST',
 			url: 'http://' + $scope.TCG_SERVER_IP +':9080/com.bigtester.ate.tcg/saveIntermediateResultForWindowsFilePicker',
 			headers: {'Content-Type': 'application/json'},
-			data: {previousScreenTriggerClickUitr: inScreenJumperUitrs[0], samePageUpdate: samePageUpdate, screenType: $scope.screenType, uitrs: uitrs, inScreenJumperUitrs: inScreenJumperUitrs, actionUitrs: actionUitrs,
+			data: {previousScreenTriggerClickUitr: inScreenJumperUitrs[0], samePageUpdate: samePageUpdate, screenType: $scope.screenType, userInputUitrs: userInputUitrs, inScreenJumperUitrs: inScreenJumperUitrs, actionUitrs: actionUitrs,
 				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
 				testCaseName:$scope.testCaseName, screenUrl: $scope.screenUrl,
 				domainName: $scope.domainName, screenName: tmpScreenName, lastScreenNodeIntermediateResult: $localStorage.lastScreenNodeBk
@@ -255,7 +255,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			$scope.pageNotSavedYet = false;
 			$scope.fruits.length = 0;
 			//$scope.fruits[0] = {inputLabelName: "SaveResult", inputMLHtmlCode: data.toString()};
-			$scope.fruits = data.uitrs.concat(data.actionUitrs).concat(data.inScreenJumperUitrs);
+			$scope.fruits = data.userInputUitrs.concat(data.actionUitrs).concat(data.inScreenJumperUitrs);
 			ate_global_page_context.pages = data.domStrings;
 			//$localStorage.lastScreenNodeBk = $localStorage.lastScreenNode;
 			alert( "success!");
@@ -304,7 +304,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 		} else {
 
 			if (actionTrigger[0].userInputType === "INSCREENJUMPER") {
-				var r1 = confirm("Is it a in-screen jump ?", "yes", "no");
+				var r1 = confirm("Is it a in-screen jump? Note: WindowsFilePicker is considered as inScreenJumper", "yes", "no");
 				if (r1)
 					$scope.inScreenJump = true;
 				else
@@ -312,14 +312,14 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			}
 
 			if (actionTrigger[0].userInputType === "SCREENJUMPER") {
-				var r2 = confirm("Is it a screen jump action?", "yes", "no");
+				var r2 = confirm("Is it a screen jump action? Note: WindowsFilePicker is considered as inScreenJumper instead of screenJumper", "yes", "no");
 				if (r2)
 					$scope.lastScreenOfTestCase = false;
 				else
 					return $q.reject();
 			}
 			if (actionTrigger[0].userInputType === "USERINPUT") {
-				var r3 = confirm("Are you sure this  user input is a screen jumper?", "yes", "no");
+				var r3 = confirm("Are you sure this user input is a screen jumper?", "yes", "no");
 				if (r3)
 					$scope.inScreenJump = true;
 				else
@@ -345,8 +345,8 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			method: 'POST',
 			url: 'http://' + $scope.TCG_SERVER_IP +':9080/com.bigtester.ate.tcg/saveIntermediateResult',
 			headers: {'Content-Type': 'application/json'},
-			//data: {uitrs: $scope.fruits, domStrings: ate_global_page_documents}
-			data: {lastScreenOfTestCase: $scope.lastScreenOfTestCase, inScreenJump: $scope.inScreenJump, samePageUpdate: samePageUpdate, screenType: $scope.screenType, uitrs: userInputUitrs, inScreenJumperUitrs: inScreenJumperUitrs, actionUitrs: screenJumperUitrs, domStrings: ate_global_page_context.pages,
+			//data: {userInputUitrs: $scope.fruits, domStrings: ate_global_page_documents}
+			data: {lastScreenOfTestCase: $scope.lastScreenOfTestCase, inScreenJump: $scope.inScreenJump, samePageUpdate: samePageUpdate, screenType: $scope.screenType, userInputUitrs: userInputUitrs, inScreenJumperUitrs: inScreenJumperUitrs, actionUitrs: screenJumperUitrs, domStrings: ate_global_page_context.pages,
 				testSuitesMap: $scope.testSuitesMap, industryCategoriesMap: $scope.industryCategoriesMap,
 				testCaseName:$scope.testCaseName, screenUrl: $scope.screenUrl,
 				domainName: $scope.domainName, screenName: tmpScreenName, lastScreenNodeIntermediateResult: $localStorage.lastScreenNodeBk
@@ -359,7 +359,7 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 			//$scope.update();
 			$scope.fruits.length = 0;
 			//$scope.fruits[0] = {inputLabelName: "SaveResult", inputMLHtmlCode: data.toString()};
-			$scope.fruits = data.uitrs.concat(data.actionUitrs).concat(data.inScreenJumperUitrs);
+			$scope.fruits = data.userInputUitrs.concat(data.actionUitrs).concat(data.inScreenJumperUitrs);
 			ate_global_page_context.pages = data.domStrings;
 			$localStorage.lastScreenNodeBk = $localStorage.lastScreenNode;
 			alert( "success!");
