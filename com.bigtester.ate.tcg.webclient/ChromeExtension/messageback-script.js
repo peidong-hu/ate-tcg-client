@@ -10,7 +10,9 @@ function sendObjectToDevTools(message) {
     });
 }
 function ate_add_invisible_marker(document) {
-    var ate_hiddenElements = $("body", document).find(":hidden").not("script");
+    var ate_hiddenElements = $("body", document).find(":hidden,[aria-hidden='true']").not("script");
+    //var ate_ariaHiddenElements = $("body", document).find("[aria-hidden='true']").not("script");
+
     for (var ate_hiddenIndex = 0; ate_hiddenIndex < ate_hiddenElements.length; ate_hiddenIndex++) {
         ate_hiddenElements[ate_hiddenIndex].setAttribute("ate-invisible", "yes");
     }
