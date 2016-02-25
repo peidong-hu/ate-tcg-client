@@ -53,7 +53,8 @@ getAllClickablesOnPage = function (docElmt) {
     var allClickables = allClickables1.add(allClickables2).add(getAllClickBindElements(docElmt));
     var offset = ate_ml_allClickables_in_page.length;
     for (var i = offset; i < allClickables.length; i++) {
-        if (allClickables[i - offset].getAttribute("ate-invisible") !== "yes") {
+        var invisibleAncestor = $(allClickables[i - offset]).closest("[ate-invisible='yes']");
+        if (allClickables[i - offset].getAttribute("ate-invisible") !== "yes" && invisibleAncestor.length===0) {
             var tmp = {clickable: allClickables[i - offset].outerHTML};
             if ($.inArray(tmp, ate_ml_allClickables_in_page) === -1) {
                 ate_ml_allClickables_in_page[i] = tmp;
@@ -79,7 +80,7 @@ ate_ml_allClickables_in_page = [];
 ate_ml_allElements_in_page = [];
 
 getAllClickablesOnPage(document.documentElement);
-getAllDocumentsOnPage = function (topDocument, parentDocIndex, startingIndex) {
+getAllDocumentsOnPage = function (topDocument, parentDocIndex, startingIndex, parentInvisible) {
     getAllClickablesOnPage(topDocument);
     var iframeElements;
     var frameElements;
@@ -89,6 +90,16 @@ getAllDocumentsOnPage = function (topDocument, parentDocIndex, startingIndex) {
     frameElements = topDocument.getElementsByTagName("frame");
     allFrameNodes = iframeElements;
     for (var i = 0; i < allFrameNodes.length; i++) {
+        var frameInvisible = false;
+        if (parentInvisible = true) {
+            frameInvisible = true;
+        } else {
+            frameInvisible= (allFrameNodes[i].getAttribute("ate-invisible") === "yes") ? true : false;
+            if (frameInvisible === false) {
+                var invisibleAncestor = $(allFrameNodes[i]).closest("[ate-invisible='yes']");
+                frameInvisible = (invisibleAncestor.length === 1) ? true : false;
+            }
+        }
         frameDoc = allFrameNodes[i].contentWindow.document;
         ate_remove_ate_invisible_marker(frameDoc);
         ate_add_invisible_marker(frameDoc);
@@ -96,7 +107,7 @@ getAllDocumentsOnPage = function (topDocument, parentDocIndex, startingIndex) {
             ate_ml_allDocs_in_page[i + startingIndex] = {
                 index: i + startingIndex,
                 parentIndex: parentDocIndex,
-                visible: (allFrameNodes[i].getAttribute("ate-invisible") === "yes") ? false : true,
+                visible: (frameInvisible === true) ? false : true,
                 xpathOfFrame: getElementXPath(allFrameNodes[i]),
                 domDoc: frameDoc.documentElement.outerHTML,
                 docText: getText(frameDoc.body).replace(/\s\s+/g, ' '),
@@ -104,12 +115,12 @@ getAllDocumentsOnPage = function (topDocument, parentDocIndex, startingIndex) {
             };
             var tempLength;
             tempLength = ate_ml_allDocs_in_page.length;
-            getAllDocumentsOnPage(frameDoc.documentElement, i + startingIndex, i + startingIndex + 1);
+            getAllDocumentsOnPage(frameDoc.documentElement, i + startingIndex, i + startingIndex + 1, frameInvisible);
             startingIndex = ate_ml_allDocs_in_page.length - tempLength + startingIndex;
         }
     }
 }
-getAllDocumentsOnPage(document.documentElement, 0, 1);
+getAllDocumentsOnPage(document.documentElement, 0, 1, false);
 getAllElementsInBody(document.body);
 
 sendObjectToDevTools({
