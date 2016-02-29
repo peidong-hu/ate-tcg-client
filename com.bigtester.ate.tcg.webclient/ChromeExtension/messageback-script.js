@@ -91,7 +91,7 @@ getAllDocumentsOnPage = function (topDocument, parentDocIndex, startingIndex, pa
     allFrameNodes = iframeElements;
     for (var i = 0; i < allFrameNodes.length; i++) {
         var frameInvisible = false;
-        if (parentInvisible = true) {
+        if (parentInvisible == true) {
             frameInvisible = true;
         } else {
             frameInvisible= (allFrameNodes[i].getAttribute("ate-invisible") === "yes") ? true : false;
