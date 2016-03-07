@@ -305,8 +305,10 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 
 			if (actionTrigger[0].userInputType === "INSCREENJUMPER") {
 				var r1 = confirm("Is it a in-screen jump? Note: WindowsFilePicker is considered as inScreenJumper", "yes", "no");
-				if (r1)
+				if (r1) {
 					$scope.inScreenJump = true;
+
+				}
 				else
 					return $q.reject();
 			}
@@ -325,6 +327,9 @@ app1.controller('JavaFXWebDemoController', function($scope, $sce, $http, $localS
 				else
 					return $q.reject();
 			}
+			var r10 = confirm("Confirm the screen name is correct?", "yes", "no");
+			if (!r10)
+				$q.reject();
 		}
 /*
 		if (actionUitrs.length === 0 && !$scope.inScreenJump && !$scope.lastScreenOfTestCase) {
